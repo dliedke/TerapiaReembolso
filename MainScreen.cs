@@ -623,6 +623,8 @@ namespace TerapiaReembolso
             // Inicia o Chrome maximizado
             ChromeOptions options = new ChromeOptions();
             options.AddArgument("--start-maximized");
+            options.AddArgument("--ignore-certificate-errors");
+            options.AddArgument("--ignore-ssl-errors");
             options.AddArgument("no-sandbox");
 
             // Baixa ultimo ChromeDriver usando proxy se necessário e usa ele
@@ -759,6 +761,8 @@ namespace TerapiaReembolso
             // Inicia o Chrome maximizado
             ChromeOptions options = new ChromeOptions();
             options.AddArgument("--start-maximized");
+            options.AddArgument("--ignore-certificate-errors");
+            options.AddArgument("--ignore-ssl-errors");
             options.AddArgument("no-sandbox");
 
             // Baixa ultimo ChromeDriver usando proxy se necessário e usa ele
