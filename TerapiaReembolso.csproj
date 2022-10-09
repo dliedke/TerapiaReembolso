@@ -15,7 +15,7 @@
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
     <IsWebBootstrapper>true</IsWebBootstrapper>
-    <PublishUrl>\\MRANWDIT01.aus.amer.dell.com\TerapiaReembolso%24\</PublishUrl>
+    <PublishUrl>\\MRANWDIT01.aus.amer.dell.com\TerapiaReembolso\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Web</InstallFrom>
     <UpdateEnabled>true</UpdateEnabled>
@@ -26,8 +26,8 @@
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
     <InstallUrl>http://MRANWDIT01.aus.amer.dell.com/TerapiaReembolso/</InstallUrl>
-    <ProductName>Concur Internet Report</ProductName>
-    <PublisherName>Dell Inc</PublisherName>
+    <ProductName>Terapia Reembolso</ProductName>
+    <PublisherName>Daniel Liedke</PublisherName>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
     <ApplicationRevision>0</ApplicationRevision>
@@ -136,6 +136,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Encryption.cs" />
     <Compile Include="ValidaDigitoCPF.cs" />
     <Compile Include="WaitExtension.cs" />
     <Compile Include="MainScreen.cs">
@@ -187,18 +188,9 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup>
-    <PublishFile Include="InternetReport.pdb">
-      <Visible>False</Visible>
-      <Group>
-      </Group>
-      <TargetPath>
-      </TargetPath>
-      <PublishState>Include</PublishState>
-      <IncludeHash>True</IncludeHash>
-      <FileType>File</FileType>
-    </PublishFile>
-  </ItemGroup>
   <ItemGroup />
+  <ItemGroup>
+    <Content Include="App.ico" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

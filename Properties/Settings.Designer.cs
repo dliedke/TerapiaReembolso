@@ -25,7 +25,7 @@ namespace TerapiaReembolso.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("80,00")]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string ValorTotal {
             get {
                 return ((string)(this["ValorTotal"]));
@@ -37,7 +37,7 @@ namespace TerapiaReembolso.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Porto Alegre")]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string Cidade {
             get {
                 return ((string)(this["Cidade"]));
@@ -61,7 +61,7 @@ namespace TerapiaReembolso.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Sessões de psicoterapia")]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string ReferenteA {
             get {
                 return ((string)(this["ReferenteA"]));
@@ -193,7 +193,6 @@ namespace TerapiaReembolso.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("4")]
         public int NumeroConsultas {
             get {
                 return ((int)(this["NumeroConsultas"]));

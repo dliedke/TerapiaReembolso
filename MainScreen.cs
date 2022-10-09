@@ -22,8 +22,6 @@ using OpenQA.Selenium.Chrome;
 using WebDriverManager;
 using WebDriverManager.DriverConfigs.Impl;
 using System.Text.RegularExpressions;
-using OpenQA.Selenium.Interactions;
-using Keys = OpenQA.Selenium.Keys;
 
 namespace TerapiaReembolso
 {
@@ -57,34 +55,25 @@ namespace TerapiaReembolso
         private DateTime _DataConsulta5;
         private string _SenhaUnimed;
         private string _PDFRecibo;
-
-        private string _concurURL;
+        private DateTimePicker[] datasConsultasControles;
 
         public MainScreen()
         {
             InitializeComponent();
         }
 
-        private DateTimePicker[] datasConsultasControles;
-
         private void MainScreen_Load(object sender, EventArgs e)
         {
-            // Set controles de datas e atualiza
+            // Seta controles de datas e atualiza a tela
             datasConsultasControles = new DateTimePicker[] { dtDataConsulta1, dtDataConsulta2, dtDataConsulta3, dtDataConsulta4, dtDataConsulta5 };
             numNumeroConsultas_ValueChanged(null, EventArgs.Empty);
 
-            ShowApplicationVersion();
-
-            ShowGreeting();
-
+            MostraVersaoAplicacao();
+            MostraBoasVindas();
             CarregaDadosSalvos();
-
-            // Aumenta um pouco aplicação pra ficar do tamanho correto
-            this.Height += 200;
-            this.Location = new System.Drawing.Point(this.Location.X, this.Location.Y-100);
         }
 
-        private void ShowApplicationVersion()
+        private void MostraVersaoAplicacao()
         {
             string windowTitle = "Terapia Reembolso";
 
@@ -94,7 +83,7 @@ namespace TerapiaReembolso
             this.Text = windowTitle;
         }
 
-        private void ShowGreeting()
+        private void MostraBoasVindas()
         {
             if (DateTime.Now.Hour <= 12)
             {
@@ -112,7 +101,7 @@ namespace TerapiaReembolso
 
         #endregion
 
-        #region Select PDF and Data Validation
+        #region Selecionar Recibo PDF e Validação de Dados
 
         private void btnSelectPDF_Click(object sender, EventArgs e)
         {
@@ -125,8 +114,12 @@ namespace TerapiaReembolso
                 // Verifica extensão do arquivo
                 if (Path.GetExtension(dialogPDF.FileName).ToLower() != ".pdf")
                 {
-                    MessageBox.Show("Favor selecionar um arquivo PDF.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("Favor selecionar um arquivo PDF.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     dialogPDF.FileName = "";
+                }
+                else
+                {
+                    _PDFRecibo = dialogPDF.FileName;
                 }
 
                 // Mostra nome do PDF na tela
@@ -345,173 +338,6 @@ namespace TerapiaReembolso
 
         #endregion
 
-        #region Gerar Recibo
-
-        private void btnGerarRecibo_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                // Valida os dados do recibo
-                if (ValidaDadosParaRecibo())
-                {
-                    Action action = (Action)GerarRecibo;
-                    RodaAutomacao(action);
-                    toolStripStatus.Text = "Recibo gerado, favor imprimir como PDF e fechar janela do chromedriver.";
-                }
-            }
-            catch (Exception ex)
-            {
-                CloseChromeDriver();
-
-                if (ex.Message.Contains("This version of ChromeDriver only supports Chrome version"))
-                {
-                    MessageBox.Show("Erro interno na aplicação: " + ex.Message + "\r\n\r\nAbra o Chrome manualmente, clique nos 3 pontos no canto superior direito, vá para \"Ajuda\", depois em \"Sobre o Google Chrome\" e atualize seu navegador Chrome para a versão mais recente.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-                else
-                {
-                    MessageBox.Show("Erro interno na aplicação: " + ex.Message + "\r\n\r\nFavor tentar de novo.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-
-                toolStripStatus.Text = "Aguardando.";
-            }
-            finally
-            {
-                EnableDisableControls(true);
-            }
-        }
-
-        private void RodaAutomacao(Action action)
-        {
-            toolStripStatus.Text = "Rodando automação (feche o Chrome se quiser abortar). Por favor, espere...";
-            EnableDisableControls(false);
-            Application.DoEvents();
-
-            // Salva tudo
-            SalvaDadosAtuais();
-
-            // Gera recibo em uma nova tarefa
-            Task task = Task.Run(action);
-
-            // Aguarda a tarefa completar sem trancar a UI
-            while (!task.IsCompleted)
-            {
-                System.Threading.Thread.Sleep(500);
-                Application.DoEvents();
-            }
-
-            // Se a tarefa não completar lançar a excessão interna da tarefa
-            if (task.IsFaulted)
-            {
-                if (task.Exception?.InnerException != null)
-                {
-                    throw task.Exception.InnerException;
-                }
-                if (task.Exception != null)
-                {
-                    throw task.Exception;
-                }
-            }
-        }
-
-        private void GerarRecibo()
-        {
-            AbreReciboOnline();
-            CriaNovoRecibo();
-        }
-
-        private void EnableDisableControls(bool enable)
-        {
-            pnlConsultas.Enabled = enable;
-            pnlRecibo.Enabled = enable;
-            pnlReembolso.Enabled = enable;
-        }
-
-        private void CloseChromeDriver()
-        {
-            if (chromeDriver != null)
-            {
-                try
-                {
-                    chromeDriver.Quit();
-                }
-                catch { }
-            }
-            if (Process.GetProcessesByName("chromedriver").Length > 0)
-            {
-                Process.GetProcessesByName("chromedriver")[0].Kill();
-            }
-        }
-
-        private void AbreReciboOnline()
-        {
-            // Start Chrome maximized
-            ChromeOptions options = new ChromeOptions();
-            options.AddArgument("--start-maximized");
-            options.AddArgument("no-sandbox");
-
-            // Download latest ChromeDriver using proxy and apply
-            //System.Net.WebProxy proxy = new System.Net.WebProxy
-            //{
-            //    UseDefaultCredentials = true,
-            //    Address = new Uri("http://proxy")
-            //};
-            //new DriverManager().WithProxy(proxy).SetUpDriver(new ChromeConfig());
-            new DriverManager().SetUpDriver(new ChromeConfig());
-            chromeDriver = new ChromeDriver(options);
-
-            // Navega para recibo online
-            chromeDriver.Navigate().GoToUrl("https://www.reciboonline.com.br/recibo-de-pagamento");
-
-            WaitExtension.WaitUntilElement(chromeDriver, By.Id("valor"));
-            System.Threading.Thread.Sleep(1000);
-        }
-               
-        private void CriaNovoRecibo()
-        {
-            decimal valorRecibo = decimal.Parse(_ValorTotal) * numNumeroConsultas.Value;
-
-            var element = chromeDriver.FindElement(By.Name("valor"));
-            element.SendKeys(valorRecibo.ToString());
-
-            element = chromeDriver.FindElement(By.Name("pagador"));
-            element.SendKeys(_NomePaciente);
-
-            element = chromeDriver.FindElement(By.Name("cpfCnpjPagador"));
-            element.SendKeys(_CPFPaciente);
-
-            element = chromeDriver.FindElement(By.Name("referente"));
-            element.SendKeys(_ReferenteA);
-
-            element = chromeDriver.FindElement(By.Name("cidade"));
-            element.SendKeys(_Cidade);
-                        
-            element = chromeDriver.FindElement(By.Name("emissor"));
-            element.SendKeys(_NomeTerapeuta);
-
-            element = chromeDriver.FindElement(By.Name("cpfCnpjEmissor"));
-            element.SendKeys(_CPFTerapeuta);
-
-            string dias = string.Empty;
-            for (int f=1;f<numNumeroConsultas.Value;f++)
-            {
-                dias += datasConsultasControles[f].Value.ToString("dd/MM/yyyy, ");
-            }
-            dias = dias.TrimEnd().TrimEnd(',');
-
-            string observacoes = $"Sessões de Psicoterapia nos dias {dias}.\n\nEndereço: {txtEnderecoTerapeuta.Text}\n\nCEP: {txtCEP.Text}\n\nCRP: {txtCRP.Text}";
-
-            element = chromeDriver.FindElement(By.Name("observacoes"));
-            element.SendKeys(observacoes);
-            element.Submit();
-
-            System.Threading.Thread.Sleep(2000);
-
-            element = chromeDriver.FindElement(By.XPath("//span[text()='IMPRIMIR']"));
-            element.Click();
-        }
-
-        #endregion
-
         #region Carrega/Salva Dados
 
         private void CarregaDadosSalvos()
@@ -534,10 +360,10 @@ namespace TerapiaReembolso
                 txtAgenciaSemDigito.Text = Properties.Settings.Default["Agencia"].ToString();
                 txtContaSemDigito.Text = Properties.Settings.Default["Conta"].ToString();
                 txtDigitoDaConta.Text = Properties.Settings.Default["Digito"].ToString();
-                txtSenhaUnimed.Text = Properties.Settings.Default["SenhaUnimed"].ToString();
+                txtSenhaUnimed.Text = Encryption.DecryptString(Properties.Settings.Default["SenhaUnimed"].ToString());
                 numNumeroConsultas.Value = decimal.Parse(Properties.Settings.Default["NumeroConsultas"].ToString());
 
-                // Carrega data se tiver alguma salva
+                // Carrega datas se tiver alguma salva
                 if (DateTime.TryParse(Properties.Settings.Default["DataConsulta1"].ToString(), out DateTime dateTime1))
                 {
                     if (dateTime1.Year > 1)
@@ -650,7 +476,7 @@ namespace TerapiaReembolso
             Properties.Settings.Default["DataConsulta5"] = _DataConsulta5;
 
             _SenhaUnimed = txtSenhaUnimed.Text;
-            Properties.Settings.Default["SenhaUnimed"] = _SenhaUnimed;
+            Properties.Settings.Default["SenhaUnimed"] = Encryption.EncryptString(_SenhaUnimed);
 
             _PDFRecibo = dialogPDF.FileName;
 
@@ -669,42 +495,190 @@ namespace TerapiaReembolso
 
         #endregion
 
-        #region Link para Assinar PDF
+        #region Gerar Recibo
 
-        private void lnkAssinarPDF_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        private void btnGerarRecibo_Click(object sender, EventArgs e)
         {
-            // Abre link do sejda para assinar PDF
-            Process.Start("https://www.sejda.com/pt/sign-pdf");
+            try
+            {
+                // Valida os dados do recibo
+                if (ValidaDadosParaRecibo())
+                {
+                    Action action = (Action)GerarRecibo;
+                    RodaAutomacao(action);
+                    toolStripStatus.Text = "Recibo gerado, favor imprimir como PDF para salvar arquivo e fechar janela do chromedriver.";
+                }
+            }
+            catch (Exception ex)
+            {
+                CloseChromeDriver();
+
+                if (ex.Message.Contains("This version of ChromeDriver only supports Chrome version"))
+                {
+                    MessageBox.Show("Erro interno na aplicação: " + ex.Message + "\r\n\r\nAbra o Chrome manualmente, clique nos 3 pontos no canto superior direito, vá para \"Ajuda\", depois em \"Sobre o Google Chrome\" e atualize seu navegador Chrome para a versão mais recente.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else
+                {
+                    MessageBox.Show("Erro interno na aplicação: " + ex.Message + "\r\n\r\nFavor tentar de novo.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
+                toolStripStatus.Text = "Aguardando.";
+            }
+            finally
+            {
+                EnableDisableControls(true);
+            }
+        }
+
+        private void RodaAutomacao(Action action)
+        {
+            toolStripStatus.Text = "Rodando automação (feche o Chrome se quiser abortar). Por favor, espere...";
+            EnableDisableControls(false);
+            Application.DoEvents();
+
+            // Salva tudo
+            SalvaDadosAtuais();
+
+            // Gera recibo em uma nova tarefa
+            Task task = Task.Run(action);
+
+            // Aguarda a tarefa completar sem trancar a UI
+            while (!task.IsCompleted)
+            {
+                System.Threading.Thread.Sleep(500);
+                Application.DoEvents();
+            }
+
+            // Se a tarefa não completar lançar a excessão interna da tarefa
+            if (task.IsFaulted)
+            {
+                if (task.Exception?.InnerException != null)
+                {
+                    throw task.Exception.InnerException;
+                }
+                if (task.Exception != null)
+                {
+                    throw task.Exception;
+                }
+            }
+        }
+
+        private void GerarRecibo()
+        {
+            AbreReciboOnline();
+            CriaNovoRecibo();
+        }
+
+        private void EnableDisableControls(bool enable)
+        {
+            pnlConsultas.Enabled = enable;
+            pnlRecibo.Enabled = enable;
+            pnlReembolso.Enabled = enable;
+        }
+
+        private void CloseChromeDriver()
+        {
+            if (chromeDriver != null)
+            {
+                try
+                {
+                    chromeDriver.Quit();
+                }
+                catch { }
+            }
+            if (Process.GetProcessesByName("chromedriver").Length > 0)
+            {
+                Process.GetProcessesByName("chromedriver")[0].Kill();
+            }
+        }
+
+        private void AbreReciboOnline()
+        {
+            // Inicia o Chrome maximizado
+            ChromeOptions options = new ChromeOptions();
+            options.AddArgument("--start-maximized");
+            options.AddArgument("no-sandbox");
+
+            // Baixa ultimo ChromeDriver usando proxy e usa ele
+            //System.Net.WebProxy proxy = new System.Net.WebProxy
+            //{
+            //    UseDefaultCredentials = true,
+            //    Address = new Uri("http://proxy")
+            //};
+            //new DriverManager().WithProxy(proxy).SetUpDriver(new ChromeConfig());
+            new DriverManager().SetUpDriver(new ChromeConfig());
+            chromeDriver = new ChromeDriver(options);
+
+            // Navega para recibo online
+            chromeDriver.Navigate().GoToUrl("https://www.reciboonline.com.br/recibo-de-pagamento");
+
+            // Espera carregar elemento
+            WaitExtension.WaitUntilElement(chromeDriver, By.Id("valor"));
+            System.Threading.Thread.Sleep(500);
+        }
+
+        private void CriaNovoRecibo()
+        {
+            // Calcula valor total do recibo conforme número de consultas
+            decimal valorRecibo = decimal.Parse(_ValorTotal) * numNumeroConsultas.Value;
+
+            // Setar valor
+            element = chromeDriver.FindElement(By.Name("valor"));
+            element.SendKeys(valorRecibo.ToString());
+
+            // Seta nome do pagador
+            element = chromeDriver.FindElement(By.Name("pagador"));
+            element.SendKeys(_NomePaciente);
+
+            // Seta CPF do pagador
+            element = chromeDriver.FindElement(By.Name("cpfCnpjPagador"));
+            element.SendKeys(_CPFPaciente);
+
+            // Seta Referente A
+            element = chromeDriver.FindElement(By.Name("referente"));
+            element.SendKeys(_ReferenteA);
+
+            // Seta cidade
+            element = chromeDriver.FindElement(By.Name("cidade"));
+            element.SendKeys(_Cidade);
+
+            // Seta nome do emissor
+            element = chromeDriver.FindElement(By.Name("emissor"));
+            element.SendKeys(_NomeTerapeuta);
+
+            // Seta CPF do emissor
+            element = chromeDriver.FindElement(By.Name("cpfCnpjEmissor"));
+            element.SendKeys(_CPFTerapeuta);
+            
+            // Cria string com data das consultas
+            string dias = string.Empty;
+            for (int f = 1; f <= numNumeroConsultas.Value; f++)
+            {
+                dias += datasConsultasControles[f-1].Value.ToString("dd/MM/yyyy, ");
+            }
+            dias = dias.TrimEnd().TrimEnd(',');
+
+            // Cria observacoes com dias das consultas, endereço, CEP e CRP
+            string observacoes = $"Sessões de Psicoterapia nos dias {dias}.\n\nEndereço: {txtEnderecoTerapeuta.Text}\n\nCEP: {txtCEP.Text}\n\nCRP: {txtCRP.Text}";
+
+            // Seta as observacoes e submete formulario
+            element = chromeDriver.FindElement(By.Name("observacoes"));
+            element.SendKeys(observacoes);
+            element.Submit();
+
+            // Aguarda um pouco geração do recibo
+            System.Threading.Thread.Sleep(1000);
+
+            // Aguarda elemento e manda imprimir PDF
+            By spanImprimirBy = By.XPath("//span[text()='IMPRIMIR']");
+            WaitExtension.WaitUntilElement(chromeDriver, spanImprimirBy);
+            element = chromeDriver.FindElement(spanImprimirBy);
+            element.Click();
         }
 
         #endregion
 
-        private void btnSelecionarConsultas_Click(object sender, EventArgs e)
-        {
-            pnlRecibo.Visible = false;
-            pnlConsultas.Visible = true;
-        }
-
-        private void btnFecharConsultas_Click(object sender, EventArgs e)
-        {
-            pnlRecibo.Visible = true;
-            pnlConsultas.Visible = false;
-        }
-        
-        private void numNumeroConsultas_ValueChanged(object sender, EventArgs e)
-        {
-            for (int f=0;f<5;f++)
-            {
-                if (f+1<= numNumeroConsultas.Value)
-                {
-                    datasConsultasControles[f].Visible = true;
-                }
-                else
-                {
-                    datasConsultasControles[f].Visible = false;
-                }
-            }
-        }
+        #region Gerar Solicitação Reembolso
 
         private void txtGerarSolicitacaoReembolso_Click(object sender, EventArgs e)
         {
@@ -743,5 +717,48 @@ namespace TerapiaReembolso
         {
 
         }
+
+        #endregion
+
+        #region Link para Assinar PDF
+
+        private void lnkAssinarPDF_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            // Abre link do sejda para assinar PDF
+            Process.Start("https://www.sejda.com/pt/sign-pdf");
+        }
+
+        #endregion
+
+        #region Selecionar Consultas
+
+        private void btnSelecionarConsultas_Click(object sender, EventArgs e)
+        {
+            pnlRecibo.Visible = false;
+            pnlConsultas.Visible = true;
+        }
+
+        private void btnFecharConsultas_Click(object sender, EventArgs e)
+        {
+            pnlRecibo.Visible = true;
+            pnlConsultas.Visible = false;
+        }
+
+        private void numNumeroConsultas_ValueChanged(object sender, EventArgs e)
+        {
+            for (int f = 0; f < 5; f++)
+            {
+                if (f + 1 <= numNumeroConsultas.Value)
+                {
+                    datasConsultasControles[f].Visible = true;
+                }
+                else
+                {
+                    datasConsultasControles[f].Visible = false;
+                }
+            }
+        }
+
+        #endregion
     }
 }

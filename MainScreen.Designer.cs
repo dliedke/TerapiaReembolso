@@ -205,12 +205,12 @@
             this.txtCPFPaciente.Size = new System.Drawing.Size(591, 38);
             this.txtCPFPaciente.TabIndex = 2;
             // 
-            // lblFileName
+            // lblNomeReciboPDF
             // 
             this.lblNomeReciboPDF.AutoSize = true;
-            this.lblNomeReciboPDF.Location = new System.Drawing.Point(367, 699);
+            this.lblNomeReciboPDF.Location = new System.Drawing.Point(680, 226);
             this.lblNomeReciboPDF.Margin = new System.Windows.Forms.Padding(7, 0, 7, 0);
-            this.lblNomeReciboPDF.Name = "lblFileName";
+            this.lblNomeReciboPDF.Name = "lblNomeReciboPDF";
             this.lblNomeReciboPDF.Size = new System.Drawing.Size(0, 32);
             this.lblNomeReciboPDF.TabIndex = 11;
             // 
@@ -467,7 +467,6 @@
             this.pnlRecibo.Controls.Add(this.txtCPFTerapeuta);
             this.pnlRecibo.Controls.Add(this.lblCPFPaciente);
             this.pnlRecibo.Controls.Add(this.lblNomeDoTerapeuta);
-            this.pnlRecibo.Controls.Add(this.lblNomeReciboPDF);
             this.pnlRecibo.Controls.Add(this.txtNomeDoTerapeuta);
             this.pnlRecibo.Controls.Add(this.txtCidade);
             this.pnlRecibo.Controls.Add(this.txtReferenteA);
@@ -529,6 +528,7 @@
             // pnlReembolso
             // 
             this.pnlReembolso.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlReembolso.Controls.Add(this.lblNomeReciboPDF);
             this.pnlReembolso.Controls.Add(this.lblSenhaUnimed);
             this.pnlReembolso.Controls.Add(this.txtSenhaUnimed);
             this.pnlReembolso.Controls.Add(this.lblTituloSolicitacaoReembolso);

@@ -3,16 +3,16 @@
   <Profiles />
   <Settings>
     <Setting Name="ValorTotal" Type="System.String" Scope="User">
-      <Value Profile="(Default)">80,00</Value>
+      <Value Profile="(Default)" />
     </Setting>
     <Setting Name="Cidade" Type="System.String" Scope="User">
-      <Value Profile="(Default)">Porto Alegre</Value>
+      <Value Profile="(Default)" />
     </Setting>
     <Setting Name="CPFPaciente" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
     <Setting Name="ReferenteA" Type="System.String" Scope="User">
-      <Value Profile="(Default)">Sessões de psicoterapia</Value>
+      <Value Profile="(Default)" />
     </Setting>
     <Setting Name="NomeTerapeuta" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
@@ -45,7 +45,7 @@
       <Value Profile="(Default)" />
     </Setting>
     <Setting Name="NumeroConsultas" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">4</Value>
+      <Value Profile="(Default)" />
     </Setting>
     <Setting Name="DataConsulta1" Type="System.DateTime" Scope="User">
       <Value Profile="(Default)" />
