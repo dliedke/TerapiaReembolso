@@ -3,8 +3,8 @@
  * 
  * Authors:  Daniel Liedke
  * 
- * Copyright © Dell Inc. 2020
- * Usage and reproduction in any manner whatsoever without the written permission of Dell Inc. is strictly forbidden.
+ * Copyright © Daniel Liedke 2022
+ * Usage and reproduction in any manner whatsoever without the written permission of Daniel Liedke is strictly forbidden.
  *  
  * Purpose: Extension to wait for elements to stabilize the automation
  *           

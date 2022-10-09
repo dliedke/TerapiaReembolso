@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainScreen));
             this.btnGerarRecibo = new System.Windows.Forms.Button();
             this.dtDataConsulta1 = new System.Windows.Forms.DateTimePicker();
             this.txtValorTotal = new System.Windows.Forms.MaskedTextBox();
@@ -698,7 +699,7 @@
             this.txtGerarSolicitacaoReembolso.TabIndex = 6;
             this.txtGerarSolicitacaoReembolso.Text = "Gerar solicitação de reembolso";
             this.txtGerarSolicitacaoReembolso.UseVisualStyleBackColor = true;
-            this.txtGerarSolicitacaoReembolso.Click += new System.EventHandler(this.txtGerarSolicitacaoReembolso_Click);
+            this.txtGerarSolicitacaoReembolso.Click += new System.EventHandler(this.btnGerarSolicitacaoReembolso_Click);
             // 
             // MainScreen
             // 
@@ -709,6 +710,7 @@
             this.Controls.Add(this.statusStrip);
             this.Controls.Add(this.pnlRecibo);
             this.Controls.Add(this.pnlConsultas);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(5);
             this.MaximizeBox = false;
             this.MinimizeBox = false;

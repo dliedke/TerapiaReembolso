@@ -12,16 +12,21 @@
 
 using System;
 using System.IO;
+using System.Threading;
 using System.Diagnostics;
 using System.Globalization;
 using System.Windows.Forms;
 using System.Threading.Tasks;
+using System.Text.RegularExpressions;
 
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Support.Extensions;
 using WebDriverManager;
 using WebDriverManager.DriverConfigs.Impl;
-using System.Text.RegularExpressions;
+
+using Keys = OpenQA.Selenium.Keys;
+using System.Net;
 
 namespace TerapiaReembolso
 {
@@ -33,7 +38,7 @@ namespace TerapiaReembolso
         private IWebElement element;
 
         private string _NomePaciente;
-        private string _ValorTotal;
+        private string _ValorConsulta;
         private string _CPFPaciente;
         private string _ReferenteA;
         private string _Cidade;
@@ -64,6 +69,14 @@ namespace TerapiaReembolso
 
         private void MainScreen_Load(object sender, EventArgs e)
         {
+            // Copia configurações da versão anterior se for preciso
+            if (Properties.Settings.Default.UpdateSettings)
+            {
+                Properties.Settings.Default.Upgrade();
+                Properties.Settings.Default.UpdateSettings = false;
+                Properties.Settings.Default.Save();
+            }
+
             // Seta controles de datas e atualiza a tela
             datasConsultasControles = new DateTimePicker[] { dtDataConsulta1, dtDataConsulta2, dtDataConsulta3, dtDataConsulta4, dtDataConsulta5 };
             numNumeroConsultas_ValueChanged(null, EventArgs.Empty);
@@ -415,8 +428,8 @@ namespace TerapiaReembolso
             _NomePaciente = txtNomeDoPaciente.Text;
             Properties.Settings.Default["NomePaciente"] = _NomePaciente;
 
-            _ValorTotal = txtValorTotal.Text;
-            Properties.Settings.Default["ValorTotal"] = _ValorTotal;
+            _ValorConsulta = txtValorTotal.Text;
+            Properties.Settings.Default["ValorTotal"] = _ValorConsulta;
 
             _CPFPaciente = txtCPFPaciente.Text;
             Properties.Settings.Default["CPFPaciente"] = _CPFPaciente;
@@ -506,7 +519,7 @@ namespace TerapiaReembolso
                 {
                     Action action = (Action)GerarRecibo;
                     RodaAutomacao(action);
-                    toolStripStatus.Text = "Recibo gerado, favor imprimir como PDF para salvar arquivo e fechar janela do chromedriver.";
+                    toolStripStatus.Text = "Recibo gerado com sucesso!";
                 }
             }
             catch (Exception ex)
@@ -521,8 +534,7 @@ namespace TerapiaReembolso
                 {
                     MessageBox.Show("Erro interno na aplicação: " + ex.Message + "\r\n\r\nFavor tentar de novo.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-
-                toolStripStatus.Text = "Aguardando.";
+                toolStripStatus.Text = "Aguardando";
             }
             finally
             {
@@ -592,6 +604,20 @@ namespace TerapiaReembolso
             }
         }
 
+        private bool NecessitaProxy()
+        {
+            try
+            {
+                string proxyUrl = "proxy";
+                IPAddress[] addresslist = Dns.GetHostAddresses(proxyUrl);
+                return true; 
+            }
+            catch
+            { 
+            }
+
+            return false;
+        }
         private void AbreReciboOnline()
         {
             // Inicia o Chrome maximizado
@@ -599,14 +625,20 @@ namespace TerapiaReembolso
             options.AddArgument("--start-maximized");
             options.AddArgument("no-sandbox");
 
-            // Baixa ultimo ChromeDriver usando proxy e usa ele
-            //System.Net.WebProxy proxy = new System.Net.WebProxy
-            //{
-            //    UseDefaultCredentials = true,
-            //    Address = new Uri("http://proxy")
-            //};
-            //new DriverManager().WithProxy(proxy).SetUpDriver(new ChromeConfig());
-            new DriverManager().SetUpDriver(new ChromeConfig());
+            // Baixa ultimo ChromeDriver usando proxy se necessário e usa ele
+            if (NecessitaProxy())
+            {
+                System.Net.WebProxy proxy = new System.Net.WebProxy
+                {
+                    UseDefaultCredentials = true,
+                    Address = new Uri("http://proxy")
+                };
+                new DriverManager().WithProxy(proxy).SetUpDriver(new ChromeConfig());
+            }
+            else
+            {
+                new DriverManager().SetUpDriver(new ChromeConfig());
+            }
             chromeDriver = new ChromeDriver(options);
 
             // Navega para recibo online
@@ -620,7 +652,7 @@ namespace TerapiaReembolso
         private void CriaNovoRecibo()
         {
             // Calcula valor total do recibo conforme número de consultas
-            decimal valorRecibo = decimal.Parse(_ValorTotal) * numNumeroConsultas.Value;
+            decimal valorRecibo = decimal.Parse(_ValorConsulta) * numNumeroConsultas.Value;
 
             // Setar valor
             element = chromeDriver.FindElement(By.Name("valor"));
@@ -680,7 +712,7 @@ namespace TerapiaReembolso
 
         #region Gerar Solicitação Reembolso
 
-        private void txtGerarSolicitacaoReembolso_Click(object sender, EventArgs e)
+        private void btnGerarSolicitacaoReembolso_Click(object sender, EventArgs e)
         {
             try
             {
@@ -689,7 +721,10 @@ namespace TerapiaReembolso
                 {
                     Action action = (Action)GerarSolicitacaoReembolso;
                     RodaAutomacao(action);
-                    toolStripStatus.Text = "Solicitação de reembolso gerada, favor fechar janela do chromedriver.";
+
+                    string msg = "Solicitação de reembolso preenchida, favor revisar formulário e submeter!";
+                    MessageBox.Show(msg, "Sucesso!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    toolStripStatus.Text = msg;
                 }
             }
             catch (Exception ex)
@@ -704,8 +739,7 @@ namespace TerapiaReembolso
                 {
                     MessageBox.Show("Erro interno na aplicação: " + ex.Message + "\r\n\r\nFavor tentar de novo.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-
-                toolStripStatus.Text = "Aguardando.";
+                toolStripStatus.Text = "Aguardando";
             }
             finally
             {
@@ -715,7 +749,285 @@ namespace TerapiaReembolso
 
         private void GerarSolicitacaoReembolso()
         {
+            AbreSegurosUnimedClient();
+            LoginUnimed();
+            SubmeteSolicitaoReembolso();
+        }
 
+        private void AbreSegurosUnimedClient()
+        {
+            // Inicia o Chrome maximizado
+            ChromeOptions options = new ChromeOptions();
+            options.AddArgument("--start-maximized");
+            options.AddArgument("no-sandbox");
+
+            // Baixa ultimo ChromeDriver usando proxy se necessário e usa ele
+            if (NecessitaProxy())
+            {
+                System.Net.WebProxy proxy = new System.Net.WebProxy
+                {
+                    UseDefaultCredentials = true,
+                    Address = new Uri("http://proxy")
+                };
+                new DriverManager().WithProxy(proxy).SetUpDriver(new ChromeConfig());
+            }
+            else
+            {
+                new DriverManager().SetUpDriver(new ChromeConfig());
+            }
+            chromeDriver = new ChromeDriver(options);
+
+            // Navega para Seguros Unimed Login Cliente
+            chromeDriver.Navigate().GoToUrl("https://www.segurosunimed.com.br/login-cliente");
+
+            // Espera carregar elemento
+            WaitExtension.WaitUntilElement(chromeDriver, By.Id("loginInput"));
+            System.Threading.Thread.Sleep(1000);
+        }
+
+        private void LoginUnimed()
+        {
+            // Seta CPF para logar
+            var emailText = chromeDriver.FindElement(By.Id("loginInput"));
+            emailText.SendKeys(_CPFPaciente);
+
+            // Seta senha para logar
+            var passwordText = chromeDriver.FindElement(By.Id("senhaInput"));
+            passwordText.SendKeys(_SenhaUnimed);
+
+            // Submete o formulário
+            passwordText.Submit();
+            System.Threading.Thread.Sleep(1500);
+
+            // Espera aparecer o botão de "Reembolsos e Prévias"
+            WaitExtension.WaitUntilElement(chromeDriver, By.XPath("//div[.=' Reembolsos e Prévias ']"), 30);
+
+            // Espera ainda mais um pouquinho 
+            System.Threading.Thread.Sleep(1000);
+
+            // Espera os spinners todos da página
+            AguardaSpinner(30);
+        }
+
+        private void SubmeteSolicitaoReembolso()
+        {
+            VaiParaSolicitacaoReembolso();
+            SelecionaPacienteTipoConsulta();
+            SelecionaSessoes();
+            SobeRecibo();
+            SetaInformacoesPsicologo();
+            SetaInformacoesBancarias();
+        }
+
+        private void VaiParaSolicitacaoReembolso()
+        {
+            // Clica em Reembolsos e Prévias
+            var botaoReembolsosPrevias = chromeDriver.FindElement(By.XPath("//div[.=' Reembolsos e Prévias ']"));
+            botaoReembolsosPrevias.Click();
+
+            // Espera ainda mais um pouquinho 
+            System.Threading.Thread.Sleep(1000);
+
+            // Espera os spinners todos da página
+            AguardaSpinner(30);
+
+            // Espera botão "Nova solicitação de reembolso" e clica
+            By novaSolicitacaoBy = By.XPath("//a[.='Nova solicitação de reembolso']");
+            WaitExtension.WaitUntilElement(chromeDriver, novaSolicitacaoBy);
+            var botaoNovaSolicitacao = chromeDriver.FindElement(novaSolicitacaoBy);
+            botaoNovaSolicitacao.Click();
+
+            // Espera ainda mais um pouquinho 
+            System.Threading.Thread.Sleep(2500);
+
+            // Espera elemento na página
+            WaitExtension.WaitUntilElement(chromeDriver, By.Id("patientInput"));
+        }
+
+        private void SelecionaPacienteTipoConsulta()
+        {
+            // Seleciona paciente
+            element = chromeDriver.FindElement(By.XPath($"//option[.='{_NomePaciente}']"));
+            element.Click();
+
+            // Seleciona psicólogo
+            element = chromeDriver.FindElement(By.XPath($"//option[.='Psicólogo']"));
+            element.Click();
+
+            // Seleciona Presencial se precisar
+            if (rbPresencial.Checked)
+            {
+                element = chromeDriver.FindElement(By.Id("PRadio"));
+                element.Click();
+            }
+
+            // Seleciona Telemedicina se precisar
+            if (rbTelemedicina.Checked)
+            {
+                element = chromeDriver.FindElement(By.Id("TRadio"));
+                element.Click();
+            }
+
+            // Seleciona checkbox "Não sei o CID"
+            element = chromeDriver.FindElement(By.XPath($"//label[@for='trueCheckbox']"));
+            element.Click();
+        }
+
+        private void SelecionaSessoes()
+        {
+            // Clica em "Sessões"
+            var elements = chromeDriver.FindElements(By.CssSelector(".form-control.no-btn.h-100"));
+            elements[0].Click();
+
+            // Espera ainda mais um pouquinho 
+            System.Threading.Thread.Sleep(1000);
+
+            // Apaga o 1 e seta quantidade de sessões
+            element = chromeDriver.FindElement(By.Id("quantitySessionsInput"));
+            element.SendKeys(Keys.Backspace + numNumeroConsultas.Value.ToString());
+
+            // Seta as datas das sessões e valor da primeira que é replicado nas outras
+            for (int i = 0; i < numNumeroConsultas.Value; i++)
+            {
+                element = chromeDriver.FindElement(By.Id($"dateSessions{i}Input"));
+                element.SendKeys(datasConsultasControles[i].Value.ToString("dd/MM/yyyy"));
+
+                if (i == 0)
+                {
+                    element = chromeDriver.FindElement(By.Id($"priceSessions{i}CurrencyInput"));
+                    element.SendKeys(_ValorConsulta);
+                }
+            }
+
+            // Confirma as datas e valores das sessões
+            element = chromeDriver.FindElement(By.XPath($"//button[.='Confirmar']"));
+            element.Click();
+
+            // Mostra o valor total calculado
+            element = chromeDriver.FindElement(By.Id("consultationValueCurrencyInput"));
+            ScrollAteElemento(element);
+
+            // Espera para usuário verificar como ficou
+            System.Threading.Thread.Sleep(4000);
+        }
+
+        private void SobeRecibo()
+        {
+            // Faz scroll até "Outros documentos"
+            element = chromeDriver.FindElement(By.XPath($"//div[.=' Outros documentos ']"));
+            ScrollAteElemento(element);
+
+            // Encontra o input de arquivo
+            element = chromeDriver.FindElement(By.XPath("(//input[@type='file'])[2]"));
+
+            // Seleciona arquivo para envio
+            element.SendKeys(_PDFRecibo);
+
+            // Espera para usuário verificar como ficou
+            System.Threading.Thread.Sleep(3000);
+        }
+
+        private void SetaInformacoesPsicologo()
+        {
+            // Seta nome do psicólogo
+            element = chromeDriver.FindElement(By.Id("providerNameInput"));
+            ScrollAteElemento(element);
+            element.SendKeys(_NomeTerapeuta);
+
+            // Seta CPF psicólogo
+            element = chromeDriver.FindElement(By.Id("inputCpfCnpjInput"));
+            element.SendKeys(_CPFTerapeuta);
+
+            // Seta número do CRP
+            element = chromeDriver.FindElement(By.Id("councilNumberInput"));
+            element.SendKeys(_CRP);
+
+            // Seta número do CEP
+            element = chromeDriver.FindElement(By.Id("cepInput"));
+            element.SendKeys(_CEP);
+
+            // Espera para usuário verificar como ficou
+            System.Threading.Thread.Sleep(4000);
+        }
+
+        private void SetaInformacoesBancarias()
+        {
+            // Seleciona paciente para conta bancária
+            var elements = chromeDriver.FindElements(By.XPath($"//option[.='{_NomePaciente}']"));
+            ScrollAteElemento(elements[1]);
+            elements[1].Click();
+
+            // Seta "Transferência em conta corrente"
+            element = chromeDriver.FindElement(By.XPath($"//option[.='Transferência em conta corrente']"));
+            element.Click();
+
+            // Seta nome do banco
+            element = chromeDriver.FindElement(By.XPath($"//option[.='{_NomeBanco}']"));
+            element.Click();
+
+            // Seta número da agência
+            element = chromeDriver.FindElement(By.Id("numberAgencyInput"));
+            element.SendKeys(_Agencia);
+
+            // Seta número da conta
+            element = chromeDriver.FindElement(By.Id("bankAccountInput"));
+            element.SendKeys(_Conta);
+
+            // Seta dígito da conta
+            element = chromeDriver.FindElement(By.Id("numberAccountInput"));
+            element.SendKeys(_Digito);
+
+            // Espera para usuário verificar como ficou
+            System.Threading.Thread.Sleep(4000);
+
+            // Submete formulário
+            //element = chromeDriver.FindElement(By.XPath($"//button[.='Enviar solicitação']"));
+            //element.Click();
+        }
+
+        public void ScrollAteElemento(IWebElement element)
+        {
+            try
+            {
+                if (element.Location.Y > 200)
+                {
+                    // Faz scroll na página até mostrar elemento
+                    chromeDriver.ExecuteJavaScript($"window.scrollTo({0}, {element.Location.Y - 600})");
+                }
+            }
+            catch { }
+        }
+
+        public void AguardaSpinner(int timeoutSecs = 10)
+        {
+            // Aguarda X segundos enquanto spinner está ativo
+            for (var i = 0; i < timeoutSecs; i++)
+            {
+                var ajaxIsComplete = !TentaEncontrarElemento(By.ClassName("spinner"));
+                if (ajaxIsComplete) return;
+                Thread.Sleep(1000);
+            }
+        }
+
+        public bool TentaEncontrarElemento(By by)
+        {
+            // Verifica se elemento está sendo mostrado
+            IWebElement element;
+            try
+            {
+                element = chromeDriver.FindElement(by);
+                bool getelement = element.Displayed;
+                if (getelement)
+                {
+                    ScrollAteElemento(element);
+
+                }
+                return getelement;
+            }
+            catch
+            {
+                return false;
+            }
         }
 
         #endregion
@@ -746,6 +1058,7 @@ namespace TerapiaReembolso
 
         private void numNumeroConsultas_ValueChanged(object sender, EventArgs e)
         {
+            // Mostra/Esconde datas quando troca número de consultas
             for (int f = 0; f < 5; f++)
             {
                 if (f + 1 <= numNumeroConsultas.Value)

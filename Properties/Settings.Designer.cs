@@ -193,6 +193,7 @@ namespace TerapiaReembolso.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("4")]
         public int NumeroConsultas {
             get {
                 return ((int)(this["NumeroConsultas"]));
@@ -278,6 +279,18 @@ namespace TerapiaReembolso.Properties {
             }
             set {
                 this["NomePaciente"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool UpdateSettings {
+            get {
+                return ((bool)(this["UpdateSettings"]));
+            }
+            set {
+                this["UpdateSettings"] = value;
             }
         }
     }
