@@ -474,8 +474,11 @@ namespace TerapiaReembolso
                 txtCRP.Text = Encryption.DecryptString(Properties.Settings.Default["CRP"].ToString());
                 txtCEP.Text = Encryption.DecryptString(Properties.Settings.Default["CEP"].ToString());
                 txtEnderecoTerapeuta.Text = Encryption.DecryptString(Properties.Settings.Default["EnderecoTerapeuta"].ToString());
-                rbTelemedicina.Checked = Encryption.DecryptString(Properties.Settings.Default["TipoAtendimento"].ToString()) == "T";
-                rbPresencial.Checked = Encryption.DecryptString(Properties.Settings.Default["TipoAtendimento"].ToString()) == "P";
+                if (!string.IsNullOrEmpty(Properties.Settings.Default["TipoAtendimento"].ToString()))
+                {
+                    rbTelemedicina.Checked = Encryption.DecryptString(Properties.Settings.Default["TipoAtendimento"].ToString()) == "T";
+                    rbPresencial.Checked = Encryption.DecryptString(Properties.Settings.Default["TipoAtendimento"].ToString()) == "P";
+                }
                 txtNomeDoBanco.Text = Encryption.DecryptString(Properties.Settings.Default["NomeBanco"].ToString());
                 txtAgenciaSemDigito.Text = Encryption.DecryptString(Properties.Settings.Default["Agencia"].ToString());
                 txtContaSemDigito.Text = Encryption.DecryptString(Properties.Settings.Default["Conta"].ToString());
@@ -488,8 +491,17 @@ namespace TerapiaReembolso
                 _DiaDaSemana = Encryption.DecryptString(Properties.Settings.Default["DiaDaSemana"].ToString());
 
                 _previneAtualizacaoDatas = true;
-                cmbMes.SelectedIndex = cmbMes.FindString(_Mes);
-                cmbDiaSemana.SelectedIndex = cmbDiaSemana.FindString(_DiaDaSemana);
+
+                if (cmbMes.FindStringExact(_Mes) != -1)
+                {
+                    cmbMes.SelectedIndex = cmbMes.FindString(_Mes);
+                }
+
+                if (cmbDiaSemana.FindStringExact(_DiaDaSemana) != -1)
+                {
+                    cmbDiaSemana.SelectedIndex = cmbDiaSemana.FindString(_DiaDaSemana);
+                }
+
                 _previneAtualizacaoDatas = false;
 
                 for (int f = 0; f < 10; f++)

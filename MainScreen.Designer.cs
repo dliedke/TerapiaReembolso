@@ -734,13 +734,13 @@
             this.rbPresencial.Name = "rbPresencial";
             this.rbPresencial.Size = new System.Drawing.Size(107, 24);
             this.rbPresencial.TabIndex = 0;
-            this.rbPresencial.TabStop = true;
             this.rbPresencial.Text = "Presencial";
             this.rbPresencial.UseVisualStyleBackColor = true;
             // 
             // rbTelemedicina
             // 
             this.rbTelemedicina.AutoSize = true;
+            this.rbTelemedicina.Checked = true;
             this.rbTelemedicina.Location = new System.Drawing.Point(24, 77);
             this.rbTelemedicina.Margin = new System.Windows.Forms.Padding(2);
             this.rbTelemedicina.Name = "rbTelemedicina";
