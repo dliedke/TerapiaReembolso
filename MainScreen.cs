@@ -27,6 +27,7 @@ using WebDriverManager.DriverConfigs.Impl;
 
 using Keys = OpenQA.Selenium.Keys;
 using System.Net;
+using System.Linq;
 
 namespace TerapiaReembolso
 {
@@ -52,15 +53,17 @@ namespace TerapiaReembolso
         private string _Agencia;
         private string _Conta;
         private string _Digito;
-        private int _NumeroConsultas;
-        private DateTime _DataConsulta1;
-        private DateTime _DataConsulta2;
-        private DateTime _DataConsulta3;
-        private DateTime _DataConsulta4;
-        private DateTime _DataConsulta5;
+        private string _LoginUnimed;
         private string _SenhaUnimed;
         private string _PDFRecibo;
-        private DateTimePicker[] datasConsultasControles;
+        private int _NumeroConsultas;
+
+        private string _Mes;
+        private string _DiaDaSemana;
+        private DateTime[] _DataConsultaLista = new DateTime[10];
+        private DateTimePicker[] _datasConsultasControles;
+
+        private bool _previneAtualizacaoDatas = false;
 
         public MainScreen()
         {
@@ -78,12 +81,42 @@ namespace TerapiaReembolso
             }
 
             // Seta controles de datas e atualiza a tela
-            datasConsultasControles = new DateTimePicker[] { dtDataConsulta1, dtDataConsulta2, dtDataConsulta3, dtDataConsulta4, dtDataConsulta5 };
+            _datasConsultasControles = new DateTimePicker[] { dtDataConsulta1, dtDataConsulta2, dtDataConsulta3, dtDataConsulta4, dtDataConsulta5, dtDataConsulta6, dtDataConsulta7, dtDataConsulta8, dtDataConsulta9, dtDataConsulta10 };
             numNumeroConsultas_ValueChanged(null, EventArgs.Empty);
 
+            PopulaMesesEDiasDaSemana();
             MostraVersaoAplicacao();
-            MostraBoasVindas();
+            MostraMensagemDeBoasVindas();
             CarregaDadosSalvos();
+        }
+
+        private void PopulaMesesEDiasDaSemana()
+        {
+            // Popula todos meses
+            cmbMes.Items.Add(new Item("Janeiro", 1));
+            cmbMes.Items.Add(new Item("Fevereiro", 2));
+            cmbMes.Items.Add(new Item("Março", 3));
+            cmbMes.Items.Add(new Item("Abril", 4));
+            cmbMes.Items.Add(new Item("Maio", 5));
+            cmbMes.Items.Add(new Item("Junho", 6));
+            cmbMes.Items.Add(new Item("Julho", 7));
+            cmbMes.Items.Add(new Item("Agosto", 8));
+            cmbMes.Items.Add(new Item("Setembro", 9));
+            cmbMes.Items.Add(new Item("Outubro", 10));
+            cmbMes.Items.Add(new Item("Novembro", 11));
+            cmbMes.Items.Add(new Item("Dezembro", 12));
+
+            // Popula todos dias da semana
+            cmbDiaSemana.Items.Add(new Item("Segunda-Feira", 2));
+            cmbDiaSemana.Items.Add(new Item("Terça-Feira", 3));
+            cmbDiaSemana.Items.Add(new Item("Quarta-Feira", 4));
+            cmbDiaSemana.Items.Add(new Item("Quinta-Feira", 5));
+            cmbDiaSemana.Items.Add(new Item("Sexta-Feira", 6));
+            cmbDiaSemana.Items.Add(new Item("Sábado", 7));
+            cmbDiaSemana.Items.Add(new Item("Domingo", 1));
+
+            // Seta o mes atual no dropdown
+            cmbMes.SelectedIndex = DateTime.Now.Month - 1;
         }
 
         private void MostraVersaoAplicacao()
@@ -96,7 +129,7 @@ namespace TerapiaReembolso
             this.Text = windowTitle;
         }
 
-        private void MostraBoasVindas()
+        private void MostraMensagemDeBoasVindas()
         {
             if (DateTime.Now.Hour <= 12)
             {
@@ -245,6 +278,7 @@ namespace TerapiaReembolso
                 return false;
             }
 
+            // Valida CPF só números
             if (!ValidaDigitoCPF.ValidaCPFFormato(txtCPFTerapeuta.Text))
             {
                 MessageBox.Show("Favor entrar CPF do terapeuta somente 11 números.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -253,6 +287,7 @@ namespace TerapiaReembolso
                 return false;
             }
 
+            // Valida CPF correto
             if (!ValidaDigitoCPF.ValidaCPFValor(txtCPFTerapeuta.Text))
             {
                 MessageBox.Show("Favor entrar CPF do terapeuta válido.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -270,10 +305,28 @@ namespace TerapiaReembolso
                 return false;
             }
 
+            // Valida CRP só números
+            if (!Regex.IsMatch(txtCRP.Text, @"^\d+$"))
+            {
+                MessageBox.Show("Favor entrar somente números para o CRP.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtCRP.Focus();
+                txtCRP.SelectAll();
+                return false;
+            }
+
             // Valida CEP
             if (string.IsNullOrEmpty(txtCEP.Text))
             {
                 MessageBox.Show("Favor entrar CEP.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtCEP.Focus();
+                txtCEP.SelectAll();
+                return false;
+            }
+
+            // Valida CEP só números
+            if (!Regex.IsMatch(txtCEP.Text, @"^\d+$"))
+            {
+                MessageBox.Show("Favor entrar somente números para o CEP.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 txtCEP.Focus();
                 txtCEP.SelectAll();
                 return false;
@@ -293,6 +346,33 @@ namespace TerapiaReembolso
 
         private bool ValidaDadosParaReembolso()
         {
+            // Valida Login Unimed
+            if (string.IsNullOrEmpty(txtLoginUnimed.Text))
+            {
+                MessageBox.Show("Favor entrar Login Unimed.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtLoginUnimed.Focus();
+                txtLoginUnimed.SelectAll();
+                return false;
+            }
+
+            // Valida Login Unimed CPF só números
+            if (!ValidaDigitoCPF.ValidaCPFFormato(txtLoginUnimed.Text))
+            {
+                MessageBox.Show("Favor entrar Login Unimed CPF somente 11 números.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtLoginUnimed.Focus();
+                txtLoginUnimed.SelectAll();
+                return false;
+            }
+
+            // Valida Login Unimed CPF correto
+            if (!ValidaDigitoCPF.ValidaCPFValor(txtLoginUnimed.Text))
+            {
+                MessageBox.Show("Favor entrar Login Unimed CPF válido.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtLoginUnimed.Focus();
+                txtLoginUnimed.SelectAll();
+                return false;
+            }
+
             // Valida Senha Unimed
             if (string.IsNullOrEmpty(txtSenhaUnimed.Text))
             {
@@ -320,6 +400,15 @@ namespace TerapiaReembolso
                 return false;
             }
 
+            // Valida Agencia só números
+            if (!Regex.IsMatch(txtAgenciaSemDigito.Text, @"^\d+$"))
+            {
+                MessageBox.Show("Favor entrar Agencia somente números.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtAgenciaSemDigito.Focus();
+                txtAgenciaSemDigito.SelectAll();
+                return false;
+            }
+
             // Valida Conta
             if (string.IsNullOrEmpty(txtContaSemDigito.Text))
             {
@@ -329,10 +418,28 @@ namespace TerapiaReembolso
                 return false;
             }
 
+            // Valida Conta só números
+            if (!Regex.IsMatch(txtContaSemDigito.Text, @"^\d+$"))
+            {
+                MessageBox.Show("Favor entrar Conta somente números.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtContaSemDigito.Focus();
+                txtContaSemDigito.SelectAll();
+                return false;
+            }
+
             // Valida Dígito da Conta
             if (string.IsNullOrEmpty(txtDigitoDaConta.Text))
             {
                 MessageBox.Show("Favor entrar Dígito da Conta.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtDigitoDaConta.Focus();
+                txtDigitoDaConta.SelectAll();
+                return false;
+            }
+
+            // Valida Dígito da Conta só números
+            if (!Regex.IsMatch(txtDigitoDaConta.Text, @"^\d+$"))
+            {
+                MessageBox.Show("Favor entrar Dígito da Conta somente números.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 txtDigitoDaConta.Focus();
                 txtDigitoDaConta.SelectAll();
                 return false;
@@ -357,63 +464,43 @@ namespace TerapiaReembolso
         {
             try
             { 
-                txtNomeDoPaciente.Text = Properties.Settings.Default["NomePaciente"].ToString();
-                txtValorTotal.Text = Properties.Settings.Default["ValorTotal"].ToString();
-                txtCPFPaciente.Text = Properties.Settings.Default["CPFPaciente"].ToString();
-                txtReferenteA.Text = Properties.Settings.Default["ReferenteA"].ToString();
-                txtCidade.Text = Properties.Settings.Default["Cidade"].ToString();
-                txtNomeDoTerapeuta.Text = Properties.Settings.Default["NomeTerapeuta"].ToString();
-                txtCPFTerapeuta.Text = Properties.Settings.Default["CPFTerapeuta"].ToString();
-                txtCRP.Text = Properties.Settings.Default["CRP"].ToString();
-                txtCEP.Text = Properties.Settings.Default["CEP"].ToString();
-                txtEnderecoTerapeuta.Text = Properties.Settings.Default["EnderecoTerapeuta"].ToString();
-                rbTelemedicina.Checked = Properties.Settings.Default["TipoAtendimento"].ToString() == "T";
-                rbPresencial.Checked = Properties.Settings.Default["TipoAtendimento"].ToString() == "P";
-                txtNomeDoBanco.Text = Properties.Settings.Default["NomeBanco"].ToString();
-                txtAgenciaSemDigito.Text = Properties.Settings.Default["Agencia"].ToString();
-                txtContaSemDigito.Text = Properties.Settings.Default["Conta"].ToString();
-                txtDigitoDaConta.Text = Properties.Settings.Default["Digito"].ToString();
+                txtNomeDoPaciente.Text = Encryption.DecryptString(Properties.Settings.Default["NomePaciente"].ToString());
+                txtValorTotal.Text = Encryption.DecryptString(Properties.Settings.Default["ValorTotal"].ToString());
+                txtCPFPaciente.Text = Encryption.DecryptString(Properties.Settings.Default["CPFPaciente"].ToString());
+                txtReferenteA.Text = Encryption.DecryptString(Properties.Settings.Default["ReferenteA"].ToString());
+                txtCidade.Text = Encryption.DecryptString(Properties.Settings.Default["Cidade"].ToString());
+                txtNomeDoTerapeuta.Text = Encryption.DecryptString(Properties.Settings.Default["NomeTerapeuta"].ToString());
+                txtCPFTerapeuta.Text = Encryption.DecryptString(Properties.Settings.Default["CPFTerapeuta"].ToString());
+                txtCRP.Text = Encryption.DecryptString(Properties.Settings.Default["CRP"].ToString());
+                txtCEP.Text = Encryption.DecryptString(Properties.Settings.Default["CEP"].ToString());
+                txtEnderecoTerapeuta.Text = Encryption.DecryptString(Properties.Settings.Default["EnderecoTerapeuta"].ToString());
+                rbTelemedicina.Checked = Encryption.DecryptString(Properties.Settings.Default["TipoAtendimento"].ToString()) == "T";
+                rbPresencial.Checked = Encryption.DecryptString(Properties.Settings.Default["TipoAtendimento"].ToString()) == "P";
+                txtNomeDoBanco.Text = Encryption.DecryptString(Properties.Settings.Default["NomeBanco"].ToString());
+                txtAgenciaSemDigito.Text = Encryption.DecryptString(Properties.Settings.Default["Agencia"].ToString());
+                txtContaSemDigito.Text = Encryption.DecryptString(Properties.Settings.Default["Conta"].ToString());
+                txtDigitoDaConta.Text = Encryption.DecryptString(Properties.Settings.Default["Digito"].ToString());
+                txtLoginUnimed.Text = Encryption.DecryptString(Properties.Settings.Default["LoginUnimed"].ToString());
                 txtSenhaUnimed.Text = Encryption.DecryptString(Properties.Settings.Default["SenhaUnimed"].ToString());
                 numNumeroConsultas.Value = decimal.Parse(Properties.Settings.Default["NumeroConsultas"].ToString());
 
-                // Carrega datas se tiver alguma salva
-                if (DateTime.TryParse(Properties.Settings.Default["DataConsulta1"].ToString(), out DateTime dateTime1))
-                {
-                    if (dateTime1.Year > 1)
-                    {
-                        dtDataConsulta1.Value = (DateTime)Properties.Settings.Default["DataConsulta1"];
-                    }
-                }
+                _Mes = Encryption.DecryptString(Properties.Settings.Default["Mes"].ToString());
+                _DiaDaSemana = Encryption.DecryptString(Properties.Settings.Default["DiaDaSemana"].ToString());
 
-                if (DateTime.TryParse(Properties.Settings.Default["DataConsulta2"].ToString(), out DateTime dateTime2))
-                {
-                    if (dateTime2.Year > 1)
-                    {
-                        dtDataConsulta2.Value = (DateTime)Properties.Settings.Default["DataConsulta2"];
-                    }
-                }
+                _previneAtualizacaoDatas = true;
+                cmbMes.SelectedIndex = cmbMes.FindString(_Mes);
+                cmbDiaSemana.SelectedIndex = cmbDiaSemana.FindString(_DiaDaSemana);
+                _previneAtualizacaoDatas = false;
 
-                if (DateTime.TryParse(Properties.Settings.Default["DataConsulta3"].ToString(), out DateTime dateTime3))
+                for (int f = 0; f < 10; f++)
                 {
-                    if (dateTime3.Year > 1)
+                    // Carrega datas das consultas se tiver alguma salva
+                    if (DateTime.TryParse(Properties.Settings.Default[$"DataConsulta{f+1}"].ToString(), out DateTime dateTime1))
                     {
-                        dtDataConsulta3.Value = (DateTime)Properties.Settings.Default["DataConsulta3"];
-                    }
-                }
-
-                if (DateTime.TryParse(Properties.Settings.Default["DataConsulta4"].ToString(), out DateTime dateTime4))
-                {
-                    if (dateTime4.Year > 1)
-                    {
-                        dtDataConsulta4.Value = (DateTime)Properties.Settings.Default["DataConsulta4"];
-                    }
-                }
-
-                if (DateTime.TryParse(Properties.Settings.Default["DataConsulta5"].ToString(), out DateTime dateTime5))
-                {
-                    if (dateTime5.Year > 1)
-                    {
-                        dtDataConsulta5.Value = (DateTime)Properties.Settings.Default["DataConsulta5"];
+                        if (dateTime1.Year > 1)
+                        {
+                            _datasConsultasControles[f].Value = (DateTime)Properties.Settings.Default[$"DataConsulta{f+1}"];
+                        }
                     }
                 }
             }
@@ -426,70 +513,70 @@ namespace TerapiaReembolso
         private void SalvaDadosAtuais()
         {
             _NomePaciente = txtNomeDoPaciente.Text;
-            Properties.Settings.Default["NomePaciente"] = _NomePaciente;
+            Properties.Settings.Default["NomePaciente"] = Encryption.EncryptString(_NomePaciente);
 
             _ValorConsulta = txtValorTotal.Text;
-            Properties.Settings.Default["ValorTotal"] = _ValorConsulta;
+            Properties.Settings.Default["ValorTotal"] = Encryption.EncryptString(_ValorConsulta);
 
             _CPFPaciente = txtCPFPaciente.Text;
-            Properties.Settings.Default["CPFPaciente"] = _CPFPaciente;
+            Properties.Settings.Default["CPFPaciente"] = Encryption.EncryptString(_CPFPaciente);
 
             _ReferenteA = txtReferenteA.Text;
-            Properties.Settings.Default["ReferenteA"] = _ReferenteA;
+            Properties.Settings.Default["ReferenteA"] = Encryption.EncryptString(_ReferenteA);
 
             _Cidade = txtCidade.Text;
-            Properties.Settings.Default["Cidade"] = _Cidade;
+            Properties.Settings.Default["Cidade"] = Encryption.EncryptString(_Cidade);
 
             _NomeTerapeuta = txtNomeDoTerapeuta.Text;
-            Properties.Settings.Default["NomeTerapeuta"] = _NomeTerapeuta;
+            Properties.Settings.Default["NomeTerapeuta"] = Encryption.EncryptString(_NomeTerapeuta);
 
             _CPFTerapeuta = txtCPFTerapeuta.Text;
-            Properties.Settings.Default["CPFTerapeuta"] = _CPFTerapeuta;
+            Properties.Settings.Default["CPFTerapeuta"] = Encryption.EncryptString(_CPFTerapeuta);
 
             _CRP = txtCRP.Text;
-            Properties.Settings.Default["CRP"] = _CRP;
+            Properties.Settings.Default["CRP"] = Encryption.EncryptString(_CRP);
 
             _CEP = txtCEP.Text;
-            Properties.Settings.Default["CEP"] = _CEP;
+            Properties.Settings.Default["CEP"] = Encryption.EncryptString(_CEP);
 
             _EnderecoTerapeuta = txtEnderecoTerapeuta.Text;
-            Properties.Settings.Default["EnderecoTerapeuta"] = _EnderecoTerapeuta;
+            Properties.Settings.Default["EnderecoTerapeuta"] = Encryption.EncryptString(_EnderecoTerapeuta);
 
             _TipoAtendimento = rbTelemedicina.Checked ? "T" : "P";
-            Properties.Settings.Default["TipoAtendimento"] = _TipoAtendimento;
+            Properties.Settings.Default["TipoAtendimento"] = Encryption.EncryptString(_TipoAtendimento);
 
             _NomeBanco = txtNomeDoBanco.Text;
-            Properties.Settings.Default["NomeBanco"] = _NomeBanco;
+            Properties.Settings.Default["NomeBanco"] = Encryption.EncryptString(_NomeBanco);
 
             _Agencia = txtAgenciaSemDigito.Text;
-            Properties.Settings.Default["Agencia"] = _Agencia;
+            Properties.Settings.Default["Agencia"] = Encryption.EncryptString(_Agencia);
 
             _Conta = txtContaSemDigito.Text;
-            Properties.Settings.Default["Conta"] = _Conta;
+            Properties.Settings.Default["Conta"] = Encryption.EncryptString(_Conta);
 
             _Digito = txtDigitoDaConta.Text;
-            Properties.Settings.Default["Digito"] = _Digito;
+            Properties.Settings.Default["Digito"] = Encryption.EncryptString(_Digito);
 
             _NumeroConsultas = (int)numNumeroConsultas.Value;
             Properties.Settings.Default["NumeroConsultas"] = _NumeroConsultas;
 
-            _DataConsulta1 = dtDataConsulta1.Value;
-            Properties.Settings.Default["DataConsulta1"] = _DataConsulta1;
-
-            _DataConsulta2 = dtDataConsulta2.Value;
-            Properties.Settings.Default["DataConsulta2"] = _DataConsulta2;
-
-            _DataConsulta3 = dtDataConsulta3.Value;
-            Properties.Settings.Default["DataConsulta3"] = _DataConsulta3;
-
-            _DataConsulta4 = dtDataConsulta4.Value;
-            Properties.Settings.Default["DataConsulta4"] = _DataConsulta4;
-
-            _DataConsulta5 = dtDataConsulta5.Value;
-            Properties.Settings.Default["DataConsulta5"] = _DataConsulta5;
+            for (int f = 0; f < 10; f++)
+            {
+                _DataConsultaLista[f] = _datasConsultasControles[f].Value;
+                Properties.Settings.Default[$"DataConsulta{f+1}"] = _DataConsultaLista[f];
+            }
 
             _SenhaUnimed = txtSenhaUnimed.Text;
             Properties.Settings.Default["SenhaUnimed"] = Encryption.EncryptString(_SenhaUnimed);
+
+            _LoginUnimed = txtLoginUnimed.Text;
+            Properties.Settings.Default["LoginUnimed"] = Encryption.EncryptString(_LoginUnimed);
+
+            _DiaDaSemana = cmbDiaSemana.Text;
+            Properties.Settings.Default["DiaDaSemana"] = Encryption.EncryptString(_DiaDaSemana);
+
+            _Mes = cmbMes.Text;
+            Properties.Settings.Default["Mes"] = Encryption.EncryptString(_Mes);
 
             _PDFRecibo = dialogPDF.FileName;
 
@@ -688,7 +775,7 @@ namespace TerapiaReembolso
             string dias = string.Empty;
             for (int f = 1; f <= numNumeroConsultas.Value; f++)
             {
-                dias += datasConsultasControles[f-1].Value.ToString("dd/MM/yyyy, ");
+                dias += _datasConsultasControles[f-1].Value.ToString("dd/MM/yyyy, ");
             }
             dias = dias.TrimEnd().TrimEnd(',');
 
@@ -724,9 +811,11 @@ namespace TerapiaReembolso
                     Action action = (Action)GerarSolicitacaoReembolso;
                     RodaAutomacao(action);
 
+                    this.TopMost = true;
                     string msg = "Solicitação de reembolso preenchida, favor revisar formulário e submeter!";
                     MessageBox.Show(msg, "Sucesso!", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     toolStripStatus.Text = msg;
+                    this.TopMost = false;
                 }
             }
             catch (Exception ex)
@@ -793,13 +882,14 @@ namespace TerapiaReembolso
         {
             // Seta CPF para logar
             var emailText = chromeDriver.FindElement(By.Id("loginInput"));
-            emailText.SendKeys(_CPFPaciente);
+            emailText.SendKeys(_LoginUnimed);
 
             // Seta senha para logar
             var passwordText = chromeDriver.FindElement(By.Id("senhaInput"));
             passwordText.SendKeys(_SenhaUnimed);
 
             // Submete o formulário
+            System.Threading.Thread.Sleep(500);
             passwordText.Submit();
             System.Threading.Thread.Sleep(1500);
 
@@ -810,7 +900,7 @@ namespace TerapiaReembolso
             System.Threading.Thread.Sleep(1000);
 
             // Espera os spinners todos da página
-            AguardaSpinner(30);
+            AguardaSpinner();
         }
 
         private void SubmeteSolicitaoReembolso()
@@ -833,7 +923,7 @@ namespace TerapiaReembolso
             System.Threading.Thread.Sleep(1000);
 
             // Espera os spinners todos da página
-            AguardaSpinner(30);
+            AguardaSpinner();
 
             // Espera botão "Nova solicitação de reembolso" e clica
             By novaSolicitacaoBy = By.XPath("//a[.='Nova solicitação de reembolso']");
@@ -894,7 +984,7 @@ namespace TerapiaReembolso
             for (int i = 0; i < numNumeroConsultas.Value; i++)
             {
                 element = chromeDriver.FindElement(By.Id($"dateSessions{i}Input"));
-                element.SendKeys(datasConsultasControles[i].Value.ToString("dd/MM/yyyy"));
+                element.SendKeys(_datasConsultasControles[i].Value.ToString("dd/MM/yyyy"));
 
                 if (i == 0)
                 {
@@ -933,9 +1023,11 @@ namespace TerapiaReembolso
 
         private void SetaInformacoesPsicologo()
         {
+            // Navega até o CEP
+            ScrollAteElemento(chromeDriver.FindElement(By.Id("cepInput")));
+
             // Seta nome do psicólogo
             element = chromeDriver.FindElement(By.Id("providerNameInput"));
-            ScrollAteElemento(element);
             element.SendKeys(_NomeTerapeuta);
 
             // Seta CPF psicólogo
@@ -1002,7 +1094,7 @@ namespace TerapiaReembolso
             catch { }
         }
 
-        public void AguardaSpinner(int timeoutSecs = 10)
+        public void AguardaSpinner(int timeoutSecs = 5)
         {
             // Aguarda X segundos enquanto spinner está ativo
             for (var i = 0; i < timeoutSecs; i++)
@@ -1063,19 +1155,109 @@ namespace TerapiaReembolso
         private void numNumeroConsultas_ValueChanged(object sender, EventArgs e)
         {
             // Mostra/Esconde datas quando troca número de consultas
-            for (int f = 0; f < 5; f++)
+            for (int f = 0; f < 10; f++)
             {
                 if (f + 1 <= numNumeroConsultas.Value)
                 {
-                    datasConsultasControles[f].Visible = true;
+                    _datasConsultasControles[f].Visible = true;
                 }
                 else
                 {
-                    datasConsultasControles[f].Visible = false;
+                    _datasConsultasControles[f].Visible = false;
                 }
             }
         }
 
         #endregion
+
+        #region Cálculo Automático dos dias das Consultas por mês/dia da semana
+
+        private void cmbDiaSemana_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            _DiaDaSemana = cmbDiaSemana.SelectedText;
+            MostraDatasPorMesEDiaDaSemana();
+        }
+
+        private void cmbMes_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            _Mes = cmbMes.SelectedText;
+            MostraDatasPorMesEDiaDaSemana();
+        }
+
+        private void MostraDatasPorMesEDiaDaSemana()
+        {
+            // Se não tem dados que chegue, não processa
+            if (cmbMes.SelectedIndex == -1 || cmbDiaSemana.SelectedIndex == -1 || _previneAtualizacaoDatas)
+                return;
+
+            // Pega o mes e dia da semana selecionado, além do ano atual
+            Item mesSelecionado = (Item)cmbMes.Items[cmbMes.SelectedIndex];
+            Item diaDaSemanaSelecionado = (Item)cmbDiaSemana.Items[cmbDiaSemana.SelectedIndex];
+            int ano = DateTime.Now.Year;
+            int mes = mesSelecionado.Value;
+
+            // Calcula inicio e final do mes
+            var dataInicio = new DateTime(ano, mes, 1);
+            var dataFim = dataInicio.AddMonths(1).AddDays(-1);
+
+            // Calcula total de dias no mes
+            int numeroDeDias = dataFim.Subtract(dataInicio).Days + 1;
+
+            // Filtro do dia da semana
+            var diasDaSemana = new[] { (DayOfWeek)diaDaSemanaSelecionado.Value - 1 };
+
+            // Seleciona dias filtrado por dia da semana
+            var datasFiltradas = Enumerable.Range(0, numeroDeDias)
+                                  .Select(i => dataInicio.AddDays(i))
+                                  .Where(d => diasDaSemana.Contains(d.DayOfWeek));
+
+            // Atualiza total de consultas
+            numNumeroConsultas.Value = datasFiltradas.Count();
+
+            // Mostra as datas filtradas
+            int count = 0;
+            foreach (var date in datasFiltradas)
+            {
+                _datasConsultasControles[count].Value = date;
+                count++;
+            }
+        }
+
+        #endregion
+
+        #region Suporte a copiar CPF para campos e deixar só dígitos
+
+        private void txtCPFPaciente_TextChanged(object sender, EventArgs e)
+        {
+            txtCPFPaciente.Text = Regex.Replace(txtCPFPaciente.Text, @"[^\d]", "");
+        }
+
+        private void txtCPFTerapeuta_TextChanged(object sender, EventArgs e)
+        {
+            txtCPFTerapeuta.Text = Regex.Replace(txtCPFTerapeuta.Text, @"[^\d]", "");
+        }
+
+        private void txtLoginUnimed_TextChanged(object sender, EventArgs e)
+        {
+            txtLoginUnimed.Text = Regex.Replace(txtLoginUnimed.Text, @"[^\d]", "");
+        }
+
+        #endregion
     }
+
+    #region Item Class
+
+    public class Item
+    {
+        public string Name { get; set; }
+        public int Value { get; set; }
+
+        public Item(string name, int value)
+        {
+            Name = name;
+            Value = value;
+        }
+    }
+
+    #endregion
 }

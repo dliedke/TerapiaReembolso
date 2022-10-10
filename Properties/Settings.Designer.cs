@@ -293,5 +293,96 @@ namespace TerapiaReembolso.Properties {
                 this["UpdateSettings"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string LoginUnimed {
+            get {
+                return ((string)(this["LoginUnimed"]));
+            }
+            set {
+                this["LoginUnimed"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public global::System.DateTime DataConsulta6 {
+            get {
+                return ((global::System.DateTime)(this["DataConsulta6"]));
+            }
+            set {
+                this["DataConsulta6"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public global::System.DateTime DataConsulta7 {
+            get {
+                return ((global::System.DateTime)(this["DataConsulta7"]));
+            }
+            set {
+                this["DataConsulta7"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public global::System.DateTime DataConsulta8 {
+            get {
+                return ((global::System.DateTime)(this["DataConsulta8"]));
+            }
+            set {
+                this["DataConsulta8"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public global::System.DateTime DataConsulta9 {
+            get {
+                return ((global::System.DateTime)(this["DataConsulta9"]));
+            }
+            set {
+                this["DataConsulta9"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public global::System.DateTime DataConsulta10 {
+            get {
+                return ((global::System.DateTime)(this["DataConsulta10"]));
+            }
+            set {
+                this["DataConsulta10"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string Mes {
+            get {
+                return ((string)(this["Mes"]));
+            }
+            set {
+                this["Mes"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string DiaDaSemana {
+            get {
+                return ((string)(this["DiaDaSemana"]));
+            }
+            set {
+                this["DiaDaSemana"] = value;
+            }
+        }
     }
 }
