@@ -178,7 +178,7 @@ namespace TerapiaReembolso
             // Valida nome do paciente
             if (string.IsNullOrEmpty(txtNomeDoPaciente.Text))
             {
-                MessageBox.Show("Favor entrar nome do paciente", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Favor entrar nome do paciente.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 txtNomeDoPaciente.Focus();
                 txtNomeDoPaciente.SelectAll();
                 return false;
@@ -448,7 +448,7 @@ namespace TerapiaReembolso
             // Validate the PDF receipt
             if (string.IsNullOrEmpty(dialogPDF.FileName))
             {
-                MessageBox.Show("Favor selecionar PDF do recibo", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Favor selecionar PDF do recibo.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 btnSelecionarPDFRecibo.Focus();
                 return false;
             }
@@ -627,11 +627,11 @@ namespace TerapiaReembolso
 
                 if (ex.Message.Contains("This version of ChromeDriver only supports Chrome version"))
                 {
-                    MessageBox.Show("Erro interno na aplicação: " + ex.Message + "\r\n\r\nAbra o Chrome manualmente, clique nos 3 pontos no canto superior direito, vá para \"Ajuda\", depois em \"Sobre o Google Chrome\" e atualize seu navegador Chrome para a versão mais recente.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Erro interno na aplicação: " + ex.Message + "\r\n\r\nAbra o Chrome manualmente, clique nos 3 pontos no canto superior direito, vá para \"Ajuda\", depois em \"Sobre o Google Chrome\" e atualize seu navegador Chrome para a versão mais recente. Então tente novamente.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 else
                 {
-                    MessageBox.Show("Erro interno na aplicação: " + ex.Message + "\r\n\r\nFavor tentar de novo.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Erro interno na aplicação: " + ex.Message + "\r\n\r\nFavor tentar de novo o mesmo processo.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 toolStripStatus.Text = "Aguardando";
             }
@@ -643,7 +643,7 @@ namespace TerapiaReembolso
 
         private void RodaAutomacao(Action action)
         {
-            toolStripStatus.Text = "Rodando automação (feche o Chrome se quiser abortar). Por favor, espere...";
+            toolStripStatus.Text = "Rodando automação (feche o Chrome se quiser abortar). Por favor, espere... Primeira vez que rodar demora um pouco mais.";
             EnableDisableControls(false);
             Application.DoEvents();
 
@@ -836,7 +836,7 @@ namespace TerapiaReembolso
 
                 if (ex.Message.Contains("This version of ChromeDriver only supports Chrome version"))
                 {
-                    MessageBox.Show("Erro interno na aplicação: " + ex.Message + "\r\n\r\nAbra o Chrome manualmente, clique nos 3 pontos no canto superior direito, vá para \"Ajuda\", depois em \"Sobre o Google Chrome\" e atualize seu navegador Chrome para a versão mais recente.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Erro interno na aplicação: " + ex.Message + "\r\n\r\nAbra o Chrome manualmente, clique nos 3 pontos no canto superior direito, vá para \"Ajuda\", depois em \"Sobre o Google Chrome\" e atualize seu navegador Chrome para a versão mais recente. Então tente de novo o processo.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 else
                 {
