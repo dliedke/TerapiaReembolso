@@ -15,7 +15,7 @@
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
     <IsWebBootstrapper>true</IsWebBootstrapper>
-    <PublishUrl>\\MRANWDIT01.aus.amer.dell.com\TerapiaReembolso\</PublishUrl>
+    <PublishUrl>C:\GitLab\TerapiaReembolso\published\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Web</InstallFrom>
     <UpdateEnabled>true</UpdateEnabled>
@@ -25,12 +25,13 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <InstallUrl>http://MRANWDIT01.aus.amer.dell.com/TerapiaReembolso/</InstallUrl>
+    <InstallUrl>https://raw.githubusercontent.com/dliedke/TerapiaReembolso/master/published/</InstallUrl>
+    <UpdateUrl>https://raw.githubusercontent.com/dliedke/TerapiaReembolso/master/published/</UpdateUrl>
     <ProductName>Terapia Reembolso</ProductName>
     <PublisherName>Daniel Liedke</PublisherName>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationRevision>1</ApplicationRevision>
     <ApplicationVersion>1.5.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -69,13 +70,13 @@
     <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
   </PropertyGroup>
   <PropertyGroup>
-    <SignManifests>false</SignManifests>
+    <SignManifests>true</SignManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>CBC63D32C6B9D981B13954BE5484A4DF5A376DA9</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>D83CF7B3FF58E6CE4FA635E664A267275A02B2B8</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestKeyFile>InternetReport_TemporaryKey.pfx</ManifestKeyFile>
+    <ManifestKeyFile>TerapiaReembolso_TemporaryKey.pfx</ManifestKeyFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="AngleSharp, Version=0.16.1.0, Culture=neutral, PublicKeyToken=e83494dcdc6d31ea, processorArchitecture=MSIL">
@@ -171,6 +172,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="TerapiaReembolso_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
