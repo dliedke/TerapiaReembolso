@@ -138,7 +138,7 @@ namespace TerapiaReembolso
             else if (DateTime.Now.Hour <= 18)
             {
                 toolStripStatus.Text = "Boa Tarde!";
-            } 
+            }
             else
             {
                 toolStripStatus.Text = "Boa Noite!";
@@ -191,11 +191,11 @@ namespace TerapiaReembolso
                 NumberGroupSeparator = ""
             };
 
-            if (string.IsNullOrEmpty(txtValorTotal.Text) || float.TryParse(txtValorTotal.Text, NumberStyles.Float, formatinfo, out float amount) == false)
+            if (string.IsNullOrEmpty(txtValorConsulta.Text) || float.TryParse(txtValorConsulta.Text, NumberStyles.Float, formatinfo, out float amount) == false)
             {
                 MessageBox.Show("Favor entrar o valor com dois dígitos depois da virgula.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                txtValorTotal.Focus();
-                txtValorTotal.SelectAll();
+                txtValorConsulta.Focus();
+                txtValorConsulta.SelectAll();
                 return false;
             }
 
@@ -203,17 +203,17 @@ namespace TerapiaReembolso
             if (amount <= 0)
             {
                 MessageBox.Show("Valor deve ser maior que zero.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                txtValorTotal.Focus();
-                txtValorTotal.SelectAll();
+                txtValorConsulta.Focus();
+                txtValorConsulta.SelectAll();
                 return false;
             }
 
             // Valida valor com dois digitos depois da virgual
-            if (!Regex.IsMatch(Regex.Escape(txtValorTotal.Text), @"^[0-9]+\,[0-9]{2}$"))
+            if (!Regex.IsMatch(Regex.Escape(txtValorConsulta.Text), @"^[0-9]+\,[0-9]{2}$"))
             {
                 MessageBox.Show("Favor entrar o valor com dois dígitos depois da virgula.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                txtValorTotal.Focus();
-                txtValorTotal.SelectAll();
+                txtValorConsulta.Focus();
+                txtValorConsulta.SelectAll();
                 return false;
             }
 
@@ -463,9 +463,9 @@ namespace TerapiaReembolso
         private void CarregaDadosSalvos()
         {
             try
-            { 
+            {
                 txtNomeDoPaciente.Text = Encryption.DecryptString(Properties.Settings.Default["NomePaciente"].ToString());
-                txtValorTotal.Text = Encryption.DecryptString(Properties.Settings.Default["ValorTotal"].ToString());
+                txtValorConsulta.Text = Encryption.DecryptString(Properties.Settings.Default["ValorTotal"].ToString());
                 txtCPFPaciente.Text = Encryption.DecryptString(Properties.Settings.Default["CPFPaciente"].ToString());
                 txtReferenteA.Text = Encryption.DecryptString(Properties.Settings.Default["ReferenteA"].ToString());
                 txtCidade.Text = Encryption.DecryptString(Properties.Settings.Default["Cidade"].ToString());
@@ -474,11 +474,14 @@ namespace TerapiaReembolso
                 txtCRP.Text = Encryption.DecryptString(Properties.Settings.Default["CRP"].ToString());
                 txtCEP.Text = Encryption.DecryptString(Properties.Settings.Default["CEP"].ToString());
                 txtEnderecoTerapeuta.Text = Encryption.DecryptString(Properties.Settings.Default["EnderecoTerapeuta"].ToString());
+
                 if (!string.IsNullOrEmpty(Properties.Settings.Default["TipoAtendimento"].ToString()))
                 {
                     rbTelemedicina.Checked = Encryption.DecryptString(Properties.Settings.Default["TipoAtendimento"].ToString()) == "T";
                     rbPresencial.Checked = Encryption.DecryptString(Properties.Settings.Default["TipoAtendimento"].ToString()) == "P";
+
                 }
+
                 txtNomeDoBanco.Text = Encryption.DecryptString(Properties.Settings.Default["NomeBanco"].ToString());
                 txtAgenciaSemDigito.Text = Encryption.DecryptString(Properties.Settings.Default["Agencia"].ToString());
                 txtContaSemDigito.Text = Encryption.DecryptString(Properties.Settings.Default["Conta"].ToString());
@@ -507,11 +510,11 @@ namespace TerapiaReembolso
                 for (int f = 0; f < 10; f++)
                 {
                     // Carrega datas das consultas se tiver alguma salva
-                    if (DateTime.TryParse(Properties.Settings.Default[$"DataConsulta{f+1}"].ToString(), out DateTime dateTime1))
+                    if (DateTime.TryParse(Properties.Settings.Default[$"DataConsulta{f + 1}"].ToString(), out DateTime dateTime1))
                     {
                         if (dateTime1.Year > 1)
                         {
-                            _datasConsultasControles[f].Value = (DateTime)Properties.Settings.Default[$"DataConsulta{f+1}"];
+                            _datasConsultasControles[f].Value = (DateTime)Properties.Settings.Default[$"DataConsulta{f + 1}"];
                         }
                     }
                 }
@@ -522,12 +525,34 @@ namespace TerapiaReembolso
             }
         }
 
+        private void CarregaDadosTelaEmMemoria()
+        {
+            _NomePaciente = txtNomeDoPaciente.Text;
+            _ValorConsulta = txtValorConsulta.Text;
+            _CPFPaciente = txtCPFPaciente.Text;
+            _ReferenteA = txtReferenteA.Text;
+            _Cidade = txtCidade.Text;
+            _NomeTerapeuta = txtNomeDoTerapeuta.Text;
+            _CPFTerapeuta = txtCPFTerapeuta.Text;
+            _CRP = txtCRP.Text;
+            _CEP = txtCEP.Text;
+            _EnderecoTerapeuta = txtEnderecoTerapeuta.Text;
+            _TipoAtendimento = rbTelemedicina.Checked ? "T" : "P";
+            _NomeBanco = txtNomeDoBanco.Text;
+            _Agencia = txtAgenciaSemDigito.Text;
+            _Conta = txtContaSemDigito.Text;
+            _Digito = txtDigitoDaConta.Text;
+            _LoginUnimed = txtLoginUnimed.Text;
+            _SenhaUnimed = txtSenhaUnimed.Text;
+            _NumeroConsultas = (int)numNumeroConsultas.Value;
+        }
+
         private void SalvaDadosAtuais()
         {
             _NomePaciente = txtNomeDoPaciente.Text;
             Properties.Settings.Default["NomePaciente"] = Encryption.EncryptString(_NomePaciente);
 
-            _ValorConsulta = txtValorTotal.Text;
+            _ValorConsulta = txtValorConsulta.Text;
             Properties.Settings.Default["ValorTotal"] = Encryption.EncryptString(_ValorConsulta);
 
             _CPFPaciente = txtCPFPaciente.Text;
@@ -575,7 +600,7 @@ namespace TerapiaReembolso
             for (int f = 0; f < 10; f++)
             {
                 _DataConsultaLista[f] = _datasConsultasControles[f].Value;
-                Properties.Settings.Default[$"DataConsulta{f+1}"] = _DataConsultaLista[f];
+                Properties.Settings.Default[$"DataConsulta{f + 1}"] = _DataConsultaLista[f];
             }
 
             _SenhaUnimed = txtSenhaUnimed.Text;
@@ -616,6 +641,8 @@ namespace TerapiaReembolso
                 // Valida os dados do recibo
                 if (ValidaDadosParaRecibo())
                 {
+                    CarregaDadosTelaEmMemoria();
+
                     Action action = (Action)GerarRecibo;
                     RodaAutomacao(action);
                     toolStripStatus.Text = "Recibo gerado com sucesso!";
@@ -709,10 +736,10 @@ namespace TerapiaReembolso
             {
                 string proxyUrl = "proxy";
                 IPAddress[] addresslist = Dns.GetHostAddresses(proxyUrl);
-                return true; 
+                return true;
             }
             catch
-            { 
+            {
             }
 
             return false;
@@ -782,12 +809,12 @@ namespace TerapiaReembolso
             // Seta CPF do emissor
             element = chromeDriver.FindElement(By.Name("cpfCnpjEmissor"));
             element.SendKeys(_CPFTerapeuta);
-            
+
             // Cria string com data das consultas
             string dias = string.Empty;
             for (int f = 1; f <= numNumeroConsultas.Value; f++)
             {
-                dias += _datasConsultasControles[f-1].Value.ToString("dd/MM/yyyy, ");
+                dias += _datasConsultasControles[f - 1].Value.ToString("dd/MM/yyyy, ");
             }
             dias = dias.TrimEnd().TrimEnd(',');
 
@@ -820,6 +847,8 @@ namespace TerapiaReembolso
                 // Valida os dados do reembolso
                 if (ValidaDadosParaReembolso())
                 {
+                    CarregaDadosTelaEmMemoria();
+
                     Action action = (Action)GerarSolicitacaoReembolso;
                     RodaAutomacao(action);
 
@@ -852,12 +881,12 @@ namespace TerapiaReembolso
 
         private void GerarSolicitacaoReembolso()
         {
-            AbreSegurosUnimedClient();
+            AbreSegurosUnimedCliente();
             LoginUnimed();
             SubmeteSolicitaoReembolso();
         }
 
-        private void AbreSegurosUnimedClient()
+        private void AbreSegurosUnimedCliente()
         {
             // Inicia o Chrome maximizado
             ChromeOptions options = new ChromeOptions();
@@ -892,27 +921,22 @@ namespace TerapiaReembolso
 
         private void LoginUnimed()
         {
-            // Seta CPF para logar
-            var emailText = chromeDriver.FindElement(By.Id("loginInput"));
-            emailText.SendKeys(_LoginUnimed);
+            // Caso se tenha um login e senha para entrar
+            if (!string.IsNullOrEmpty(_LoginUnimed) && !string.IsNullOrEmpty(_SenhaUnimed))
+            {
+                // Seta CPF para logar
+                var emailText = chromeDriver.FindElement(By.Id("loginInput"));
+                emailText.SendKeys(_LoginUnimed);
 
-            // Seta senha para logar
-            var passwordText = chromeDriver.FindElement(By.Id("senhaInput"));
-            passwordText.SendKeys(_SenhaUnimed);
+                // Seta senha para logar
+                var passwordText = chromeDriver.FindElement(By.Id("senhaInput"));
+                passwordText.SendKeys(_SenhaUnimed);
 
-            // Submete o formulário
-            System.Threading.Thread.Sleep(500);
-            passwordText.Submit();
-            System.Threading.Thread.Sleep(1500);
-
-            // Espera aparecer o botão de "Reembolsos e Prévias"
-            WaitExtension.WaitUntilElement(chromeDriver, By.XPath("//div[.=' Reembolsos e Prévias ']"), 30);
-
-            // Espera ainda mais um pouquinho 
-            System.Threading.Thread.Sleep(1000);
-
-            // Espera os spinners todos da página
-            AguardaSpinner();
+                // Submete o formulário
+                System.Threading.Thread.Sleep(1500);
+                passwordText.Submit();
+                System.Threading.Thread.Sleep(1500);
+            }
         }
 
         private void SubmeteSolicitaoReembolso()
@@ -927,6 +951,15 @@ namespace TerapiaReembolso
 
         private void VaiParaSolicitacaoReembolso()
         {
+            // Espera aparecer o botão de "Reembolsos e Prévias"
+            WaitExtension.WaitUntilElement(chromeDriver, By.XPath("//div[.=' Reembolsos e Prévias ']"), 30);
+
+            // Espera ainda mais um pouquinho 
+            System.Threading.Thread.Sleep(1000);
+
+            // Espera os spinners todos da página
+            AguardaSpinner();
+
             // Clica em Reembolsos e Prévias
             var botaoReembolsosPrevias = chromeDriver.FindElement(By.XPath("//div[.=' Reembolsos e Prévias ']"));
             botaoReembolsosPrevias.Click();
@@ -1140,12 +1173,20 @@ namespace TerapiaReembolso
 
         #endregion
 
-        #region Link para Assinar PDF
+        #region Link para Assinar PDF e Login Unimed
 
         private void lnkAssinarPDF_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             // Abre link do sejda para assinar PDF
             Process.Start("https://www.sejda.com/pt/sign-pdf");
+        }
+
+
+        private void lnkUnimedLogin_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            CarregaDadosTelaEmMemoria();
+            AbreSegurosUnimedCliente();
+            LoginUnimed();
         }
 
         #endregion
@@ -1237,7 +1278,7 @@ namespace TerapiaReembolso
 
         #endregion
 
-        #region Suporte a copiar CPF para campos e deixar só dígitos
+        #region Suporte a copiar CPF/CEP/CRP/Valor/Dados bancários para campos e deixar só dígitos
 
         private void txtCPFPaciente_TextChanged(object sender, EventArgs e)
         {
@@ -1252,6 +1293,36 @@ namespace TerapiaReembolso
         private void txtLoginUnimed_TextChanged(object sender, EventArgs e)
         {
             txtLoginUnimed.Text = Regex.Replace(txtLoginUnimed.Text, @"[^\d]", "");
+        }
+
+        private void txtCRP_TextChanged(object sender, EventArgs e)
+        {
+            txtCRP.Text = Regex.Replace(txtCRP.Text, @"[^\d]", "");
+        }
+
+        private void txtCEP_TextChanged(object sender, EventArgs e)
+        {
+            txtCEP.Text = Regex.Replace(txtCEP.Text, @"[^\d]", "");
+        }
+
+        private void txtAgenciaSemDigito_TextChanged(object sender, EventArgs e)
+        {
+            txtAgenciaSemDigito.Text = Regex.Replace(txtAgenciaSemDigito.Text, @"[^\d]", "");
+        }
+
+        private void txtContaSemDigito_TextChanged(object sender, EventArgs e)
+        {
+            txtContaSemDigito.Text = Regex.Replace(txtContaSemDigito.Text, @"[^\d]", "");
+        }
+
+        private void txtDigitoDaConta_TextChanged(object sender, EventArgs e)
+        {
+            txtDigitoDaConta.Text = Regex.Replace(txtDigitoDaConta.Text, @"[^\d]", "");
+        }
+
+        private void txtValorConsulta_TextChanged(object sender, EventArgs e)
+        {
+            txtValorConsulta.Text = Regex.Replace(txtValorConsulta.Text, @"[^\d,]", "");
         }
 
         #endregion
