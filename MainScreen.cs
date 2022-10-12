@@ -12,6 +12,8 @@
 
 using System;
 using System.IO;
+using System.Net;
+using System.Linq;
 using System.Threading;
 using System.Diagnostics;
 using System.Globalization;
@@ -22,12 +24,11 @@ using System.Text.RegularExpressions;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.Extensions;
+
 using WebDriverManager;
 using WebDriverManager.DriverConfigs.Impl;
 
 using Keys = OpenQA.Selenium.Keys;
-using System.Net;
-using System.Linq;
 
 namespace TerapiaReembolso
 {
@@ -176,11 +177,11 @@ namespace TerapiaReembolso
         private bool ValidaDadosParaRecibo()
         {
             // Valida nome do paciente
-            if (string.IsNullOrEmpty(txtNomeDoPaciente.Text))
+            if (string.IsNullOrEmpty(cmbNomePaciente.Text))
             {
                 MessageBox.Show("Favor entrar nome do paciente.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                txtNomeDoPaciente.Focus();
-                txtNomeDoPaciente.SelectAll();
+                cmbNomePaciente.Focus();
+                cmbNomePaciente.SelectAll();
                 return false;
             }
 
@@ -464,7 +465,7 @@ namespace TerapiaReembolso
         {
             try
             {
-                txtNomeDoPaciente.Text = Encryption.DecryptString(Properties.Settings.Default["NomePaciente"].ToString());
+                cmbNomePaciente.Text = Encryption.DecryptString(Properties.Settings.Default["NomePaciente"].ToString());
                 txtValorConsulta.Text = Encryption.DecryptString(Properties.Settings.Default["ValorTotal"].ToString());
                 txtCPFPaciente.Text = Encryption.DecryptString(Properties.Settings.Default["CPFPaciente"].ToString());
                 txtReferenteA.Text = Encryption.DecryptString(Properties.Settings.Default["ReferenteA"].ToString());
@@ -527,7 +528,7 @@ namespace TerapiaReembolso
 
         private void CarregaDadosTelaEmMemoria()
         {
-            _NomePaciente = txtNomeDoPaciente.Text;
+            _NomePaciente = cmbNomePaciente.Text;
             _ValorConsulta = txtValorConsulta.Text;
             _CPFPaciente = txtCPFPaciente.Text;
             _ReferenteA = txtReferenteA.Text;
@@ -549,7 +550,7 @@ namespace TerapiaReembolso
 
         private void SalvaDadosAtuais()
         {
-            _NomePaciente = txtNomeDoPaciente.Text;
+            _NomePaciente = cmbNomePaciente.Text;
             Properties.Settings.Default["NomePaciente"] = Encryption.EncryptString(_NomePaciente);
 
             _ValorConsulta = txtValorConsulta.Text;
@@ -1278,7 +1279,7 @@ namespace TerapiaReembolso
 
         #endregion
 
-        #region Suporte a copiar CPF/CEP/CRP/Valor/Dados bancários para campos e deixar só dígitos
+        #region Somente dígitos para campos de CPF/CEP/CRP/Valor/Dados bancários
 
         private void txtCPFPaciente_TextChanged(object sender, EventArgs e)
         {
@@ -1326,6 +1327,27 @@ namespace TerapiaReembolso
         }
 
         #endregion
+
+        private void btnExcluirPaciente_Click(object sender, EventArgs e)
+        {
+            if (cmbNomePaciente.SelectedIndex != -1)
+            {
+                cmbNomePaciente.Items.RemoveAt(cmbNomePaciente.SelectedIndex);
+            }
+
+            cmbNomePaciente.Text = string.Empty;
+            txtValorConsulta.Text = String.Empty;
+            txtCPFPaciente.Text = String.Empty;
+            txtReferenteA.Text = String.Empty;
+        }
+
+        private void btnSalvarPaciente_Click(object sender, EventArgs e)
+        {
+            if (!cmbNomePaciente.Items.Contains(cmbNomePaciente.Text))
+            {
+                cmbNomePaciente.Items.Add(cmbNomePaciente.Text);
+            }
+        }
     }
 
     #region Item Class
