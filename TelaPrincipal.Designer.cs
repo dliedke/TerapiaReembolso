@@ -123,10 +123,9 @@
             // 
             // btnGerarRecibo
             // 
-            this.btnGerarRecibo.Location = new System.Drawing.Point(347, 1285);
-            this.btnGerarRecibo.Margin = new System.Windows.Forms.Padding(7, 8, 7, 8);
+            this.btnGerarRecibo.Location = new System.Drawing.Point(130, 539);
             this.btnGerarRecibo.Name = "btnGerarRecibo";
-            this.btnGerarRecibo.Size = new System.Drawing.Size(357, 82);
+            this.btnGerarRecibo.Size = new System.Drawing.Size(134, 34);
             this.btnGerarRecibo.TabIndex = 11;
             this.btnGerarRecibo.Text = "Gerar Recibo";
             this.btnGerarRecibo.UseVisualStyleBackColor = true;
@@ -134,48 +133,43 @@
             // 
             // dtDataConsulta1
             // 
-            this.dtDataConsulta1.Location = new System.Drawing.Point(238, 288);
-            this.dtDataConsulta1.Margin = new System.Windows.Forms.Padding(7, 8, 7, 8);
+            this.dtDataConsulta1.Location = new System.Drawing.Point(89, 121);
             this.dtDataConsulta1.Name = "dtDataConsulta1";
-            this.dtDataConsulta1.Size = new System.Drawing.Size(607, 38);
+            this.dtDataConsulta1.Size = new System.Drawing.Size(230, 20);
             this.dtDataConsulta1.TabIndex = 3;
             // 
             // txtValorConsulta
             // 
-            this.txtValorConsulta.Location = new System.Drawing.Point(352, 158);
-            this.txtValorConsulta.Margin = new System.Windows.Forms.Padding(7, 8, 7, 8);
+            this.txtValorConsulta.Location = new System.Drawing.Point(132, 66);
             this.txtValorConsulta.Name = "txtValorConsulta";
-            this.txtValorConsulta.Size = new System.Drawing.Size(121, 38);
+            this.txtValorConsulta.Size = new System.Drawing.Size(48, 20);
             this.txtValorConsulta.TabIndex = 4;
             this.txtValorConsulta.ValidatingType = typeof(int);
             this.txtValorConsulta.TextChanged += new System.EventHandler(this.txtValorConsulta_TextChanged);
             // 
             // lblNomeDoPaciente
             // 
-            this.lblNomeDoPaciente.Location = new System.Drawing.Point(233, 83);
-            this.lblNomeDoPaciente.Margin = new System.Windows.Forms.Padding(7, 0, 7, 0);
+            this.lblNomeDoPaciente.Location = new System.Drawing.Point(87, 35);
             this.lblNomeDoPaciente.Name = "lblNomeDoPaciente";
-            this.lblNomeDoPaciente.Size = new System.Drawing.Size(114, 57);
+            this.lblNomeDoPaciente.Size = new System.Drawing.Size(43, 24);
             this.lblNomeDoPaciente.TabIndex = 4;
             this.lblNomeDoPaciente.Text = "Nome:";
             // 
             // lblValorTotal
             // 
             this.lblValorTotal.AutoSize = true;
-            this.lblValorTotal.Location = new System.Drawing.Point(128, 161);
-            this.lblValorTotal.Margin = new System.Windows.Forms.Padding(7, 0, 7, 0);
+            this.lblValorTotal.Location = new System.Drawing.Point(48, 68);
             this.lblValorTotal.Name = "lblValorTotal";
-            this.lblValorTotal.Size = new System.Drawing.Size(209, 32);
+            this.lblValorTotal.Size = new System.Drawing.Size(78, 13);
             this.lblValorTotal.TabIndex = 5;
             this.lblValorTotal.Text = "Valor Consulta:";
             // 
             // lblReferenteA
             // 
             this.lblReferenteA.AutoSize = true;
-            this.lblReferenteA.Location = new System.Drawing.Point(152, 302);
-            this.lblReferenteA.Margin = new System.Windows.Forms.Padding(7, 0, 7, 0);
+            this.lblReferenteA.Location = new System.Drawing.Point(57, 127);
             this.lblReferenteA.Name = "lblReferenteA";
-            this.lblReferenteA.Size = new System.Drawing.Size(170, 32);
+            this.lblReferenteA.Size = new System.Drawing.Size(66, 13);
             this.lblReferenteA.TabIndex = 6;
             this.lblReferenteA.Text = "Referente à:";
             this.lblReferenteA.TextAlign = System.Drawing.ContentAlignment.TopRight;
@@ -183,19 +177,17 @@
             // lblReciboAssinado
             // 
             this.lblReciboAssinado.AutoSize = true;
-            this.lblReciboAssinado.Location = new System.Drawing.Point(58, 298);
-            this.lblReciboAssinado.Margin = new System.Windows.Forms.Padding(7, 0, 7, 0);
+            this.lblReciboAssinado.Location = new System.Drawing.Point(22, 125);
             this.lblReciboAssinado.Name = "lblReciboAssinado";
-            this.lblReciboAssinado.Size = new System.Drawing.Size(236, 32);
+            this.lblReciboAssinado.Size = new System.Drawing.Size(90, 13);
             this.lblReciboAssinado.TabIndex = 7;
             this.lblReciboAssinado.Text = "Recibo Assinado:";
             // 
             // btnSelecionarPDFRecibo
             // 
-            this.btnSelecionarPDFRecibo.Location = new System.Drawing.Point(317, 286);
-            this.btnSelecionarPDFRecibo.Margin = new System.Windows.Forms.Padding(7, 8, 7, 8);
+            this.btnSelecionarPDFRecibo.Location = new System.Drawing.Point(119, 120);
             this.btnSelecionarPDFRecibo.Name = "btnSelecionarPDFRecibo";
-            this.btnSelecionarPDFRecibo.Size = new System.Drawing.Size(338, 54);
+            this.btnSelecionarPDFRecibo.Size = new System.Drawing.Size(127, 23);
             this.btnSelecionarPDFRecibo.TabIndex = 2;
             this.btnSelecionarPDFRecibo.Text = "Selecionar PDF Recibo";
             this.btnSelecionarPDFRecibo.UseVisualStyleBackColor = true;
@@ -208,30 +200,27 @@
             // lblCPFPaciente
             // 
             this.lblCPFPaciente.AutoSize = true;
-            this.lblCPFPaciente.Location = new System.Drawing.Point(244, 231);
-            this.lblCPFPaciente.Margin = new System.Windows.Forms.Padding(7, 0, 7, 0);
+            this.lblCPFPaciente.Location = new System.Drawing.Point(92, 97);
             this.lblCPFPaciente.Name = "lblCPFPaciente";
-            this.lblCPFPaciente.Size = new System.Drawing.Size(78, 32);
+            this.lblCPFPaciente.Size = new System.Drawing.Size(30, 13);
             this.lblCPFPaciente.TabIndex = 10;
             this.lblCPFPaciente.Text = "CPF:";
             // 
             // txtCPFPaciente
             // 
-            this.txtCPFPaciente.Location = new System.Drawing.Point(352, 231);
-            this.txtCPFPaciente.Margin = new System.Windows.Forms.Padding(7, 8, 7, 8);
+            this.txtCPFPaciente.Location = new System.Drawing.Point(132, 97);
             this.txtCPFPaciente.MaxLength = 16;
             this.txtCPFPaciente.Name = "txtCPFPaciente";
-            this.txtCPFPaciente.Size = new System.Drawing.Size(583, 38);
+            this.txtCPFPaciente.Size = new System.Drawing.Size(221, 20);
             this.txtCPFPaciente.TabIndex = 5;
             this.txtCPFPaciente.TextChanged += new System.EventHandler(this.txtCPFPaciente_TextChanged);
             // 
             // lblNomeReciboPDF
             // 
             this.lblNomeReciboPDF.AutoSize = true;
-            this.lblNomeReciboPDF.Location = new System.Drawing.Point(684, 292);
-            this.lblNomeReciboPDF.Margin = new System.Windows.Forms.Padding(7, 0, 7, 0);
+            this.lblNomeReciboPDF.Location = new System.Drawing.Point(256, 122);
             this.lblNomeReciboPDF.Name = "lblNomeReciboPDF";
-            this.lblNomeReciboPDF.Size = new System.Drawing.Size(0, 32);
+            this.lblNomeReciboPDF.Size = new System.Drawing.Size(0, 13);
             this.lblNomeReciboPDF.TabIndex = 11;
             // 
             // statusStrip
@@ -239,10 +228,10 @@
             this.statusStrip.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatus});
-            this.statusStrip.Location = new System.Drawing.Point(0, 1411);
+            this.statusStrip.Location = new System.Drawing.Point(0, 592);
             this.statusStrip.Name = "statusStrip";
-            this.statusStrip.Padding = new System.Windows.Forms.Padding(4, 0, 37, 0);
-            this.statusStrip.Size = new System.Drawing.Size(2132, 54);
+            this.statusStrip.Padding = new System.Windows.Forms.Padding(2, 0, 14, 0);
+            this.statusStrip.Size = new System.Drawing.Size(800, 22);
             this.statusStrip.SizingGrip = false;
             this.statusStrip.TabIndex = 12;
             this.statusStrip.Text = "statusStrip1";
@@ -250,16 +239,15 @@
             // toolStripStatus
             // 
             this.toolStripStatus.Name = "toolStripStatus";
-            this.toolStripStatus.Size = new System.Drawing.Size(74, 41);
+            this.toolStripStatus.Size = new System.Drawing.Size(29, 17);
             this.toolStripStatus.Text = "Idle.";
             // 
             // lnkAssinarPDF
             // 
             this.lnkAssinarPDF.AutoSize = true;
-            this.lnkAssinarPDF.Location = new System.Drawing.Point(856, 17);
-            this.lnkAssinarPDF.Margin = new System.Windows.Forms.Padding(7, 0, 7, 0);
+            this.lnkAssinarPDF.Location = new System.Drawing.Point(321, 7);
             this.lnkAssinarPDF.Name = "lnkAssinarPDF";
-            this.lnkAssinarPDF.Size = new System.Drawing.Size(172, 32);
+            this.lnkAssinarPDF.Size = new System.Drawing.Size(65, 13);
             this.lnkAssinarPDF.TabIndex = 24;
             this.lnkAssinarPDF.TabStop = true;
             this.lnkAssinarPDF.Text = "Assinar PDF";
@@ -267,97 +255,87 @@
             // 
             // txtReferenteA
             // 
-            this.txtReferenteA.Location = new System.Drawing.Point(348, 302);
-            this.txtReferenteA.Margin = new System.Windows.Forms.Padding(7, 8, 7, 8);
+            this.txtReferenteA.Location = new System.Drawing.Point(130, 127);
             this.txtReferenteA.MaxLength = 32;
             this.txtReferenteA.Name = "txtReferenteA";
-            this.txtReferenteA.Size = new System.Drawing.Size(589, 38);
+            this.txtReferenteA.Size = new System.Drawing.Size(223, 20);
             this.txtReferenteA.TabIndex = 6;
             // 
             // lblNomeDoTerapeuta
             // 
             this.lblNomeDoTerapeuta.AutoSize = true;
-            this.lblNomeDoTerapeuta.Location = new System.Drawing.Point(199, 152);
-            this.lblNomeDoTerapeuta.Margin = new System.Windows.Forms.Padding(7, 0, 7, 0);
+            this.lblNomeDoTerapeuta.Location = new System.Drawing.Point(75, 64);
             this.lblNomeDoTerapeuta.Name = "lblNomeDoTerapeuta";
-            this.lblNomeDoTerapeuta.Size = new System.Drawing.Size(97, 32);
+            this.lblNomeDoTerapeuta.Size = new System.Drawing.Size(38, 13);
             this.lblNomeDoTerapeuta.TabIndex = 27;
             this.lblNomeDoTerapeuta.Text = "Nome:";
             // 
             // txtNomeDoTerapeuta
             // 
-            this.txtNomeDoTerapeuta.Location = new System.Drawing.Point(334, 152);
-            this.txtNomeDoTerapeuta.Margin = new System.Windows.Forms.Padding(7, 8, 7, 8);
+            this.txtNomeDoTerapeuta.Location = new System.Drawing.Point(125, 64);
             this.txtNomeDoTerapeuta.MaxLength = 32;
             this.txtNomeDoTerapeuta.Name = "txtNomeDoTerapeuta";
-            this.txtNomeDoTerapeuta.Size = new System.Drawing.Size(600, 38);
+            this.txtNomeDoTerapeuta.Size = new System.Drawing.Size(228, 20);
             this.txtNomeDoTerapeuta.TabIndex = 1;
             // 
             // lblCPFTerapeuta
             // 
             this.lblCPFTerapeuta.AutoSize = true;
-            this.lblCPFTerapeuta.Location = new System.Drawing.Point(218, 232);
-            this.lblCPFTerapeuta.Margin = new System.Windows.Forms.Padding(7, 0, 7, 0);
+            this.lblCPFTerapeuta.Location = new System.Drawing.Point(82, 97);
             this.lblCPFTerapeuta.Name = "lblCPFTerapeuta";
-            this.lblCPFTerapeuta.Size = new System.Drawing.Size(78, 32);
+            this.lblCPFTerapeuta.Size = new System.Drawing.Size(30, 13);
             this.lblCPFTerapeuta.TabIndex = 29;
             this.lblCPFTerapeuta.Text = "CPF:";
             // 
             // txtCPFTerapeuta
             // 
-            this.txtCPFTerapeuta.Location = new System.Drawing.Point(334, 232);
-            this.txtCPFTerapeuta.Margin = new System.Windows.Forms.Padding(7, 8, 7, 8);
+            this.txtCPFTerapeuta.Location = new System.Drawing.Point(125, 97);
             this.txtCPFTerapeuta.MaxLength = 16;
             this.txtCPFTerapeuta.Name = "txtCPFTerapeuta";
-            this.txtCPFTerapeuta.Size = new System.Drawing.Size(600, 38);
+            this.txtCPFTerapeuta.Size = new System.Drawing.Size(228, 20);
             this.txtCPFTerapeuta.TabIndex = 2;
             this.txtCPFTerapeuta.TextChanged += new System.EventHandler(this.txtCPFTerapeuta_TextChanged);
             // 
             // lblEnderecoTerapeuta
             // 
             this.lblEnderecoTerapeuta.AutoSize = true;
-            this.lblEnderecoTerapeuta.Location = new System.Drawing.Point(152, 457);
-            this.lblEnderecoTerapeuta.Margin = new System.Windows.Forms.Padding(7, 0, 7, 0);
+            this.lblEnderecoTerapeuta.Location = new System.Drawing.Point(57, 192);
             this.lblEnderecoTerapeuta.Name = "lblEnderecoTerapeuta";
-            this.lblEnderecoTerapeuta.Size = new System.Drawing.Size(144, 32);
+            this.lblEnderecoTerapeuta.Size = new System.Drawing.Size(56, 13);
             this.lblEnderecoTerapeuta.TabIndex = 31;
             this.lblEnderecoTerapeuta.Text = "Endereço:";
             // 
             // txtEnderecoTerapeuta
             // 
-            this.txtEnderecoTerapeuta.Location = new System.Drawing.Point(338, 454);
-            this.txtEnderecoTerapeuta.Margin = new System.Windows.Forms.Padding(7, 8, 7, 8);
+            this.txtEnderecoTerapeuta.Location = new System.Drawing.Point(127, 190);
             this.txtEnderecoTerapeuta.Multiline = true;
             this.txtEnderecoTerapeuta.Name = "txtEnderecoTerapeuta";
-            this.txtEnderecoTerapeuta.Size = new System.Drawing.Size(598, 154);
+            this.txtEnderecoTerapeuta.Size = new System.Drawing.Size(227, 67);
             this.txtEnderecoTerapeuta.TabIndex = 5;
             // 
             // lblCRP
             // 
             this.lblCRP.AutoSize = true;
-            this.lblCRP.Location = new System.Drawing.Point(69, 305);
-            this.lblCRP.Margin = new System.Windows.Forms.Padding(7, 0, 7, 0);
+            this.lblCRP.Location = new System.Drawing.Point(26, 128);
             this.lblCRP.Name = "lblCRP";
-            this.lblCRP.Size = new System.Drawing.Size(227, 32);
+            this.lblCRP.Size = new System.Drawing.Size(87, 13);
             this.lblCRP.TabIndex = 33;
             this.lblCRP.Text = "Número do CRP:";
             // 
             // txtCRP
             // 
-            this.txtCRP.Location = new System.Drawing.Point(336, 305);
-            this.txtCRP.Margin = new System.Windows.Forms.Padding(7, 8, 7, 8);
+            this.txtCRP.Location = new System.Drawing.Point(126, 128);
             this.txtCRP.MaxLength = 20;
             this.txtCRP.Name = "txtCRP";
-            this.txtCRP.Size = new System.Drawing.Size(598, 38);
+            this.txtCRP.Size = new System.Drawing.Size(227, 20);
             this.txtCRP.TabIndex = 3;
             this.txtCRP.TextChanged += new System.EventHandler(this.txtCRP_TextChanged);
             // 
             // btnSelecionarConsultas
             // 
-            this.btnSelecionarConsultas.Location = new System.Drawing.Point(352, 377);
-            this.btnSelecionarConsultas.Margin = new System.Windows.Forms.Padding(7, 8, 7, 8);
+            this.btnSelecionarConsultas.Location = new System.Drawing.Point(132, 158);
             this.btnSelecionarConsultas.Name = "btnSelecionarConsultas";
-            this.btnSelecionarConsultas.Size = new System.Drawing.Size(357, 70);
+            this.btnSelecionarConsultas.Size = new System.Drawing.Size(134, 29);
             this.btnSelecionarConsultas.TabIndex = 7;
             this.btnSelecionarConsultas.Text = "Selecionar Consultas";
             this.btnSelecionarConsultas.UseVisualStyleBackColor = true;
@@ -384,30 +362,28 @@
             this.pnlConsultas.Controls.Add(this.dtDataConsulta5);
             this.pnlConsultas.Controls.Add(this.dtDataConsulta2);
             this.pnlConsultas.Controls.Add(this.dtDataConsulta1);
-            this.pnlConsultas.Location = new System.Drawing.Point(1104, 12);
-            this.pnlConsultas.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.pnlConsultas.Location = new System.Drawing.Point(414, 5);
+            this.pnlConsultas.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
             this.pnlConsultas.Name = "pnlConsultas";
-            this.pnlConsultas.Size = new System.Drawing.Size(1016, 1396);
+            this.pnlConsultas.Size = new System.Drawing.Size(382, 587);
             this.pnlConsultas.TabIndex = 35;
             this.pnlConsultas.Visible = false;
             // 
             // lbDiaSemana
             // 
             this.lbDiaSemana.AutoSize = true;
-            this.lbDiaSemana.Location = new System.Drawing.Point(438, 29);
-            this.lbDiaSemana.Margin = new System.Windows.Forms.Padding(7, 0, 7, 0);
+            this.lbDiaSemana.Location = new System.Drawing.Point(164, 12);
             this.lbDiaSemana.Name = "lbDiaSemana";
-            this.lbDiaSemana.Size = new System.Drawing.Size(217, 32);
+            this.lbDiaSemana.Size = new System.Drawing.Size(83, 13);
             this.lbDiaSemana.TabIndex = 48;
             this.lbDiaSemana.Text = "Dia da Semana:";
             // 
             // lbMes
             // 
             this.lbMes.AutoSize = true;
-            this.lbMes.Location = new System.Drawing.Point(28, 29);
-            this.lbMes.Margin = new System.Windows.Forms.Padding(7, 0, 7, 0);
+            this.lbMes.Location = new System.Drawing.Point(10, 12);
             this.lbMes.Name = "lbMes";
-            this.lbMes.Size = new System.Drawing.Size(75, 32);
+            this.lbMes.Size = new System.Drawing.Size(30, 13);
             this.lbMes.TabIndex = 47;
             this.lbMes.Text = "Mes:";
             // 
@@ -416,10 +392,10 @@
             this.cmbDiaSemana.DisplayMember = "Name";
             this.cmbDiaSemana.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbDiaSemana.FormattingEnabled = true;
-            this.cmbDiaSemana.Location = new System.Drawing.Point(669, 25);
-            this.cmbDiaSemana.Margin = new System.Windows.Forms.Padding(5);
+            this.cmbDiaSemana.Location = new System.Drawing.Point(251, 10);
+            this.cmbDiaSemana.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.cmbDiaSemana.Name = "cmbDiaSemana";
-            this.cmbDiaSemana.Size = new System.Drawing.Size(317, 39);
+            this.cmbDiaSemana.Size = new System.Drawing.Size(121, 21);
             this.cmbDiaSemana.TabIndex = 1;
             this.cmbDiaSemana.ValueMember = "Value";
             this.cmbDiaSemana.SelectedIndexChanged += new System.EventHandler(this.cmbDiaSemana_SelectedIndexChanged);
@@ -429,60 +405,54 @@
             this.cmbMes.DisplayMember = "Name";
             this.cmbMes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbMes.FormattingEnabled = true;
-            this.cmbMes.Location = new System.Drawing.Point(116, 25);
-            this.cmbMes.Margin = new System.Windows.Forms.Padding(5);
+            this.cmbMes.Location = new System.Drawing.Point(44, 10);
+            this.cmbMes.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.cmbMes.Name = "cmbMes";
-            this.cmbMes.Size = new System.Drawing.Size(297, 39);
+            this.cmbMes.Size = new System.Drawing.Size(114, 21);
             this.cmbMes.TabIndex = 0;
             this.cmbMes.ValueMember = "Value";
             this.cmbMes.SelectedIndexChanged += new System.EventHandler(this.cmbMes_SelectedIndexChanged);
             // 
             // dtDataConsulta10
             // 
-            this.dtDataConsulta10.Location = new System.Drawing.Point(238, 1054);
-            this.dtDataConsulta10.Margin = new System.Windows.Forms.Padding(7, 8, 7, 8);
+            this.dtDataConsulta10.Location = new System.Drawing.Point(89, 442);
             this.dtDataConsulta10.Name = "dtDataConsulta10";
-            this.dtDataConsulta10.Size = new System.Drawing.Size(607, 38);
+            this.dtDataConsulta10.Size = new System.Drawing.Size(230, 20);
             this.dtDataConsulta10.TabIndex = 12;
             // 
             // dtDataConsulta9
             // 
-            this.dtDataConsulta9.Location = new System.Drawing.Point(238, 980);
-            this.dtDataConsulta9.Margin = new System.Windows.Forms.Padding(7, 8, 7, 8);
+            this.dtDataConsulta9.Location = new System.Drawing.Point(89, 411);
             this.dtDataConsulta9.Name = "dtDataConsulta9";
-            this.dtDataConsulta9.Size = new System.Drawing.Size(607, 38);
+            this.dtDataConsulta9.Size = new System.Drawing.Size(230, 20);
             this.dtDataConsulta9.TabIndex = 11;
             // 
             // dtDataConsulta8
             // 
-            this.dtDataConsulta8.Location = new System.Drawing.Point(238, 899);
-            this.dtDataConsulta8.Margin = new System.Windows.Forms.Padding(7, 8, 7, 8);
+            this.dtDataConsulta8.Location = new System.Drawing.Point(89, 377);
             this.dtDataConsulta8.Name = "dtDataConsulta8";
-            this.dtDataConsulta8.Size = new System.Drawing.Size(607, 38);
+            this.dtDataConsulta8.Size = new System.Drawing.Size(230, 20);
             this.dtDataConsulta8.TabIndex = 10;
             // 
             // dtDataConsulta7
             // 
-            this.dtDataConsulta7.Location = new System.Drawing.Point(238, 817);
-            this.dtDataConsulta7.Margin = new System.Windows.Forms.Padding(7, 8, 7, 8);
+            this.dtDataConsulta7.Location = new System.Drawing.Point(89, 343);
             this.dtDataConsulta7.Name = "dtDataConsulta7";
-            this.dtDataConsulta7.Size = new System.Drawing.Size(607, 38);
+            this.dtDataConsulta7.Size = new System.Drawing.Size(230, 20);
             this.dtDataConsulta7.TabIndex = 9;
             // 
             // dtDataConsulta6
             // 
-            this.dtDataConsulta6.Location = new System.Drawing.Point(238, 733);
-            this.dtDataConsulta6.Margin = new System.Windows.Forms.Padding(7, 8, 7, 8);
+            this.dtDataConsulta6.Location = new System.Drawing.Point(89, 307);
             this.dtDataConsulta6.Name = "dtDataConsulta6";
-            this.dtDataConsulta6.Size = new System.Drawing.Size(607, 38);
+            this.dtDataConsulta6.Size = new System.Drawing.Size(230, 20);
             this.dtDataConsulta6.TabIndex = 8;
             // 
             // btnSalvarConsultas
             // 
-            this.btnSalvarConsultas.Location = new System.Drawing.Point(309, 1144);
-            this.btnSalvarConsultas.Margin = new System.Windows.Forms.Padding(7, 8, 7, 8);
+            this.btnSalvarConsultas.Location = new System.Drawing.Point(116, 480);
             this.btnSalvarConsultas.Name = "btnSalvarConsultas";
-            this.btnSalvarConsultas.Size = new System.Drawing.Size(357, 70);
+            this.btnSalvarConsultas.Size = new System.Drawing.Size(134, 29);
             this.btnSalvarConsultas.TabIndex = 13;
             this.btnSalvarConsultas.Text = "Salvar";
             this.btnSalvarConsultas.UseVisualStyleBackColor = true;
@@ -491,17 +461,16 @@
             // lblNumeroDeConsultas
             // 
             this.lblNumeroDeConsultas.AutoSize = true;
-            this.lblNumeroDeConsultas.Location = new System.Drawing.Point(341, 127);
-            this.lblNumeroDeConsultas.Margin = new System.Windows.Forms.Padding(7, 0, 7, 0);
+            this.lblNumeroDeConsultas.Location = new System.Drawing.Point(128, 53);
             this.lblNumeroDeConsultas.Name = "lblNumeroDeConsultas";
-            this.lblNumeroDeConsultas.Size = new System.Drawing.Size(295, 32);
+            this.lblNumeroDeConsultas.Size = new System.Drawing.Size(111, 13);
             this.lblNumeroDeConsultas.TabIndex = 39;
             this.lblNumeroDeConsultas.Text = "Número de Consultas:";
             // 
             // numNumeroConsultas
             // 
-            this.numNumeroConsultas.Location = new System.Drawing.Point(645, 127);
-            this.numNumeroConsultas.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.numNumeroConsultas.Location = new System.Drawing.Point(242, 53);
+            this.numNumeroConsultas.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
             this.numNumeroConsultas.Maximum = new decimal(new int[] {
             10,
             0,
@@ -513,7 +482,7 @@
             0,
             0});
             this.numNumeroConsultas.Name = "numNumeroConsultas";
-            this.numNumeroConsultas.Size = new System.Drawing.Size(121, 38);
+            this.numNumeroConsultas.Size = new System.Drawing.Size(45, 20);
             this.numNumeroConsultas.TabIndex = 2;
             this.numNumeroConsultas.Value = new decimal(new int[] {
             10,
@@ -525,43 +494,38 @@
             // lblSelecioneDataConsultas
             // 
             this.lblSelecioneDataConsultas.AutoSize = true;
-            this.lblSelecioneDataConsultas.Location = new System.Drawing.Point(348, 219);
-            this.lblSelecioneDataConsultas.Margin = new System.Windows.Forms.Padding(7, 0, 7, 0);
+            this.lblSelecioneDataConsultas.Location = new System.Drawing.Point(130, 92);
             this.lblSelecioneDataConsultas.Name = "lblSelecioneDataConsultas";
-            this.lblSelecioneDataConsultas.Size = new System.Drawing.Size(407, 32);
+            this.lblSelecioneDataConsultas.Size = new System.Drawing.Size(154, 13);
             this.lblSelecioneDataConsultas.TabIndex = 37;
             this.lblSelecioneDataConsultas.Text = "Selecione datas das consultas:";
             // 
             // dtDataConsulta4
             // 
-            this.dtDataConsulta4.Location = new System.Drawing.Point(238, 553);
-            this.dtDataConsulta4.Margin = new System.Windows.Forms.Padding(7, 8, 7, 8);
+            this.dtDataConsulta4.Location = new System.Drawing.Point(89, 232);
             this.dtDataConsulta4.Name = "dtDataConsulta4";
-            this.dtDataConsulta4.Size = new System.Drawing.Size(607, 38);
+            this.dtDataConsulta4.Size = new System.Drawing.Size(230, 20);
             this.dtDataConsulta4.TabIndex = 6;
             // 
             // dtDataConsulta3
             // 
-            this.dtDataConsulta3.Location = new System.Drawing.Point(238, 463);
-            this.dtDataConsulta3.Margin = new System.Windows.Forms.Padding(7, 8, 7, 8);
+            this.dtDataConsulta3.Location = new System.Drawing.Point(89, 194);
             this.dtDataConsulta3.Name = "dtDataConsulta3";
-            this.dtDataConsulta3.Size = new System.Drawing.Size(607, 38);
+            this.dtDataConsulta3.Size = new System.Drawing.Size(230, 20);
             this.dtDataConsulta3.TabIndex = 5;
             // 
             // dtDataConsulta5
             // 
-            this.dtDataConsulta5.Location = new System.Drawing.Point(238, 642);
-            this.dtDataConsulta5.Margin = new System.Windows.Forms.Padding(7, 8, 7, 8);
+            this.dtDataConsulta5.Location = new System.Drawing.Point(89, 269);
             this.dtDataConsulta5.Name = "dtDataConsulta5";
-            this.dtDataConsulta5.Size = new System.Drawing.Size(607, 38);
+            this.dtDataConsulta5.Size = new System.Drawing.Size(230, 20);
             this.dtDataConsulta5.TabIndex = 7;
             // 
             // dtDataConsulta2
             // 
-            this.dtDataConsulta2.Location = new System.Drawing.Point(238, 377);
-            this.dtDataConsulta2.Margin = new System.Windows.Forms.Padding(7, 8, 7, 8);
+            this.dtDataConsulta2.Location = new System.Drawing.Point(89, 158);
             this.dtDataConsulta2.Name = "dtDataConsulta2";
-            this.dtDataConsulta2.Size = new System.Drawing.Size(607, 38);
+            this.dtDataConsulta2.Size = new System.Drawing.Size(230, 20);
             this.dtDataConsulta2.TabIndex = 4;
             // 
             // pnlRecibo
@@ -571,10 +535,10 @@
             this.pnlRecibo.Controls.Add(this.lblTituloGeracaoRecibo);
             this.pnlRecibo.Controls.Add(this.lnkAssinarPDF);
             this.pnlRecibo.Controls.Add(this.btnGerarRecibo);
-            this.pnlRecibo.Location = new System.Drawing.Point(12, 12);
-            this.pnlRecibo.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.pnlRecibo.Location = new System.Drawing.Point(4, 5);
+            this.pnlRecibo.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
             this.pnlRecibo.Name = "pnlRecibo";
-            this.pnlRecibo.Size = new System.Drawing.Size(1069, 1396);
+            this.pnlRecibo.Size = new System.Drawing.Size(401, 585);
             this.pnlRecibo.TabIndex = 36;
             // 
             // pnlDadosPaciente
@@ -593,17 +557,19 @@
             this.pnlDadosPaciente.Controls.Add(this.lblReferenteA);
             this.pnlDadosPaciente.Controls.Add(this.lblValorTotal);
             this.pnlDadosPaciente.Controls.Add(this.txtValorConsulta);
-            this.pnlDadosPaciente.Location = new System.Drawing.Point(34, 72);
+            this.pnlDadosPaciente.Location = new System.Drawing.Point(13, 30);
+            this.pnlDadosPaciente.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
             this.pnlDadosPaciente.Name = "pnlDadosPaciente";
-            this.pnlDadosPaciente.Size = new System.Drawing.Size(1003, 481);
+            this.pnlDadosPaciente.Size = new System.Drawing.Size(377, 203);
             this.pnlDadosPaciente.TabIndex = 0;
             // 
             // btnNovo
             // 
             this.btnNovo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnNovo.Location = new System.Drawing.Point(580, 138);
+            this.btnNovo.Location = new System.Drawing.Point(196, 58);
+            this.btnNovo.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
             this.btnNovo.Name = "btnNovo";
-            this.btnNovo.Size = new System.Drawing.Size(111, 48);
+            this.btnNovo.Size = new System.Drawing.Size(47, 28);
             this.btnNovo.TabIndex = 1;
             this.btnNovo.Text = "Novo";
             this.btnNovo.UseVisualStyleBackColor = true;
@@ -612,9 +578,10 @@
             // btnExcluirPaciente
             // 
             this.btnExcluirPaciente.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnExcluirPaciente.Location = new System.Drawing.Point(821, 138);
+            this.btnExcluirPaciente.Location = new System.Drawing.Point(296, 58);
+            this.btnExcluirPaciente.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
             this.btnExcluirPaciente.Name = "btnExcluirPaciente";
-            this.btnExcluirPaciente.Size = new System.Drawing.Size(111, 48);
+            this.btnExcluirPaciente.Size = new System.Drawing.Size(54, 28);
             this.btnExcluirPaciente.TabIndex = 3;
             this.btnExcluirPaciente.Text = "Excluir";
             this.btnExcluirPaciente.UseVisualStyleBackColor = true;
@@ -623,9 +590,10 @@
             // btnSalvarPaciente
             // 
             this.btnSalvarPaciente.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSalvarPaciente.Location = new System.Drawing.Point(700, 138);
+            this.btnSalvarPaciente.Location = new System.Drawing.Point(246, 58);
+            this.btnSalvarPaciente.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
             this.btnSalvarPaciente.Name = "btnSalvarPaciente";
-            this.btnSalvarPaciente.Size = new System.Drawing.Size(111, 48);
+            this.btnSalvarPaciente.Size = new System.Drawing.Size(48, 28);
             this.btnSalvarPaciente.TabIndex = 2;
             this.btnSalvarPaciente.Text = "Salvar";
             this.btnSalvarPaciente.UseVisualStyleBackColor = true;
@@ -634,9 +602,10 @@
             // cmbNomePaciente
             // 
             this.cmbNomePaciente.FormattingEnabled = true;
-            this.cmbNomePaciente.Location = new System.Drawing.Point(348, 83);
+            this.cmbNomePaciente.Location = new System.Drawing.Point(130, 35);
+            this.cmbNomePaciente.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
             this.cmbNomePaciente.Name = "cmbNomePaciente";
-            this.cmbNomePaciente.Size = new System.Drawing.Size(580, 39);
+            this.cmbNomePaciente.Size = new System.Drawing.Size(220, 21);
             this.cmbNomePaciente.TabIndex = 0;
             this.cmbNomePaciente.SelectedIndexChanged += new System.EventHandler(this.cmbNomePaciente_SelectedIndexChanged);
             this.cmbNomePaciente.TextChanged += new System.EventHandler(this.cmbNomePaciente_TextChanged);
@@ -645,10 +614,9 @@
             // lbDadosPaciente
             // 
             this.lbDadosPaciente.AutoSize = true;
-            this.lbDadosPaciente.Location = new System.Drawing.Point(16, 16);
-            this.lbDadosPaciente.Margin = new System.Windows.Forms.Padding(7, 0, 7, 0);
+            this.lbDadosPaciente.Location = new System.Drawing.Point(6, 7);
             this.lbDadosPaciente.Name = "lbDadosPaciente";
-            this.lbDadosPaciente.Size = new System.Drawing.Size(223, 32);
+            this.lbDadosPaciente.Size = new System.Drawing.Size(86, 13);
             this.lbDadosPaciente.TabIndex = 44;
             this.lbDadosPaciente.Text = "Dados Paciente:";
             // 
@@ -668,57 +636,53 @@
             this.pnlDadosTerapeuta.Controls.Add(this.lblEnderecoTerapeuta);
             this.pnlDadosTerapeuta.Controls.Add(this.lblCRP);
             this.pnlDadosTerapeuta.Controls.Add(this.txtCRP);
-            this.pnlDadosTerapeuta.Location = new System.Drawing.Point(35, 591);
+            this.pnlDadosTerapeuta.Location = new System.Drawing.Point(13, 248);
+            this.pnlDadosTerapeuta.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
             this.pnlDadosTerapeuta.Name = "pnlDadosTerapeuta";
-            this.pnlDadosTerapeuta.Size = new System.Drawing.Size(1009, 658);
+            this.pnlDadosTerapeuta.Size = new System.Drawing.Size(380, 277);
             this.pnlDadosTerapeuta.TabIndex = 1;
             // 
             // lbDadosTerapeuta
             // 
             this.lbDadosTerapeuta.AutoSize = true;
-            this.lbDadosTerapeuta.Location = new System.Drawing.Point(16, 15);
-            this.lbDadosTerapeuta.Margin = new System.Windows.Forms.Padding(7, 0, 7, 0);
+            this.lbDadosTerapeuta.Location = new System.Drawing.Point(6, 6);
             this.lbDadosTerapeuta.Name = "lbDadosTerapeuta";
-            this.lbDadosTerapeuta.Size = new System.Drawing.Size(241, 32);
+            this.lbDadosTerapeuta.Size = new System.Drawing.Size(93, 13);
             this.lbDadosTerapeuta.TabIndex = 43;
             this.lbDadosTerapeuta.Text = "Dados Terapeuta:";
             // 
             // lblCidade
             // 
             this.lblCidade.AutoSize = true;
-            this.lblCidade.Location = new System.Drawing.Point(185, 79);
-            this.lblCidade.Margin = new System.Windows.Forms.Padding(7, 0, 7, 0);
+            this.lblCidade.Location = new System.Drawing.Point(69, 33);
             this.lblCidade.Name = "lblCidade";
-            this.lblCidade.Size = new System.Drawing.Size(113, 32);
+            this.lblCidade.Size = new System.Drawing.Size(43, 13);
             this.lblCidade.TabIndex = 14;
             this.lblCidade.Text = "Cidade:";
             // 
             // txtCidade
             // 
-            this.txtCidade.Location = new System.Drawing.Point(339, 74);
-            this.txtCidade.Margin = new System.Windows.Forms.Padding(7, 8, 7, 8);
+            this.txtCidade.Location = new System.Drawing.Point(127, 31);
             this.txtCidade.MaxLength = 32;
             this.txtCidade.Name = "txtCidade";
-            this.txtCidade.Size = new System.Drawing.Size(592, 38);
+            this.txtCidade.Size = new System.Drawing.Size(224, 20);
             this.txtCidade.TabIndex = 0;
             // 
             // lblCEP
             // 
             this.lblCEP.AutoSize = true;
-            this.lblCEP.Location = new System.Drawing.Point(216, 381);
-            this.lblCEP.Margin = new System.Windows.Forms.Padding(7, 0, 7, 0);
+            this.lblCEP.Location = new System.Drawing.Point(81, 160);
             this.lblCEP.Name = "lblCEP";
-            this.lblCEP.Size = new System.Drawing.Size(80, 32);
+            this.lblCEP.Size = new System.Drawing.Size(31, 13);
             this.lblCEP.TabIndex = 36;
             this.lblCEP.Text = "CEP:";
             // 
             // txtCEP
             // 
-            this.txtCEP.Location = new System.Drawing.Point(334, 381);
-            this.txtCEP.Margin = new System.Windows.Forms.Padding(7, 8, 7, 8);
+            this.txtCEP.Location = new System.Drawing.Point(125, 160);
             this.txtCEP.MaxLength = 12;
             this.txtCEP.Name = "txtCEP";
-            this.txtCEP.Size = new System.Drawing.Size(598, 38);
+            this.txtCEP.Size = new System.Drawing.Size(227, 20);
             this.txtCEP.TabIndex = 4;
             this.txtCEP.TextChanged += new System.EventHandler(this.txtCEP_TextChanged);
             // 
@@ -726,10 +690,9 @@
             // 
             this.lblTituloGeracaoRecibo.AutoSize = true;
             this.lblTituloGeracaoRecibo.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.1F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTituloGeracaoRecibo.Location = new System.Drawing.Point(341, 17);
-            this.lblTituloGeracaoRecibo.Margin = new System.Windows.Forms.Padding(7, 0, 7, 0);
+            this.lblTituloGeracaoRecibo.Location = new System.Drawing.Point(128, 7);
             this.lblTituloGeracaoRecibo.Name = "lblTituloGeracaoRecibo";
-            this.lblTituloGeracaoRecibo.Size = new System.Drawing.Size(387, 32);
+            this.lblTituloGeracaoRecibo.Size = new System.Drawing.Size(164, 13);
             this.lblTituloGeracaoRecibo.TabIndex = 44;
             this.lblTituloGeracaoRecibo.Text = "Geração de Recibo Terapia";
             // 
@@ -740,19 +703,18 @@
             this.pnlReembolso.Controls.Add(this.pnlDadosBancarios);
             this.pnlReembolso.Controls.Add(this.lblTituloSolicitacaoReembolso);
             this.pnlReembolso.Controls.Add(this.txtGerarSolicitacaoReembolso);
-            this.pnlReembolso.Location = new System.Drawing.Point(1104, 12);
-            this.pnlReembolso.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.pnlReembolso.Location = new System.Drawing.Point(414, 5);
+            this.pnlReembolso.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
             this.pnlReembolso.Name = "pnlReembolso";
-            this.pnlReembolso.Size = new System.Drawing.Size(1016, 1396);
+            this.pnlReembolso.Size = new System.Drawing.Size(381, 585);
             this.pnlReembolso.TabIndex = 37;
             // 
             // lnkUnimedLogin
             // 
             this.lnkUnimedLogin.AutoSize = true;
-            this.lnkUnimedLogin.Location = new System.Drawing.Point(787, 17);
-            this.lnkUnimedLogin.Margin = new System.Windows.Forms.Padding(7, 0, 7, 0);
+            this.lnkUnimedLogin.Location = new System.Drawing.Point(295, 7);
             this.lnkUnimedLogin.Name = "lnkUnimedLogin";
-            this.lnkUnimedLogin.Size = new System.Drawing.Size(190, 32);
+            this.lnkUnimedLogin.Size = new System.Drawing.Size(72, 13);
             this.lnkUnimedLogin.TabIndex = 50;
             this.lnkUnimedLogin.TabStop = true;
             this.lnkUnimedLogin.Text = "Login Unimed";
@@ -770,38 +732,36 @@
             this.pnlDadosReembolso.Controls.Add(this.lblNomeReciboPDF);
             this.pnlDadosReembolso.Controls.Add(this.txtSenhaUnimed);
             this.pnlDadosReembolso.Controls.Add(this.lblSenhaUnimed);
-            this.pnlDadosReembolso.Location = new System.Drawing.Point(40, 72);
+            this.pnlDadosReembolso.Location = new System.Drawing.Point(15, 30);
+            this.pnlDadosReembolso.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
             this.pnlDadosReembolso.Name = "pnlDadosReembolso";
-            this.pnlDadosReembolso.Size = new System.Drawing.Size(937, 654);
+            this.pnlDadosReembolso.Size = new System.Drawing.Size(353, 275);
             this.pnlDadosReembolso.TabIndex = 0;
             // 
             // lbDadosReembolso
             // 
             this.lbDadosReembolso.AutoSize = true;
-            this.lbDadosReembolso.Location = new System.Drawing.Point(20, 16);
-            this.lbDadosReembolso.Margin = new System.Windows.Forms.Padding(7, 0, 7, 0);
+            this.lbDadosReembolso.Location = new System.Drawing.Point(8, 7);
             this.lbDadosReembolso.Name = "lbDadosReembolso";
-            this.lbDadosReembolso.Size = new System.Drawing.Size(255, 32);
+            this.lbDadosReembolso.Size = new System.Drawing.Size(97, 13);
             this.lbDadosReembolso.TabIndex = 48;
             this.lbDadosReembolso.Text = "Dados Reembolso:";
             // 
             // lblLoginUnimed
             // 
             this.lblLoginUnimed.AutoSize = true;
-            this.lblLoginUnimed.Location = new System.Drawing.Point(26, 115);
-            this.lblLoginUnimed.Margin = new System.Windows.Forms.Padding(7, 0, 7, 0);
+            this.lblLoginUnimed.Location = new System.Drawing.Point(10, 48);
             this.lblLoginUnimed.Name = "lblLoginUnimed";
-            this.lblLoginUnimed.Size = new System.Drawing.Size(279, 32);
+            this.lblLoginUnimed.Size = new System.Drawing.Size(104, 13);
             this.lblLoginUnimed.TabIndex = 47;
             this.lblLoginUnimed.Text = "Login Unimed (CPF):";
             // 
             // txtLoginUnimed
             // 
-            this.txtLoginUnimed.Location = new System.Drawing.Point(317, 115);
-            this.txtLoginUnimed.Margin = new System.Windows.Forms.Padding(7, 8, 7, 8);
+            this.txtLoginUnimed.Location = new System.Drawing.Point(119, 48);
             this.txtLoginUnimed.MaxLength = 16;
             this.txtLoginUnimed.Name = "txtLoginUnimed";
-            this.txtLoginUnimed.Size = new System.Drawing.Size(560, 38);
+            this.txtLoginUnimed.Size = new System.Drawing.Size(212, 20);
             this.txtLoginUnimed.TabIndex = 0;
             this.txtLoginUnimed.TextChanged += new System.EventHandler(this.txtLoginUnimed_TextChanged);
             // 
@@ -809,11 +769,11 @@
             // 
             this.grbTipoAtendimento.Controls.Add(this.rbPresencial);
             this.grbTipoAtendimento.Controls.Add(this.rbTelemedicina);
-            this.grbTipoAtendimento.Location = new System.Drawing.Point(49, 391);
-            this.grbTipoAtendimento.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.grbTipoAtendimento.Location = new System.Drawing.Point(18, 164);
+            this.grbTipoAtendimento.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
             this.grbTipoAtendimento.Name = "grbTipoAtendimento";
-            this.grbTipoAtendimento.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.grbTipoAtendimento.Size = new System.Drawing.Size(308, 195);
+            this.grbTipoAtendimento.Padding = new System.Windows.Forms.Padding(2, 1, 2, 1);
+            this.grbTipoAtendimento.Size = new System.Drawing.Size(138, 82);
             this.grbTipoAtendimento.TabIndex = 42;
             this.grbTipoAtendimento.TabStop = false;
             this.grbTipoAtendimento.Text = "Tipo de Atendimento:";
@@ -821,10 +781,10 @@
             // rbPresencial
             // 
             this.rbPresencial.AutoSize = true;
-            this.rbPresencial.Location = new System.Drawing.Point(43, 57);
-            this.rbPresencial.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.rbPresencial.Location = new System.Drawing.Point(16, 24);
+            this.rbPresencial.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
             this.rbPresencial.Name = "rbPresencial";
-            this.rbPresencial.Size = new System.Drawing.Size(185, 36);
+            this.rbPresencial.Size = new System.Drawing.Size(74, 17);
             this.rbPresencial.TabIndex = 0;
             this.rbPresencial.Text = "Presencial";
             this.rbPresencial.UseVisualStyleBackColor = true;
@@ -833,10 +793,10 @@
             // 
             this.rbTelemedicina.AutoSize = true;
             this.rbTelemedicina.Checked = true;
-            this.rbTelemedicina.Location = new System.Drawing.Point(43, 119);
-            this.rbTelemedicina.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.rbTelemedicina.Location = new System.Drawing.Point(16, 50);
+            this.rbTelemedicina.Margin = new System.Windows.Forms.Padding(2, 1, 2, 1);
             this.rbTelemedicina.Name = "rbTelemedicina";
-            this.rbTelemedicina.Size = new System.Drawing.Size(222, 36);
+            this.rbTelemedicina.Size = new System.Drawing.Size(88, 17);
             this.rbTelemedicina.TabIndex = 1;
             this.rbTelemedicina.TabStop = true;
             this.rbTelemedicina.Text = "Telemedicina";
@@ -844,21 +804,19 @@
             // 
             // txtSenhaUnimed
             // 
-            this.txtSenhaUnimed.Location = new System.Drawing.Point(317, 196);
-            this.txtSenhaUnimed.Margin = new System.Windows.Forms.Padding(7, 8, 7, 8);
+            this.txtSenhaUnimed.Location = new System.Drawing.Point(119, 82);
             this.txtSenhaUnimed.MaxLength = 32;
             this.txtSenhaUnimed.Name = "txtSenhaUnimed";
             this.txtSenhaUnimed.PasswordChar = '*';
-            this.txtSenhaUnimed.Size = new System.Drawing.Size(560, 38);
+            this.txtSenhaUnimed.Size = new System.Drawing.Size(212, 20);
             this.txtSenhaUnimed.TabIndex = 1;
             // 
             // lblSenhaUnimed
             // 
             this.lblSenhaUnimed.AutoSize = true;
-            this.lblSenhaUnimed.Location = new System.Drawing.Point(79, 199);
-            this.lblSenhaUnimed.Margin = new System.Windows.Forms.Padding(7, 0, 7, 0);
+            this.lblSenhaUnimed.Location = new System.Drawing.Point(30, 83);
             this.lblSenhaUnimed.Name = "lblSenhaUnimed";
-            this.lblSenhaUnimed.Size = new System.Drawing.Size(210, 32);
+            this.lblSenhaUnimed.Size = new System.Drawing.Size(80, 13);
             this.lblSenhaUnimed.TabIndex = 45;
             this.lblSenhaUnimed.Text = "Senha Unimed:";
             // 
@@ -874,97 +832,89 @@
             this.pnlDadosBancarios.Controls.Add(this.lblContaSemDigito);
             this.pnlDadosBancarios.Controls.Add(this.txtContaSemDigito);
             this.pnlDadosBancarios.Controls.Add(this.lblAgenciaSemDigito);
-            this.pnlDadosBancarios.Location = new System.Drawing.Point(40, 765);
+            this.pnlDadosBancarios.Location = new System.Drawing.Point(15, 321);
+            this.pnlDadosBancarios.Margin = new System.Windows.Forms.Padding(1, 1, 1, 1);
             this.pnlDadosBancarios.Name = "pnlDadosBancarios";
-            this.pnlDadosBancarios.Size = new System.Drawing.Size(937, 484);
+            this.pnlDadosBancarios.Size = new System.Drawing.Size(353, 204);
             this.pnlDadosBancarios.TabIndex = 1;
             // 
             // lbDadosBancarios
             // 
             this.lbDadosBancarios.AutoSize = true;
-            this.lbDadosBancarios.Location = new System.Drawing.Point(15, 24);
-            this.lbDadosBancarios.Margin = new System.Windows.Forms.Padding(7, 0, 7, 0);
+            this.lbDadosBancarios.Location = new System.Drawing.Point(6, 10);
             this.lbDadosBancarios.Name = "lbDadosBancarios";
-            this.lbDadosBancarios.Size = new System.Drawing.Size(238, 32);
+            this.lbDadosBancarios.Size = new System.Drawing.Size(91, 13);
             this.lbDadosBancarios.TabIndex = 42;
             this.lbDadosBancarios.Text = "Dados Bancários:";
             // 
             // lblNomeDoBanco
             // 
             this.lblNomeDoBanco.AutoSize = true;
-            this.lblNomeDoBanco.Location = new System.Drawing.Point(64, 130);
-            this.lblNomeDoBanco.Margin = new System.Windows.Forms.Padding(7, 0, 7, 0);
+            this.lblNomeDoBanco.Location = new System.Drawing.Point(24, 55);
             this.lblNomeDoBanco.Name = "lblNomeDoBanco";
-            this.lblNomeDoBanco.Size = new System.Drawing.Size(224, 32);
+            this.lblNomeDoBanco.Size = new System.Drawing.Size(87, 13);
             this.lblNomeDoBanco.TabIndex = 35;
             this.lblNomeDoBanco.Text = "Nome do Banco:";
             // 
             // lblDigitoDaConta
             // 
             this.lblDigitoDaConta.AutoSize = true;
-            this.lblDigitoDaConta.Location = new System.Drawing.Point(68, 374);
-            this.lblDigitoDaConta.Margin = new System.Windows.Forms.Padding(7, 0, 7, 0);
+            this.lblDigitoDaConta.Location = new System.Drawing.Point(26, 157);
             this.lblDigitoDaConta.Name = "lblDigitoDaConta";
-            this.lblDigitoDaConta.Size = new System.Drawing.Size(212, 32);
+            this.lblDigitoDaConta.Size = new System.Drawing.Size(84, 13);
             this.lblDigitoDaConta.TabIndex = 41;
             this.lblDigitoDaConta.Text = "Dígito da conta:";
             // 
             // txtNomeDoBanco
             // 
-            this.txtNomeDoBanco.Location = new System.Drawing.Point(303, 127);
-            this.txtNomeDoBanco.Margin = new System.Windows.Forms.Padding(7, 8, 7, 8);
+            this.txtNomeDoBanco.Location = new System.Drawing.Point(114, 53);
             this.txtNomeDoBanco.MaxLength = 32;
             this.txtNomeDoBanco.Name = "txtNomeDoBanco";
-            this.txtNomeDoBanco.Size = new System.Drawing.Size(560, 38);
+            this.txtNomeDoBanco.Size = new System.Drawing.Size(212, 20);
             this.txtNomeDoBanco.TabIndex = 0;
             // 
             // txtDigitoDaConta
             // 
-            this.txtDigitoDaConta.Location = new System.Drawing.Point(306, 374);
-            this.txtDigitoDaConta.Margin = new System.Windows.Forms.Padding(7, 8, 7, 8);
+            this.txtDigitoDaConta.Location = new System.Drawing.Point(115, 157);
             this.txtDigitoDaConta.MaxLength = 32;
             this.txtDigitoDaConta.Name = "txtDigitoDaConta";
-            this.txtDigitoDaConta.Size = new System.Drawing.Size(560, 38);
+            this.txtDigitoDaConta.Size = new System.Drawing.Size(212, 20);
             this.txtDigitoDaConta.TabIndex = 3;
             this.txtDigitoDaConta.TextChanged += new System.EventHandler(this.txtDigitoDaConta_TextChanged);
             // 
             // txtAgenciaSemDigito
             // 
-            this.txtAgenciaSemDigito.Location = new System.Drawing.Point(306, 209);
-            this.txtAgenciaSemDigito.Margin = new System.Windows.Forms.Padding(7, 8, 7, 8);
+            this.txtAgenciaSemDigito.Location = new System.Drawing.Point(115, 88);
             this.txtAgenciaSemDigito.MaxLength = 32;
             this.txtAgenciaSemDigito.Name = "txtAgenciaSemDigito";
-            this.txtAgenciaSemDigito.Size = new System.Drawing.Size(560, 38);
+            this.txtAgenciaSemDigito.Size = new System.Drawing.Size(212, 20);
             this.txtAgenciaSemDigito.TabIndex = 1;
             this.txtAgenciaSemDigito.TextChanged += new System.EventHandler(this.txtAgenciaSemDigito_TextChanged);
             // 
             // lblContaSemDigito
             // 
             this.lblContaSemDigito.AutoSize = true;
-            this.lblContaSemDigito.Location = new System.Drawing.Point(43, 298);
-            this.lblContaSemDigito.Margin = new System.Windows.Forms.Padding(7, 0, 7, 0);
+            this.lblContaSemDigito.Location = new System.Drawing.Point(16, 125);
             this.lblContaSemDigito.Name = "lblContaSemDigito";
-            this.lblContaSemDigito.Size = new System.Drawing.Size(235, 32);
+            this.lblContaSemDigito.Size = new System.Drawing.Size(90, 13);
             this.lblContaSemDigito.TabIndex = 39;
             this.lblContaSemDigito.Text = "Conta sem dígito:";
             // 
             // txtContaSemDigito
             // 
-            this.txtContaSemDigito.Location = new System.Drawing.Point(304, 291);
-            this.txtContaSemDigito.Margin = new System.Windows.Forms.Padding(7, 8, 7, 8);
+            this.txtContaSemDigito.Location = new System.Drawing.Point(114, 122);
             this.txtContaSemDigito.MaxLength = 32;
             this.txtContaSemDigito.Name = "txtContaSemDigito";
-            this.txtContaSemDigito.Size = new System.Drawing.Size(560, 38);
+            this.txtContaSemDigito.Size = new System.Drawing.Size(212, 20);
             this.txtContaSemDigito.TabIndex = 2;
             this.txtContaSemDigito.TextChanged += new System.EventHandler(this.txtContaSemDigito_TextChanged);
             // 
             // lblAgenciaSemDigito
             // 
             this.lblAgenciaSemDigito.AutoSize = true;
-            this.lblAgenciaSemDigito.Location = new System.Drawing.Point(29, 209);
-            this.lblAgenciaSemDigito.Margin = new System.Windows.Forms.Padding(7, 0, 7, 0);
+            this.lblAgenciaSemDigito.Location = new System.Drawing.Point(11, 88);
             this.lblAgenciaSemDigito.Name = "lblAgenciaSemDigito";
-            this.lblAgenciaSemDigito.Size = new System.Drawing.Size(263, 32);
+            this.lblAgenciaSemDigito.Size = new System.Drawing.Size(101, 13);
             this.lblAgenciaSemDigito.TabIndex = 37;
             this.lblAgenciaSemDigito.Text = "Agência sem dígito:";
             // 
@@ -972,38 +922,36 @@
             // 
             this.lblTituloSolicitacaoReembolso.AutoSize = true;
             this.lblTituloSolicitacaoReembolso.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.1F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTituloSolicitacaoReembolso.Location = new System.Drawing.Point(260, 17);
-            this.lblTituloSolicitacaoReembolso.Margin = new System.Windows.Forms.Padding(7, 0, 7, 0);
+            this.lblTituloSolicitacaoReembolso.Location = new System.Drawing.Point(98, 7);
             this.lblTituloSolicitacaoReembolso.Name = "lblTituloSolicitacaoReembolso";
-            this.lblTituloSolicitacaoReembolso.Size = new System.Drawing.Size(480, 32);
+            this.lblTituloSolicitacaoReembolso.Size = new System.Drawing.Size(200, 13);
             this.lblTituloSolicitacaoReembolso.TabIndex = 43;
             this.lblTituloSolicitacaoReembolso.Text = "Solicitação de Reembolso Unimed";
             // 
             // txtGerarSolicitacaoReembolso
             // 
-            this.txtGerarSolicitacaoReembolso.Location = new System.Drawing.Point(315, 1285);
-            this.txtGerarSolicitacaoReembolso.Margin = new System.Windows.Forms.Padding(7, 8, 7, 8);
+            this.txtGerarSolicitacaoReembolso.Location = new System.Drawing.Point(118, 539);
             this.txtGerarSolicitacaoReembolso.Name = "txtGerarSolicitacaoReembolso";
-            this.txtGerarSolicitacaoReembolso.Size = new System.Drawing.Size(357, 97);
+            this.txtGerarSolicitacaoReembolso.Size = new System.Drawing.Size(134, 41);
             this.txtGerarSolicitacaoReembolso.TabIndex = 6;
             this.txtGerarSolicitacaoReembolso.Text = "Gerar solicitação de reembolso";
             this.txtGerarSolicitacaoReembolso.UseVisualStyleBackColor = true;
             this.txtGerarSolicitacaoReembolso.Click += new System.EventHandler(this.btnGerarSolicitacaoReembolso_Click);
             // 
-            // MainScreen
+            // TelaPrincipal
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(16F, 31F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(2132, 1465);
+            this.ClientSize = new System.Drawing.Size(800, 614);
             this.Controls.Add(this.statusStrip);
             this.Controls.Add(this.pnlRecibo);
             this.Controls.Add(this.pnlReembolso);
             this.Controls.Add(this.pnlConsultas);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(5);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "MainScreen";
+            this.Name = "TelaPrincipal";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Terapia Reembolso";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainScreen_FormClosing);
