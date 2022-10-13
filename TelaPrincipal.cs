@@ -731,6 +731,8 @@ namespace TerapiaReembolso
             chromeDriver = new ChromeDriver(options);
 
             // Navega para recibo online
+            chromeDriver.Navigate().GoToUrl("https://www.google.com.br");
+            System.Threading.Thread.Sleep(1000);
             chromeDriver.Navigate().GoToUrl("https://www.reciboonline.com.br/recibo-de-pagamento");
 
             // Espera carregar elemento
