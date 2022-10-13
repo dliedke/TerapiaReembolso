@@ -495,7 +495,7 @@ namespace TerapiaReembolso
                 txtSenhaUnimed.Text = Encryption.DecryptString(Properties.Settings.Default["SenhaUnimed"].ToString());
 
                 // Carrega dados dos pacientes de arquivo binario criptografado
-                string arquivoPacientes = Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), "pacientes.bin");
+                string arquivoPacientes = Path.Combine(Environment.ExpandEnvironmentVariables("%APPDATA%\\..\\Local\\TerapiaReembolso"), "pacientes.bin");
                 if (File.Exists(arquivoPacientes))
                 {
                     _listaPacientes = CryptoSerializer.DeSerialize(arquivoPacientes);
@@ -578,7 +578,7 @@ namespace TerapiaReembolso
             Properties.Settings.Default.Save();
 
             // Salva lista de pacientes em arquivo binário criptografado
-            string arquivoPacientes = Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), "pacientes.bin");
+            string arquivoPacientes = Path.Combine(Environment.ExpandEnvironmentVariables("%APPDATA%\\..\\Local\\TerapiaReembolso"), "pacientes.bin");
             CryptoSerializer.Serialize(arquivoPacientes, _listaPacientes);
         }
 
