@@ -1477,5 +1477,35 @@ namespace TerapiaReembolso
         }
 
         #endregion
+
+        #region Tela de Sobre...
+
+        private void sairToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // Fecha aplicação
+            Close();
+        }
+
+        private void sobreToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // Mostra panel de sobre... com ano atual
+            pnlSobre.Visible = true;
+            pnlConsultas.Visible = false;
+            pnlReembolso.Visible = false;
+            pnlRecibo.Visible = false;
+            lblCopyright.Text = $"Copyright © Daniel Liedke {DateTime.Now.Year}";
+            lblNomeAplicao.Text = this.Text;
+        }
+
+        private void btnFecharSobre_Click(object sender, EventArgs e)
+        {
+            // Fecha panel de sobre...
+            pnlSobre.Visible = false;
+            pnlConsultas.Visible = true;
+            pnlReembolso.Visible = true;
+            pnlRecibo.Visible = true;
+        }
+
+        #endregion
     }
 }
