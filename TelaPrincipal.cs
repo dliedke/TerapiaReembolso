@@ -14,29 +14,31 @@ using System;
 using System.IO;
 using System.Net;
 using System.Linq;
+using System.Text;
 using System.Threading;
 using System.Diagnostics;
 using System.Globalization;
 using System.Windows.Forms;
 using System.Threading.Tasks;
+using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
+// Selenium para automação web
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.Extensions;
+using Keys = OpenQA.Selenium.Keys;
 
+// Pacote para baixar automaticamente último ChormeDriver da Internet
 using WebDriverManager;
 using WebDriverManager.DriverConfigs.Impl;
 
-using Keys = OpenQA.Selenium.Keys;
-using System.Collections.Generic;
-using System.Text;
 
 namespace TerapiaReembolso
 {
-    public partial class MainScreen : Form
+    public partial class TelaPrincipal : Form
     {
-        #region Inicialização da Aplicação
+        #region Variáveis de Classe e Inicialização da Aplicação
 
         private IWebDriver chromeDriver;
         private IWebElement element;
@@ -66,14 +68,14 @@ namespace TerapiaReembolso
         private Dictionary<string, Paciente> _listaPacientes = new Dictionary<string, Paciente>();
         private bool _previneAtualizacaoDatas = false;
 
-        public MainScreen()
+        public TelaPrincipal()
         {
             InitializeComponent();
         }
 
         private void MainScreen_Load(object sender, EventArgs e)
         {
-            // Copia configurações da versão anterior se for preciso
+            // Copia configurações da versão anterior caso necessário
             if (Properties.Settings.Default.UpdateSettings)
             {
                 Properties.Settings.Default.Upgrade();
@@ -81,7 +83,7 @@ namespace TerapiaReembolso
                 Properties.Settings.Default.Save();
             }
 
-            // Seta controles de datas e atualiza a tela
+            // Seta lista de controles de datas e atualiza a tela
             _datasConsultasControles = new DateTimePicker[] { dtDataConsulta1, dtDataConsulta2, dtDataConsulta3, dtDataConsulta4, dtDataConsulta5, dtDataConsulta6, dtDataConsulta7, dtDataConsulta8, dtDataConsulta9, dtDataConsulta10 };
             numNumeroConsultas_ValueChanged(null, EventArgs.Empty);
 
@@ -90,6 +92,7 @@ namespace TerapiaReembolso
             MostraMensagemDeBoasVindas();
             CarregaDadosSalvos();
 
+            // Seleciona primeiro paciente se existir algum cadastrado
             if (cmbNomePaciente.Items.Count > 0)
             {
                 cmbNomePaciente.SelectedIndex = 0;
@@ -121,15 +124,15 @@ namespace TerapiaReembolso
             cmbDiaSemana.Items.Add(new Item("Sábado", 7));
             cmbDiaSemana.Items.Add(new Item("Domingo", 1));
 
-            // Seta o mes atual no dropdown
-            cmbMes.SelectedIndex = DateTime.Now.Month - 1;
+            // Seta o mes passado no dropdown
+            cmbMes.SelectedIndex = DateTime.Now.AddMonths(-1).Month;
         }
 
         private void MostraVersaoAplicacao()
         {
             string windowTitle = "Terapia Reembolso";
 
-            // Sets the application version in the windows title
+            // Mostra versão da aplicação no título da janela
             Version ver = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
             windowTitle = windowTitle + " v" + ver.Major + "." + ver.Minor;
             this.Text = windowTitle;
@@ -157,7 +160,7 @@ namespace TerapiaReembolso
 
         private void btnSelectPDF_Click(object sender, EventArgs e)
         {
-            // Pede PDF pro usuário
+            // Pede arquivo PDF do recibo pro usuário
             DialogResult dialogResult = dialogoPDF.ShowDialog();
 
             // Se arquivo foi selecionado
@@ -266,7 +269,7 @@ namespace TerapiaReembolso
                 return false;
             }
 
-            // Valida nome do terapeuta
+            // Valida Nome do terapeuta
             if (string.IsNullOrEmpty(txtNomeDoTerapeuta.Text))
             {
                 MessageBox.Show("Favor entrar nome do terapeuta.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -470,6 +473,7 @@ namespace TerapiaReembolso
         {
             try
             {
+                // Carrega dados do arquivo de configuração
                 txtCidade.Text = Encryption.DecryptString(Properties.Settings.Default["Cidade"].ToString());
                 txtNomeDoTerapeuta.Text = Encryption.DecryptString(Properties.Settings.Default["NomeTerapeuta"].ToString());
                 txtCPFTerapeuta.Text = Encryption.DecryptString(Properties.Settings.Default["CPFTerapeuta"].ToString());
@@ -481,7 +485,6 @@ namespace TerapiaReembolso
                 {
                     rbTelemedicina.Checked = Encryption.DecryptString(Properties.Settings.Default["TipoAtendimento"].ToString()) == "T";
                     rbPresencial.Checked = Encryption.DecryptString(Properties.Settings.Default["TipoAtendimento"].ToString()) == "P";
-
                 }
 
                 txtNomeDoBanco.Text = Encryption.DecryptString(Properties.Settings.Default["NomeBanco"].ToString());
@@ -490,23 +493,6 @@ namespace TerapiaReembolso
                 txtDigitoDaConta.Text = Encryption.DecryptString(Properties.Settings.Default["Digito"].ToString());
                 txtLoginUnimed.Text = Encryption.DecryptString(Properties.Settings.Default["LoginUnimed"].ToString());
                 txtSenhaUnimed.Text = Encryption.DecryptString(Properties.Settings.Default["SenhaUnimed"].ToString());
-
-                _Mes = Encryption.DecryptString(Properties.Settings.Default["Mes"].ToString());
-                _DiaDaSemana = Encryption.DecryptString(Properties.Settings.Default["DiaDaSemana"].ToString());
-
-                _previneAtualizacaoDatas = true;
-
-                if (cmbMes.FindStringExact(_Mes) != -1)
-                {
-                    cmbMes.SelectedIndex = cmbMes.FindString(_Mes);
-                }
-
-                if (cmbDiaSemana.FindStringExact(_DiaDaSemana) != -1)
-                {
-                    cmbDiaSemana.SelectedIndex = cmbDiaSemana.FindString(_DiaDaSemana);
-                }
-
-                _previneAtualizacaoDatas = false;
 
                 // Carrega dados dos pacientes de arquivo binario criptografado
                 string arquivoPacientes = Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), "pacientes.bin");
@@ -524,6 +510,7 @@ namespace TerapiaReembolso
 
         private void CarregaDadosTelaEmMemoria()
         {
+            // Atualiza variáveis com os valores da tela
             _NomePaciente = cmbNomePaciente.Text;
             _ValorConsulta = txtValorConsulta.Text;
             _CPFPaciente = txtCPFPaciente.Text;
@@ -545,6 +532,7 @@ namespace TerapiaReembolso
 
         private void SalvaDadosAtuais()
         {
+            // Salva todos dados da tela em arquivo de configuração
             _Cidade = txtCidade.Text;
             Properties.Settings.Default["Cidade"] = Encryption.EncryptString(_Cidade);
 
@@ -584,12 +572,6 @@ namespace TerapiaReembolso
             _LoginUnimed = txtLoginUnimed.Text;
             Properties.Settings.Default["LoginUnimed"] = Encryption.EncryptString(_LoginUnimed);
 
-            _DiaDaSemana = cmbDiaSemana.Text;
-            Properties.Settings.Default["DiaDaSemana"] = Encryption.EncryptString(_DiaDaSemana);
-
-            _Mes = cmbMes.Text;
-            Properties.Settings.Default["Mes"] = Encryption.EncryptString(_Mes);
-
             _PDFRecibo = dialogoPDF.FileName;
 
             // Salva configurações no arquivo de config da aplicação
@@ -602,10 +584,10 @@ namespace TerapiaReembolso
 
         private void MainScreen_FormClosing(object sender, FormClosingEventArgs e)
         {
-            // Save the data from the screen when closing
+            // Salva dados na tela quando fecha a aplicação
             SalvaDadosAtuais();
 
-            // Close Chrome Driver
+            // Fecha Chrome Driver
             CloseChromeDriver();
         }
 
@@ -823,14 +805,16 @@ namespace TerapiaReembolso
         {
             try
             {
-                // Valida os dados do reembolso
-                if (ValidaDadosParaReembolso())
+                // Valida os dados do recibo e reembolso 
+                // (muitos campso do recibo são necessário para pedir o reembolso)
+                if (ValidaDadosParaRecibo() && ValidaDadosParaReembolso())
                 {
                     CarregaDadosTelaEmMemoria();
 
                     Action action = (Action)GerarSolicitacaoReembolso;
                     RodaAutomacao(action);
 
+                    // Mostra mensagem de sucesso
                     this.TopMost = true;
                     string msg = "Solicitação de reembolso preenchida, favor revisar formulário e submeter!";
                     MessageBox.Show(msg, "Sucesso!", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -891,6 +875,8 @@ namespace TerapiaReembolso
             chromeDriver = new ChromeDriver(options);
 
             // Navega para Seguros Unimed Login Cliente
+            chromeDriver.Navigate().GoToUrl("https://www.google.com.br");
+            System.Threading.Thread.Sleep(1000);
             chromeDriver.Navigate().GoToUrl("https://www.segurosunimed.com.br/login-cliente");
 
             // Espera carregar elemento
@@ -911,9 +897,12 @@ namespace TerapiaReembolso
                 var passwordText = chromeDriver.FindElement(By.Id("senhaInput"));
                 passwordText.SendKeys(_SenhaUnimed);
 
+                //var botaoEntrar = chromeDriver.FindElement(By.CssSelector("input[type='submit']"));
+                //botaoEntrar.Click();
+
                 // Submete o formulário
-                System.Threading.Thread.Sleep(1500);
-                passwordText.Submit();
+                System.Threading.Thread.Sleep(4000);
+                emailText.Submit();
                 System.Threading.Thread.Sleep(1500);
             }
         }
@@ -1099,10 +1088,6 @@ namespace TerapiaReembolso
 
             // Espera para usuário verificar como ficou
             System.Threading.Thread.Sleep(4000);
-
-            // Submete formulário
-            //element = chromeDriver.FindElement(By.XPath($"//button[.='Enviar solicitação']"));
-            //element.Click();
         }
 
         public void ScrollAteElemento(IWebElement element)
@@ -1120,7 +1105,7 @@ namespace TerapiaReembolso
 
         public void AguardaSpinner(int timeoutSecs = 5)
         {
-            // Aguarda X segundos enquanto spinner está ativo
+            // Aguarda X segundos enquanto spinner na página está ativo
             for (var i = 0; i < timeoutSecs; i++)
             {
                 var ajaxIsComplete = !TentaEncontrarElemento(By.ClassName("spinner"));
@@ -1160,7 +1145,6 @@ namespace TerapiaReembolso
             Process.Start("https://www.sejda.com/pt/sign-pdf");
         }
 
-
         private void lnkUnimedLogin_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             CarregaDadosTelaEmMemoria();
@@ -1198,11 +1182,11 @@ namespace TerapiaReembolso
             {
                 btnGerarRecibo.Enabled = false;
             }
-
         }
 
         private void btnSalvarConsultas_Click(object sender, EventArgs e)
         {
+            // Salva dados do paciente e fecha panel das consultas
             pnlConsultas.Visible = false;
             pnlDadosReembolso.Visible = true;
             SalvaDadosPaciente();
@@ -1358,9 +1342,9 @@ namespace TerapiaReembolso
             pnlDadosReembolso.Visible = true;
         }
 
-
         private void btnSalvarPaciente_Click(object sender, EventArgs e)
         {
+            // Nome do paciente necessário para salvar
             if (cmbNomePaciente.Text == string.Empty)
             {
                 MessageBox.Show("Favor informar o nome do paciente primeiro!", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -1399,7 +1383,6 @@ namespace TerapiaReembolso
             toolStripStatus.Text = $"Paciente \"{nomePaciente}\" salvo!";
         }
 
-
         private void cmbNomePaciente_SelectedIndexChanged(object sender, EventArgs e)
         {
             // Carrega dados do paciente selecionado
@@ -1412,6 +1395,7 @@ namespace TerapiaReembolso
                 txtReferenteA.Text = paciente.ReferenteA;
                 cmbDiaSemana.Text = paciente.DiaSemana;
 
+                // Carrega número datas das consultas se tiver
                 if (paciente.NumeroConsultas > 0)
                 {
                     numNumeroConsultas.Value = (decimal)paciente.NumeroConsultas;
@@ -1446,11 +1430,12 @@ namespace TerapiaReembolso
                     // Algum paciente está selecionado
                     if (cmbNomePaciente.SelectedIndex != -1)
                     {
-                        // Remove da list e do dropdown
+                        // Remove da lista e do dropdown
                         _listaPacientes.Remove(nomePaciente);
                         cmbNomePaciente.Items.RemoveAt(cmbNomePaciente.SelectedIndex);
                     }
 
+                    // Limpa tudo
                     btnNovo_Click(sender, e);
 
                     // Mostra status da operação
@@ -1461,7 +1446,7 @@ namespace TerapiaReembolso
 
         #endregion
 
-        #region Remove acentos do nome
+        #region Remove Acentos do Nome do Paciente
 
         private string strAcentos = "ÄÅÁÂÀÃäáâàãÉÊËÈéêëèÍÎÏÌíîïìÖÓÔÒÕöóôòõÜÚÛüúûùÇç";
 
@@ -1475,7 +1460,7 @@ namespace TerapiaReembolso
 
         public static string RemoveAcentos(string text)
         {
-            // Remove todos acentos do nome
+            // Remove todos acentos do nome do paciente
             StringBuilder sbReturn = new StringBuilder();
             var arrayText = text.Normalize(NormalizationForm.FormD).ToCharArray();
             foreach (char letter in arrayText)

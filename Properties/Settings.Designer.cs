@@ -190,29 +190,5 @@ namespace TerapiaReembolso.Properties {
                 this["LoginUnimed"] = value;
             }
         }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string Mes {
-            get {
-                return ((string)(this["Mes"]));
-            }
-            set {
-                this["Mes"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string DiaDaSemana {
-            get {
-                return ((string)(this["DiaDaSemana"]));
-            }
-            set {
-                this["DiaDaSemana"] = value;
-            }
-        }
     }
 }

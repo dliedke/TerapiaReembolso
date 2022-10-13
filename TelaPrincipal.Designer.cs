@@ -1,6 +1,6 @@
 ﻿namespace TerapiaReembolso
 {
-    partial class MainScreen
+    partial class TelaPrincipal
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainScreen));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TelaPrincipal));
             this.btnGerarRecibo = new System.Windows.Forms.Button();
             this.dtDataConsulta1 = new System.Windows.Forms.DateTimePicker();
             this.txtValorConsulta = new System.Windows.Forms.MaskedTextBox();
