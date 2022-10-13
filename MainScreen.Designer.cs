@@ -37,7 +37,7 @@
             this.lblReferenteA = new System.Windows.Forms.Label();
             this.lblReciboAssinado = new System.Windows.Forms.Label();
             this.btnSelecionarPDFRecibo = new System.Windows.Forms.Button();
-            this.dialogPDF = new System.Windows.Forms.OpenFileDialog();
+            this.dialogoPDF = new System.Windows.Forms.OpenFileDialog();
             this.lblCPFPaciente = new System.Windows.Forms.Label();
             this.txtCPFPaciente = new System.Windows.Forms.TextBox();
             this.lblNomeReciboPDF = new System.Windows.Forms.Label();
@@ -64,7 +64,7 @@
             this.dtDataConsulta8 = new System.Windows.Forms.DateTimePicker();
             this.dtDataConsulta7 = new System.Windows.Forms.DateTimePicker();
             this.dtDataConsulta6 = new System.Windows.Forms.DateTimePicker();
-            this.btnFecharConsultas = new System.Windows.Forms.Button();
+            this.btnSalvarConsultas = new System.Windows.Forms.Button();
             this.lblNumeroDeConsultas = new System.Windows.Forms.Label();
             this.numNumeroConsultas = new System.Windows.Forms.NumericUpDown();
             this.lblSelecioneDataConsultas = new System.Windows.Forms.Label();
@@ -73,9 +73,13 @@
             this.dtDataConsulta5 = new System.Windows.Forms.DateTimePicker();
             this.dtDataConsulta2 = new System.Windows.Forms.DateTimePicker();
             this.pnlRecibo = new System.Windows.Forms.Panel();
-            this.panel3 = new System.Windows.Forms.Panel();
+            this.pnlDadosPaciente = new System.Windows.Forms.Panel();
+            this.btnNovo = new System.Windows.Forms.Button();
+            this.btnExcluirPaciente = new System.Windows.Forms.Button();
+            this.btnSalvarPaciente = new System.Windows.Forms.Button();
+            this.cmbNomePaciente = new System.Windows.Forms.ComboBox();
             this.lbDadosPaciente = new System.Windows.Forms.Label();
-            this.panel2 = new System.Windows.Forms.Panel();
+            this.pnlDadosTerapeuta = new System.Windows.Forms.Panel();
             this.lbDadosTerapeuta = new System.Windows.Forms.Label();
             this.lblCidade = new System.Windows.Forms.Label();
             this.txtCidade = new System.Windows.Forms.TextBox();
@@ -84,16 +88,16 @@
             this.lblTituloGeracaoRecibo = new System.Windows.Forms.Label();
             this.pnlReembolso = new System.Windows.Forms.Panel();
             this.lnkUnimedLogin = new System.Windows.Forms.LinkLabel();
-            this.panel4 = new System.Windows.Forms.Panel();
+            this.pnlDadosReembolso = new System.Windows.Forms.Panel();
             this.lbDadosReembolso = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
+            this.lblLoginUnimed = new System.Windows.Forms.Label();
             this.txtLoginUnimed = new System.Windows.Forms.TextBox();
             this.grbTipoAtendimento = new System.Windows.Forms.GroupBox();
             this.rbPresencial = new System.Windows.Forms.RadioButton();
             this.rbTelemedicina = new System.Windows.Forms.RadioButton();
             this.txtSenhaUnimed = new System.Windows.Forms.TextBox();
             this.lblSenhaUnimed = new System.Windows.Forms.Label();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.pnlDadosBancarios = new System.Windows.Forms.Panel();
             this.lbDadosBancarios = new System.Windows.Forms.Label();
             this.lblNomeDoBanco = new System.Windows.Forms.Label();
             this.lblDigitoDaConta = new System.Windows.Forms.Label();
@@ -105,19 +109,16 @@
             this.lblAgenciaSemDigito = new System.Windows.Forms.Label();
             this.lblTituloSolicitacaoReembolso = new System.Windows.Forms.Label();
             this.txtGerarSolicitacaoReembolso = new System.Windows.Forms.Button();
-            this.cmbNomePaciente = new System.Windows.Forms.ComboBox();
-            this.btnSalvarPaciente = new System.Windows.Forms.Button();
-            this.btnExcluirPaciente = new System.Windows.Forms.Button();
             this.statusStrip.SuspendLayout();
             this.pnlConsultas.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numNumeroConsultas)).BeginInit();
             this.pnlRecibo.SuspendLayout();
-            this.panel3.SuspendLayout();
-            this.panel2.SuspendLayout();
+            this.pnlDadosPaciente.SuspendLayout();
+            this.pnlDadosTerapeuta.SuspendLayout();
             this.pnlReembolso.SuspendLayout();
-            this.panel4.SuspendLayout();
+            this.pnlDadosReembolso.SuspendLayout();
             this.grbTipoAtendimento.SuspendLayout();
-            this.panel1.SuspendLayout();
+            this.pnlDadosBancarios.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnGerarRecibo
@@ -137,7 +138,7 @@
             this.dtDataConsulta1.Margin = new System.Windows.Forms.Padding(7, 8, 7, 8);
             this.dtDataConsulta1.Name = "dtDataConsulta1";
             this.dtDataConsulta1.Size = new System.Drawing.Size(607, 38);
-            this.dtDataConsulta1.TabIndex = 1;
+            this.dtDataConsulta1.TabIndex = 3;
             // 
             // txtValorConsulta
             // 
@@ -145,18 +146,18 @@
             this.txtValorConsulta.Margin = new System.Windows.Forms.Padding(7, 8, 7, 8);
             this.txtValorConsulta.Name = "txtValorConsulta";
             this.txtValorConsulta.Size = new System.Drawing.Size(121, 38);
-            this.txtValorConsulta.TabIndex = 1;
+            this.txtValorConsulta.TabIndex = 4;
             this.txtValorConsulta.ValidatingType = typeof(int);
             this.txtValorConsulta.TextChanged += new System.EventHandler(this.txtValorConsulta_TextChanged);
             // 
             // lblNomeDoPaciente
             // 
-            this.lblNomeDoPaciente.Location = new System.Drawing.Point(45, 86);
+            this.lblNomeDoPaciente.Location = new System.Drawing.Point(233, 83);
             this.lblNomeDoPaciente.Margin = new System.Windows.Forms.Padding(7, 0, 7, 0);
             this.lblNomeDoPaciente.Name = "lblNomeDoPaciente";
-            this.lblNomeDoPaciente.Size = new System.Drawing.Size(292, 57);
+            this.lblNomeDoPaciente.Size = new System.Drawing.Size(114, 57);
             this.lblNomeDoPaciente.TabIndex = 4;
-            this.lblNomeDoPaciente.Text = "Nome (Sem Acentos):";
+            this.lblNomeDoPaciente.Text = "Nome:";
             // 
             // lblValorTotal
             // 
@@ -195,14 +196,14 @@
             this.btnSelecionarPDFRecibo.Margin = new System.Windows.Forms.Padding(7, 8, 7, 8);
             this.btnSelecionarPDFRecibo.Name = "btnSelecionarPDFRecibo";
             this.btnSelecionarPDFRecibo.Size = new System.Drawing.Size(338, 54);
-            this.btnSelecionarPDFRecibo.TabIndex = 1;
+            this.btnSelecionarPDFRecibo.TabIndex = 2;
             this.btnSelecionarPDFRecibo.Text = "Selecionar PDF Recibo";
             this.btnSelecionarPDFRecibo.UseVisualStyleBackColor = true;
             this.btnSelecionarPDFRecibo.Click += new System.EventHandler(this.btnSelectPDF_Click);
             // 
-            // dialogPDF
+            // dialogoPDF
             // 
-            this.dialogPDF.Filter = "PDF files|*.pdf";
+            this.dialogoPDF.Filter = "PDF files|*.pdf";
             // 
             // lblCPFPaciente
             // 
@@ -221,7 +222,7 @@
             this.txtCPFPaciente.MaxLength = 16;
             this.txtCPFPaciente.Name = "txtCPFPaciente";
             this.txtCPFPaciente.Size = new System.Drawing.Size(583, 38);
-            this.txtCPFPaciente.TabIndex = 2;
+            this.txtCPFPaciente.TabIndex = 5;
             this.txtCPFPaciente.TextChanged += new System.EventHandler(this.txtCPFPaciente_TextChanged);
             // 
             // lblNomeReciboPDF
@@ -271,7 +272,7 @@
             this.txtReferenteA.MaxLength = 32;
             this.txtReferenteA.Name = "txtReferenteA";
             this.txtReferenteA.Size = new System.Drawing.Size(589, 38);
-            this.txtReferenteA.TabIndex = 3;
+            this.txtReferenteA.TabIndex = 6;
             // 
             // lblNomeDoTerapeuta
             // 
@@ -290,7 +291,7 @@
             this.txtNomeDoTerapeuta.MaxLength = 32;
             this.txtNomeDoTerapeuta.Name = "txtNomeDoTerapeuta";
             this.txtNomeDoTerapeuta.Size = new System.Drawing.Size(600, 38);
-            this.txtNomeDoTerapeuta.TabIndex = 5;
+            this.txtNomeDoTerapeuta.TabIndex = 1;
             // 
             // lblCPFTerapeuta
             // 
@@ -309,7 +310,7 @@
             this.txtCPFTerapeuta.MaxLength = 16;
             this.txtCPFTerapeuta.Name = "txtCPFTerapeuta";
             this.txtCPFTerapeuta.Size = new System.Drawing.Size(600, 38);
-            this.txtCPFTerapeuta.TabIndex = 6;
+            this.txtCPFTerapeuta.TabIndex = 2;
             this.txtCPFTerapeuta.TextChanged += new System.EventHandler(this.txtCPFTerapeuta_TextChanged);
             // 
             // lblEnderecoTerapeuta
@@ -329,7 +330,7 @@
             this.txtEnderecoTerapeuta.Multiline = true;
             this.txtEnderecoTerapeuta.Name = "txtEnderecoTerapeuta";
             this.txtEnderecoTerapeuta.Size = new System.Drawing.Size(598, 154);
-            this.txtEnderecoTerapeuta.TabIndex = 9;
+            this.txtEnderecoTerapeuta.TabIndex = 5;
             // 
             // lblCRP
             // 
@@ -348,7 +349,7 @@
             this.txtCRP.MaxLength = 20;
             this.txtCRP.Name = "txtCRP";
             this.txtCRP.Size = new System.Drawing.Size(598, 38);
-            this.txtCRP.TabIndex = 7;
+            this.txtCRP.TabIndex = 3;
             this.txtCRP.TextChanged += new System.EventHandler(this.txtCRP_TextChanged);
             // 
             // btnSelecionarConsultas
@@ -357,7 +358,7 @@
             this.btnSelecionarConsultas.Margin = new System.Windows.Forms.Padding(7, 8, 7, 8);
             this.btnSelecionarConsultas.Name = "btnSelecionarConsultas";
             this.btnSelecionarConsultas.Size = new System.Drawing.Size(357, 70);
-            this.btnSelecionarConsultas.TabIndex = 10;
+            this.btnSelecionarConsultas.TabIndex = 7;
             this.btnSelecionarConsultas.Text = "Selecionar Consultas";
             this.btnSelecionarConsultas.UseVisualStyleBackColor = true;
             this.btnSelecionarConsultas.Click += new System.EventHandler(this.btnSelecionarConsultas_Click);
@@ -374,7 +375,7 @@
             this.pnlConsultas.Controls.Add(this.dtDataConsulta8);
             this.pnlConsultas.Controls.Add(this.dtDataConsulta7);
             this.pnlConsultas.Controls.Add(this.dtDataConsulta6);
-            this.pnlConsultas.Controls.Add(this.btnFecharConsultas);
+            this.pnlConsultas.Controls.Add(this.btnSalvarConsultas);
             this.pnlConsultas.Controls.Add(this.lblNumeroDeConsultas);
             this.pnlConsultas.Controls.Add(this.numNumeroConsultas);
             this.pnlConsultas.Controls.Add(this.lblSelecioneDataConsultas);
@@ -383,16 +384,17 @@
             this.pnlConsultas.Controls.Add(this.dtDataConsulta5);
             this.pnlConsultas.Controls.Add(this.dtDataConsulta2);
             this.pnlConsultas.Controls.Add(this.dtDataConsulta1);
-            this.pnlConsultas.Location = new System.Drawing.Point(12, 12);
+            this.pnlConsultas.Location = new System.Drawing.Point(1104, 12);
             this.pnlConsultas.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.pnlConsultas.Name = "pnlConsultas";
-            this.pnlConsultas.Size = new System.Drawing.Size(1069, 1240);
+            this.pnlConsultas.Size = new System.Drawing.Size(1016, 1396);
             this.pnlConsultas.TabIndex = 35;
+            this.pnlConsultas.Visible = false;
             // 
             // lbDiaSemana
             // 
             this.lbDiaSemana.AutoSize = true;
-            this.lbDiaSemana.Location = new System.Drawing.Point(448, 29);
+            this.lbDiaSemana.Location = new System.Drawing.Point(438, 29);
             this.lbDiaSemana.Margin = new System.Windows.Forms.Padding(7, 0, 7, 0);
             this.lbDiaSemana.Name = "lbDiaSemana";
             this.lbDiaSemana.Size = new System.Drawing.Size(217, 32);
@@ -414,11 +416,11 @@
             this.cmbDiaSemana.DisplayMember = "Name";
             this.cmbDiaSemana.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbDiaSemana.FormattingEnabled = true;
-            this.cmbDiaSemana.Location = new System.Drawing.Point(679, 25);
+            this.cmbDiaSemana.Location = new System.Drawing.Point(669, 25);
             this.cmbDiaSemana.Margin = new System.Windows.Forms.Padding(5);
             this.cmbDiaSemana.Name = "cmbDiaSemana";
             this.cmbDiaSemana.Size = new System.Drawing.Size(317, 39);
-            this.cmbDiaSemana.TabIndex = 46;
+            this.cmbDiaSemana.TabIndex = 1;
             this.cmbDiaSemana.ValueMember = "Value";
             this.cmbDiaSemana.SelectedIndexChanged += new System.EventHandler(this.cmbDiaSemana_SelectedIndexChanged);
             // 
@@ -431,7 +433,7 @@
             this.cmbMes.Margin = new System.Windows.Forms.Padding(5);
             this.cmbMes.Name = "cmbMes";
             this.cmbMes.Size = new System.Drawing.Size(297, 39);
-            this.cmbMes.TabIndex = 45;
+            this.cmbMes.TabIndex = 0;
             this.cmbMes.ValueMember = "Value";
             this.cmbMes.SelectedIndexChanged += new System.EventHandler(this.cmbMes_SelectedIndexChanged);
             // 
@@ -441,7 +443,7 @@
             this.dtDataConsulta10.Margin = new System.Windows.Forms.Padding(7, 8, 7, 8);
             this.dtDataConsulta10.Name = "dtDataConsulta10";
             this.dtDataConsulta10.Size = new System.Drawing.Size(607, 38);
-            this.dtDataConsulta10.TabIndex = 44;
+            this.dtDataConsulta10.TabIndex = 12;
             // 
             // dtDataConsulta9
             // 
@@ -449,7 +451,7 @@
             this.dtDataConsulta9.Margin = new System.Windows.Forms.Padding(7, 8, 7, 8);
             this.dtDataConsulta9.Name = "dtDataConsulta9";
             this.dtDataConsulta9.Size = new System.Drawing.Size(607, 38);
-            this.dtDataConsulta9.TabIndex = 43;
+            this.dtDataConsulta9.TabIndex = 11;
             // 
             // dtDataConsulta8
             // 
@@ -457,7 +459,7 @@
             this.dtDataConsulta8.Margin = new System.Windows.Forms.Padding(7, 8, 7, 8);
             this.dtDataConsulta8.Name = "dtDataConsulta8";
             this.dtDataConsulta8.Size = new System.Drawing.Size(607, 38);
-            this.dtDataConsulta8.TabIndex = 42;
+            this.dtDataConsulta8.TabIndex = 10;
             // 
             // dtDataConsulta7
             // 
@@ -465,7 +467,7 @@
             this.dtDataConsulta7.Margin = new System.Windows.Forms.Padding(7, 8, 7, 8);
             this.dtDataConsulta7.Name = "dtDataConsulta7";
             this.dtDataConsulta7.Size = new System.Drawing.Size(607, 38);
-            this.dtDataConsulta7.TabIndex = 41;
+            this.dtDataConsulta7.TabIndex = 9;
             // 
             // dtDataConsulta6
             // 
@@ -473,18 +475,18 @@
             this.dtDataConsulta6.Margin = new System.Windows.Forms.Padding(7, 8, 7, 8);
             this.dtDataConsulta6.Name = "dtDataConsulta6";
             this.dtDataConsulta6.Size = new System.Drawing.Size(607, 38);
-            this.dtDataConsulta6.TabIndex = 40;
+            this.dtDataConsulta6.TabIndex = 8;
             // 
-            // btnFecharConsultas
+            // btnSalvarConsultas
             // 
-            this.btnFecharConsultas.Location = new System.Drawing.Point(309, 1144);
-            this.btnFecharConsultas.Margin = new System.Windows.Forms.Padding(7, 8, 7, 8);
-            this.btnFecharConsultas.Name = "btnFecharConsultas";
-            this.btnFecharConsultas.Size = new System.Drawing.Size(357, 70);
-            this.btnFecharConsultas.TabIndex = 6;
-            this.btnFecharConsultas.Text = "Fechar";
-            this.btnFecharConsultas.UseVisualStyleBackColor = true;
-            this.btnFecharConsultas.Click += new System.EventHandler(this.btnFecharConsultas_Click);
+            this.btnSalvarConsultas.Location = new System.Drawing.Point(309, 1144);
+            this.btnSalvarConsultas.Margin = new System.Windows.Forms.Padding(7, 8, 7, 8);
+            this.btnSalvarConsultas.Name = "btnSalvarConsultas";
+            this.btnSalvarConsultas.Size = new System.Drawing.Size(357, 70);
+            this.btnSalvarConsultas.TabIndex = 13;
+            this.btnSalvarConsultas.Text = "Salvar";
+            this.btnSalvarConsultas.UseVisualStyleBackColor = true;
+            this.btnSalvarConsultas.Click += new System.EventHandler(this.btnSalvarConsultas_Click);
             // 
             // lblNumeroDeConsultas
             // 
@@ -512,7 +514,7 @@
             0});
             this.numNumeroConsultas.Name = "numNumeroConsultas";
             this.numNumeroConsultas.Size = new System.Drawing.Size(121, 38);
-            this.numNumeroConsultas.TabIndex = 0;
+            this.numNumeroConsultas.TabIndex = 2;
             this.numNumeroConsultas.Value = new decimal(new int[] {
             10,
             0,
@@ -536,7 +538,7 @@
             this.dtDataConsulta4.Margin = new System.Windows.Forms.Padding(7, 8, 7, 8);
             this.dtDataConsulta4.Name = "dtDataConsulta4";
             this.dtDataConsulta4.Size = new System.Drawing.Size(607, 38);
-            this.dtDataConsulta4.TabIndex = 4;
+            this.dtDataConsulta4.TabIndex = 6;
             // 
             // dtDataConsulta3
             // 
@@ -544,7 +546,7 @@
             this.dtDataConsulta3.Margin = new System.Windows.Forms.Padding(7, 8, 7, 8);
             this.dtDataConsulta3.Name = "dtDataConsulta3";
             this.dtDataConsulta3.Size = new System.Drawing.Size(607, 38);
-            this.dtDataConsulta3.TabIndex = 3;
+            this.dtDataConsulta3.TabIndex = 5;
             // 
             // dtDataConsulta5
             // 
@@ -552,7 +554,7 @@
             this.dtDataConsulta5.Margin = new System.Windows.Forms.Padding(7, 8, 7, 8);
             this.dtDataConsulta5.Name = "dtDataConsulta5";
             this.dtDataConsulta5.Size = new System.Drawing.Size(607, 38);
-            this.dtDataConsulta5.TabIndex = 5;
+            this.dtDataConsulta5.TabIndex = 7;
             // 
             // dtDataConsulta2
             // 
@@ -560,12 +562,12 @@
             this.dtDataConsulta2.Margin = new System.Windows.Forms.Padding(7, 8, 7, 8);
             this.dtDataConsulta2.Name = "dtDataConsulta2";
             this.dtDataConsulta2.Size = new System.Drawing.Size(607, 38);
-            this.dtDataConsulta2.TabIndex = 2;
+            this.dtDataConsulta2.TabIndex = 4;
             // 
             // pnlRecibo
             // 
-            this.pnlRecibo.Controls.Add(this.panel3);
-            this.pnlRecibo.Controls.Add(this.panel2);
+            this.pnlRecibo.Controls.Add(this.pnlDadosPaciente);
+            this.pnlRecibo.Controls.Add(this.pnlDadosTerapeuta);
             this.pnlRecibo.Controls.Add(this.lblTituloGeracaoRecibo);
             this.pnlRecibo.Controls.Add(this.lnkAssinarPDF);
             this.pnlRecibo.Controls.Add(this.btnGerarRecibo);
@@ -575,25 +577,70 @@
             this.pnlRecibo.Size = new System.Drawing.Size(1069, 1396);
             this.pnlRecibo.TabIndex = 36;
             // 
-            // panel3
+            // pnlDadosPaciente
             // 
-            this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel3.Controls.Add(this.btnExcluirPaciente);
-            this.panel3.Controls.Add(this.btnSalvarPaciente);
-            this.panel3.Controls.Add(this.cmbNomePaciente);
-            this.panel3.Controls.Add(this.lbDadosPaciente);
-            this.panel3.Controls.Add(this.lblNomeDoPaciente);
-            this.panel3.Controls.Add(this.txtReferenteA);
-            this.panel3.Controls.Add(this.lblCPFPaciente);
-            this.panel3.Controls.Add(this.txtCPFPaciente);
-            this.panel3.Controls.Add(this.btnSelecionarConsultas);
-            this.panel3.Controls.Add(this.lblReferenteA);
-            this.panel3.Controls.Add(this.lblValorTotal);
-            this.panel3.Controls.Add(this.txtValorConsulta);
-            this.panel3.Location = new System.Drawing.Point(34, 72);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(1003, 481);
-            this.panel3.TabIndex = 46;
+            this.pnlDadosPaciente.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlDadosPaciente.Controls.Add(this.btnNovo);
+            this.pnlDadosPaciente.Controls.Add(this.btnExcluirPaciente);
+            this.pnlDadosPaciente.Controls.Add(this.btnSalvarPaciente);
+            this.pnlDadosPaciente.Controls.Add(this.cmbNomePaciente);
+            this.pnlDadosPaciente.Controls.Add(this.lbDadosPaciente);
+            this.pnlDadosPaciente.Controls.Add(this.lblNomeDoPaciente);
+            this.pnlDadosPaciente.Controls.Add(this.txtReferenteA);
+            this.pnlDadosPaciente.Controls.Add(this.lblCPFPaciente);
+            this.pnlDadosPaciente.Controls.Add(this.txtCPFPaciente);
+            this.pnlDadosPaciente.Controls.Add(this.btnSelecionarConsultas);
+            this.pnlDadosPaciente.Controls.Add(this.lblReferenteA);
+            this.pnlDadosPaciente.Controls.Add(this.lblValorTotal);
+            this.pnlDadosPaciente.Controls.Add(this.txtValorConsulta);
+            this.pnlDadosPaciente.Location = new System.Drawing.Point(34, 72);
+            this.pnlDadosPaciente.Name = "pnlDadosPaciente";
+            this.pnlDadosPaciente.Size = new System.Drawing.Size(1003, 481);
+            this.pnlDadosPaciente.TabIndex = 0;
+            // 
+            // btnNovo
+            // 
+            this.btnNovo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnNovo.Location = new System.Drawing.Point(580, 138);
+            this.btnNovo.Name = "btnNovo";
+            this.btnNovo.Size = new System.Drawing.Size(111, 48);
+            this.btnNovo.TabIndex = 1;
+            this.btnNovo.Text = "Novo";
+            this.btnNovo.UseVisualStyleBackColor = true;
+            this.btnNovo.Click += new System.EventHandler(this.btnNovo_Click);
+            // 
+            // btnExcluirPaciente
+            // 
+            this.btnExcluirPaciente.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnExcluirPaciente.Location = new System.Drawing.Point(821, 138);
+            this.btnExcluirPaciente.Name = "btnExcluirPaciente";
+            this.btnExcluirPaciente.Size = new System.Drawing.Size(111, 48);
+            this.btnExcluirPaciente.TabIndex = 3;
+            this.btnExcluirPaciente.Text = "Excluir";
+            this.btnExcluirPaciente.UseVisualStyleBackColor = true;
+            this.btnExcluirPaciente.Click += new System.EventHandler(this.btnExcluirPaciente_Click);
+            // 
+            // btnSalvarPaciente
+            // 
+            this.btnSalvarPaciente.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSalvarPaciente.Location = new System.Drawing.Point(700, 138);
+            this.btnSalvarPaciente.Name = "btnSalvarPaciente";
+            this.btnSalvarPaciente.Size = new System.Drawing.Size(111, 48);
+            this.btnSalvarPaciente.TabIndex = 2;
+            this.btnSalvarPaciente.Text = "Salvar";
+            this.btnSalvarPaciente.UseVisualStyleBackColor = true;
+            this.btnSalvarPaciente.Click += new System.EventHandler(this.btnSalvarPaciente_Click);
+            // 
+            // cmbNomePaciente
+            // 
+            this.cmbNomePaciente.FormattingEnabled = true;
+            this.cmbNomePaciente.Location = new System.Drawing.Point(348, 83);
+            this.cmbNomePaciente.Name = "cmbNomePaciente";
+            this.cmbNomePaciente.Size = new System.Drawing.Size(580, 39);
+            this.cmbNomePaciente.TabIndex = 0;
+            this.cmbNomePaciente.SelectedIndexChanged += new System.EventHandler(this.cmbNomePaciente_SelectedIndexChanged);
+            this.cmbNomePaciente.TextChanged += new System.EventHandler(this.cmbNomePaciente_TextChanged);
+            this.cmbNomePaciente.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cmbNomePaciente_KeyPress);
             // 
             // lbDadosPaciente
             // 
@@ -605,26 +652,26 @@
             this.lbDadosPaciente.TabIndex = 44;
             this.lbDadosPaciente.Text = "Dados Paciente:";
             // 
-            // panel2
+            // pnlDadosTerapeuta
             // 
-            this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel2.Controls.Add(this.lbDadosTerapeuta);
-            this.panel2.Controls.Add(this.lblCidade);
-            this.panel2.Controls.Add(this.txtCidade);
-            this.panel2.Controls.Add(this.lblCEP);
-            this.panel2.Controls.Add(this.txtNomeDoTerapeuta);
-            this.panel2.Controls.Add(this.txtCEP);
-            this.panel2.Controls.Add(this.lblNomeDoTerapeuta);
-            this.panel2.Controls.Add(this.txtCPFTerapeuta);
-            this.panel2.Controls.Add(this.lblCPFTerapeuta);
-            this.panel2.Controls.Add(this.txtEnderecoTerapeuta);
-            this.panel2.Controls.Add(this.lblEnderecoTerapeuta);
-            this.panel2.Controls.Add(this.lblCRP);
-            this.panel2.Controls.Add(this.txtCRP);
-            this.panel2.Location = new System.Drawing.Point(35, 591);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1009, 658);
-            this.panel2.TabIndex = 45;
+            this.pnlDadosTerapeuta.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlDadosTerapeuta.Controls.Add(this.lbDadosTerapeuta);
+            this.pnlDadosTerapeuta.Controls.Add(this.lblCidade);
+            this.pnlDadosTerapeuta.Controls.Add(this.txtCidade);
+            this.pnlDadosTerapeuta.Controls.Add(this.lblCEP);
+            this.pnlDadosTerapeuta.Controls.Add(this.txtNomeDoTerapeuta);
+            this.pnlDadosTerapeuta.Controls.Add(this.txtCEP);
+            this.pnlDadosTerapeuta.Controls.Add(this.lblNomeDoTerapeuta);
+            this.pnlDadosTerapeuta.Controls.Add(this.txtCPFTerapeuta);
+            this.pnlDadosTerapeuta.Controls.Add(this.lblCPFTerapeuta);
+            this.pnlDadosTerapeuta.Controls.Add(this.txtEnderecoTerapeuta);
+            this.pnlDadosTerapeuta.Controls.Add(this.lblEnderecoTerapeuta);
+            this.pnlDadosTerapeuta.Controls.Add(this.lblCRP);
+            this.pnlDadosTerapeuta.Controls.Add(this.txtCRP);
+            this.pnlDadosTerapeuta.Location = new System.Drawing.Point(35, 591);
+            this.pnlDadosTerapeuta.Name = "pnlDadosTerapeuta";
+            this.pnlDadosTerapeuta.Size = new System.Drawing.Size(1009, 658);
+            this.pnlDadosTerapeuta.TabIndex = 1;
             // 
             // lbDadosTerapeuta
             // 
@@ -653,7 +700,7 @@
             this.txtCidade.MaxLength = 32;
             this.txtCidade.Name = "txtCidade";
             this.txtCidade.Size = new System.Drawing.Size(592, 38);
-            this.txtCidade.TabIndex = 4;
+            this.txtCidade.TabIndex = 0;
             // 
             // lblCEP
             // 
@@ -672,7 +719,7 @@
             this.txtCEP.MaxLength = 12;
             this.txtCEP.Name = "txtCEP";
             this.txtCEP.Size = new System.Drawing.Size(598, 38);
-            this.txtCEP.TabIndex = 8;
+            this.txtCEP.TabIndex = 4;
             this.txtCEP.TextChanged += new System.EventHandler(this.txtCEP_TextChanged);
             // 
             // lblTituloGeracaoRecibo
@@ -689,8 +736,8 @@
             // pnlReembolso
             // 
             this.pnlReembolso.Controls.Add(this.lnkUnimedLogin);
-            this.pnlReembolso.Controls.Add(this.panel4);
-            this.pnlReembolso.Controls.Add(this.panel1);
+            this.pnlReembolso.Controls.Add(this.pnlDadosReembolso);
+            this.pnlReembolso.Controls.Add(this.pnlDadosBancarios);
             this.pnlReembolso.Controls.Add(this.lblTituloSolicitacaoReembolso);
             this.pnlReembolso.Controls.Add(this.txtGerarSolicitacaoReembolso);
             this.pnlReembolso.Location = new System.Drawing.Point(1104, 12);
@@ -711,22 +758,22 @@
             this.lnkUnimedLogin.Text = "Login Unimed";
             this.lnkUnimedLogin.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkUnimedLogin_LinkClicked);
             // 
-            // panel4
+            // pnlDadosReembolso
             // 
-            this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel4.Controls.Add(this.lbDadosReembolso);
-            this.panel4.Controls.Add(this.label1);
-            this.panel4.Controls.Add(this.btnSelecionarPDFRecibo);
-            this.panel4.Controls.Add(this.lblReciboAssinado);
-            this.panel4.Controls.Add(this.txtLoginUnimed);
-            this.panel4.Controls.Add(this.grbTipoAtendimento);
-            this.panel4.Controls.Add(this.lblNomeReciboPDF);
-            this.panel4.Controls.Add(this.txtSenhaUnimed);
-            this.panel4.Controls.Add(this.lblSenhaUnimed);
-            this.panel4.Location = new System.Drawing.Point(40, 72);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(937, 654);
-            this.panel4.TabIndex = 49;
+            this.pnlDadosReembolso.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlDadosReembolso.Controls.Add(this.lbDadosReembolso);
+            this.pnlDadosReembolso.Controls.Add(this.lblLoginUnimed);
+            this.pnlDadosReembolso.Controls.Add(this.btnSelecionarPDFRecibo);
+            this.pnlDadosReembolso.Controls.Add(this.lblReciboAssinado);
+            this.pnlDadosReembolso.Controls.Add(this.txtLoginUnimed);
+            this.pnlDadosReembolso.Controls.Add(this.grbTipoAtendimento);
+            this.pnlDadosReembolso.Controls.Add(this.lblNomeReciboPDF);
+            this.pnlDadosReembolso.Controls.Add(this.txtSenhaUnimed);
+            this.pnlDadosReembolso.Controls.Add(this.lblSenhaUnimed);
+            this.pnlDadosReembolso.Location = new System.Drawing.Point(40, 72);
+            this.pnlDadosReembolso.Name = "pnlDadosReembolso";
+            this.pnlDadosReembolso.Size = new System.Drawing.Size(937, 654);
+            this.pnlDadosReembolso.TabIndex = 0;
             // 
             // lbDadosReembolso
             // 
@@ -738,15 +785,15 @@
             this.lbDadosReembolso.TabIndex = 48;
             this.lbDadosReembolso.Text = "Dados Reembolso:";
             // 
-            // label1
+            // lblLoginUnimed
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(26, 115);
-            this.label1.Margin = new System.Windows.Forms.Padding(7, 0, 7, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(279, 32);
-            this.label1.TabIndex = 47;
-            this.label1.Text = "Login Unimed (CPF):";
+            this.lblLoginUnimed.AutoSize = true;
+            this.lblLoginUnimed.Location = new System.Drawing.Point(26, 115);
+            this.lblLoginUnimed.Margin = new System.Windows.Forms.Padding(7, 0, 7, 0);
+            this.lblLoginUnimed.Name = "lblLoginUnimed";
+            this.lblLoginUnimed.Size = new System.Drawing.Size(279, 32);
+            this.lblLoginUnimed.TabIndex = 47;
+            this.lblLoginUnimed.Text = "Login Unimed (CPF):";
             // 
             // txtLoginUnimed
             // 
@@ -755,7 +802,7 @@
             this.txtLoginUnimed.MaxLength = 16;
             this.txtLoginUnimed.Name = "txtLoginUnimed";
             this.txtLoginUnimed.Size = new System.Drawing.Size(560, 38);
-            this.txtLoginUnimed.TabIndex = 46;
+            this.txtLoginUnimed.TabIndex = 0;
             this.txtLoginUnimed.TextChanged += new System.EventHandler(this.txtLoginUnimed_TextChanged);
             // 
             // grbTipoAtendimento
@@ -803,7 +850,7 @@
             this.txtSenhaUnimed.Name = "txtSenhaUnimed";
             this.txtSenhaUnimed.PasswordChar = '*';
             this.txtSenhaUnimed.Size = new System.Drawing.Size(560, 38);
-            this.txtSenhaUnimed.TabIndex = 0;
+            this.txtSenhaUnimed.TabIndex = 1;
             // 
             // lblSenhaUnimed
             // 
@@ -815,22 +862,22 @@
             this.lblSenhaUnimed.TabIndex = 45;
             this.lblSenhaUnimed.Text = "Senha Unimed:";
             // 
-            // panel1
+            // pnlDadosBancarios
             // 
-            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel1.Controls.Add(this.lbDadosBancarios);
-            this.panel1.Controls.Add(this.lblNomeDoBanco);
-            this.panel1.Controls.Add(this.lblDigitoDaConta);
-            this.panel1.Controls.Add(this.txtNomeDoBanco);
-            this.panel1.Controls.Add(this.txtDigitoDaConta);
-            this.panel1.Controls.Add(this.txtAgenciaSemDigito);
-            this.panel1.Controls.Add(this.lblContaSemDigito);
-            this.panel1.Controls.Add(this.txtContaSemDigito);
-            this.panel1.Controls.Add(this.lblAgenciaSemDigito);
-            this.panel1.Location = new System.Drawing.Point(40, 765);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(937, 484);
-            this.panel1.TabIndex = 48;
+            this.pnlDadosBancarios.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlDadosBancarios.Controls.Add(this.lbDadosBancarios);
+            this.pnlDadosBancarios.Controls.Add(this.lblNomeDoBanco);
+            this.pnlDadosBancarios.Controls.Add(this.lblDigitoDaConta);
+            this.pnlDadosBancarios.Controls.Add(this.txtNomeDoBanco);
+            this.pnlDadosBancarios.Controls.Add(this.txtDigitoDaConta);
+            this.pnlDadosBancarios.Controls.Add(this.txtAgenciaSemDigito);
+            this.pnlDadosBancarios.Controls.Add(this.lblContaSemDigito);
+            this.pnlDadosBancarios.Controls.Add(this.txtContaSemDigito);
+            this.pnlDadosBancarios.Controls.Add(this.lblAgenciaSemDigito);
+            this.pnlDadosBancarios.Location = new System.Drawing.Point(40, 765);
+            this.pnlDadosBancarios.Name = "pnlDadosBancarios";
+            this.pnlDadosBancarios.Size = new System.Drawing.Size(937, 484);
+            this.pnlDadosBancarios.TabIndex = 1;
             // 
             // lbDadosBancarios
             // 
@@ -869,7 +916,7 @@
             this.txtNomeDoBanco.MaxLength = 32;
             this.txtNomeDoBanco.Name = "txtNomeDoBanco";
             this.txtNomeDoBanco.Size = new System.Drawing.Size(560, 38);
-            this.txtNomeDoBanco.TabIndex = 2;
+            this.txtNomeDoBanco.TabIndex = 0;
             // 
             // txtDigitoDaConta
             // 
@@ -878,7 +925,7 @@
             this.txtDigitoDaConta.MaxLength = 32;
             this.txtDigitoDaConta.Name = "txtDigitoDaConta";
             this.txtDigitoDaConta.Size = new System.Drawing.Size(560, 38);
-            this.txtDigitoDaConta.TabIndex = 5;
+            this.txtDigitoDaConta.TabIndex = 3;
             this.txtDigitoDaConta.TextChanged += new System.EventHandler(this.txtDigitoDaConta_TextChanged);
             // 
             // txtAgenciaSemDigito
@@ -888,7 +935,7 @@
             this.txtAgenciaSemDigito.MaxLength = 32;
             this.txtAgenciaSemDigito.Name = "txtAgenciaSemDigito";
             this.txtAgenciaSemDigito.Size = new System.Drawing.Size(560, 38);
-            this.txtAgenciaSemDigito.TabIndex = 3;
+            this.txtAgenciaSemDigito.TabIndex = 1;
             this.txtAgenciaSemDigito.TextChanged += new System.EventHandler(this.txtAgenciaSemDigito_TextChanged);
             // 
             // lblContaSemDigito
@@ -908,7 +955,7 @@
             this.txtContaSemDigito.MaxLength = 32;
             this.txtContaSemDigito.Name = "txtContaSemDigito";
             this.txtContaSemDigito.Size = new System.Drawing.Size(560, 38);
-            this.txtContaSemDigito.TabIndex = 4;
+            this.txtContaSemDigito.TabIndex = 2;
             this.txtContaSemDigito.TextChanged += new System.EventHandler(this.txtContaSemDigito_TextChanged);
             // 
             // lblAgenciaSemDigito
@@ -943,44 +990,14 @@
             this.txtGerarSolicitacaoReembolso.UseVisualStyleBackColor = true;
             this.txtGerarSolicitacaoReembolso.Click += new System.EventHandler(this.btnGerarSolicitacaoReembolso_Click);
             // 
-            // cmbNomePaciente
-            // 
-            this.cmbNomePaciente.FormattingEnabled = true;
-            this.cmbNomePaciente.Location = new System.Drawing.Point(348, 83);
-            this.cmbNomePaciente.Name = "cmbNomePaciente";
-            this.cmbNomePaciente.Size = new System.Drawing.Size(580, 39);
-            this.cmbNomePaciente.TabIndex = 45;
-            // 
-            // btnSalvarPaciente
-            // 
-            this.btnSalvarPaciente.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSalvarPaciente.Location = new System.Drawing.Point(700, 138);
-            this.btnSalvarPaciente.Name = "btnSalvarPaciente";
-            this.btnSalvarPaciente.Size = new System.Drawing.Size(111, 48);
-            this.btnSalvarPaciente.TabIndex = 46;
-            this.btnSalvarPaciente.Text = "Salvar";
-            this.btnSalvarPaciente.UseVisualStyleBackColor = true;
-            this.btnSalvarPaciente.Click += new System.EventHandler(this.btnSalvarPaciente_Click);
-            // 
-            // btnExcluirPaciente
-            // 
-            this.btnExcluirPaciente.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnExcluirPaciente.Location = new System.Drawing.Point(821, 138);
-            this.btnExcluirPaciente.Name = "btnExcluirPaciente";
-            this.btnExcluirPaciente.Size = new System.Drawing.Size(111, 48);
-            this.btnExcluirPaciente.TabIndex = 47;
-            this.btnExcluirPaciente.Text = "Excluir";
-            this.btnExcluirPaciente.UseVisualStyleBackColor = true;
-            this.btnExcluirPaciente.Click += new System.EventHandler(this.btnExcluirPaciente_Click);
-            // 
             // MainScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(16F, 31F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(2132, 1465);
-            this.Controls.Add(this.pnlReembolso);
             this.Controls.Add(this.statusStrip);
             this.Controls.Add(this.pnlRecibo);
+            this.Controls.Add(this.pnlReembolso);
             this.Controls.Add(this.pnlConsultas);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(5);
@@ -998,18 +1015,18 @@
             ((System.ComponentModel.ISupportInitialize)(this.numNumeroConsultas)).EndInit();
             this.pnlRecibo.ResumeLayout(false);
             this.pnlRecibo.PerformLayout();
-            this.panel3.ResumeLayout(false);
-            this.panel3.PerformLayout();
-            this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
+            this.pnlDadosPaciente.ResumeLayout(false);
+            this.pnlDadosPaciente.PerformLayout();
+            this.pnlDadosTerapeuta.ResumeLayout(false);
+            this.pnlDadosTerapeuta.PerformLayout();
             this.pnlReembolso.ResumeLayout(false);
             this.pnlReembolso.PerformLayout();
-            this.panel4.ResumeLayout(false);
-            this.panel4.PerformLayout();
+            this.pnlDadosReembolso.ResumeLayout(false);
+            this.pnlDadosReembolso.PerformLayout();
             this.grbTipoAtendimento.ResumeLayout(false);
             this.grbTipoAtendimento.PerformLayout();
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
+            this.pnlDadosBancarios.ResumeLayout(false);
+            this.pnlDadosBancarios.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1025,7 +1042,7 @@
         private System.Windows.Forms.Label lblReferenteA;
         private System.Windows.Forms.Label lblReciboAssinado;
         private System.Windows.Forms.Button btnSelecionarPDFRecibo;
-        private System.Windows.Forms.OpenFileDialog dialogPDF;
+        private System.Windows.Forms.OpenFileDialog dialogoPDF;
         private System.Windows.Forms.Label lblCPFPaciente;
         private System.Windows.Forms.TextBox txtCPFPaciente;
         private System.Windows.Forms.Label lblNomeReciboPDF;
@@ -1044,7 +1061,7 @@
         private System.Windows.Forms.Button btnSelecionarConsultas;
         private System.Windows.Forms.Panel pnlConsultas;
         private System.Windows.Forms.Panel pnlRecibo;
-        private System.Windows.Forms.Button btnFecharConsultas;
+        private System.Windows.Forms.Button btnSalvarConsultas;
         private System.Windows.Forms.Label lblNumeroDeConsultas;
         private System.Windows.Forms.NumericUpDown numNumeroConsultas;
         private System.Windows.Forms.Label lblSelecioneDataConsultas;
@@ -1073,7 +1090,7 @@
         private System.Windows.Forms.Button txtGerarSolicitacaoReembolso;
         private System.Windows.Forms.Label lblSenhaUnimed;
         private System.Windows.Forms.TextBox txtSenhaUnimed;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lblLoginUnimed;
         private System.Windows.Forms.TextBox txtLoginUnimed;
         private System.Windows.Forms.DateTimePicker dtDataConsulta10;
         private System.Windows.Forms.DateTimePicker dtDataConsulta9;
@@ -1084,18 +1101,19 @@
         private System.Windows.Forms.ComboBox cmbMes;
         private System.Windows.Forms.Label lbDiaSemana;
         private System.Windows.Forms.Label lbMes;
-        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Panel pnlDadosPaciente;
         private System.Windows.Forms.Label lbDadosPaciente;
-        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Panel pnlDadosTerapeuta;
         private System.Windows.Forms.Label lbDadosTerapeuta;
-        private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.Panel pnlDadosReembolso;
         private System.Windows.Forms.Label lbDadosReembolso;
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel pnlDadosBancarios;
         private System.Windows.Forms.Label lbDadosBancarios;
         private System.Windows.Forms.LinkLabel lnkUnimedLogin;
         private System.Windows.Forms.ComboBox cmbNomePaciente;
         private System.Windows.Forms.Button btnExcluirPaciente;
         private System.Windows.Forms.Button btnSalvarPaciente;
+        private System.Windows.Forms.Button btnNovo;
     }
 }
 

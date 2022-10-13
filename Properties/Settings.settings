@@ -2,16 +2,7 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="TerapiaReembolso.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
-    <Setting Name="ValorTotal" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
-    </Setting>
     <Setting Name="Cidade" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
-    </Setting>
-    <Setting Name="CPFPaciente" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
-    </Setting>
-    <Setting Name="ReferenteA" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
     <Setting Name="NomeTerapeuta" Type="System.String" Scope="User">
@@ -44,49 +35,13 @@
     <Setting Name="Digito" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="NumeroConsultas" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">4</Value>
-    </Setting>
-    <Setting Name="DataConsulta1" Type="System.DateTime" Scope="User">
-      <Value Profile="(Default)" />
-    </Setting>
-    <Setting Name="DataConsulta2" Type="System.DateTime" Scope="User">
-      <Value Profile="(Default)" />
-    </Setting>
-    <Setting Name="DataConsulta3" Type="System.DateTime" Scope="User">
-      <Value Profile="(Default)" />
-    </Setting>
-    <Setting Name="DataConsulta4" Type="System.DateTime" Scope="User">
-      <Value Profile="(Default)" />
-    </Setting>
-    <Setting Name="DataConsulta5" Type="System.DateTime" Scope="User">
-      <Value Profile="(Default)" />
-    </Setting>
     <Setting Name="SenhaUnimed" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
-    </Setting>
-    <Setting Name="NomePaciente" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
     <Setting Name="UpdateSettings" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="LoginUnimed" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
-    </Setting>
-    <Setting Name="DataConsulta6" Type="System.DateTime" Scope="User">
-      <Value Profile="(Default)" />
-    </Setting>
-    <Setting Name="DataConsulta7" Type="System.DateTime" Scope="User">
-      <Value Profile="(Default)" />
-    </Setting>
-    <Setting Name="DataConsulta8" Type="System.DateTime" Scope="User">
-      <Value Profile="(Default)" />
-    </Setting>
-    <Setting Name="DataConsulta9" Type="System.DateTime" Scope="User">
-      <Value Profile="(Default)" />
-    </Setting>
-    <Setting Name="DataConsulta10" Type="System.DateTime" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
     <Setting Name="Mes" Type="System.String" Scope="User">

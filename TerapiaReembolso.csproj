@@ -32,8 +32,8 @@
     <PublisherName>Daniel Liedke</PublisherName>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>2</ApplicationRevision>
-    <ApplicationVersion>1.8.0.%2a</ApplicationVersion>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>2.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -140,9 +140,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Encryption.cs" />
-    <Compile Include="ValidaDigitoCPF.cs" />
-    <Compile Include="WaitExtension.cs" />
+    <Compile Include="Utils\CryptoSerializer.cs" />
+    <Compile Include="Utils\Encryption.cs" />
+    <Compile Include="Data\Item.cs" />
+    <Compile Include="Data\Paciente.cs" />
+    <Compile Include="Utils\ValidaDigitoCPF.cs" />
+    <Compile Include="Utils\WaitExtension.cs" />
     <Compile Include="MainScreen.cs">
       <SubType>Form</SubType>
     </Compile>

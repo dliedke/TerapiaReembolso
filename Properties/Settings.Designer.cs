@@ -26,48 +26,12 @@ namespace TerapiaReembolso.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string ValorTotal {
-            get {
-                return ((string)(this["ValorTotal"]));
-            }
-            set {
-                this["ValorTotal"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string Cidade {
             get {
                 return ((string)(this["Cidade"]));
             }
             set {
                 this["Cidade"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string CPFPaciente {
-            get {
-                return ((string)(this["CPFPaciente"]));
-            }
-            set {
-                this["CPFPaciente"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string ReferenteA {
-            get {
-                return ((string)(this["ReferenteA"]));
-            }
-            set {
-                this["ReferenteA"] = value;
             }
         }
         
@@ -193,73 +157,6 @@ namespace TerapiaReembolso.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("4")]
-        public int NumeroConsultas {
-            get {
-                return ((int)(this["NumeroConsultas"]));
-            }
-            set {
-                this["NumeroConsultas"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        public global::System.DateTime DataConsulta1 {
-            get {
-                return ((global::System.DateTime)(this["DataConsulta1"]));
-            }
-            set {
-                this["DataConsulta1"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        public global::System.DateTime DataConsulta2 {
-            get {
-                return ((global::System.DateTime)(this["DataConsulta2"]));
-            }
-            set {
-                this["DataConsulta2"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        public global::System.DateTime DataConsulta3 {
-            get {
-                return ((global::System.DateTime)(this["DataConsulta3"]));
-            }
-            set {
-                this["DataConsulta3"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        public global::System.DateTime DataConsulta4 {
-            get {
-                return ((global::System.DateTime)(this["DataConsulta4"]));
-            }
-            set {
-                this["DataConsulta4"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        public global::System.DateTime DataConsulta5 {
-            get {
-                return ((global::System.DateTime)(this["DataConsulta5"]));
-            }
-            set {
-                this["DataConsulta5"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string SenhaUnimed {
             get {
@@ -267,18 +164,6 @@ namespace TerapiaReembolso.Properties {
             }
             set {
                 this["SenhaUnimed"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string NomePaciente {
-            get {
-                return ((string)(this["NomePaciente"]));
-            }
-            set {
-                this["NomePaciente"] = value;
             }
         }
         
@@ -303,61 +188,6 @@ namespace TerapiaReembolso.Properties {
             }
             set {
                 this["LoginUnimed"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        public global::System.DateTime DataConsulta6 {
-            get {
-                return ((global::System.DateTime)(this["DataConsulta6"]));
-            }
-            set {
-                this["DataConsulta6"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        public global::System.DateTime DataConsulta7 {
-            get {
-                return ((global::System.DateTime)(this["DataConsulta7"]));
-            }
-            set {
-                this["DataConsulta7"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        public global::System.DateTime DataConsulta8 {
-            get {
-                return ((global::System.DateTime)(this["DataConsulta8"]));
-            }
-            set {
-                this["DataConsulta8"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        public global::System.DateTime DataConsulta9 {
-            get {
-                return ((global::System.DateTime)(this["DataConsulta9"]));
-            }
-            set {
-                this["DataConsulta9"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        public global::System.DateTime DataConsulta10 {
-            get {
-                return ((global::System.DateTime)(this["DataConsulta10"]));
-            }
-            set {
-                this["DataConsulta10"] = value;
             }
         }
         

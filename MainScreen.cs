@@ -29,6 +29,8 @@ using WebDriverManager;
 using WebDriverManager.DriverConfigs.Impl;
 
 using Keys = OpenQA.Selenium.Keys;
+using System.Collections.Generic;
+using System.Text;
 
 namespace TerapiaReembolso
 {
@@ -57,13 +59,11 @@ namespace TerapiaReembolso
         private string _LoginUnimed;
         private string _SenhaUnimed;
         private string _PDFRecibo;
-        private int _NumeroConsultas;
 
         private string _Mes;
         private string _DiaDaSemana;
-        private DateTime[] _DataConsultaLista = new DateTime[10];
         private DateTimePicker[] _datasConsultasControles;
-
+        private Dictionary<string, Paciente> _listaPacientes = new Dictionary<string, Paciente>();
         private bool _previneAtualizacaoDatas = false;
 
         public MainScreen()
@@ -89,6 +89,11 @@ namespace TerapiaReembolso
             MostraVersaoAplicacao();
             MostraMensagemDeBoasVindas();
             CarregaDadosSalvos();
+
+            if (cmbNomePaciente.Items.Count > 0)
+            {
+                cmbNomePaciente.SelectedIndex = 0;
+            }
         }
 
         private void PopulaMesesEDiasDaSemana()
@@ -153,24 +158,24 @@ namespace TerapiaReembolso
         private void btnSelectPDF_Click(object sender, EventArgs e)
         {
             // Pede PDF pro usuário
-            DialogResult dialogResult = dialogPDF.ShowDialog();
+            DialogResult dialogResult = dialogoPDF.ShowDialog();
 
             // Se arquivo foi selecionado
             if (dialogResult == DialogResult.OK)
             {
                 // Verifica extensão do arquivo
-                if (Path.GetExtension(dialogPDF.FileName).ToLower() != ".pdf")
+                if (Path.GetExtension(dialogoPDF.FileName).ToLower() != ".pdf")
                 {
                     MessageBox.Show("Favor selecionar um arquivo PDF.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    dialogPDF.FileName = "";
+                    dialogoPDF.FileName = "";
                 }
                 else
                 {
-                    _PDFRecibo = dialogPDF.FileName;
+                    _PDFRecibo = dialogoPDF.FileName;
                 }
 
                 // Mostra nome do PDF na tela
-                lblNomeReciboPDF.Text = Path.GetFileName(dialogPDF.FileName);
+                lblNomeReciboPDF.Text = Path.GetFileName(dialogoPDF.FileName);
             }
         }
 
@@ -447,7 +452,7 @@ namespace TerapiaReembolso
             }
 
             // Validate the PDF receipt
-            if (string.IsNullOrEmpty(dialogPDF.FileName))
+            if (string.IsNullOrEmpty(dialogoPDF.FileName))
             {
                 MessageBox.Show("Favor selecionar PDF do recibo.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 btnSelecionarPDFRecibo.Focus();
@@ -465,10 +470,6 @@ namespace TerapiaReembolso
         {
             try
             {
-                cmbNomePaciente.Text = Encryption.DecryptString(Properties.Settings.Default["NomePaciente"].ToString());
-                txtValorConsulta.Text = Encryption.DecryptString(Properties.Settings.Default["ValorTotal"].ToString());
-                txtCPFPaciente.Text = Encryption.DecryptString(Properties.Settings.Default["CPFPaciente"].ToString());
-                txtReferenteA.Text = Encryption.DecryptString(Properties.Settings.Default["ReferenteA"].ToString());
                 txtCidade.Text = Encryption.DecryptString(Properties.Settings.Default["Cidade"].ToString());
                 txtNomeDoTerapeuta.Text = Encryption.DecryptString(Properties.Settings.Default["NomeTerapeuta"].ToString());
                 txtCPFTerapeuta.Text = Encryption.DecryptString(Properties.Settings.Default["CPFTerapeuta"].ToString());
@@ -489,7 +490,6 @@ namespace TerapiaReembolso
                 txtDigitoDaConta.Text = Encryption.DecryptString(Properties.Settings.Default["Digito"].ToString());
                 txtLoginUnimed.Text = Encryption.DecryptString(Properties.Settings.Default["LoginUnimed"].ToString());
                 txtSenhaUnimed.Text = Encryption.DecryptString(Properties.Settings.Default["SenhaUnimed"].ToString());
-                numNumeroConsultas.Value = decimal.Parse(Properties.Settings.Default["NumeroConsultas"].ToString());
 
                 _Mes = Encryption.DecryptString(Properties.Settings.Default["Mes"].ToString());
                 _DiaDaSemana = Encryption.DecryptString(Properties.Settings.Default["DiaDaSemana"].ToString());
@@ -508,21 +508,17 @@ namespace TerapiaReembolso
 
                 _previneAtualizacaoDatas = false;
 
-                for (int f = 0; f < 10; f++)
+                // Carrega dados dos pacientes de arquivo binario criptografado
+                string arquivoPacientes = Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), "pacientes.bin");
+                if (File.Exists(arquivoPacientes))
                 {
-                    // Carrega datas das consultas se tiver alguma salva
-                    if (DateTime.TryParse(Properties.Settings.Default[$"DataConsulta{f + 1}"].ToString(), out DateTime dateTime1))
-                    {
-                        if (dateTime1.Year > 1)
-                        {
-                            _datasConsultasControles[f].Value = (DateTime)Properties.Settings.Default[$"DataConsulta{f + 1}"];
-                        }
-                    }
+                    _listaPacientes = CryptoSerializer.DeSerialize(arquivoPacientes);
+                    cmbNomePaciente.Items.AddRange(_listaPacientes.Keys.ToArray<string>());
                 }
             }
-            catch
+            catch (Exception ex)
             {
-
+                MessageBox.Show("Erro Carregando Dados: " + ex.Message + ex.StackTrace, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -545,23 +541,10 @@ namespace TerapiaReembolso
             _Digito = txtDigitoDaConta.Text;
             _LoginUnimed = txtLoginUnimed.Text;
             _SenhaUnimed = txtSenhaUnimed.Text;
-            _NumeroConsultas = (int)numNumeroConsultas.Value;
         }
 
         private void SalvaDadosAtuais()
         {
-            _NomePaciente = cmbNomePaciente.Text;
-            Properties.Settings.Default["NomePaciente"] = Encryption.EncryptString(_NomePaciente);
-
-            _ValorConsulta = txtValorConsulta.Text;
-            Properties.Settings.Default["ValorTotal"] = Encryption.EncryptString(_ValorConsulta);
-
-            _CPFPaciente = txtCPFPaciente.Text;
-            Properties.Settings.Default["CPFPaciente"] = Encryption.EncryptString(_CPFPaciente);
-
-            _ReferenteA = txtReferenteA.Text;
-            Properties.Settings.Default["ReferenteA"] = Encryption.EncryptString(_ReferenteA);
-
             _Cidade = txtCidade.Text;
             Properties.Settings.Default["Cidade"] = Encryption.EncryptString(_Cidade);
 
@@ -595,15 +578,6 @@ namespace TerapiaReembolso
             _Digito = txtDigitoDaConta.Text;
             Properties.Settings.Default["Digito"] = Encryption.EncryptString(_Digito);
 
-            _NumeroConsultas = (int)numNumeroConsultas.Value;
-            Properties.Settings.Default["NumeroConsultas"] = _NumeroConsultas;
-
-            for (int f = 0; f < 10; f++)
-            {
-                _DataConsultaLista[f] = _datasConsultasControles[f].Value;
-                Properties.Settings.Default[$"DataConsulta{f + 1}"] = _DataConsultaLista[f];
-            }
-
             _SenhaUnimed = txtSenhaUnimed.Text;
             Properties.Settings.Default["SenhaUnimed"] = Encryption.EncryptString(_SenhaUnimed);
 
@@ -616,10 +590,14 @@ namespace TerapiaReembolso
             _Mes = cmbMes.Text;
             Properties.Settings.Default["Mes"] = Encryption.EncryptString(_Mes);
 
-            _PDFRecibo = dialogPDF.FileName;
+            _PDFRecibo = dialogoPDF.FileName;
 
-            // Saves settings in application configuration file
+            // Salva configurações no arquivo de config da aplicação
             Properties.Settings.Default.Save();
+
+            // Salva lista de pacientes em arquivo binário criptografado
+            string arquivoPacientes = Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), "pacientes.bin");
+            CryptoSerializer.Serialize(arquivoPacientes, _listaPacientes);
         }
 
         private void MainScreen_FormClosing(object sender, FormClosingEventArgs e)
@@ -1196,14 +1174,39 @@ namespace TerapiaReembolso
 
         private void btnSelecionarConsultas_Click(object sender, EventArgs e)
         {
-            pnlRecibo.Visible = false;
-            pnlConsultas.Visible = true;
+            // Não deixa selecionar datas das consultas sem nome do paciente
+            if (pnlConsultas.Visible == false &&
+                cmbNomePaciente.Text == string.Empty)
+            {
+                MessageBox.Show("Favor informar o nome do paciente primeiro!", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                cmbNomePaciente.Focus();
+                return;
+            }
+
+            // Mostra tabs corretas
+            pnlConsultas.BringToFront();
+            pnlConsultas.Visible = !pnlConsultas.Visible;
+            pnlDadosReembolso.Visible = !pnlDadosReembolso.Visible;
+
+            // Se necessário já salva os dados do paciente
+            if (!pnlConsultas.Visible)
+            {
+                SalvaDadosPaciente();
+                btnGerarRecibo.Enabled = true;
+            }
+            else
+            {
+                btnGerarRecibo.Enabled = false;
+            }
+
         }
 
-        private void btnFecharConsultas_Click(object sender, EventArgs e)
+        private void btnSalvarConsultas_Click(object sender, EventArgs e)
         {
-            pnlRecibo.Visible = true;
             pnlConsultas.Visible = false;
+            pnlDadosReembolso.Visible = true;
+            SalvaDadosPaciente();
+            btnGerarRecibo.Enabled = true;
         }
 
         private void numNumeroConsultas_ValueChanged(object sender, EventArgs e)
@@ -1328,41 +1331,166 @@ namespace TerapiaReembolso
 
         #endregion
 
-        private void btnExcluirPaciente_Click(object sender, EventArgs e)
+        #region Gerenciamento de dados dos pacientes
+
+        private void btnNovo_Click(object sender, EventArgs e)
         {
-            if (cmbNomePaciente.SelectedIndex != -1)
+            // Limpa tudo 
+            cmbNomePaciente.Text = string.Empty;
+            txtValorConsulta.Text = string.Empty;
+            txtCPFPaciente.Text = string.Empty;
+            txtReferenteA.Text = string.Empty;
+
+            // Seta todas consultas pro dia de hoje
+            foreach (var controle in _datasConsultasControles)
             {
-                cmbNomePaciente.Items.RemoveAt(cmbNomePaciente.SelectedIndex);
+                controle.Value = DateTime.Now;
             }
 
-            cmbNomePaciente.Text = string.Empty;
-            txtValorConsulta.Text = String.Empty;
-            txtCPFPaciente.Text = String.Empty;
-            txtReferenteA.Text = String.Empty;
+            // Seleciona segunda-feira
+            cmbDiaSemana.SelectedIndex = 0;
+
+            // Uma consulta
+            numNumeroConsultas.Value = 1;
+
+            // Fecha panel de consultas
+            pnlConsultas.Visible = false;
+            pnlDadosReembolso.Visible = true;
         }
+
 
         private void btnSalvarPaciente_Click(object sender, EventArgs e)
         {
-            if (!cmbNomePaciente.Items.Contains(cmbNomePaciente.Text))
+            if (cmbNomePaciente.Text == string.Empty)
             {
+                MessageBox.Show("Favor informar o nome do paciente primeiro!", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                cmbNomePaciente.Focus();
+                return;
+            }
+
+            SalvaDadosPaciente();
+        }
+
+        private void SalvaDadosPaciente()
+        {
+            // Pega nome do paciente e cria nova classe com dados atualizados
+            string nomePaciente = cmbNomePaciente.Text;
+            Paciente pacienteAtualizado = new Paciente(nomePaciente,
+                                                       txtValorConsulta.Text,
+                                                       txtCPFPaciente.Text,
+                                                       txtReferenteA.Text,
+                                                       cmbDiaSemana.Text,
+                                                       (int)numNumeroConsultas.Value,
+                                                       _datasConsultasControles);
+
+            if (!cmbNomePaciente.Items.Contains(nomePaciente))
+            {
+                // Adiciona novo paciente na lista e no dropdown
+                _listaPacientes.Add(nomePaciente, pacienteAtualizado);
                 cmbNomePaciente.Items.Add(cmbNomePaciente.Text);
             }
+            else
+            {
+                // Atualiza dados do paciente
+                _listaPacientes[nomePaciente] = pacienteAtualizado;
+            }
+
+            // Mostra status da operação
+            toolStripStatus.Text = $"Paciente \"{nomePaciente}\" salvo!";
         }
-    }
 
-    #region Item Class
 
-    public class Item
-    {
-        public string Name { get; set; }
-        public int Value { get; set; }
-
-        public Item(string name, int value)
+        private void cmbNomePaciente_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Name = name;
-            Value = value;
-        }
-    }
+            // Carrega dados do paciente selecionado
+            string nomePaciente = cmbNomePaciente.Text;
+            if (_listaPacientes.ContainsKey(nomePaciente))
+            {
+                Paciente paciente = _listaPacientes[nomePaciente];
+                txtValorConsulta.Text = paciente.Valor;
+                txtCPFPaciente.Text = paciente.CPF;
+                txtReferenteA.Text = paciente.ReferenteA;
+                cmbDiaSemana.Text = paciente.DiaSemana;
 
-    #endregion
+                if (paciente.NumeroConsultas > 0)
+                {
+                    numNumeroConsultas.Value = (decimal)paciente.NumeroConsultas;
+
+                    int count = 0;
+                    foreach (DateTime data in paciente.DataConsultaLista)
+                    {
+                        _datasConsultasControles[count].Value = data;
+                        if (count + 1 > numNumeroConsultas.Value)
+                        {
+                            break;
+                        }
+                        count++;
+                    }
+                }
+            }
+        }
+
+
+        private void btnExcluirPaciente_Click(object sender, EventArgs e)
+        {
+            // Pede confirmação para exclusão
+            string nomePaciente = cmbNomePaciente.Text;
+
+            if (!string.IsNullOrEmpty(nomePaciente))
+            {
+                DialogResult resultadoPergunta = MessageBox.Show($"Deseja excluir o(a) paciente \"{nomePaciente}\"?", "Confirmação", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
+
+                // Usuário confirmou
+                if (resultadoPergunta == DialogResult.Yes)
+                {
+                    // Algum paciente está selecionado
+                    if (cmbNomePaciente.SelectedIndex != -1)
+                    {
+                        // Remove da list e do dropdown
+                        _listaPacientes.Remove(nomePaciente);
+                        cmbNomePaciente.Items.RemoveAt(cmbNomePaciente.SelectedIndex);
+                    }
+
+                    btnNovo_Click(sender, e);
+
+                    // Mostra status da operação
+                    toolStripStatus.Text = $"Paciente \"{nomePaciente}\" excluído!";
+                }
+            }
+        }
+
+        #endregion
+
+        #region Remove acentos do nome
+
+        private string strAcentos = "ÄÅÁÂÀÃäáâàãÉÊËÈéêëèÍÎÏÌíîïìÖÓÔÒÕöóôòõÜÚÛüúûùÇç";
+
+        private void cmbNomePaciente_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (strAcentos.IndexOf(e.KeyChar) > 0)
+            {
+                e.Handled = true;
+            }
+        }
+
+        public static string RemoveAcentos(string text)
+        {
+            // Remove todos acentos do nome
+            StringBuilder sbReturn = new StringBuilder();
+            var arrayText = text.Normalize(NormalizationForm.FormD).ToCharArray();
+            foreach (char letter in arrayText)
+            {
+                if (CharUnicodeInfo.GetUnicodeCategory(letter) != UnicodeCategory.NonSpacingMark)
+                    sbReturn.Append(letter);
+            }
+            return sbReturn.ToString();
+        }
+
+        private void cmbNomePaciente_TextChanged(object sender, EventArgs e)
+        {
+            cmbNomePaciente.Text = RemoveAcentos(cmbNomePaciente.Text);
+        }
+
+        #endregion
+    }
 }
