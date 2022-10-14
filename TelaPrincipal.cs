@@ -1,21 +1,19 @@
 ﻿/* *******************************************************************************************************************
- * Application: TerapiaReembolso
+ * Aplicação: TerapiaReembolso
  * 
- * Author:  Daniel Liedke
+ * Autor:  Daniel Liedke
  * 
  * Copyright © Daniel Liedke 2022
  * Usage and reproduction in any manner whatsoever without the written permission of Daniel Liedke is strictly forbidden.
  *  
- * Purpose: Automate receipt generation and refund for therapy
+ * Propósito: Automatizar geração de recibos e solicitações de reembolso para terapia no Unimed Seguros
  *           
  * *******************************************************************************************************************/
 
 using System;
 using System.IO;
-using System.Net;
 using System.Linq;
 using System.Text;
-using System.Threading;
 using System.Diagnostics;
 using System.Globalization;
 using System.Windows.Forms;
@@ -23,50 +21,17 @@ using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
-// Selenium para automação web
-using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.Support.Extensions;
-using Keys = OpenQA.Selenium.Keys;
-
-// Pacote para baixar automaticamente último ChormeDriver da Internet
-using WebDriverManager;
-using WebDriverManager.DriverConfigs.Impl;
-
-
 namespace TerapiaReembolso
 {
     public partial class TelaPrincipal : Form
     {
         #region Variáveis de Classe e Inicialização da Aplicação
 
-        private IWebDriver chromeDriver;
-        private IWebElement element;
+        public static Configuracao Config = new Configuracao();
+        public static Paciente PacienteAtual;
 
-        private string _NomePaciente;
-        private string _ValorConsulta;
-        private string _CPFPaciente;
-        private string _ReferenteA;
-        private string _Cidade;
-        private string _NomeTerapeuta;
-        private string _CPFTerapeuta;
-        private string _CRP;
-        private string _CEP;
-        private string _EnderecoTerapeuta;
-        private string _TipoAtendimento;
-        private string _NomeBanco;
-        private string _Agencia;
-        private string _Conta;
-        private string _Digito;
-        private string _LoginUnimed;
-        private string _SenhaUnimed;
-        private string _PDFRecibo;
-
-        private string _Mes;
-        private string _DiaDaSemana;
         private DateTimePicker[] _datasConsultasControles;
         private Dictionary<string, Paciente> _listaPacientes = new Dictionary<string, Paciente>();
-        private bool _previneAtualizacaoDatas = false;
 
         public TelaPrincipal()
         {
@@ -75,14 +40,6 @@ namespace TerapiaReembolso
 
         private void MainScreen_Load(object sender, EventArgs e)
         {
-            // Copia configurações da versão anterior caso necessário
-            if (Properties.Settings.Default.UpdateSettings)
-            {
-                Properties.Settings.Default.Upgrade();
-                Properties.Settings.Default.UpdateSettings = false;
-                Properties.Settings.Default.Save();
-            }
-
             // Seta lista de controles de datas e atualiza a tela
             _datasConsultasControles = new DateTimePicker[] { dtDataConsulta1, dtDataConsulta2, dtDataConsulta3, dtDataConsulta4, dtDataConsulta5, dtDataConsulta6, dtDataConsulta7, dtDataConsulta8, dtDataConsulta9, dtDataConsulta10 };
             numNumeroConsultas_ValueChanged(null, EventArgs.Empty);
@@ -125,7 +82,7 @@ namespace TerapiaReembolso
             cmbDiaSemana.Items.Add(new Item("Domingo", 1));
 
             // Seta o mes passado no dropdown
-            cmbMes.SelectedIndex = DateTime.Now.AddMonths(-1).Month;
+            cmbMes.SelectedIndex = DateTime.Now.AddMonths(-1).Month-1;
         }
 
         private void MostraVersaoAplicacao()
@@ -174,7 +131,7 @@ namespace TerapiaReembolso
                 }
                 else
                 {
-                    _PDFRecibo = dialogoPDF.FileName;
+                    Config.PDFRecibo = dialogoPDF.FileName;
                 }
 
                 // Mostra nome do PDF na tela
@@ -473,33 +430,41 @@ namespace TerapiaReembolso
         {
             try
             {
-                // Carrega dados do arquivo de configuração
-                txtCidade.Text = Encryption.DecryptString(Properties.Settings.Default["Cidade"].ToString());
-                txtNomeDoTerapeuta.Text = Encryption.DecryptString(Properties.Settings.Default["NomeTerapeuta"].ToString());
-                txtCPFTerapeuta.Text = Encryption.DecryptString(Properties.Settings.Default["CPFTerapeuta"].ToString());
-                txtCRP.Text = Encryption.DecryptString(Properties.Settings.Default["CRP"].ToString());
-                txtCEP.Text = Encryption.DecryptString(Properties.Settings.Default["CEP"].ToString());
-                txtEnderecoTerapeuta.Text = Encryption.DecryptString(Properties.Settings.Default["EnderecoTerapeuta"].ToString());
-
-                if (!string.IsNullOrEmpty(Properties.Settings.Default["TipoAtendimento"].ToString()))
-                {
-                    rbTelemedicina.Checked = Encryption.DecryptString(Properties.Settings.Default["TipoAtendimento"].ToString()) == "T";
-                    rbPresencial.Checked = Encryption.DecryptString(Properties.Settings.Default["TipoAtendimento"].ToString()) == "P";
-                }
-
-                txtNomeDoBanco.Text = Encryption.DecryptString(Properties.Settings.Default["NomeBanco"].ToString());
-                txtAgenciaSemDigito.Text = Encryption.DecryptString(Properties.Settings.Default["Agencia"].ToString());
-                txtContaSemDigito.Text = Encryption.DecryptString(Properties.Settings.Default["Conta"].ToString());
-                txtDigitoDaConta.Text = Encryption.DecryptString(Properties.Settings.Default["Digito"].ToString());
-                txtLoginUnimed.Text = Encryption.DecryptString(Properties.Settings.Default["LoginUnimed"].ToString());
-                txtSenhaUnimed.Text = Encryption.DecryptString(Properties.Settings.Default["SenhaUnimed"].ToString());
+                string caminhoConfiguracoes = Environment.ExpandEnvironmentVariables("%APPDATA%\\..\\Local\\TerapiaReembolso");
 
                 // Carrega dados dos pacientes de arquivo binario criptografado
-                string arquivoPacientes = Path.Combine(Environment.ExpandEnvironmentVariables("%APPDATA%\\..\\Local\\TerapiaReembolso"), "pacientes.bin");
+                string arquivoPacientes = Path.Combine(caminhoConfiguracoes, "pacientes.bin");
                 if (File.Exists(arquivoPacientes))
                 {
-                    _listaPacientes = CryptoSerializer.DeSerialize(arquivoPacientes);
+                    _listaPacientes = CryptoSerializer.DeSerialize<Dictionary<string, Paciente>>(arquivoPacientes);
+                 
+                    // Seta dropdown com os pacientes
                     cmbNomePaciente.Items.AddRange(_listaPacientes.Keys.ToArray<string>());
+                }
+                
+                // Carrega dados de configuração de arquivo binario criptografado
+                string arquivoConfiguracao = Path.Combine(caminhoConfiguracoes, "config.bin");
+                if (File.Exists(arquivoConfiguracao))
+                {
+                    Config = CryptoSerializer.DeSerialize<Configuracao>(arquivoConfiguracao);
+                             
+                    // Atualiza tela com configuração carregada
+                    txtCidade.Text = Config.Cidade;
+                    txtNomeDoTerapeuta.Text = Config.NomeTerapeuta;
+                    txtCPFTerapeuta.Text = Config.CPFTerapeuta;
+                    txtCRP.Text = Config.CRP;
+                    txtCEP.Text = Config.CEP;
+                    txtEnderecoTerapeuta.Text = Config.EnderecoTerapeuta;
+
+                    rbTelemedicina.Checked = Config.TipoAtendimento == "T";
+                    rbPresencial.Checked = Config.TipoAtendimento == "P";
+
+                    txtNomeDoBanco.Text = Config.NomeBanco;
+                    txtAgenciaSemDigito.Text = Config.Agencia;
+                    txtContaSemDigito.Text = Config.Conta;
+                    txtDigitoDaConta.Text = Config.Digito;
+                    txtLoginUnimed.Text = Config.LoginUnimed;
+                    txtSenhaUnimed.Text = Config.SenhaUnimed;
                 }
             }
             catch (Exception ex)
@@ -508,78 +473,48 @@ namespace TerapiaReembolso
             }
         }
 
-        private void CarregaDadosTelaEmMemoria()
-        {
-            // Atualiza variáveis com os valores da tela
-            _NomePaciente = cmbNomePaciente.Text;
-            _ValorConsulta = txtValorConsulta.Text;
-            _CPFPaciente = txtCPFPaciente.Text;
-            _ReferenteA = txtReferenteA.Text;
-            _Cidade = txtCidade.Text;
-            _NomeTerapeuta = txtNomeDoTerapeuta.Text;
-            _CPFTerapeuta = txtCPFTerapeuta.Text;
-            _CRP = txtCRP.Text;
-            _CEP = txtCEP.Text;
-            _EnderecoTerapeuta = txtEnderecoTerapeuta.Text;
-            _TipoAtendimento = rbTelemedicina.Checked ? "T" : "P";
-            _NomeBanco = txtNomeDoBanco.Text;
-            _Agencia = txtAgenciaSemDigito.Text;
-            _Conta = txtContaSemDigito.Text;
-            _Digito = txtDigitoDaConta.Text;
-            _LoginUnimed = txtLoginUnimed.Text;
-            _SenhaUnimed = txtSenhaUnimed.Text;
-        }
-
         private void SalvaDadosAtuais()
         {
-            // Salva todos dados da tela em arquivo de configuração
-            _Cidade = txtCidade.Text;
-            Properties.Settings.Default["Cidade"] = Encryption.EncryptString(_Cidade);
+            // Salva todos dados da tela em classe Configuracao
+            CarregaDadosTelaEmMemoria();
 
-            _NomeTerapeuta = txtNomeDoTerapeuta.Text;
-            Properties.Settings.Default["NomeTerapeuta"] = Encryption.EncryptString(_NomeTerapeuta);
+            // Não salva o PDF do recibo
+            string pdfRecibo = Config.PDFRecibo;
+            Config.PDFRecibo = string.Empty;
 
-            _CPFTerapeuta = txtCPFTerapeuta.Text;
-            Properties.Settings.Default["CPFTerapeuta"] = Encryption.EncryptString(_CPFTerapeuta);
+            // Caminho dos arquvos criptogrados de configuração
+            string caminhoConfiguracoes = Environment.ExpandEnvironmentVariables("%APPDATA%\\..\\Local\\TerapiaReembolso");
 
-            _CRP = txtCRP.Text;
-            Properties.Settings.Default["CRP"] = Encryption.EncryptString(_CRP);
-
-            _CEP = txtCEP.Text;
-            Properties.Settings.Default["CEP"] = Encryption.EncryptString(_CEP);
-
-            _EnderecoTerapeuta = txtEnderecoTerapeuta.Text;
-            Properties.Settings.Default["EnderecoTerapeuta"] = Encryption.EncryptString(_EnderecoTerapeuta);
-
-            _TipoAtendimento = rbTelemedicina.Checked ? "T" : "P";
-            Properties.Settings.Default["TipoAtendimento"] = Encryption.EncryptString(_TipoAtendimento);
-
-            _NomeBanco = txtNomeDoBanco.Text;
-            Properties.Settings.Default["NomeBanco"] = Encryption.EncryptString(_NomeBanco);
-
-            _Agencia = txtAgenciaSemDigito.Text;
-            Properties.Settings.Default["Agencia"] = Encryption.EncryptString(_Agencia);
-
-            _Conta = txtContaSemDigito.Text;
-            Properties.Settings.Default["Conta"] = Encryption.EncryptString(_Conta);
-
-            _Digito = txtDigitoDaConta.Text;
-            Properties.Settings.Default["Digito"] = Encryption.EncryptString(_Digito);
-
-            _SenhaUnimed = txtSenhaUnimed.Text;
-            Properties.Settings.Default["SenhaUnimed"] = Encryption.EncryptString(_SenhaUnimed);
-
-            _LoginUnimed = txtLoginUnimed.Text;
-            Properties.Settings.Default["LoginUnimed"] = Encryption.EncryptString(_LoginUnimed);
-
-            _PDFRecibo = dialogoPDF.FileName;
-
-            // Salva configurações no arquivo de config da aplicação
-            Properties.Settings.Default.Save();
+            // Salva configuracao em arquivo binário criptografado
+            string arquivoConfiguracao = Path.Combine(caminhoConfiguracoes, "config.bin");
+            CryptoSerializer.Serialize<Configuracao>(arquivoConfiguracao, Config);
 
             // Salva lista de pacientes em arquivo binário criptografado
-            string arquivoPacientes = Path.Combine(Environment.ExpandEnvironmentVariables("%APPDATA%\\..\\Local\\TerapiaReembolso"), "pacientes.bin");
-            CryptoSerializer.Serialize(arquivoPacientes, _listaPacientes);
+            string arquivoPacientes = Path.Combine(caminhoConfiguracoes, "pacientes.bin");
+            CryptoSerializer.Serialize<Dictionary<string,Paciente>>(arquivoPacientes, _listaPacientes);
+
+            // Mantem em memoria o pdf do recibo
+            Config.PDFRecibo = pdfRecibo;
+        }
+
+        private void CarregaDadosTelaEmMemoria()
+        {
+            // Salva todos dados da tela em classe Configuracao
+            Config.Cidade = txtCidade.Text;
+            Config.NomeTerapeuta = txtNomeDoTerapeuta.Text;
+            Config.CPFTerapeuta = txtCPFTerapeuta.Text;
+            Config.CRP = txtCRP.Text;
+            Config.CEP = txtCEP.Text;
+            Config.EnderecoTerapeuta = txtEnderecoTerapeuta.Text;
+            Config.TipoAtendimento = rbTelemedicina.Checked ? "T" : "P";
+            Config.NomeBanco = txtNomeDoBanco.Text;
+            Config.Agencia = txtAgenciaSemDigito.Text;
+            Config.Conta = txtContaSemDigito.Text;
+            Config.Digito = txtDigitoDaConta.Text;
+            Config.SenhaUnimed = txtSenhaUnimed.Text;
+            Config.LoginUnimed = txtLoginUnimed.Text;
+
+            PegaPacienteAtual();
         }
 
         private void MainScreen_FormClosing(object sender, FormClosingEventArgs e)
@@ -588,7 +523,7 @@ namespace TerapiaReembolso
             SalvaDadosAtuais();
 
             // Fecha Chrome Driver
-            CloseChromeDriver();
+            Utilitarios.CloseChromeDriver(null);
         }
 
         #endregion
@@ -604,14 +539,14 @@ namespace TerapiaReembolso
                 {
                     CarregaDadosTelaEmMemoria();
 
-                    Action action = (Action)GerarRecibo;
+                    Action action = (Action)GeracaoRecibo.GerarRecibo;
                     RodaAutomacao(action);
                     toolStripStatus.Text = "Recibo gerado com sucesso!";
                 }
             }
             catch (Exception ex)
             {
-                CloseChromeDriver();
+                Utilitarios.CloseChromeDriver(null);
 
                 if (ex.Message.Contains("This version of ChromeDriver only supports Chrome version"))
                 {
@@ -662,141 +597,11 @@ namespace TerapiaReembolso
             }
         }
 
-        private void GerarRecibo()
-        {
-            AbreReciboOnline();
-            CriaNovoRecibo();
-        }
-
         private void EnableDisableControls(bool enable)
         {
             pnlConsultas.Enabled = enable;
             pnlRecibo.Enabled = enable;
             pnlReembolso.Enabled = enable;
-        }
-
-        private void CloseChromeDriver()
-        {
-            if (chromeDriver != null)
-            {
-                try
-                {
-                    chromeDriver.Quit();
-                }
-                catch { }
-            }
-            if (Process.GetProcessesByName("chromedriver").Length > 0)
-            {
-                Process.GetProcessesByName("chromedriver")[0].Kill();
-            }
-        }
-
-        private bool NecessitaProxy()
-        {
-            try
-            {
-                string proxyUrl = "proxy";
-                IPAddress[] addresslist = Dns.GetHostAddresses(proxyUrl);
-                return true;
-            }
-            catch
-            {
-            }
-
-            return false;
-        }
-        private void AbreReciboOnline()
-        {
-            // Inicia o Chrome maximizado
-            ChromeOptions options = new ChromeOptions();
-            options.AddArgument("--start-maximized");
-            options.AddArgument("--ignore-certificate-errors");
-            options.AddArgument("--ignore-ssl-errors");
-            options.AddArgument("no-sandbox");
-
-            // Baixa ultimo ChromeDriver usando proxy se necessário e usa ele
-            if (NecessitaProxy())
-            {
-                System.Net.WebProxy proxy = new System.Net.WebProxy
-                {
-                    UseDefaultCredentials = true,
-                    Address = new Uri("http://proxy")
-                };
-                new DriverManager().WithProxy(proxy).SetUpDriver(new ChromeConfig());
-            }
-            else
-            {
-                new DriverManager().SetUpDriver(new ChromeConfig());
-            }
-            chromeDriver = new ChromeDriver(options);
-
-            // Navega para recibo online
-            chromeDriver.Navigate().GoToUrl("https://www.google.com.br");
-            System.Threading.Thread.Sleep(1000);
-            chromeDriver.Navigate().GoToUrl("https://www.reciboonline.com.br/recibo-de-pagamento");
-
-            // Espera carregar elemento
-            WaitExtension.WaitUntilElement(chromeDriver, By.Id("valor"));
-            System.Threading.Thread.Sleep(500);
-        }
-
-        private void CriaNovoRecibo()
-        {
-            // Calcula valor total do recibo conforme número de consultas
-            decimal valorRecibo = decimal.Parse(_ValorConsulta) * numNumeroConsultas.Value;
-
-            // Setar valor
-            element = chromeDriver.FindElement(By.Name("valor"));
-            element.SendKeys(valorRecibo.ToString());
-
-            // Seta nome do pagador
-            element = chromeDriver.FindElement(By.Name("pagador"));
-            element.SendKeys(_NomePaciente);
-
-            // Seta CPF do pagador
-            element = chromeDriver.FindElement(By.Name("cpfCnpjPagador"));
-            element.SendKeys(_CPFPaciente);
-
-            // Seta Referente A
-            element = chromeDriver.FindElement(By.Name("referente"));
-            element.SendKeys(_ReferenteA);
-
-            // Seta cidade
-            element = chromeDriver.FindElement(By.Name("cidade"));
-            element.SendKeys(_Cidade);
-
-            // Seta nome do emissor
-            element = chromeDriver.FindElement(By.Name("emissor"));
-            element.SendKeys(_NomeTerapeuta);
-
-            // Seta CPF do emissor
-            element = chromeDriver.FindElement(By.Name("cpfCnpjEmissor"));
-            element.SendKeys(_CPFTerapeuta);
-
-            // Cria string com data das consultas
-            string dias = string.Empty;
-            for (int f = 1; f <= numNumeroConsultas.Value; f++)
-            {
-                dias += _datasConsultasControles[f - 1].Value.ToString("dd/MM/yyyy, ");
-            }
-            dias = dias.TrimEnd().TrimEnd(',');
-
-            // Cria observacoes com dias das consultas, endereço, CEP e CRP
-            string observacoes = $"Sessões de Psicoterapia nos dias {dias}.\n\nEndereço: {txtEnderecoTerapeuta.Text}\n\nCEP: {txtCEP.Text}\n\nCRP: {txtCRP.Text}";
-
-            // Seta as observacoes e submete formulario
-            element = chromeDriver.FindElement(By.Name("observacoes"));
-            element.SendKeys(observacoes);
-            element.Submit();
-
-            // Aguarda um pouco geração do recibo
-            System.Threading.Thread.Sleep(1000);
-
-            // Aguarda elemento e manda imprimir PDF
-            By spanImprimirBy = By.XPath("//span[text()='IMPRIMIR']");
-            WaitExtension.WaitUntilElement(chromeDriver, spanImprimirBy);
-            element = chromeDriver.FindElement(spanImprimirBy);
-            element.Click();
         }
 
         #endregion
@@ -813,7 +618,7 @@ namespace TerapiaReembolso
                 {
                     CarregaDadosTelaEmMemoria();
 
-                    Action action = (Action)GerarSolicitacaoReembolso;
+                    Action action = (Action)SolicitacaoReembolso.GerarSolicitacaoReembolso;
                     RodaAutomacao(action);
 
                     // Mostra mensagem de sucesso
@@ -826,7 +631,7 @@ namespace TerapiaReembolso
             }
             catch (Exception ex)
             {
-                CloseChromeDriver();
+                Utilitarios.CloseChromeDriver(null);
 
                 if (ex.Message.Contains("This version of ChromeDriver only supports Chrome version"))
                 {
@@ -844,298 +649,6 @@ namespace TerapiaReembolso
             }
         }
 
-        private void GerarSolicitacaoReembolso()
-        {
-            AbreSegurosUnimedCliente();
-            LoginUnimed();
-            SubmeteSolicitaoReembolso();
-        }
-
-        private void AbreSegurosUnimedCliente()
-        {
-            // Inicia o Chrome maximizado
-            ChromeOptions options = new ChromeOptions();
-            options.AddArgument("--start-maximized");
-            options.AddArgument("--ignore-certificate-errors");
-            options.AddArgument("--ignore-ssl-errors");
-            options.AddArgument("no-sandbox");
-
-            // Baixa ultimo ChromeDriver usando proxy se necessário e usa ele
-            if (NecessitaProxy())
-            {
-                System.Net.WebProxy proxy = new System.Net.WebProxy
-                {
-                    UseDefaultCredentials = true,
-                    Address = new Uri("http://proxy")
-                };
-                new DriverManager().WithProxy(proxy).SetUpDriver(new ChromeConfig());
-            }
-            else
-            {
-                new DriverManager().SetUpDriver(new ChromeConfig());
-            }
-            chromeDriver = new ChromeDriver(options);
-
-            // Navega para Seguros Unimed Login Cliente
-            chromeDriver.Navigate().GoToUrl("https://www.google.com.br");
-            System.Threading.Thread.Sleep(1000);
-            chromeDriver.Navigate().GoToUrl("https://www.segurosunimed.com.br/login-cliente");
-
-            // Espera carregar elemento
-            WaitExtension.WaitUntilElement(chromeDriver, By.Id("loginInput"));
-            System.Threading.Thread.Sleep(1000);
-        }
-
-        private void LoginUnimed()
-        {
-            // Caso se tenha um login e senha para entrar
-            if (!string.IsNullOrEmpty(_LoginUnimed) && !string.IsNullOrEmpty(_SenhaUnimed))
-            {
-                // Seta CPF para logar
-                var emailText = chromeDriver.FindElement(By.Id("loginInput"));
-                emailText.SendKeys(_LoginUnimed);
-
-                // Seta senha para logar
-                var passwordText = chromeDriver.FindElement(By.Id("senhaInput"));
-                passwordText.SendKeys(_SenhaUnimed);
-
-                //var botaoEntrar = chromeDriver.FindElement(By.CssSelector("input[type='submit']"));
-                //botaoEntrar.Click();
-
-                // Submete o formulário
-                System.Threading.Thread.Sleep(4000);
-                emailText.Submit();
-                System.Threading.Thread.Sleep(1500);
-            }
-        }
-
-        private void SubmeteSolicitaoReembolso()
-        {
-            VaiParaSolicitacaoReembolso();
-            SelecionaPacienteTipoConsulta();
-            SelecionaSessoes();
-            SobeRecibo();
-            SetaInformacoesPsicologo();
-            SetaInformacoesBancarias();
-        }
-
-        private void VaiParaSolicitacaoReembolso()
-        {
-            // Espera aparecer o botão de "Reembolsos e Prévias"
-            WaitExtension.WaitUntilElement(chromeDriver, By.XPath("//div[.=' Reembolsos e Prévias ']"), 30);
-
-            // Espera ainda mais um pouquinho 
-            System.Threading.Thread.Sleep(1000);
-
-            // Espera os spinners todos da página
-            AguardaSpinner();
-
-            // Clica em Reembolsos e Prévias
-            var botaoReembolsosPrevias = chromeDriver.FindElement(By.XPath("//div[.=' Reembolsos e Prévias ']"));
-            botaoReembolsosPrevias.Click();
-
-            // Espera ainda mais um pouquinho 
-            System.Threading.Thread.Sleep(1000);
-
-            // Espera os spinners todos da página
-            AguardaSpinner();
-
-            // Espera botão "Nova solicitação de reembolso" e clica
-            By novaSolicitacaoBy = By.XPath("//a[.='Nova solicitação de reembolso']");
-            WaitExtension.WaitUntilElement(chromeDriver, novaSolicitacaoBy);
-            var botaoNovaSolicitacao = chromeDriver.FindElement(novaSolicitacaoBy);
-            botaoNovaSolicitacao.Click();
-
-            // Espera ainda mais um pouquinho 
-            System.Threading.Thread.Sleep(2500);
-
-            // Espera elemento na página
-            WaitExtension.WaitUntilElement(chromeDriver, By.Id("patientInput"));
-        }
-
-        private void SelecionaPacienteTipoConsulta()
-        {
-            // Seleciona paciente
-            element = chromeDriver.FindElement(By.XPath($"//option[.='{_NomePaciente}']"));
-            element.Click();
-
-            // Seleciona psicólogo
-            element = chromeDriver.FindElement(By.XPath($"//option[.='Psicólogo']"));
-            element.Click();
-
-            // Seleciona Presencial se precisar
-            if (rbPresencial.Checked)
-            {
-                element = chromeDriver.FindElement(By.Id("PRadio"));
-                element.Click();
-            }
-
-            // Seleciona Telemedicina se precisar
-            if (rbTelemedicina.Checked)
-            {
-                element = chromeDriver.FindElement(By.Id("TRadio"));
-                element.Click();
-            }
-
-            // Seleciona checkbox "Não sei o CID"
-            element = chromeDriver.FindElement(By.XPath($"//label[@for='trueCheckbox']"));
-            element.Click();
-        }
-
-        private void SelecionaSessoes()
-        {
-            // Clica em "Sessões"
-            var elements = chromeDriver.FindElements(By.CssSelector(".form-control.no-btn.h-100"));
-            elements[0].Click();
-
-            // Espera ainda mais um pouquinho 
-            System.Threading.Thread.Sleep(1000);
-
-            // Apaga o 1 e seta quantidade de sessões
-            element = chromeDriver.FindElement(By.Id("quantitySessionsInput"));
-            element.SendKeys(Keys.Backspace + numNumeroConsultas.Value.ToString());
-
-            // Seta as datas das sessões e valor da primeira que é replicado nas outras
-            for (int i = 0; i < numNumeroConsultas.Value; i++)
-            {
-                element = chromeDriver.FindElement(By.Id($"dateSessions{i}Input"));
-                element.SendKeys(_datasConsultasControles[i].Value.ToString("dd/MM/yyyy"));
-
-                if (i == 0)
-                {
-                    element = chromeDriver.FindElement(By.Id($"priceSessions{i}CurrencyInput"));
-                    element.SendKeys(_ValorConsulta);
-                }
-            }
-
-            // Confirma as datas e valores das sessões
-            element = chromeDriver.FindElement(By.XPath($"//button[.='Confirmar']"));
-            element.Click();
-
-            // Mostra o valor total calculado
-            element = chromeDriver.FindElement(By.Id("consultationValueCurrencyInput"));
-            ScrollAteElemento(element);
-
-            // Espera para usuário verificar como ficou
-            System.Threading.Thread.Sleep(4000);
-        }
-
-        private void SobeRecibo()
-        {
-            // Faz scroll até "Outros documentos"
-            element = chromeDriver.FindElement(By.XPath($"//div[.=' Outros documentos ']"));
-            ScrollAteElemento(element);
-
-            // Encontra o input de arquivo
-            element = chromeDriver.FindElement(By.XPath("(//input[@type='file'])[2]"));
-
-            // Seleciona arquivo para envio
-            element.SendKeys(_PDFRecibo);
-
-            // Espera para usuário verificar como ficou
-            System.Threading.Thread.Sleep(3000);
-        }
-
-        private void SetaInformacoesPsicologo()
-        {
-            // Navega até o CEP
-            ScrollAteElemento(chromeDriver.FindElement(By.Id("cepInput")));
-
-            // Seta nome do psicólogo
-            element = chromeDriver.FindElement(By.Id("providerNameInput"));
-            element.SendKeys(_NomeTerapeuta);
-
-            // Seta CPF psicólogo
-            element = chromeDriver.FindElement(By.Id("inputCpfCnpjInput"));
-            element.SendKeys(_CPFTerapeuta);
-
-            // Seta número do CRP
-            element = chromeDriver.FindElement(By.Id("councilNumberInput"));
-            element.SendKeys(_CRP);
-
-            // Seta número do CEP
-            element = chromeDriver.FindElement(By.Id("cepInput"));
-            element.SendKeys(_CEP);
-
-            // Espera para usuário verificar como ficou
-            System.Threading.Thread.Sleep(4000);
-        }
-
-        private void SetaInformacoesBancarias()
-        {
-            // Seleciona paciente para conta bancária
-            var elements = chromeDriver.FindElements(By.XPath($"//option[.='{_NomePaciente}']"));
-            ScrollAteElemento(elements[1]);
-            elements[1].Click();
-
-            // Seta "Transferência em conta corrente"
-            element = chromeDriver.FindElement(By.XPath($"//option[.='Transferência em conta corrente']"));
-            element.Click();
-
-            // Seta nome do banco
-            element = chromeDriver.FindElement(By.XPath($"//option[.='{_NomeBanco}']"));
-            element.Click();
-
-            // Seta número da agência
-            element = chromeDriver.FindElement(By.Id("numberAgencyInput"));
-            element.SendKeys(_Agencia);
-
-            // Seta número da conta
-            element = chromeDriver.FindElement(By.Id("bankAccountInput"));
-            element.SendKeys(_Conta);
-
-            // Seta dígito da conta
-            element = chromeDriver.FindElement(By.Id("numberAccountInput"));
-            element.SendKeys(_Digito);
-
-            // Espera para usuário verificar como ficou
-            System.Threading.Thread.Sleep(4000);
-        }
-
-        public void ScrollAteElemento(IWebElement element)
-        {
-            try
-            {
-                if (element.Location.Y > 200)
-                {
-                    // Faz scroll na página até mostrar elemento
-                    chromeDriver.ExecuteJavaScript($"window.scrollTo({0}, {element.Location.Y - 600})");
-                }
-            }
-            catch { }
-        }
-
-        public void AguardaSpinner(int timeoutSecs = 5)
-        {
-            // Aguarda X segundos enquanto spinner na página está ativo
-            for (var i = 0; i < timeoutSecs; i++)
-            {
-                var ajaxIsComplete = !TentaEncontrarElemento(By.ClassName("spinner"));
-                if (ajaxIsComplete) return;
-                Thread.Sleep(1000);
-            }
-        }
-
-        public bool TentaEncontrarElemento(By by)
-        {
-            // Verifica se elemento está sendo mostrado
-            IWebElement element;
-            try
-            {
-                element = chromeDriver.FindElement(by);
-                bool getelement = element.Displayed;
-                if (getelement)
-                {
-                    ScrollAteElemento(element);
-
-                }
-                return getelement;
-            }
-            catch
-            {
-                return false;
-            }
-        }
 
         #endregion
 
@@ -1150,8 +663,8 @@ namespace TerapiaReembolso
         private void lnkUnimedLogin_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             CarregaDadosTelaEmMemoria();
-            AbreSegurosUnimedCliente();
-            LoginUnimed();
+            SolicitacaoReembolso.AbreSegurosUnimedCliente();
+            SolicitacaoReembolso.LoginUnimed();
         }
 
         #endregion
@@ -1217,20 +730,18 @@ namespace TerapiaReembolso
 
         private void cmbDiaSemana_SelectedIndexChanged(object sender, EventArgs e)
         {
-            _DiaDaSemana = cmbDiaSemana.SelectedText;
             MostraDatasPorMesEDiaDaSemana();
         }
 
         private void cmbMes_SelectedIndexChanged(object sender, EventArgs e)
         {
-            _Mes = cmbMes.SelectedText;
             MostraDatasPorMesEDiaDaSemana();
         }
 
         private void MostraDatasPorMesEDiaDaSemana()
         {
             // Se não tem dados que chegue, não processa
-            if (cmbMes.SelectedIndex == -1 || cmbDiaSemana.SelectedIndex == -1 || _previneAtualizacaoDatas)
+            if (cmbMes.SelectedIndex == -1 || cmbDiaSemana.SelectedIndex == -1)
                 return;
 
             // Pega o mes e dia da semana selecionado, além do ano atual
@@ -1443,6 +954,19 @@ namespace TerapiaReembolso
                     // Mostra status da operação
                     toolStripStatus.Text = $"Paciente \"{nomePaciente}\" excluído!";
                 }
+            }
+        }
+
+        public void PegaPacienteAtual()
+        {
+            string nomePaciente = cmbNomePaciente.Text;
+            if (_listaPacientes.ContainsKey(nomePaciente))
+            {
+                PacienteAtual = _listaPacientes[nomePaciente];
+            }
+            else
+            {
+                PacienteAtual = null;
             }
         }
 

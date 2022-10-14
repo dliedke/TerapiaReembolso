@@ -1,5 +1,4 @@
 ﻿using System.IO;
-using System.Collections.Generic;
 using System.Security.Cryptography;
 using System.Runtime.Serialization.Formatters.Binary;
 
@@ -12,7 +11,7 @@ namespace TerapiaReembolso
 
         private static DESCryptoServiceProvider des = new DESCryptoServiceProvider();
 
-        public static void Serialize(string path, Dictionary<string, Paciente> _listaPacientes)
+        public static void Serialize<T>(string path, T _listaPacientes)
         {
             // Encryption
             using (var fs = new FileStream(path, FileMode.Create, FileAccess.Write))
@@ -25,7 +24,7 @@ namespace TerapiaReembolso
             }
         }
 
-        public static Dictionary<string, Paciente> DeSerialize(string path)
+        public static T DeSerialize<T>(string path)
         {
             // Decryption
             using (var fs = new FileStream(path, FileMode.Open, FileAccess.Read))
@@ -33,7 +32,7 @@ namespace TerapiaReembolso
             {
                 // This is where you deserialize the class
                 BinaryFormatter formatter = new BinaryFormatter();
-                Dictionary<string, Paciente> deserialized = (Dictionary<string, Paciente>)formatter.Deserialize(cryptoStream);
+                T deserialized = (T)formatter.Deserialize(cryptoStream);
                 return deserialized;
             }
         }
