@@ -40,6 +40,26 @@ namespace TerapiaReembolso
 
         private void MainScreen_Load(object sender, EventArgs e)
         {
+            // Copia configurações da versão anterior caso necessário
+            if (Properties.Settings.Default.UpdateSettings)
+            {
+                Properties.Settings.Default.Upgrade();
+                Properties.Settings.Default.UpdateSettings = false;
+                Properties.Settings.Default.Save();
+            }
+
+            // Se tiver dados salvos do tamanho já restaura tamanho e posição da janela
+            if (!(Properties.Settings.Default.F1Size.Width == 0 && Properties.Settings.Default.F1Size.Height == 0))
+            {
+                this.WindowState = Properties.Settings.Default.F1State;
+
+                // Sem janela minimizada na inicialização
+                if (this.WindowState == FormWindowState.Minimized) this.WindowState = FormWindowState.Normal;
+
+                this.Location = Properties.Settings.Default.F1Location;
+                this.Size = Properties.Settings.Default.F1Size;
+            }
+
             // Seta lista de controles de datas e atualiza a tela
             _datasConsultasControles = new DateTimePicker[] { dtDataConsulta1, dtDataConsulta2, dtDataConsulta3, dtDataConsulta4, dtDataConsulta5, dtDataConsulta6, dtDataConsulta7, dtDataConsulta8, dtDataConsulta9, dtDataConsulta10 };
             numNumeroConsultas_ValueChanged(null, EventArgs.Empty);
@@ -430,7 +450,12 @@ namespace TerapiaReembolso
         {
             try
             {
-                string caminhoConfiguracoes = Environment.ExpandEnvironmentVariables("%APPDATA%\\..\\Local\\TerapiaReembolso");
+                // Cria caminho para os arquivos de configuração se não existir
+                string caminhoConfiguracoes = Environment.ExpandEnvironmentVariables(@"%APPDATA%\..\Local\TerapiaReembolso");
+                if (!Directory.Exists(caminhoConfiguracoes))
+                {
+                    Directory.CreateDirectory(caminhoConfiguracoes);
+                }
 
                 // Carrega dados dos pacientes de arquivo binario criptografado
                 string arquivoPacientes = Path.Combine(caminhoConfiguracoes, "pacientes.bin");
@@ -482,8 +507,12 @@ namespace TerapiaReembolso
             string pdfRecibo = Config.PDFRecibo;
             Config.PDFRecibo = string.Empty;
 
-            // Caminho dos arquvos criptogrados de configuração
-            string caminhoConfiguracoes = Environment.ExpandEnvironmentVariables("%APPDATA%\\..\\Local\\TerapiaReembolso");
+            // Cria caminho para os arquivos de configuração se não existir
+            string caminhoConfiguracoes = Environment.ExpandEnvironmentVariables(@"%APPDATA%\..\Local\TerapiaReembolso");
+            if (!Directory.Exists(caminhoConfiguracoes))
+            {
+                Directory.CreateDirectory(caminhoConfiguracoes);
+            }
 
             // Salva configuracao em arquivo binário criptografado
             string arquivoConfiguracao = Path.Combine(caminhoConfiguracoes, "config.bin");
@@ -524,6 +553,20 @@ namespace TerapiaReembolso
 
             // Fecha Chrome Driver
             Utilitarios.CloseChromeDriver(null);
+
+            // Salvo posição e tamanho da janela
+            Properties.Settings.Default.F1State = this.WindowState;
+            if (this.WindowState == FormWindowState.Normal)
+            {
+                Properties.Settings.Default.F1Location = this.Location;
+                Properties.Settings.Default.F1Size = this.Size;
+            }
+            else
+            {
+                Properties.Settings.Default.F1Location = this.RestoreBounds.Location;
+                Properties.Settings.Default.F1Size = this.RestoreBounds.Size;
+            }
+            Properties.Settings.Default.Save();
         }
 
         #endregion
