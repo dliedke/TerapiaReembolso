@@ -6,10 +6,10 @@
       <Value Profile="(Default)">Normal</Value>
     </Setting>
     <Setting Name="F1Location" Type="System.Drawing.Point" Scope="User">
-      <Value Profile="(Default)">0, 0</Value>
+      <Value Profile="(Default)">406, 110</Value>
     </Setting>
     <Setting Name="F1Size" Type="System.Drawing.Size" Scope="User">
-      <Value Profile="(Default)">0, 0</Value>
+      <Value Profile="(Default)">815, 689</Value>
     </Setting>
     <Setting Name="UpdateSettings" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>

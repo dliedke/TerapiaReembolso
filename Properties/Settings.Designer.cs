@@ -37,7 +37,7 @@ namespace TerapiaReembolso.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0, 0")]
+        [global::System.Configuration.DefaultSettingValueAttribute("406, 110")]
         public global::System.Drawing.Point F1Location {
             get {
                 return ((global::System.Drawing.Point)(this["F1Location"]));
@@ -49,7 +49,7 @@ namespace TerapiaReembolso.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0, 0")]
+        [global::System.Configuration.DefaultSettingValueAttribute("815, 689")]
         public global::System.Drawing.Size F1Size {
             get {
                 return ((global::System.Drawing.Size)(this["F1Size"]));
