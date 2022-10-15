@@ -11,6 +11,7 @@
  * *******************************************************************************************************************/
 
 using System;
+using System.Globalization;
 
 // Selenium para automação web
 using OpenQA.Selenium;
@@ -71,7 +72,7 @@ namespace TerapiaReembolso
         private static void CriaNovoRecibo()
         {
             // Calcula valor total do recibo conforme número de consultas
-            decimal valorRecibo = decimal.Parse(TelaPrincipal.PacienteAtual.Valor) * TelaPrincipal.PacienteAtual.NumeroConsultas;
+            decimal valorRecibo = decimal.Parse(TelaPrincipal.PacienteAtual.Valor.Replace(",","."), CultureInfo.InvariantCulture) * TelaPrincipal.PacienteAtual.NumeroConsultas;
 
             // Setar valor
             _element = _chromeDriver.FindElement(By.Name("valor"));
