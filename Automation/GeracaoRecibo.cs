@@ -76,7 +76,7 @@ namespace TerapiaReembolso
 
             // Setar valor
             _element = _chromeDriver.FindElement(By.Name("valor"));
-            _element.SendKeys(valorRecibo.ToString());
+            _element.SendKeys(valorRecibo.ToString().Replace(".",","));
 
             // Seta nome do pagador
             _element = _chromeDriver.FindElement(By.Name("pagador"));
