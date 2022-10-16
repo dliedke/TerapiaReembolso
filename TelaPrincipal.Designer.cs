@@ -1090,21 +1090,21 @@
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(5, 2, 0, 2);
-            this.menuStrip1.Size = new System.Drawing.Size(2176, 49);
+            this.menuStrip1.Size = new System.Drawing.Size(2176, 60);
             this.menuStrip1.TabIndex = 46;
             this.menuStrip1.Text = "menuStrip1";
             // 
             // sairToolStripMenuItem
             // 
             this.sairToolStripMenuItem.Name = "sairToolStripMenuItem";
-            this.sairToolStripMenuItem.Size = new System.Drawing.Size(90, 45);
+            this.sairToolStripMenuItem.Size = new System.Drawing.Size(90, 56);
             this.sairToolStripMenuItem.Text = "Sa&ir";
             this.sairToolStripMenuItem.Click += new System.EventHandler(this.sairToolStripMenuItem_Click);
             // 
             // sobreToolStripMenuItem
             // 
             this.sobreToolStripMenuItem.Name = "sobreToolStripMenuItem";
-            this.sobreToolStripMenuItem.Size = new System.Drawing.Size(141, 45);
+            this.sobreToolStripMenuItem.Size = new System.Drawing.Size(141, 56);
             this.sobreToolStripMenuItem.Text = "&Sobre...";
             this.sobreToolStripMenuItem.Click += new System.EventHandler(this.sobreToolStripMenuItem_Click);
             // 
@@ -1115,7 +1115,7 @@
             this.pnlSobre.Controls.Add(this.btnFecharSobre);
             this.pnlSobre.Controls.Add(this.lblCopyright);
             this.pnlSobre.Controls.Add(this.lblNomeAplicao);
-            this.pnlSobre.Location = new System.Drawing.Point(1419, 11);
+            this.pnlSobre.Location = new System.Drawing.Point(757, 506);
             this.pnlSobre.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pnlSobre.Name = "pnlSobre";
             this.pnlSobre.Size = new System.Drawing.Size(775, 429);
@@ -1162,7 +1162,7 @@
             this.lblNomeAplicao.Name = "lblNomeAplicao";
             this.lblNomeAplicao.Size = new System.Drawing.Size(475, 46);
             this.lblNomeAplicao.TabIndex = 0;
-            this.lblNomeAplicao.Text = "Terapia Reembolso v2.3";
+            this.lblNomeAplicao.Text = "Terapia Reembolso v4.1";
             // 
             // TelaPrincipal
             // 
