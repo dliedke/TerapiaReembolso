@@ -74,6 +74,11 @@
             this.dtDataConsulta2 = new System.Windows.Forms.DateTimePicker();
             this.pnlRecibo = new System.Windows.Forms.Panel();
             this.pnlDadosTerapeuta = new System.Windows.Forms.Panel();
+            this.lblCNPJTerapeuta = new System.Windows.Forms.Label();
+            this.lbNomeEmpresa = new System.Windows.Forms.Label();
+            this.gbTipoPessoa = new System.Windows.Forms.GroupBox();
+            this.rbFisica = new System.Windows.Forms.RadioButton();
+            this.rbJuridica = new System.Windows.Forms.RadioButton();
             this.lbDadosTerapeuta = new System.Windows.Forms.Label();
             this.lblCidade = new System.Windows.Forms.Label();
             this.txtCidade = new System.Windows.Forms.TextBox();
@@ -122,6 +127,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.numNumeroConsultas)).BeginInit();
             this.pnlRecibo.SuspendLayout();
             this.pnlDadosTerapeuta.SuspendLayout();
+            this.gbTipoPessoa.SuspendLayout();
             this.pnlDadosPaciente.SuspendLayout();
             this.pnlReembolso.SuspendLayout();
             this.pnlDadosReembolso.SuspendLayout();
@@ -207,7 +213,7 @@
             this.btnSelecionarPDFRecibo.Location = new System.Drawing.Point(317, 286);
             this.btnSelecionarPDFRecibo.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.btnSelecionarPDFRecibo.Name = "btnSelecionarPDFRecibo";
-            this.btnSelecionarPDFRecibo.Size = new System.Drawing.Size(339, 55);
+            this.btnSelecionarPDFRecibo.Size = new System.Drawing.Size(397, 55);
             this.btnSelecionarPDFRecibo.TabIndex = 2;
             this.btnSelecionarPDFRecibo.Text = "Selecionar PDF Recibo";
             this.btnSelecionarPDFRecibo.UseVisualStyleBackColor = true;
@@ -289,7 +295,7 @@
             // lblNomeDoTerapeuta
             // 
             this.lblNomeDoTerapeuta.AutoSize = true;
-            this.lblNomeDoTerapeuta.Location = new System.Drawing.Point(200, 153);
+            this.lblNomeDoTerapeuta.Location = new System.Drawing.Point(213, 141);
             this.lblNomeDoTerapeuta.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
             this.lblNomeDoTerapeuta.Name = "lblNomeDoTerapeuta";
             this.lblNomeDoTerapeuta.Size = new System.Drawing.Size(97, 32);
@@ -298,7 +304,7 @@
             // 
             // txtNomeDoTerapeuta
             // 
-            this.txtNomeDoTerapeuta.Location = new System.Drawing.Point(339, 154);
+            this.txtNomeDoTerapeuta.Location = new System.Drawing.Point(339, 142);
             this.txtNomeDoTerapeuta.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.txtNomeDoTerapeuta.MaxLength = 32;
             this.txtNomeDoTerapeuta.Name = "txtNomeDoTerapeuta";
@@ -308,7 +314,7 @@
             // lblCPFTerapeuta
             // 
             this.lblCPFTerapeuta.AutoSize = true;
-            this.lblCPFTerapeuta.Location = new System.Drawing.Point(219, 231);
+            this.lblCPFTerapeuta.Location = new System.Drawing.Point(233, 209);
             this.lblCPFTerapeuta.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
             this.lblCPFTerapeuta.Name = "lblCPFTerapeuta";
             this.lblCPFTerapeuta.Size = new System.Drawing.Size(78, 32);
@@ -317,9 +323,9 @@
             // 
             // txtCPFTerapeuta
             // 
-            this.txtCPFTerapeuta.Location = new System.Drawing.Point(339, 233);
+            this.txtCPFTerapeuta.Location = new System.Drawing.Point(339, 211);
             this.txtCPFTerapeuta.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
-            this.txtCPFTerapeuta.MaxLength = 16;
+            this.txtCPFTerapeuta.MaxLength = 20;
             this.txtCPFTerapeuta.Name = "txtCPFTerapeuta";
             this.txtCPFTerapeuta.Size = new System.Drawing.Size(601, 38);
             this.txtCPFTerapeuta.TabIndex = 2;
@@ -328,7 +334,7 @@
             // lblEnderecoTerapeuta
             // 
             this.lblEnderecoTerapeuta.AutoSize = true;
-            this.lblEnderecoTerapeuta.Location = new System.Drawing.Point(152, 458);
+            this.lblEnderecoTerapeuta.Location = new System.Drawing.Point(167, 491);
             this.lblEnderecoTerapeuta.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
             this.lblEnderecoTerapeuta.Name = "lblEnderecoTerapeuta";
             this.lblEnderecoTerapeuta.Size = new System.Drawing.Size(144, 32);
@@ -337,26 +343,26 @@
             // 
             // txtEnderecoTerapeuta
             // 
-            this.txtEnderecoTerapeuta.Location = new System.Drawing.Point(339, 453);
+            this.txtEnderecoTerapeuta.Location = new System.Drawing.Point(339, 488);
             this.txtEnderecoTerapeuta.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.txtEnderecoTerapeuta.Multiline = true;
             this.txtEnderecoTerapeuta.Name = "txtEnderecoTerapeuta";
-            this.txtEnderecoTerapeuta.Size = new System.Drawing.Size(599, 154);
+            this.txtEnderecoTerapeuta.Size = new System.Drawing.Size(601, 119);
             this.txtEnderecoTerapeuta.TabIndex = 5;
             // 
             // lblCRP
             // 
             this.lblCRP.AutoSize = true;
-            this.lblCRP.Location = new System.Drawing.Point(69, 305);
+            this.lblCRP.Location = new System.Drawing.Point(229, 280);
             this.lblCRP.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
             this.lblCRP.Name = "lblCRP";
-            this.lblCRP.Size = new System.Drawing.Size(227, 32);
+            this.lblCRP.Size = new System.Drawing.Size(81, 32);
             this.lblCRP.TabIndex = 33;
-            this.lblCRP.Text = "Número do CRP:";
+            this.lblCRP.Text = "CRP:";
             // 
             // txtCRP
             // 
-            this.txtCRP.Location = new System.Drawing.Point(339, 305);
+            this.txtCRP.Location = new System.Drawing.Point(339, 277);
             this.txtCRP.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.txtCRP.MaxLength = 20;
             this.txtCRP.Name = "txtCRP";
@@ -430,7 +436,7 @@
             this.cmbDiaSemana.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbDiaSemana.FormattingEnabled = true;
             this.cmbDiaSemana.Location = new System.Drawing.Point(669, 24);
-            this.cmbDiaSemana.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.cmbDiaSemana.Margin = new System.Windows.Forms.Padding(5);
             this.cmbDiaSemana.Name = "cmbDiaSemana";
             this.cmbDiaSemana.Size = new System.Drawing.Size(316, 39);
             this.cmbDiaSemana.TabIndex = 1;
@@ -443,7 +449,7 @@
             this.cmbMes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbMes.FormattingEnabled = true;
             this.cmbMes.Location = new System.Drawing.Point(117, 24);
-            this.cmbMes.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.cmbMes.Margin = new System.Windows.Forms.Padding(5);
             this.cmbMes.Name = "cmbMes";
             this.cmbMes.Size = new System.Drawing.Size(297, 39);
             this.cmbMes.TabIndex = 0;
@@ -593,6 +599,9 @@
             // pnlDadosTerapeuta
             // 
             this.pnlDadosTerapeuta.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlDadosTerapeuta.Controls.Add(this.lblCNPJTerapeuta);
+            this.pnlDadosTerapeuta.Controls.Add(this.lbNomeEmpresa);
+            this.pnlDadosTerapeuta.Controls.Add(this.gbTipoPessoa);
             this.pnlDadosTerapeuta.Controls.Add(this.lbDadosTerapeuta);
             this.pnlDadosTerapeuta.Controls.Add(this.lblCidade);
             this.pnlDadosTerapeuta.Controls.Add(this.txtCidade);
@@ -612,6 +621,67 @@
             this.pnlDadosTerapeuta.Size = new System.Drawing.Size(1010, 658);
             this.pnlDadosTerapeuta.TabIndex = 1;
             // 
+            // lblCNPJTerapeuta
+            // 
+            this.lblCNPJTerapeuta.AutoSize = true;
+            this.lblCNPJTerapeuta.Location = new System.Drawing.Point(213, 214);
+            this.lblCNPJTerapeuta.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
+            this.lblCNPJTerapeuta.Name = "lblCNPJTerapeuta";
+            this.lblCNPJTerapeuta.Size = new System.Drawing.Size(95, 32);
+            this.lblCNPJTerapeuta.TabIndex = 46;
+            this.lblCNPJTerapeuta.Text = "CNPJ:";
+            this.lblCNPJTerapeuta.Visible = false;
+            // 
+            // lbNomeEmpresa
+            // 
+            this.lbNomeEmpresa.AutoSize = true;
+            this.lbNomeEmpresa.Location = new System.Drawing.Point(93, 144);
+            this.lbNomeEmpresa.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
+            this.lbNomeEmpresa.Name = "lbNomeEmpresa";
+            this.lbNomeEmpresa.Size = new System.Drawing.Size(217, 32);
+            this.lbNomeEmpresa.TabIndex = 45;
+            this.lbNomeEmpresa.Text = "Nome Empresa:";
+            this.lbNomeEmpresa.Visible = false;
+            // 
+            // gbTipoPessoa
+            // 
+            this.gbTipoPessoa.Controls.Add(this.rbFisica);
+            this.gbTipoPessoa.Controls.Add(this.rbJuridica);
+            this.gbTipoPessoa.Location = new System.Drawing.Point(339, 14);
+            this.gbTipoPessoa.Margin = new System.Windows.Forms.Padding(5, 2, 5, 2);
+            this.gbTipoPessoa.Name = "gbTipoPessoa";
+            this.gbTipoPessoa.Padding = new System.Windows.Forms.Padding(5, 2, 5, 2);
+            this.gbTipoPessoa.Size = new System.Drawing.Size(428, 108);
+            this.gbTipoPessoa.TabIndex = 44;
+            this.gbTipoPessoa.TabStop = false;
+            this.gbTipoPessoa.Text = "Tipo de Pessoa:";
+            // 
+            // rbFisica
+            // 
+            this.rbFisica.AutoSize = true;
+            this.rbFisica.Checked = true;
+            this.rbFisica.Location = new System.Drawing.Point(43, 57);
+            this.rbFisica.Margin = new System.Windows.Forms.Padding(5, 2, 5, 2);
+            this.rbFisica.Name = "rbFisica";
+            this.rbFisica.Size = new System.Drawing.Size(126, 36);
+            this.rbFisica.TabIndex = 0;
+            this.rbFisica.TabStop = true;
+            this.rbFisica.Text = "Física";
+            this.rbFisica.UseVisualStyleBackColor = true;
+            this.rbFisica.CheckedChanged += new System.EventHandler(this.rbFisica_CheckedChanged);
+            // 
+            // rbJuridica
+            // 
+            this.rbJuridica.AutoSize = true;
+            this.rbJuridica.Location = new System.Drawing.Point(188, 57);
+            this.rbJuridica.Margin = new System.Windows.Forms.Padding(5, 2, 5, 2);
+            this.rbJuridica.Name = "rbJuridica";
+            this.rbJuridica.Size = new System.Drawing.Size(150, 36);
+            this.rbJuridica.TabIndex = 1;
+            this.rbJuridica.Text = "Juridica";
+            this.rbJuridica.UseVisualStyleBackColor = true;
+            this.rbJuridica.CheckedChanged += new System.EventHandler(this.rbJuridica_CheckedChanged);
+            // 
             // lbDadosTerapeuta
             // 
             this.lbDadosTerapeuta.AutoSize = true;
@@ -625,7 +695,7 @@
             // lblCidade
             // 
             this.lblCidade.AutoSize = true;
-            this.lblCidade.Location = new System.Drawing.Point(184, 79);
+            this.lblCidade.Location = new System.Drawing.Point(197, 414);
             this.lblCidade.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
             this.lblCidade.Name = "lblCidade";
             this.lblCidade.Size = new System.Drawing.Size(113, 32);
@@ -634,17 +704,17 @@
             // 
             // txtCidade
             // 
-            this.txtCidade.Location = new System.Drawing.Point(339, 74);
+            this.txtCidade.Location = new System.Drawing.Point(336, 414);
             this.txtCidade.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.txtCidade.MaxLength = 32;
             this.txtCidade.Name = "txtCidade";
-            this.txtCidade.Size = new System.Drawing.Size(591, 38);
+            this.txtCidade.Size = new System.Drawing.Size(604, 38);
             this.txtCidade.TabIndex = 0;
             // 
             // lblCEP
             // 
             this.lblCEP.AutoSize = true;
-            this.lblCEP.Location = new System.Drawing.Point(216, 382);
+            this.lblCEP.Location = new System.Drawing.Point(230, 349);
             this.lblCEP.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
             this.lblCEP.Name = "lblCEP";
             this.lblCEP.Size = new System.Drawing.Size(80, 32);
@@ -653,7 +723,7 @@
             // 
             // txtCEP
             // 
-            this.txtCEP.Location = new System.Drawing.Point(339, 381);
+            this.txtCEP.Location = new System.Drawing.Point(339, 348);
             this.txtCEP.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.txtCEP.MaxLength = 12;
             this.txtCEP.Name = "txtCEP";
@@ -1045,7 +1115,7 @@
             this.pnlSobre.Controls.Add(this.btnFecharSobre);
             this.pnlSobre.Controls.Add(this.lblCopyright);
             this.pnlSobre.Controls.Add(this.lblNomeAplicao);
-            this.pnlSobre.Location = new System.Drawing.Point(757, 506);
+            this.pnlSobre.Location = new System.Drawing.Point(1419, 11);
             this.pnlSobre.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pnlSobre.Name = "pnlSobre";
             this.pnlSobre.Size = new System.Drawing.Size(775, 429);
@@ -1106,7 +1176,7 @@
             this.Controls.Add(this.pnlConsultas);
             this.Controls.Add(this.pnlRecibo);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.Margin = new System.Windows.Forms.Padding(5);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "TelaPrincipal";
@@ -1123,6 +1193,8 @@
             this.pnlRecibo.PerformLayout();
             this.pnlDadosTerapeuta.ResumeLayout(false);
             this.pnlDadosTerapeuta.PerformLayout();
+            this.gbTipoPessoa.ResumeLayout(false);
+            this.gbTipoPessoa.PerformLayout();
             this.pnlDadosPaciente.ResumeLayout(false);
             this.pnlDadosPaciente.PerformLayout();
             this.pnlReembolso.ResumeLayout(false);
@@ -1233,6 +1305,11 @@
         private System.Windows.Forms.Label lblCopyright;
         private System.Windows.Forms.Label lblNomeAplicao;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.GroupBox gbTipoPessoa;
+        private System.Windows.Forms.RadioButton rbFisica;
+        private System.Windows.Forms.RadioButton rbJuridica;
+        private System.Windows.Forms.Label lbNomeEmpresa;
+        private System.Windows.Forms.Label lblCNPJTerapeuta;
     }
 }
 

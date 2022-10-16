@@ -212,7 +212,7 @@ namespace TerapiaReembolso
                 return false;
             }
 
-            if (!ValidaDigitoCPF.ValidaCPFFormato(txtCPFPaciente.Text))
+            if (!ValidaCPF.ValidaCPFFormato(txtCPFPaciente.Text))
             {
                 MessageBox.Show("Favor entrar CPF do paciente somente 11 números.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 txtCPFPaciente.Focus();
@@ -220,7 +220,7 @@ namespace TerapiaReembolso
                 return false;
             }
 
-            if (!ValidaDigitoCPF.ValidaCPFValor(txtCPFPaciente.Text))
+            if (!ValidaCPF.ValidaCPFValor(txtCPFPaciente.Text))
             {
                 MessageBox.Show("Favor entrar CPF do paciente válido.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 txtCPFPaciente.Focus();
@@ -264,22 +264,45 @@ namespace TerapiaReembolso
                 return false;
             }
 
-            // Valida CPF só números
-            if (!ValidaDigitoCPF.ValidaCPFFormato(txtCPFTerapeuta.Text))
+            if (rbFisica.Checked)
             {
-                MessageBox.Show("Favor entrar CPF do terapeuta somente 11 números.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                txtCPFTerapeuta.Focus();
-                txtCPFTerapeuta.SelectAll();
-                return false;
-            }
+                // Valida CPF só números
+                if (!ValidaCPF.ValidaCPFFormato(txtCPFTerapeuta.Text))
+                {
+                    MessageBox.Show("Favor entrar CPF do terapeuta somente 11 números.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    txtCPFTerapeuta.Focus();
+                    txtCPFTerapeuta.SelectAll();
+                    return false;
+                }
 
-            // Valida CPF correto
-            if (!ValidaDigitoCPF.ValidaCPFValor(txtCPFTerapeuta.Text))
+                // Valida CPF correto
+                if (!ValidaCPF.ValidaCPFValor(txtCPFTerapeuta.Text))
+                {
+                    MessageBox.Show("Favor entrar CPF do terapeuta válido.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    txtCPFTerapeuta.Focus();
+                    txtCPFTerapeuta.SelectAll();
+                    return false;
+                }
+            }
+            else
             {
-                MessageBox.Show("Favor entrar CPF do terapeuta válido.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                txtCPFTerapeuta.Focus();
-                txtCPFTerapeuta.SelectAll();
-                return false;
+                // Valida CNPJ só números
+                if (!ValidaCNPJ.ValidaCNPJFormato(txtCPFTerapeuta.Text))
+                {
+                    MessageBox.Show("Favor entrar CNPJ da empresa somente 14 números.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    txtCPFTerapeuta.Focus();
+                    txtCPFTerapeuta.SelectAll();
+                    return false;
+                }
+
+                // Valida CNPJ correto
+                if (!ValidaCNPJ.ValidaCNPJValor(txtCPFTerapeuta.Text))
+                {
+                    MessageBox.Show("Favor entrar CNPJ da empresa válido.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    txtCPFTerapeuta.Focus();
+                    txtCPFTerapeuta.SelectAll();
+                    return false;
+                }
             }
 
             // Valida CRP
@@ -342,7 +365,7 @@ namespace TerapiaReembolso
             }
 
             // Valida Login Unimed CPF só números
-            if (!ValidaDigitoCPF.ValidaCPFFormato(txtLoginUnimed.Text))
+            if (!ValidaCPF.ValidaCPFFormato(txtLoginUnimed.Text))
             {
                 MessageBox.Show("Favor entrar Login Unimed CPF somente 11 números.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 txtLoginUnimed.Focus();
@@ -351,7 +374,7 @@ namespace TerapiaReembolso
             }
 
             // Valida Login Unimed CPF correto
-            if (!ValidaDigitoCPF.ValidaCPFValor(txtLoginUnimed.Text))
+            if (!ValidaCPF.ValidaCPFValor(txtLoginUnimed.Text))
             {
                 MessageBox.Show("Favor entrar Login Unimed CPF válido.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 txtLoginUnimed.Focus();
@@ -431,12 +454,25 @@ namespace TerapiaReembolso
                 return false;
             }
 
-            // Validate the PDF receipt
-            if (string.IsNullOrEmpty(dialogoPDF.FileName))
+            if (rbFisica.Checked)
             {
-                MessageBox.Show("Favor selecionar PDF do recibo.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                btnSelecionarPDFRecibo.Focus();
-                return false;
+                // Valida PDF do recibo
+                if (string.IsNullOrEmpty(dialogoPDF.FileName))
+                {
+                    MessageBox.Show("Favor selecionar PDF do recibo.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    btnSelecionarPDFRecibo.Focus();
+                    return false;
+                }
+            }
+            else
+            {
+                // Valida PDF do recibo
+                if (string.IsNullOrEmpty(dialogoPDF.FileName))
+                {
+                    MessageBox.Show("Favor selecionar PDF da nota fiscal.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    btnSelecionarPDFRecibo.Focus();
+                    return false;
+                }
             }
 
             return true;
@@ -472,8 +508,17 @@ namespace TerapiaReembolso
                 if (File.Exists(arquivoConfiguracao))
                 {
                     Config = CryptoSerializer.DeSerialize<Configuracao>(arquivoConfiguracao);
-                             
+
                     // Atualiza tela com configuração carregada
+                    rbFisica.Checked = Config.TipoPessoaTerapeuta == "F";
+                    rbJuridica.Checked = Config.TipoPessoaTerapeuta == "J";
+
+                    // Padrão é pessoa física
+                    if (string.IsNullOrEmpty(Config.TipoPessoaTerapeuta))
+                    {
+                        rbFisica.Checked = true;
+                    }
+
                     txtCidade.Text = Config.Cidade;
                     txtNomeDoTerapeuta.Text = Config.NomeTerapeuta;
                     txtCPFTerapeuta.Text = Config.CPFTerapeuta;
@@ -529,6 +574,7 @@ namespace TerapiaReembolso
         private void CarregaDadosTelaEmMemoria()
         {
             // Salva todos dados da tela em classe Configuracao
+            Config.TipoPessoaTerapeuta = rbFisica.Checked ? "F" : "J";
             Config.Cidade = txtCidade.Text;
             Config.NomeTerapeuta = txtNomeDoTerapeuta.Text;
             Config.CPFTerapeuta = txtCPFTerapeuta.Text;
@@ -536,6 +582,7 @@ namespace TerapiaReembolso
             Config.CEP = txtCEP.Text;
             Config.EnderecoTerapeuta = txtEnderecoTerapeuta.Text;
             Config.TipoAtendimento = rbTelemedicina.Checked ? "T" : "P";
+            
             Config.NomeBanco = txtNomeDoBanco.Text;
             Config.Agencia = txtAgenciaSemDigito.Text;
             Config.Conta = txtContaSemDigito.Text;
@@ -1076,5 +1123,31 @@ namespace TerapiaReembolso
         }
 
         #endregion
+
+        private void rbFisica_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rbFisica.Checked)
+            {
+                lblNomeDoTerapeuta.Visible = true;
+                lbNomeEmpresa.Visible = false;
+                lblCPFTerapeuta.Visible = true;
+                lblCNPJTerapeuta.Visible = false;
+                lblReciboAssinado.Text = "Recibo Assinado:";
+                btnSelecionarPDFRecibo.Text = "Selecionar PDF Recibo";
+            }
+        }
+
+        private void rbJuridica_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rbJuridica.Checked)
+            {
+                lblNomeDoTerapeuta.Visible = false;
+                lbNomeEmpresa.Visible = true;
+                lblCPFTerapeuta.Visible = false;
+                lblCNPJTerapeuta.Visible = true;
+                lblReciboAssinado.Text = "Nota Fiscal PDF:";
+                btnSelecionarPDFRecibo.Text = "Selecionar Nota Fiscal";
+            }
+        }
     }
 }

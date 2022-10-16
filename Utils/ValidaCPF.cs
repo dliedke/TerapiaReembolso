@@ -21,7 +21,7 @@ using System.Text.RegularExpressions;
 
 namespace TerapiaReembolso
 {
-    public static class ValidaDigitoCPF
+    public static class ValidaCPF
     {
         public static Boolean ValidaCPFFormato(string cpf)
         {

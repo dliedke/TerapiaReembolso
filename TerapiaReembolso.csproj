@@ -32,8 +32,8 @@
     <PublisherName>Daniel Liedke</PublisherName>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>1</ApplicationRevision>
-    <ApplicationVersion>3.6.0.%2a</ApplicationVersion>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>4.0.0.0</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -146,7 +146,8 @@
     <Compile Include="Utils\CryptoSerializer.cs" />
     <Compile Include="Data\Item.cs" />
     <Compile Include="Data\Paciente.cs" />
-    <Compile Include="Utils\ValidaDigitoCPF.cs" />
+    <Compile Include="Utils\ValidaCNPJ.cs" />
+    <Compile Include="Utils\ValidaCPF.cs" />
     <Compile Include="Utils\Utilitarios.cs" />
     <Compile Include="Utils\WaitExtension.cs" />
     <Compile Include="TelaPrincipal.cs">
