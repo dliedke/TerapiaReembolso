@@ -403,7 +403,7 @@
             this.pnlConsultas.Controls.Add(this.dtDataConsulta5);
             this.pnlConsultas.Controls.Add(this.dtDataConsulta2);
             this.pnlConsultas.Controls.Add(this.dtDataConsulta1);
-            this.pnlConsultas.Location = new System.Drawing.Point(1104, 64);
+            this.pnlConsultas.Location = new System.Drawing.Point(1104, 68);
             this.pnlConsultas.Margin = new System.Windows.Forms.Padding(5, 2, 5, 2);
             this.pnlConsultas.Name = "pnlConsultas";
             this.pnlConsultas.Size = new System.Drawing.Size(1015, 1397);
@@ -590,7 +590,7 @@
             this.pnlRecibo.Controls.Add(this.lnkAssinarPDF);
             this.pnlRecibo.Controls.Add(this.btnGerarRecibo);
             this.pnlRecibo.Controls.Add(this.pnlDadosPaciente);
-            this.pnlRecibo.Location = new System.Drawing.Point(11, 64);
+            this.pnlRecibo.Location = new System.Drawing.Point(11, 68);
             this.pnlRecibo.Margin = new System.Windows.Forms.Padding(5, 2, 5, 2);
             this.pnlRecibo.Name = "pnlRecibo";
             this.pnlRecibo.Size = new System.Drawing.Size(1069, 1395);
@@ -829,7 +829,7 @@
             this.pnlReembolso.Controls.Add(this.pnlDadosBancarios);
             this.pnlReembolso.Controls.Add(this.lblTituloSolicitacaoReembolso);
             this.pnlReembolso.Controls.Add(this.txtGerarSolicitacaoReembolso);
-            this.pnlReembolso.Location = new System.Drawing.Point(1104, 64);
+            this.pnlReembolso.Location = new System.Drawing.Point(1104, 68);
             this.pnlReembolso.Margin = new System.Windows.Forms.Padding(5, 2, 5, 2);
             this.pnlReembolso.Name = "pnlReembolso";
             this.pnlReembolso.Size = new System.Drawing.Size(1016, 1395);
@@ -1090,21 +1090,21 @@
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(5, 2, 0, 2);
-            this.menuStrip1.Size = new System.Drawing.Size(2176, 60);
+            this.menuStrip1.Size = new System.Drawing.Size(2176, 49);
             this.menuStrip1.TabIndex = 46;
             this.menuStrip1.Text = "menuStrip1";
             // 
             // sairToolStripMenuItem
             // 
             this.sairToolStripMenuItem.Name = "sairToolStripMenuItem";
-            this.sairToolStripMenuItem.Size = new System.Drawing.Size(90, 56);
+            this.sairToolStripMenuItem.Size = new System.Drawing.Size(90, 45);
             this.sairToolStripMenuItem.Text = "Sa&ir";
             this.sairToolStripMenuItem.Click += new System.EventHandler(this.sairToolStripMenuItem_Click);
             // 
             // sobreToolStripMenuItem
             // 
             this.sobreToolStripMenuItem.Name = "sobreToolStripMenuItem";
-            this.sobreToolStripMenuItem.Size = new System.Drawing.Size(141, 56);
+            this.sobreToolStripMenuItem.Size = new System.Drawing.Size(141, 45);
             this.sobreToolStripMenuItem.Text = "&Sobre...";
             this.sobreToolStripMenuItem.Click += new System.EventHandler(this.sobreToolStripMenuItem_Click);
             // 
