@@ -1116,8 +1116,9 @@ namespace TerapiaReembolso
         {
             // Fecha panel de sobre...
             pnlSobre.Visible = false;
-            pnlConsultas.Visible = true;
+            pnlConsultas.Visible = false;
             pnlReembolso.Visible = true;
+            pnlReembolso.BringToFront();
             pnlRecibo.Visible = true;
         }
 
