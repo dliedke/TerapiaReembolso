@@ -155,7 +155,7 @@ namespace TerapiaReembolso
                 }
 
                 // Mostra nome do PDF na tela
-                lblNomeReciboPDF.Text = Path.GetFileName(dialogoPDF.FileName);
+                lblNomeArquivoPDF.Text = Path.GetFileName(dialogoPDF.FileName);
             }
         }
 

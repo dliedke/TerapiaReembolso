@@ -40,7 +40,7 @@
             this.dialogoPDF = new System.Windows.Forms.OpenFileDialog();
             this.lblCPFPaciente = new System.Windows.Forms.Label();
             this.txtCPFPaciente = new System.Windows.Forms.TextBox();
-            this.lblNomeReciboPDF = new System.Windows.Forms.Label();
+            this.lblNomeArquivoPDF = new System.Windows.Forms.Label();
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.toolStripStatus = new System.Windows.Forms.ToolStripStatusLabel();
             this.lnkAssinarPDF = new System.Windows.Forms.LinkLabel();
@@ -114,11 +114,11 @@
             this.lblAgenciaSemDigito = new System.Windows.Forms.Label();
             this.lblTituloSolicitacaoReembolso = new System.Windows.Forms.Label();
             this.txtGerarSolicitacaoReembolso = new System.Windows.Forms.Button();
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.menuAplicacao = new System.Windows.Forms.MenuStrip();
             this.sairToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.sobreToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pnlSobre = new System.Windows.Forms.Panel();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.picIconeSobre = new System.Windows.Forms.PictureBox();
             this.btnFecharSobre = new System.Windows.Forms.Button();
             this.lblCopyright = new System.Windows.Forms.Label();
             this.lblNomeAplicao = new System.Windows.Forms.Label();
@@ -133,9 +133,9 @@
             this.pnlDadosReembolso.SuspendLayout();
             this.grbTipoAtendimento.SuspendLayout();
             this.pnlDadosBancarios.SuspendLayout();
-            this.menuStrip1.SuspendLayout();
+            this.menuAplicacao.SuspendLayout();
             this.pnlSobre.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picIconeSobre)).BeginInit();
             this.SuspendLayout();
             // 
             // btnGerarRecibo
@@ -143,7 +143,7 @@
             this.btnGerarRecibo.Location = new System.Drawing.Point(347, 1285);
             this.btnGerarRecibo.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.btnGerarRecibo.Name = "btnGerarRecibo";
-            this.btnGerarRecibo.Size = new System.Drawing.Size(357, 81);
+            this.btnGerarRecibo.Size = new System.Drawing.Size(357, 98);
             this.btnGerarRecibo.TabIndex = 11;
             this.btnGerarRecibo.Text = "Gerar Recibo";
             this.btnGerarRecibo.UseVisualStyleBackColor = true;
@@ -243,14 +243,14 @@
             this.txtCPFPaciente.TabIndex = 5;
             this.txtCPFPaciente.TextChanged += new System.EventHandler(this.txtCPFPaciente_TextChanged);
             // 
-            // lblNomeReciboPDF
+            // lblNomeArquivoPDF
             // 
-            this.lblNomeReciboPDF.AutoSize = true;
-            this.lblNomeReciboPDF.Location = new System.Drawing.Point(683, 291);
-            this.lblNomeReciboPDF.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
-            this.lblNomeReciboPDF.Name = "lblNomeReciboPDF";
-            this.lblNomeReciboPDF.Size = new System.Drawing.Size(0, 32);
-            this.lblNomeReciboPDF.TabIndex = 11;
+            this.lblNomeArquivoPDF.AutoEllipsis = true;
+            this.lblNomeArquivoPDF.Location = new System.Drawing.Point(313, 348);
+            this.lblNomeArquivoPDF.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
+            this.lblNomeArquivoPDF.Name = "lblNomeArquivoPDF";
+            this.lblNomeArquivoPDF.Size = new System.Drawing.Size(584, 40);
+            this.lblNomeArquivoPDF.TabIndex = 11;
             // 
             // statusStrip
             // 
@@ -660,7 +660,7 @@
             // 
             this.rbFisica.AutoSize = true;
             this.rbFisica.Checked = true;
-            this.rbFisica.Location = new System.Drawing.Point(43, 57);
+            this.rbFisica.Location = new System.Drawing.Point(43, 51);
             this.rbFisica.Margin = new System.Windows.Forms.Padding(5, 2, 5, 2);
             this.rbFisica.Name = "rbFisica";
             this.rbFisica.Size = new System.Drawing.Size(126, 36);
@@ -673,7 +673,7 @@
             // rbJuridica
             // 
             this.rbJuridica.AutoSize = true;
-            this.rbJuridica.Location = new System.Drawing.Point(188, 57);
+            this.rbJuridica.Location = new System.Drawing.Point(188, 51);
             this.rbJuridica.Margin = new System.Windows.Forms.Padding(5, 2, 5, 2);
             this.rbJuridica.Name = "rbJuridica";
             this.rbJuridica.Size = new System.Drawing.Size(150, 36);
@@ -855,7 +855,7 @@
             this.pnlDadosReembolso.Controls.Add(this.lblReciboAssinado);
             this.pnlDadosReembolso.Controls.Add(this.txtLoginUnimed);
             this.pnlDadosReembolso.Controls.Add(this.grbTipoAtendimento);
-            this.pnlDadosReembolso.Controls.Add(this.lblNomeReciboPDF);
+            this.pnlDadosReembolso.Controls.Add(this.lblNomeArquivoPDF);
             this.pnlDadosReembolso.Controls.Add(this.txtSenhaUnimed);
             this.pnlDadosReembolso.Controls.Add(this.lblSenhaUnimed);
             this.pnlDadosReembolso.Location = new System.Drawing.Point(40, 72);
@@ -898,7 +898,7 @@
             // 
             this.grbTipoAtendimento.Controls.Add(this.rbPresencial);
             this.grbTipoAtendimento.Controls.Add(this.rbTelemedicina);
-            this.grbTipoAtendimento.Location = new System.Drawing.Point(48, 391);
+            this.grbTipoAtendimento.Location = new System.Drawing.Point(48, 412);
             this.grbTipoAtendimento.Margin = new System.Windows.Forms.Padding(5, 2, 5, 2);
             this.grbTipoAtendimento.Name = "grbTipoAtendimento";
             this.grbTipoAtendimento.Padding = new System.Windows.Forms.Padding(5, 2, 5, 2);
@@ -1080,38 +1080,37 @@
             this.txtGerarSolicitacaoReembolso.UseVisualStyleBackColor = true;
             this.txtGerarSolicitacaoReembolso.Click += new System.EventHandler(this.btnGerarSolicitacaoReembolso_Click);
             // 
-            // menuStrip1
+            // menuAplicacao
             // 
-            this.menuStrip1.GripMargin = new System.Windows.Forms.Padding(2, 2, 0, 2);
-            this.menuStrip1.ImageScalingSize = new System.Drawing.Size(40, 40);
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuAplicacao.ImageScalingSize = new System.Drawing.Size(40, 40);
+            this.menuAplicacao.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.sairToolStripMenuItem,
             this.sobreToolStripMenuItem});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Padding = new System.Windows.Forms.Padding(5, 2, 0, 2);
-            this.menuStrip1.Size = new System.Drawing.Size(2176, 49);
-            this.menuStrip1.TabIndex = 46;
-            this.menuStrip1.Text = "menuStrip1";
+            this.menuAplicacao.Location = new System.Drawing.Point(0, 0);
+            this.menuAplicacao.Name = "menuAplicacao";
+            this.menuAplicacao.Padding = new System.Windows.Forms.Padding(5, 2, 0, 2);
+            this.menuAplicacao.Size = new System.Drawing.Size(2176, 60);
+            this.menuAplicacao.TabIndex = 46;
+            this.menuAplicacao.Text = "menuStrip1";
             // 
             // sairToolStripMenuItem
             // 
             this.sairToolStripMenuItem.Name = "sairToolStripMenuItem";
-            this.sairToolStripMenuItem.Size = new System.Drawing.Size(90, 45);
+            this.sairToolStripMenuItem.Size = new System.Drawing.Size(90, 56);
             this.sairToolStripMenuItem.Text = "Sa&ir";
             this.sairToolStripMenuItem.Click += new System.EventHandler(this.sairToolStripMenuItem_Click);
             // 
             // sobreToolStripMenuItem
             // 
             this.sobreToolStripMenuItem.Name = "sobreToolStripMenuItem";
-            this.sobreToolStripMenuItem.Size = new System.Drawing.Size(141, 45);
+            this.sobreToolStripMenuItem.Size = new System.Drawing.Size(141, 56);
             this.sobreToolStripMenuItem.Text = "&Sobre...";
             this.sobreToolStripMenuItem.Click += new System.EventHandler(this.sobreToolStripMenuItem_Click);
             // 
             // pnlSobre
             // 
             this.pnlSobre.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnlSobre.Controls.Add(this.pictureBox1);
+            this.pnlSobre.Controls.Add(this.picIconeSobre);
             this.pnlSobre.Controls.Add(this.btnFecharSobre);
             this.pnlSobre.Controls.Add(this.lblCopyright);
             this.pnlSobre.Controls.Add(this.lblNomeAplicao);
@@ -1122,16 +1121,16 @@
             this.pnlSobre.TabIndex = 45;
             this.pnlSobre.Visible = false;
             // 
-            // pictureBox1
+            // picIconeSobre
             // 
-            this.pictureBox1.BackgroundImage = global::TerapiaReembolso.Properties.Resources.App;
-            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pictureBox1.Location = new System.Drawing.Point(667, 93);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(64, 64);
-            this.pictureBox1.TabIndex = 3;
-            this.pictureBox1.TabStop = false;
+            this.picIconeSobre.BackgroundImage = global::TerapiaReembolso.Properties.Resources.App;
+            this.picIconeSobre.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.picIconeSobre.Location = new System.Drawing.Point(667, 93);
+            this.picIconeSobre.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.picIconeSobre.Name = "picIconeSobre";
+            this.picIconeSobre.Size = new System.Drawing.Size(64, 64);
+            this.picIconeSobre.TabIndex = 3;
+            this.picIconeSobre.TabStop = false;
             // 
             // btnFecharSobre
             // 
@@ -1162,7 +1161,7 @@
             this.lblNomeAplicao.Name = "lblNomeAplicao";
             this.lblNomeAplicao.Size = new System.Drawing.Size(475, 46);
             this.lblNomeAplicao.TabIndex = 0;
-            this.lblNomeAplicao.Text = "Terapia Reembolso v4.1";
+            this.lblNomeAplicao.Text = "Terapia Reembolso v4.5";
             // 
             // TelaPrincipal
             // 
@@ -1170,7 +1169,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(2176, 1538);
             this.Controls.Add(this.pnlSobre);
-            this.Controls.Add(this.menuStrip1);
+            this.Controls.Add(this.menuAplicacao);
             this.Controls.Add(this.statusStrip);
             this.Controls.Add(this.pnlReembolso);
             this.Controls.Add(this.pnlConsultas);
@@ -1205,11 +1204,11 @@
             this.grbTipoAtendimento.PerformLayout();
             this.pnlDadosBancarios.ResumeLayout(false);
             this.pnlDadosBancarios.PerformLayout();
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
+            this.menuAplicacao.ResumeLayout(false);
+            this.menuAplicacao.PerformLayout();
             this.pnlSobre.ResumeLayout(false);
             this.pnlSobre.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picIconeSobre)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1228,7 +1227,7 @@
         private System.Windows.Forms.OpenFileDialog dialogoPDF;
         private System.Windows.Forms.Label lblCPFPaciente;
         private System.Windows.Forms.TextBox txtCPFPaciente;
-        private System.Windows.Forms.Label lblNomeReciboPDF;
+        private System.Windows.Forms.Label lblNomeArquivoPDF;
         private System.Windows.Forms.StatusStrip statusStrip;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatus;
         private System.Windows.Forms.LinkLabel lnkAssinarPDF;
@@ -1297,14 +1296,14 @@
         private System.Windows.Forms.Button btnExcluirPaciente;
         private System.Windows.Forms.Button btnSalvarPaciente;
         private System.Windows.Forms.Button btnNovo;
-        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.MenuStrip menuAplicacao;
         private System.Windows.Forms.ToolStripMenuItem sairToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem sobreToolStripMenuItem;
         private System.Windows.Forms.Panel pnlSobre;
         private System.Windows.Forms.Button btnFecharSobre;
         private System.Windows.Forms.Label lblCopyright;
         private System.Windows.Forms.Label lblNomeAplicao;
-        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox picIconeSobre;
         private System.Windows.Forms.GroupBox gbTipoPessoa;
         private System.Windows.Forms.RadioButton rbFisica;
         private System.Windows.Forms.RadioButton rbJuridica;
