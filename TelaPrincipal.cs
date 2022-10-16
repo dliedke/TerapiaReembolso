@@ -775,8 +775,7 @@ namespace TerapiaReembolso
             // Mostra tabs corretas
             pnlConsultas.BringToFront();
             pnlConsultas.Visible = !pnlConsultas.Visible;
-            pnlDadosReembolso.Visible = !pnlDadosReembolso.Visible;
-
+            
             // Se necessário já salva os dados do paciente
             if (!pnlConsultas.Visible)
             {
