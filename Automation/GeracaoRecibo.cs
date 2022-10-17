@@ -39,10 +39,7 @@ namespace TerapiaReembolso
             // Inicia o Chrome maximizado
             ChromeOptions options = new ChromeOptions();
             options.AddArgument("--start-maximized");
-            options.AddArgument("--ignore-certificate-errors");
-            options.AddArgument("--ignore-ssl-errors");
-            options.AddArgument("no-sandbox");
-
+            
             // Baixa ultimo ChromeDriver usando proxy se necessário e usa ele
             if (Utilitarios.NecessitaProxy())
             {
@@ -61,7 +58,7 @@ namespace TerapiaReembolso
 
             // Navega para recibo online
             _chromeDriver.Navigate().GoToUrl("https://www.google.com.br");
-            System.Threading.Thread.Sleep(1000);
+            System.Threading.Thread.Sleep(2000);
             _chromeDriver.Navigate().GoToUrl("https://www.reciboonline.com.br/recibo-de-pagamento");
 
             // Espera carregar elemento
