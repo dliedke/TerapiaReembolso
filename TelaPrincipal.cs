@@ -34,6 +34,8 @@ namespace TerapiaReembolso
         private DateTimePicker[] _datasConsultasControles;
         private Dictionary<string, Paciente> _listaPacientes = new Dictionary<string, Paciente>();
 
+        private string _caminhoConfiguracoes = Environment.ExpandEnvironmentVariables(@"%APPDATA%\..\Local\TerapiaReembolso");
+
         public TelaPrincipal()
         {
             InitializeComponent();
@@ -66,11 +68,10 @@ namespace TerapiaReembolso
             numNumeroConsultas_ValueChanged(null, EventArgs.Empty);
 
             // Migra config antigo para novo padrão se precisar
-            string caminhoConfiguracoes = Environment.ExpandEnvironmentVariables(@"%APPDATA%\..\Local\TerapiaReembolso");
-            string arquivoConfig = Path.Combine(caminhoConfiguracoes, "config.bin");
+            string arquivoConfig = Path.Combine(_caminhoConfiguracoes, "config.bin");
             if (File.Exists(arquivoConfig))
             {
-                File.Move(arquivoConfig, Path.Combine(caminhoConfiguracoes, "config_0.bin"));
+                File.Move(arquivoConfig, Path.Combine(_caminhoConfiguracoes, "config_0.bin"));
             }
 
             // Faz o processamento inicial
@@ -513,14 +514,13 @@ namespace TerapiaReembolso
             try
             {
                 // Cria caminho para os arquivos de configuração se não existir
-                string caminhoConfiguracoes = Environment.ExpandEnvironmentVariables(@"%APPDATA%\..\Local\TerapiaReembolso");
-                if (!Directory.Exists(caminhoConfiguracoes))
+                if (!Directory.Exists(_caminhoConfiguracoes))
                 {
-                    Directory.CreateDirectory(caminhoConfiguracoes);
+                    Directory.CreateDirectory(_caminhoConfiguracoes);
                 }
 
                 // Carrega dados dos pacientes de arquivo binario criptografado
-                string arquivoPacientes = Path.Combine(caminhoConfiguracoes, "pacientes.bin");
+                string arquivoPacientes = Path.Combine(_caminhoConfiguracoes, "pacientes.bin");
                 if (File.Exists(arquivoPacientes))
                 {
                     _listaPacientes = CryptoSerializer.DeSerialize<Dictionary<string, Paciente>>(arquivoPacientes);
@@ -537,7 +537,7 @@ namespace TerapiaReembolso
                 for (int i = 0; i < 100; i++)
                 {
                     // Carrega dados de configuração de arquivo binario criptografado
-                    string arquivoConfiguracao = Path.Combine(caminhoConfiguracoes, $"config_{i}.bin");
+                    string arquivoConfiguracao = Path.Combine(_caminhoConfiguracoes, $"config_{i}.bin");
                     if (File.Exists(arquivoConfiguracao))
                     {
                         Configuracao configuracao = CryptoSerializer.DeSerialize<Configuracao>(arquivoConfiguracao);
@@ -1373,6 +1373,13 @@ namespace TerapiaReembolso
                     cmbNomeCliente.Items.RemoveAt(cmbNomeCliente.FindStringExact(cmbNomeCliente.Text));
                     cmbNomeCliente.Text = String.Empty;
                     cmbNomeCliente.SelectedIndex = -1;
+
+                    // Remove arquivo com configuração
+                    string arquivoConfiguracao = Path.Combine(_caminhoConfiguracoes, $"config_{i}.bin");
+                    if (File.Exists(arquivoConfiguracao))
+                    {
+                        File.Delete(arquivoConfiguracao);
+                    }
                 }
             }
         }

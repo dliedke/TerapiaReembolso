@@ -1151,7 +1151,7 @@
             this.pnlSobre.Controls.Add(this.btnFecharSobre);
             this.pnlSobre.Controls.Add(this.lblCopyright);
             this.pnlSobre.Controls.Add(this.lblNomeAplicao);
-            this.pnlSobre.Location = new System.Drawing.Point(563, 418);
+            this.pnlSobre.Location = new System.Drawing.Point(563, 336);
             this.pnlSobre.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pnlSobre.Name = "pnlSobre";
             this.pnlSobre.Size = new System.Drawing.Size(1178, 812);
@@ -1207,7 +1207,7 @@
             this.lblNomeAplicao.Name = "lblNomeAplicao";
             this.lblNomeAplicao.Size = new System.Drawing.Size(475, 46);
             this.lblNomeAplicao.TabIndex = 0;
-            this.lblNomeAplicao.Text = "Terapia Reembolso v5.0";
+            this.lblNomeAplicao.Text = "Terapia Reembolso v5.2";
             // 
             // pnlCadastroCliente
             // 
