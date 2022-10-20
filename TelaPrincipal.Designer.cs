@@ -1127,14 +1127,14 @@
             // adicionarExcluirToolStripMenuItem
             // 
             this.adicionarExcluirToolStripMenuItem.Name = "adicionarExcluirToolStripMenuItem";
-            this.adicionarExcluirToolStripMenuItem.Size = new System.Drawing.Size(448, 54);
+            this.adicionarExcluirToolStripMenuItem.Size = new System.Drawing.Size(421, 54);
             this.adicionarExcluirToolStripMenuItem.Text = "&Adicionar / Excluir";
             this.adicionarExcluirToolStripMenuItem.Click += new System.EventHandler(this.adicionarExcluirToolStripMenuItem_Click);
             // 
             // toolStripMenuItemLinha1
             // 
             this.toolStripMenuItemLinha1.Name = "toolStripMenuItemLinha1";
-            this.toolStripMenuItemLinha1.Size = new System.Drawing.Size(445, 6);
+            this.toolStripMenuItemLinha1.Size = new System.Drawing.Size(418, 6);
             // 
             // sobreToolStripMenuItem
             // 

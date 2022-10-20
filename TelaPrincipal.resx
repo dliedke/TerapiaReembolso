@@ -133,7 +133,8 @@ Multiplos pacientes podem ser cadastrados para geração de diferentes recibos p
 
 Multiplos clientes podem ser cadastrados para solicitação de reembolso por todos familiares cobertos pelo plano de saúde.
 
-Caso alguma página não carregue durante a automação, só dar F5 no browser que ela segue executando.</value>
+Caso alguma página não carregue durante a automação, só dar F5 no browser que ela segue executando. Se der errado, tenha 
+paciencia e tente outra vez :)</value>
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">

@@ -828,9 +828,12 @@ namespace TerapiaReembolso
 
         private void lnkUnimedLogin_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            CarregaDadosTelaEmMemoria();
-            SolicitacaoReembolso.AbreSegurosUnimedCliente();
-            SolicitacaoReembolso.LoginUnimed();
+            if (ValidaDadosParaReembolso())
+            {
+                CarregaDadosTelaEmMemoria();
+                SolicitacaoReembolso.AbreSegurosUnimedCliente();
+                SolicitacaoReembolso.LoginUnimed();
+            }
         }
 
         #endregion
@@ -1216,6 +1219,7 @@ namespace TerapiaReembolso
             pnlReembolso.Visible = false;
             pnlRecibo.Visible = false;
             pnlCadastroCliente.Visible = true;
+            cmbNomeCliente.Focus();
         }
 
         private void btnFecharDadosCliente_Click(object sender, EventArgs e)
