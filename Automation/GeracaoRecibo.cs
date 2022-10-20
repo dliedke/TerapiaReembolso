@@ -89,15 +89,15 @@ namespace TerapiaReembolso
 
             // Seta cidade
             _element = _chromeDriver.FindElement(By.Name("cidade"));
-            _element.SendKeys(TelaPrincipal.Config.Cidade);
+            _element.SendKeys(TelaPrincipal.PegaClienteAtual().Cidade);
 
             // Seta nome do emissor
             _element = _chromeDriver.FindElement(By.Name("emissor"));
-            _element.SendKeys(TelaPrincipal.Config.NomeTerapeuta);
+            _element.SendKeys(TelaPrincipal.PegaClienteAtual().NomeTerapeuta);
 
             // Seta CPF do emissor
             _element = _chromeDriver.FindElement(By.Name("cpfCnpjEmissor"));
-            _element.SendKeys(TelaPrincipal.Config.CPFTerapeuta);
+            _element.SendKeys(TelaPrincipal.PegaClienteAtual().CPFTerapeuta);
 
             // Cria string com data das consultas
             string dias = string.Empty;
@@ -115,7 +115,7 @@ namespace TerapiaReembolso
             dias = dias.TrimEnd().TrimEnd(',');
 
             // Cria observacoes com dias das consultas, endereço, CEP e CRP
-            string observacoes = $"Sessões de Psicoterapia nos dias {dias}.\n\nEndereço: {TelaPrincipal.Config.EnderecoTerapeuta}\n\nCEP: {TelaPrincipal.Config.CEP}\n\nCRP: {TelaPrincipal.Config.CRP}";
+            string observacoes = $"Sessões de Psicoterapia nos dias {dias}.\n\nEndereço: {TelaPrincipal.PegaClienteAtual().EnderecoTerapeuta}\n\nCEP: {TelaPrincipal.PegaClienteAtual().CEP}\n\nCRP: {TelaPrincipal.PegaClienteAtual().CRP}";
 
             // Seta as observacoes e submete formulario
             _element = _chromeDriver.FindElement(By.Name("observacoes"));

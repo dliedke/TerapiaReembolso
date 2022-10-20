@@ -27,7 +27,8 @@ namespace TerapiaReembolso
     {
         #region Variáveis de Classe e Inicialização da Aplicação
 
-        public static Configuracao Config = new Configuracao();
+        private static List<Configuracao> ListaConfiguracoesClientes = new List<Configuracao>();
+        private static int IndiceClienteAtual = 0;
         public static Paciente PacienteAtual;
 
         private DateTimePicker[] _datasConsultasControles;
@@ -64,6 +65,15 @@ namespace TerapiaReembolso
             _datasConsultasControles = new DateTimePicker[] { dtDataConsulta1, dtDataConsulta2, dtDataConsulta3, dtDataConsulta4, dtDataConsulta5, dtDataConsulta6, dtDataConsulta7, dtDataConsulta8, dtDataConsulta9, dtDataConsulta10 };
             numNumeroConsultas_ValueChanged(null, EventArgs.Empty);
 
+            // Migra config antigo para novo padrão se precisar
+            string caminhoConfiguracoes = Environment.ExpandEnvironmentVariables(@"%APPDATA%\..\Local\TerapiaReembolso");
+            string arquivoConfig = Path.Combine(caminhoConfiguracoes, "config.bin");
+            if (File.Exists(arquivoConfig))
+            {
+                File.Move(arquivoConfig, Path.Combine(caminhoConfiguracoes, "config_0.bin"));
+            }
+
+            // Faz o processamento inicial
             PopulaMesesEDiasDaSemana();
             MostraVersaoAplicacao();
             MostraMensagemDeBoasVindas();
@@ -73,6 +83,22 @@ namespace TerapiaReembolso
             if (cmbNomePaciente.Items.Count > 0)
             {
                 cmbNomePaciente.SelectedIndex = 0;
+            }
+
+            // Se não tem nada salvo, cria um cliente padrão
+            CriaClientePadraoSeNaoExistir();
+        }
+
+        private static void CriaClientePadraoSeNaoExistir()
+        {
+            // Se não tem nada salvo, cria um cliente padrão para não explodir tudo
+            if (ListaConfiguracoesClientes.Count == 0)
+            {
+                Configuracao configuracao = new Configuracao
+                {
+                    NomeCliente = "Cliente 1"
+                };
+                ListaConfiguracoesClientes.Add(configuracao);
             }
         }
 
@@ -102,7 +128,7 @@ namespace TerapiaReembolso
             cmbDiaSemana.Items.Add(new Item("Domingo", 1));
 
             // Seta o mes passado no dropdown
-            cmbMes.SelectedIndex = DateTime.Now.AddMonths(-1).Month-1;
+            cmbMes.SelectedIndex = DateTime.Now.AddMonths(-1).Month - 1;
         }
 
         private void MostraVersaoAplicacao()
@@ -151,7 +177,7 @@ namespace TerapiaReembolso
                 }
                 else
                 {
-                    Config.PDFRecibo = dialogoPDF.FileName;
+                    TelaPrincipal.PegaClienteAtual().PDFRecibo = dialogoPDF.FileName;
                 }
 
                 // Mostra nome do PDF na tela
@@ -498,43 +524,51 @@ namespace TerapiaReembolso
                 if (File.Exists(arquivoPacientes))
                 {
                     _listaPacientes = CryptoSerializer.DeSerialize<Dictionary<string, Paciente>>(arquivoPacientes);
-                 
+
                     // Seta dropdown com os pacientes
                     cmbNomePaciente.Items.AddRange(_listaPacientes.Keys.ToArray<string>());
+                    cmbNomePaciente.SelectedIndex = 0;
                 }
-                
-                // Carrega dados de configuração de arquivo binario criptografado
-                string arquivoConfiguracao = Path.Combine(caminhoConfiguracoes, "config.bin");
-                if (File.Exists(arquivoConfiguracao))
+
+                // Busca todos arquivos de configuração existentes
+                ListaConfiguracoesClientes.Clear();
+                IndiceClienteAtual = 0;
+                cmbNomeCliente.Items.Clear();
+                for (int i = 0; i < 100; i++)
                 {
-                    Config = CryptoSerializer.DeSerialize<Configuracao>(arquivoConfiguracao);
-
-                    // Atualiza tela com configuração carregada
-                    rbFisica.Checked = Config.TipoPessoaTerapeuta == "F";
-                    rbJuridica.Checked = Config.TipoPessoaTerapeuta == "J";
-
-                    // Padrão é pessoa física
-                    if (string.IsNullOrEmpty(Config.TipoPessoaTerapeuta))
+                    // Carrega dados de configuração de arquivo binario criptografado
+                    string arquivoConfiguracao = Path.Combine(caminhoConfiguracoes, $"config_{i}.bin");
+                    if (File.Exists(arquivoConfiguracao))
                     {
-                        rbFisica.Checked = true;
+                        Configuracao configuracao = CryptoSerializer.DeSerialize<Configuracao>(arquivoConfiguracao);
+
+                        // Se ainda não temos nome do cliente tenta pegar da lista de pacientes,
+                        // se não cria um nome padrão
+                        if (string.IsNullOrEmpty(configuracao.NomeCliente))
+                        {
+                            configuracao.NomeCliente = cmbNomePaciente.Text;
+                        }
+                        if (string.IsNullOrEmpty(configuracao.NomeCliente))
+                        {
+                            configuracao.NomeCliente = "Cliente 1";
+                        }
+
+                        // Adiciona o novo cliente no menu e no dropdown de clientes
+                        AdicionaClienteMenu(configuracao.NomeCliente, i);
+                        cmbNomeCliente.Items.Add(configuracao.NomeCliente);
+                        ListaConfiguracoesClientes.Add(configuracao);
                     }
+                    else
+                    {
+                        break;
+                    }
+                }
 
-                    txtCidade.Text = Config.Cidade;
-                    txtNomeDoTerapeuta.Text = Config.NomeTerapeuta;
-                    txtCPFTerapeuta.Text = Config.CPFTerapeuta;
-                    txtCRP.Text = Config.CRP;
-                    txtCEP.Text = Config.CEP;
-                    txtEnderecoTerapeuta.Text = Config.EnderecoTerapeuta;
-
-                    rbTelemedicina.Checked = Config.TipoAtendimento == "T";
-                    rbPresencial.Checked = Config.TipoAtendimento == "P";
-
-                    txtNomeDoBanco.Text = Config.NomeBanco;
-                    txtAgenciaSemDigito.Text = Config.Agencia;
-                    txtContaSemDigito.Text = Config.Conta;
-                    txtDigitoDaConta.Text = Config.Digito;
-                    txtLoginUnimed.Text = Config.LoginUnimed;
-                    txtSenhaUnimed.Text = Config.SenhaUnimed;
+                // Se tem algum cliente carregado
+                if (ListaConfiguracoesClientes.Count > 0)
+                {
+                    // Clica no primeiro cliente
+                    nomeClienteMenu_Click(clientesToolStripMenuItem.DropDownItems[2], EventArgs.Empty);
                 }
             }
             catch (Exception ex)
@@ -543,52 +577,94 @@ namespace TerapiaReembolso
             }
         }
 
+        private void AtualizaTelaComConfiguracaoAtual()
+        {
+            // Atualiza tela com configuração carregada
+            rbFisica.Checked = TelaPrincipal.PegaClienteAtual().TipoPessoaTerapeuta == "F";
+            rbJuridica.Checked = TelaPrincipal.PegaClienteAtual().TipoPessoaTerapeuta == "J";
+
+            // Padrão é pessoa física
+            if (string.IsNullOrEmpty(TelaPrincipal.PegaClienteAtual().TipoPessoaTerapeuta))
+            {
+                rbFisica.Checked = true;
+            }
+
+            txtCidade.Text = TelaPrincipal.PegaClienteAtual().Cidade;
+            txtNomeDoTerapeuta.Text = TelaPrincipal.PegaClienteAtual().NomeTerapeuta;
+            txtCPFTerapeuta.Text = TelaPrincipal.PegaClienteAtual().CPFTerapeuta;
+            txtCRP.Text = TelaPrincipal.PegaClienteAtual().CRP;
+            txtCEP.Text = TelaPrincipal.PegaClienteAtual().CEP;
+            txtEnderecoTerapeuta.Text = TelaPrincipal.PegaClienteAtual().EnderecoTerapeuta;
+
+            rbTelemedicina.Checked = TelaPrincipal.PegaClienteAtual().TipoAtendimento == "T";
+            rbPresencial.Checked = TelaPrincipal.PegaClienteAtual().TipoAtendimento == "P";
+
+            // Padrão é telemedicina
+            if (string.IsNullOrEmpty(TelaPrincipal.PegaClienteAtual().TipoAtendimento))
+            {
+                rbTelemedicina.Checked = true;
+            }
+
+            txtNomeDoBanco.Text = TelaPrincipal.PegaClienteAtual().NomeBanco;
+            txtAgenciaSemDigito.Text = TelaPrincipal.PegaClienteAtual().Agencia;
+            txtContaSemDigito.Text = TelaPrincipal.PegaClienteAtual().Conta;
+            txtDigitoDaConta.Text = TelaPrincipal.PegaClienteAtual().Digito;
+            txtLoginUnimed.Text = TelaPrincipal.PegaClienteAtual().LoginUnimed;
+            txtSenhaUnimed.Text = TelaPrincipal.PegaClienteAtual().SenhaUnimed;
+        }
+
         private void SalvaDadosAtuais()
         {
             // Salva todos dados da tela em classe Configuracao
             CarregaDadosTelaEmMemoria();
 
             // Não salva o PDF do recibo
-            string pdfRecibo = Config.PDFRecibo;
-            Config.PDFRecibo = string.Empty;
+            string pdfRecibo = TelaPrincipal.PegaClienteAtual().PDFRecibo;
+            TelaPrincipal.PegaClienteAtual().PDFRecibo = string.Empty;
 
-            // Cria caminho para os arquivos de configuração se não existir
+            // Cria diretório para os arquivos de configuração se não existir
             string caminhoConfiguracoes = Environment.ExpandEnvironmentVariables(@"%APPDATA%\..\Local\TerapiaReembolso");
             if (!Directory.Exists(caminhoConfiguracoes))
             {
                 Directory.CreateDirectory(caminhoConfiguracoes);
             }
 
-            // Salva configuracao em arquivo binário criptografado
-            string arquivoConfiguracao = Path.Combine(caminhoConfiguracoes, "config.bin");
-            CryptoSerializer.Serialize<Configuracao>(arquivoConfiguracao, Config);
+            // Salva configurações de todos clientes em arquivos binários criptografados
+            for (int i = 0; i < ListaConfiguracoesClientes.Count(); i++)
+            {
+                string arquivoConfiguracao = Path.Combine(caminhoConfiguracoes, $"config_{i}.bin");
+                CryptoSerializer.Serialize<Configuracao>(arquivoConfiguracao, ListaConfiguracoesClientes[i]);
+            }
 
-            // Salva lista de pacientes em arquivo binário criptografado
-            string arquivoPacientes = Path.Combine(caminhoConfiguracoes, "pacientes.bin");
-            CryptoSerializer.Serialize<Dictionary<string,Paciente>>(arquivoPacientes, _listaPacientes);
+            // Salva lista de pacientes em arquivo binário criptografado se tiver dados
+            if (_listaPacientes.Count > 0)
+            {
+                string arquivoPacientes = Path.Combine(caminhoConfiguracoes, "pacientes.bin");
+                CryptoSerializer.Serialize<Dictionary<string, Paciente>>(arquivoPacientes, _listaPacientes);
+            }
 
             // Mantem em memoria o pdf do recibo
-            Config.PDFRecibo = pdfRecibo;
+            TelaPrincipal.PegaClienteAtual().PDFRecibo = pdfRecibo;
         }
 
         private void CarregaDadosTelaEmMemoria()
         {
             // Salva todos dados da tela em classe Configuracao
-            Config.TipoPessoaTerapeuta = rbFisica.Checked ? "F" : "J";
-            Config.Cidade = txtCidade.Text;
-            Config.NomeTerapeuta = txtNomeDoTerapeuta.Text;
-            Config.CPFTerapeuta = txtCPFTerapeuta.Text;
-            Config.CRP = txtCRP.Text;
-            Config.CEP = txtCEP.Text;
-            Config.EnderecoTerapeuta = txtEnderecoTerapeuta.Text;
-            Config.TipoAtendimento = rbTelemedicina.Checked ? "T" : "P";
-            
-            Config.NomeBanco = txtNomeDoBanco.Text;
-            Config.Agencia = txtAgenciaSemDigito.Text;
-            Config.Conta = txtContaSemDigito.Text;
-            Config.Digito = txtDigitoDaConta.Text;
-            Config.SenhaUnimed = txtSenhaUnimed.Text;
-            Config.LoginUnimed = txtLoginUnimed.Text;
+            TelaPrincipal.PegaClienteAtual().TipoPessoaTerapeuta = rbFisica.Checked ? "F" : "J";
+            TelaPrincipal.PegaClienteAtual().Cidade = txtCidade.Text;
+            TelaPrincipal.PegaClienteAtual().NomeTerapeuta = txtNomeDoTerapeuta.Text;
+            TelaPrincipal.PegaClienteAtual().CPFTerapeuta = txtCPFTerapeuta.Text;
+            TelaPrincipal.PegaClienteAtual().CRP = txtCRP.Text;
+            TelaPrincipal.PegaClienteAtual().CEP = txtCEP.Text;
+            TelaPrincipal.PegaClienteAtual().EnderecoTerapeuta = txtEnderecoTerapeuta.Text;
+            TelaPrincipal.PegaClienteAtual().TipoAtendimento = rbTelemedicina.Checked ? "T" : "P";
+
+            TelaPrincipal.PegaClienteAtual().NomeBanco = txtNomeDoBanco.Text;
+            TelaPrincipal.PegaClienteAtual().Agencia = txtAgenciaSemDigito.Text;
+            TelaPrincipal.PegaClienteAtual().Conta = txtContaSemDigito.Text;
+            TelaPrincipal.PegaClienteAtual().Digito = txtDigitoDaConta.Text;
+            TelaPrincipal.PegaClienteAtual().SenhaUnimed = txtSenhaUnimed.Text;
+            TelaPrincipal.PegaClienteAtual().LoginUnimed = txtLoginUnimed.Text;
 
             PegaPacienteAtual();
         }
@@ -775,7 +851,7 @@ namespace TerapiaReembolso
             // Mostra tabs corretas
             pnlConsultas.BringToFront();
             pnlConsultas.Visible = !pnlConsultas.Visible;
-            
+
             // Se necessário já salva os dados do paciente
             if (!pnlConsultas.Visible)
             {
@@ -919,7 +995,7 @@ namespace TerapiaReembolso
 
         #region Gerenciamento de dados dos pacientes
 
-        private void btnNovo_Click(object sender, EventArgs e)
+        private void btnNovoPaciente_Click(object sender, EventArgs e)
         {
             // Limpa tudo 
             cmbNomePaciente.Text = string.Empty;
@@ -1016,7 +1092,6 @@ namespace TerapiaReembolso
             }
         }
 
-
         private void btnExcluirPaciente_Click(object sender, EventArgs e)
         {
             // Pede confirmação para exclusão
@@ -1038,7 +1113,7 @@ namespace TerapiaReembolso
                     }
 
                     // Limpa tudo
-                    btnNovo_Click(sender, e);
+                    btnNovoPaciente_Click(sender, e);
 
                     // Mostra status da operação
                     toolStripStatus.Text = $"Paciente \"{nomePaciente}\" excluído!";
@@ -1092,37 +1167,8 @@ namespace TerapiaReembolso
         }
 
         #endregion
-
-        #region Tela de Sobre...
-
-        private void sairToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            // Fecha aplicação
-            Close();
-        }
-
-        private void sobreToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            // Mostra panel de sobre... com ano atual
-            pnlSobre.Visible = true;
-            pnlConsultas.Visible = false;
-            pnlReembolso.Visible = false;
-            pnlRecibo.Visible = false;
-            lblCopyright.Text = $"Copyright © Daniel Liedke {DateTime.Now.Year}";
-            lblNomeAplicao.Text = this.Text;
-        }
-
-        private void btnFecharSobre_Click(object sender, EventArgs e)
-        {
-            // Fecha panel de sobre...
-            pnlSobre.Visible = false;
-            pnlConsultas.Visible = false;
-            pnlReembolso.Visible = true;
-            pnlReembolso.BringToFront();
-            pnlRecibo.Visible = true;
-        }
-
-        #endregion
+                
+        #region Pessoal Física e Jurídica
 
         private void rbFisica_CheckedChanged(object sender, EventArgs e)
         {
@@ -1149,5 +1195,216 @@ namespace TerapiaReembolso
                 btnSelecionarPDFRecibo.Text = "Selecionar Nota Fiscal";
             }
         }
+
+        #endregion
+
+        #region Cadastro de Clientes
+
+        public static Configuracao PegaClienteAtual()
+        {
+            // Se não tem nada salvo, cria um cliente padrão
+            CriaClientePadraoSeNaoExistir();
+
+            return ListaConfiguracoesClientes[IndiceClienteAtual];
+        }
+
+        private void adicionarExcluirToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // Mostra panel de cadastro de clientes
+            pnlSobre.Visible = false;
+            pnlConsultas.Visible = false;
+            pnlReembolso.Visible = false;
+            pnlRecibo.Visible = false;
+            pnlCadastroCliente.Visible = true;
+        }
+
+        private void btnFecharDadosCliente_Click(object sender, EventArgs e)
+        {
+            // Esconde painel de cadastro de clientes
+            pnlSobre.Visible = false;
+            pnlConsultas.Visible = false;
+            pnlReembolso.Visible = true;
+            pnlRecibo.Visible = true;
+            pnlCadastroCliente.Visible = false;
+        }
+
+        private void btnNovoCliente_Click(object sender, EventArgs e)
+        {
+            // Nome do paciente necessário para salvar
+            if (cmbNomeCliente.Text == string.Empty)
+            {
+                MessageBox.Show("Favor informar o nome do cliente primeiro!", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                cmbNomeCliente.Focus();
+                return;
+            }
+
+            // Busca nome do novo cliente
+            string nomeClienteNovo = cmbNomeCliente.Text;
+
+            // Verifica se cliente foi preenchido e não existe ainda
+            if (!string.IsNullOrEmpty(nomeClienteNovo) && cmbNomeCliente.FindStringExact(nomeClienteNovo) == -1)
+            {
+                // Limpa todos campos que não são do paciente
+                LimpaCamposCliente();
+
+                // Adiciona novo cliente na lista e seta indice para novo cliente
+                Configuracao configuracao = new Configuracao
+                {
+                    NomeCliente = nomeClienteNovo
+                };
+                ListaConfiguracoesClientes.Add(configuracao);
+
+                int indiceNovoCliente = ListaConfiguracoesClientes.Count - 1;
+
+                // Adiciona o novo cliente no menu
+                AdicionaClienteMenu(nomeClienteNovo, indiceNovoCliente);
+
+                // Clica no cliente criado
+                nomeClienteMenu_Click(clientesToolStripMenuItem.DropDownItems[2 + indiceNovoCliente], EventArgs.Empty);
+
+                // Seta nome do paciente igual ao nome do cliente criado
+                cmbNomePaciente.Text = nomeClienteNovo;
+
+                // Fecha o panel
+                btnFecharDadosCliente_Click(null, EventArgs.Empty);
+            }
+        }
+
+        private void LimpaCamposCliente()
+        {
+            // Limpa todos campos do cliente quando cria um novo
+            rbFisica.Checked = true;
+            rbTelemedicina.Checked = true;
+            txtNomeDoTerapeuta.Text = string.Empty;
+            txtCPFTerapeuta.Text = string.Empty;
+            txtCRP.Text = string.Empty;
+            txtCEP.Text = string.Empty;
+            txtCidade.Text = string.Empty;
+            txtEnderecoTerapeuta.Text = string.Empty;
+            txtNomeDoBanco.Text = string.Empty;
+            txtAgenciaSemDigito.Text = string.Empty;
+            txtContaSemDigito.Text = string.Empty;
+            txtDigitoDaConta.Text = string.Empty;
+        }
+
+        private void AdicionaClienteMenu(string nomeClienteNovo, int indice)
+        {
+            // Adiciona o novo cliente no menu
+            ToolStripMenuItem nomeClienteMenu = new ToolStripMenuItem();
+            nomeClienteMenu.Text = nomeClienteNovo;
+            nomeClienteMenu.Click += nomeClienteMenu_Click;
+            nomeClienteMenu.Tag = indice;
+            clientesToolStripMenuItem.DropDownItems.Add(nomeClienteMenu);
+        }
+
+        private void RemoveClienteMenu(int indice)
+        {
+            // Remove cliente excluido do menu
+            clientesToolStripMenuItem.DropDownItems.RemoveAt(indice + 2);
+        }
+
+        private void nomeClienteMenu_Click(object sender, EventArgs e)
+        {
+            // Remove flecha da seleção anterior
+            if (clientesToolStripMenuItem.DropDownItems[IndiceClienteAtual+2].Text.StartsWith("→ "))
+            {
+                clientesToolStripMenuItem.DropDownItems[IndiceClienteAtual+2].Text = clientesToolStripMenuItem.DropDownItems[IndiceClienteAtual+2].Text.Substring(2);
+            }
+
+            ToolStripMenuItem menu = (ToolStripMenuItem)sender;
+
+            // Tenta achar o nome do paciente igual se tiver e já seleciona
+            int indicePaciente = cmbNomePaciente.FindStringExact(menu.Text);
+            if (indicePaciente >= 0)
+            {
+                cmbNomePaciente.SelectedIndex = indicePaciente;
+            }
+
+            // Adiciona flecha na seleção atual
+            menu.Text = "→ " + menu.Text;
+
+            // Pega o índice do cliente selecionado
+            int indice = (int)menu.Tag;
+            IndiceClienteAtual = indice;
+
+            // Mostra toda configuração do cliente selecionado na tela
+            AtualizaTelaComConfiguracaoAtual();
+        }
+
+        private void btnExcluirCliente_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(cmbNomeCliente.Text))
+            {
+                return;
+            }
+
+            // Busca o cliente selecionado
+            for (int i=0;i<ListaConfiguracoesClientes.Count;i++)
+            {
+                // Caso encontre pelo nome
+                if (cmbNomeCliente.Text == ListaConfiguracoesClientes[i].NomeCliente)
+                {
+                    // Remove cliente da lista, do menu e seta indice 0
+                    ListaConfiguracoesClientes.RemoveAt(i);
+                    RemoveClienteMenu(i);
+                    IndiceClienteAtual = 0;
+
+                    if (ListaConfiguracoesClientes.Count > 0)
+                    {
+                        // Refaz os indices dos clientes no menu
+                        for (int f = 2; f < clientesToolStripMenuItem.DropDownItems.Count; f++)
+                        {
+                            clientesToolStripMenuItem.DropDownItems[f].Tag = f - 2;
+                        }
+
+                        // Clica no primeiro cliente
+                        nomeClienteMenu_Click(clientesToolStripMenuItem.DropDownItems[2], EventArgs.Empty);
+                    }
+                    else
+                    {
+                        LimpaCamposCliente();
+                    }
+
+                    // Remove do dropdown
+                    cmbNomeCliente.Items.RemoveAt(cmbNomeCliente.FindStringExact(cmbNomeCliente.Text));
+                    cmbNomeCliente.Text = String.Empty;
+                    cmbNomeCliente.SelectedIndex = -1;
+                }
+            }
+        }
+
+        #endregion
+
+        #region Tela de Sobre...
+
+        private void sairToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // Fecha aplicação toda e salva os dados
+            Close();
+        }
+
+        private void sobreToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // Mostra panel de Sobre... com ajuda e ano atual atualizado
+            pnlSobre.Visible = true;
+            pnlConsultas.Visible = false;
+            pnlReembolso.Visible = false;
+            pnlRecibo.Visible = false;
+            pnlCadastroCliente.Visible = false;
+            lblCopyright.Text = $"Copyright © Daniel Liedke {DateTime.Now.Year}";
+            lblNomeAplicao.Text = this.Text;
+        }
+
+        private void btnFecharSobre_Click(object sender, EventArgs e)
+        {
+            // Fecha panel de Sobre...
+            pnlSobre.Visible = false;
+            pnlConsultas.Visible = false;
+            pnlReembolso.Visible = true;
+            pnlReembolso.BringToFront();
+            pnlRecibo.Visible = true;
+        }
+
+        #endregion
     }
 }

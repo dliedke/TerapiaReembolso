@@ -69,15 +69,15 @@ namespace TerapiaReembolso
         public static void LoginUnimed()
         {
             // Caso se tenha um login e senha para entrar
-            if (!string.IsNullOrEmpty(TelaPrincipal.Config.LoginUnimed) && !string.IsNullOrEmpty(TelaPrincipal.Config.SenhaUnimed))
+            if (!string.IsNullOrEmpty(TelaPrincipal.PegaClienteAtual().LoginUnimed) && !string.IsNullOrEmpty(TelaPrincipal.PegaClienteAtual().SenhaUnimed))
             {
                 // Seta CPF para logar
                 var emailText = _chromeDriver.FindElement(By.Id("loginInput"));
-                emailText.SendKeys(TelaPrincipal.Config.LoginUnimed);
+                emailText.SendKeys(TelaPrincipal.PegaClienteAtual().LoginUnimed);
 
                 // Seta senha para logar
                 var passwordText = _chromeDriver.FindElement(By.Id("senhaInput"));
-                passwordText.SendKeys(TelaPrincipal.Config.SenhaUnimed);
+                passwordText.SendKeys(TelaPrincipal.PegaClienteAtual().SenhaUnimed);
 
                 // Submete o formulário
                 emailText.Submit();
@@ -140,14 +140,14 @@ namespace TerapiaReembolso
             _element.Click();
 
             // Seleciona Presencial se precisar
-            if (TelaPrincipal.Config.TipoAtendimento == "P")
+            if (TelaPrincipal.PegaClienteAtual().TipoAtendimento == "P")
             {
                 _element = _chromeDriver.FindElement(By.Id("PRadio"));
                 _element.Click();
             }
 
             // Seleciona Telemedicina se precisar
-            if (TelaPrincipal.Config.TipoAtendimento == "T")
+            if (TelaPrincipal.PegaClienteAtual().TipoAtendimento == "T")
             {
                 _element = _chromeDriver.FindElement(By.Id("TRadio"));
                 _element.Click();
@@ -206,7 +206,7 @@ namespace TerapiaReembolso
             _element = _chromeDriver.FindElement(By.XPath("(//input[@type='file'])[2]"));
 
             // Seleciona arquivo para envio
-            _element.SendKeys(TelaPrincipal.Config.PDFRecibo);
+            _element.SendKeys(TelaPrincipal.PegaClienteAtual().PDFRecibo);
 
             // Espera para usuário verificar como ficou
             System.Threading.Thread.Sleep(3000);
@@ -219,19 +219,19 @@ namespace TerapiaReembolso
 
             // Seta nome do psicólogo
             _element = _chromeDriver.FindElement(By.Id("providerNameInput"));
-            _element.SendKeys(TelaPrincipal.Config.NomeTerapeuta);
+            _element.SendKeys(TelaPrincipal.PegaClienteAtual().NomeTerapeuta);
 
             // Seta CPF psicólogo
             _element = _chromeDriver.FindElement(By.Id("inputCpfCnpjInput"));
-            _element.SendKeys(TelaPrincipal.Config.CPFTerapeuta);
+            _element.SendKeys(TelaPrincipal.PegaClienteAtual().CPFTerapeuta);
 
             // Seta número do CRP
             _element = _chromeDriver.FindElement(By.Id("councilNumberInput"));
-            _element.SendKeys(TelaPrincipal.Config.CRP);
+            _element.SendKeys(TelaPrincipal.PegaClienteAtual().CRP);
 
             // Seta número do CEP
             _element = _chromeDriver.FindElement(By.Id("cepInput"));
-            _element.SendKeys(TelaPrincipal.Config.CEP);
+            _element.SendKeys(TelaPrincipal.PegaClienteAtual().CEP);
 
             // Espera para usuário verificar como ficou
             System.Threading.Thread.Sleep(4000);
@@ -249,20 +249,20 @@ namespace TerapiaReembolso
             _element.Click();
 
             // Seta nome do banco
-            _element = _chromeDriver.FindElement(By.XPath($"//option[.='{TelaPrincipal.Config.NomeBanco}']"));
+            _element = _chromeDriver.FindElement(By.XPath($"//option[.='{TelaPrincipal.PegaClienteAtual().NomeBanco}']"));
             _element.Click();
 
             // Seta número da agência
             _element = _chromeDriver.FindElement(By.Id("numberAgencyInput"));
-            _element.SendKeys(TelaPrincipal.Config.Agencia);
+            _element.SendKeys(TelaPrincipal.PegaClienteAtual().Agencia);
 
             // Seta número da conta
             _element = _chromeDriver.FindElement(By.Id("bankAccountInput"));
-            _element.SendKeys(TelaPrincipal.Config.Conta);
+            _element.SendKeys(TelaPrincipal.PegaClienteAtual().Conta);
 
             // Seta dígito da conta
             _element = _chromeDriver.FindElement(By.Id("numberAccountInput"));
-            _element.SendKeys(TelaPrincipal.Config.Digito);
+            _element.SendKeys(TelaPrincipal.PegaClienteAtual().Digito);
 
             // Espera para usuário verificar como ficou
             System.Threading.Thread.Sleep(4000);

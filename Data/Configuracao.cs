@@ -5,6 +5,7 @@ namespace TerapiaReembolso
     [Serializable]
     public class Configuracao
     {
+        public string NomeCliente { get; set; } 
         public string TipoPessoaTerapeuta { get; set; } 
         public string Cidade {get; set;}
         public string NomeTerapeuta {get; set;}

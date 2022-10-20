@@ -86,7 +86,7 @@
             this.txtCEP = new System.Windows.Forms.TextBox();
             this.lblTituloGeracaoRecibo = new System.Windows.Forms.Label();
             this.pnlDadosPaciente = new System.Windows.Forms.Panel();
-            this.btnNovo = new System.Windows.Forms.Button();
+            this.btnNovoPaciente = new System.Windows.Forms.Button();
             this.btnExcluirPaciente = new System.Windows.Forms.Button();
             this.btnSalvarPaciente = new System.Windows.Forms.Button();
             this.cmbNomePaciente = new System.Windows.Forms.ComboBox();
@@ -116,12 +116,24 @@
             this.txtGerarSolicitacaoReembolso = new System.Windows.Forms.Button();
             this.menuAplicacao = new System.Windows.Forms.MenuStrip();
             this.sairToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.clientesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.adicionarExcluirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItemLinha1 = new System.Windows.Forms.ToolStripSeparator();
             this.sobreToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pnlSobre = new System.Windows.Forms.Panel();
+            this.lblAjuda = new System.Windows.Forms.Label();
             this.picIconeSobre = new System.Windows.Forms.PictureBox();
             this.btnFecharSobre = new System.Windows.Forms.Button();
             this.lblCopyright = new System.Windows.Forms.Label();
             this.lblNomeAplicao = new System.Windows.Forms.Label();
+            this.pnlCadastroCliente = new System.Windows.Forms.Panel();
+            this.lbInstrucoesClientes = new System.Windows.Forms.Label();
+            this.btnNovoCliente = new System.Windows.Forms.Button();
+            this.btnExcluirCliente = new System.Windows.Forms.Button();
+            this.cmbNomeCliente = new System.Windows.Forms.ComboBox();
+            this.lbCliente = new System.Windows.Forms.Label();
+            this.lbNomeCliente = new System.Windows.Forms.Label();
+            this.btnFecharDadosCliente = new System.Windows.Forms.Button();
             this.statusStrip.SuspendLayout();
             this.pnlConsultas.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numNumeroConsultas)).BeginInit();
@@ -136,6 +148,7 @@
             this.menuAplicacao.SuspendLayout();
             this.pnlSobre.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picIconeSobre)).BeginInit();
+            this.pnlCadastroCliente.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnGerarRecibo
@@ -144,7 +157,7 @@
             this.btnGerarRecibo.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.btnGerarRecibo.Name = "btnGerarRecibo";
             this.btnGerarRecibo.Size = new System.Drawing.Size(357, 98);
-            this.btnGerarRecibo.TabIndex = 11;
+            this.btnGerarRecibo.TabIndex = 3;
             this.btnGerarRecibo.Text = "Gerar Recibo";
             this.btnGerarRecibo.UseVisualStyleBackColor = true;
             this.btnGerarRecibo.Click += new System.EventHandler(this.btnGerarRecibo_Click);
@@ -163,7 +176,7 @@
             this.txtValorConsulta.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.txtValorConsulta.Name = "txtValorConsulta";
             this.txtValorConsulta.Size = new System.Drawing.Size(121, 38);
-            this.txtValorConsulta.TabIndex = 4;
+            this.txtValorConsulta.TabIndex = 1;
             this.txtValorConsulta.ValidatingType = typeof(int);
             this.txtValorConsulta.TextChanged += new System.EventHandler(this.txtValorConsulta_TextChanged);
             // 
@@ -246,10 +259,10 @@
             // lblNomeArquivoPDF
             // 
             this.lblNomeArquivoPDF.AutoEllipsis = true;
-            this.lblNomeArquivoPDF.Location = new System.Drawing.Point(313, 348);
+            this.lblNomeArquivoPDF.Location = new System.Drawing.Point(312, 348);
             this.lblNomeArquivoPDF.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
             this.lblNomeArquivoPDF.Name = "lblNomeArquivoPDF";
-            this.lblNomeArquivoPDF.Size = new System.Drawing.Size(584, 40);
+            this.lblNomeArquivoPDF.Size = new System.Drawing.Size(584, 41);
             this.lblNomeArquivoPDF.TabIndex = 11;
             // 
             // statusStrip
@@ -304,7 +317,7 @@
             // 
             // txtNomeDoTerapeuta
             // 
-            this.txtNomeDoTerapeuta.Location = new System.Drawing.Point(339, 142);
+            this.txtNomeDoTerapeuta.Location = new System.Drawing.Point(339, 143);
             this.txtNomeDoTerapeuta.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.txtNomeDoTerapeuta.MaxLength = 32;
             this.txtNomeDoTerapeuta.Name = "txtNomeDoTerapeuta";
@@ -314,7 +327,7 @@
             // lblCPFTerapeuta
             // 
             this.lblCPFTerapeuta.AutoSize = true;
-            this.lblCPFTerapeuta.Location = new System.Drawing.Point(233, 209);
+            this.lblCPFTerapeuta.Location = new System.Drawing.Point(232, 210);
             this.lblCPFTerapeuta.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
             this.lblCPFTerapeuta.Name = "lblCPFTerapeuta";
             this.lblCPFTerapeuta.Size = new System.Drawing.Size(78, 32);
@@ -323,7 +336,7 @@
             // 
             // txtCPFTerapeuta
             // 
-            this.txtCPFTerapeuta.Location = new System.Drawing.Point(339, 211);
+            this.txtCPFTerapeuta.Location = new System.Drawing.Point(339, 210);
             this.txtCPFTerapeuta.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.txtCPFTerapeuta.MaxLength = 20;
             this.txtCPFTerapeuta.Name = "txtCPFTerapeuta";
@@ -334,7 +347,7 @@
             // lblEnderecoTerapeuta
             // 
             this.lblEnderecoTerapeuta.AutoSize = true;
-            this.lblEnderecoTerapeuta.Location = new System.Drawing.Point(167, 491);
+            this.lblEnderecoTerapeuta.Location = new System.Drawing.Point(168, 491);
             this.lblEnderecoTerapeuta.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
             this.lblEnderecoTerapeuta.Name = "lblEnderecoTerapeuta";
             this.lblEnderecoTerapeuta.Size = new System.Drawing.Size(144, 32);
@@ -343,17 +356,17 @@
             // 
             // txtEnderecoTerapeuta
             // 
-            this.txtEnderecoTerapeuta.Location = new System.Drawing.Point(339, 488);
+            this.txtEnderecoTerapeuta.Location = new System.Drawing.Point(339, 489);
             this.txtEnderecoTerapeuta.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.txtEnderecoTerapeuta.Multiline = true;
             this.txtEnderecoTerapeuta.Name = "txtEnderecoTerapeuta";
-            this.txtEnderecoTerapeuta.Size = new System.Drawing.Size(601, 119);
-            this.txtEnderecoTerapeuta.TabIndex = 5;
+            this.txtEnderecoTerapeuta.Size = new System.Drawing.Size(601, 118);
+            this.txtEnderecoTerapeuta.TabIndex = 6;
             // 
             // lblCRP
             // 
             this.lblCRP.AutoSize = true;
-            this.lblCRP.Location = new System.Drawing.Point(229, 280);
+            this.lblCRP.Location = new System.Drawing.Point(229, 279);
             this.lblCRP.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
             this.lblCRP.Name = "lblCRP";
             this.lblCRP.Size = new System.Drawing.Size(81, 32);
@@ -403,7 +416,7 @@
             this.pnlConsultas.Controls.Add(this.dtDataConsulta5);
             this.pnlConsultas.Controls.Add(this.dtDataConsulta2);
             this.pnlConsultas.Controls.Add(this.dtDataConsulta1);
-            this.pnlConsultas.Location = new System.Drawing.Point(1104, 68);
+            this.pnlConsultas.Location = new System.Drawing.Point(1104, 69);
             this.pnlConsultas.Margin = new System.Windows.Forms.Padding(5, 2, 5, 2);
             this.pnlConsultas.Name = "pnlConsultas";
             this.pnlConsultas.Size = new System.Drawing.Size(1015, 1397);
@@ -590,7 +603,7 @@
             this.pnlRecibo.Controls.Add(this.lnkAssinarPDF);
             this.pnlRecibo.Controls.Add(this.btnGerarRecibo);
             this.pnlRecibo.Controls.Add(this.pnlDadosPaciente);
-            this.pnlRecibo.Location = new System.Drawing.Point(11, 68);
+            this.pnlRecibo.Location = new System.Drawing.Point(11, 69);
             this.pnlRecibo.Margin = new System.Windows.Forms.Padding(5, 2, 5, 2);
             this.pnlRecibo.Name = "pnlRecibo";
             this.pnlRecibo.Size = new System.Drawing.Size(1069, 1395);
@@ -619,12 +632,12 @@
             this.pnlDadosTerapeuta.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pnlDadosTerapeuta.Name = "pnlDadosTerapeuta";
             this.pnlDadosTerapeuta.Size = new System.Drawing.Size(1010, 658);
-            this.pnlDadosTerapeuta.TabIndex = 1;
+            this.pnlDadosTerapeuta.TabIndex = 2;
             // 
             // lblCNPJTerapeuta
             // 
             this.lblCNPJTerapeuta.AutoSize = true;
-            this.lblCNPJTerapeuta.Location = new System.Drawing.Point(213, 214);
+            this.lblCNPJTerapeuta.Location = new System.Drawing.Point(213, 215);
             this.lblCNPJTerapeuta.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
             this.lblCNPJTerapeuta.Name = "lblCNPJTerapeuta";
             this.lblCNPJTerapeuta.Size = new System.Drawing.Size(95, 32);
@@ -635,7 +648,7 @@
             // lbNomeEmpresa
             // 
             this.lbNomeEmpresa.AutoSize = true;
-            this.lbNomeEmpresa.Location = new System.Drawing.Point(93, 144);
+            this.lbNomeEmpresa.Location = new System.Drawing.Point(93, 143);
             this.lbNomeEmpresa.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
             this.lbNomeEmpresa.Name = "lbNomeEmpresa";
             this.lbNomeEmpresa.Size = new System.Drawing.Size(217, 32);
@@ -651,8 +664,8 @@
             this.gbTipoPessoa.Margin = new System.Windows.Forms.Padding(5, 2, 5, 2);
             this.gbTipoPessoa.Name = "gbTipoPessoa";
             this.gbTipoPessoa.Padding = new System.Windows.Forms.Padding(5, 2, 5, 2);
-            this.gbTipoPessoa.Size = new System.Drawing.Size(428, 108);
-            this.gbTipoPessoa.TabIndex = 44;
+            this.gbTipoPessoa.Size = new System.Drawing.Size(427, 107);
+            this.gbTipoPessoa.TabIndex = 0;
             this.gbTipoPessoa.TabStop = false;
             this.gbTipoPessoa.Text = "Tipo de Pessoa:";
             // 
@@ -660,7 +673,7 @@
             // 
             this.rbFisica.AutoSize = true;
             this.rbFisica.Checked = true;
-            this.rbFisica.Location = new System.Drawing.Point(43, 51);
+            this.rbFisica.Location = new System.Drawing.Point(43, 50);
             this.rbFisica.Margin = new System.Windows.Forms.Padding(5, 2, 5, 2);
             this.rbFisica.Name = "rbFisica";
             this.rbFisica.Size = new System.Drawing.Size(126, 36);
@@ -673,7 +686,7 @@
             // rbJuridica
             // 
             this.rbJuridica.AutoSize = true;
-            this.rbJuridica.Location = new System.Drawing.Point(188, 51);
+            this.rbJuridica.Location = new System.Drawing.Point(187, 50);
             this.rbJuridica.Margin = new System.Windows.Forms.Padding(5, 2, 5, 2);
             this.rbJuridica.Name = "rbJuridica";
             this.rbJuridica.Size = new System.Drawing.Size(150, 36);
@@ -695,7 +708,7 @@
             // lblCidade
             // 
             this.lblCidade.AutoSize = true;
-            this.lblCidade.Location = new System.Drawing.Point(197, 414);
+            this.lblCidade.Location = new System.Drawing.Point(197, 415);
             this.lblCidade.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
             this.lblCidade.Name = "lblCidade";
             this.lblCidade.Size = new System.Drawing.Size(113, 32);
@@ -704,17 +717,17 @@
             // 
             // txtCidade
             // 
-            this.txtCidade.Location = new System.Drawing.Point(336, 414);
+            this.txtCidade.Location = new System.Drawing.Point(336, 415);
             this.txtCidade.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.txtCidade.MaxLength = 32;
             this.txtCidade.Name = "txtCidade";
             this.txtCidade.Size = new System.Drawing.Size(604, 38);
-            this.txtCidade.TabIndex = 0;
+            this.txtCidade.TabIndex = 5;
             // 
             // lblCEP
             // 
             this.lblCEP.AutoSize = true;
-            this.lblCEP.Location = new System.Drawing.Point(230, 349);
+            this.lblCEP.Location = new System.Drawing.Point(229, 348);
             this.lblCEP.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
             this.lblCEP.Name = "lblCEP";
             this.lblCEP.Size = new System.Drawing.Size(80, 32);
@@ -745,7 +758,7 @@
             // pnlDadosPaciente
             // 
             this.pnlDadosPaciente.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnlDadosPaciente.Controls.Add(this.btnNovo);
+            this.pnlDadosPaciente.Controls.Add(this.btnNovoPaciente);
             this.pnlDadosPaciente.Controls.Add(this.btnExcluirPaciente);
             this.pnlDadosPaciente.Controls.Add(this.btnSalvarPaciente);
             this.pnlDadosPaciente.Controls.Add(this.cmbNomePaciente);
@@ -762,19 +775,19 @@
             this.pnlDadosPaciente.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pnlDadosPaciente.Name = "pnlDadosPaciente";
             this.pnlDadosPaciente.Size = new System.Drawing.Size(1002, 481);
-            this.pnlDadosPaciente.TabIndex = 0;
+            this.pnlDadosPaciente.TabIndex = 1;
             // 
-            // btnNovo
+            // btnNovoPaciente
             // 
-            this.btnNovo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnNovo.Location = new System.Drawing.Point(523, 138);
-            this.btnNovo.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btnNovo.Name = "btnNovo";
-            this.btnNovo.Size = new System.Drawing.Size(125, 67);
-            this.btnNovo.TabIndex = 1;
-            this.btnNovo.Text = "Novo";
-            this.btnNovo.UseVisualStyleBackColor = true;
-            this.btnNovo.Click += new System.EventHandler(this.btnNovo_Click);
+            this.btnNovoPaciente.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnNovoPaciente.Location = new System.Drawing.Point(523, 138);
+            this.btnNovoPaciente.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnNovoPaciente.Name = "btnNovoPaciente";
+            this.btnNovoPaciente.Size = new System.Drawing.Size(125, 67);
+            this.btnNovoPaciente.TabIndex = 2;
+            this.btnNovoPaciente.Text = "Novo";
+            this.btnNovoPaciente.UseVisualStyleBackColor = true;
+            this.btnNovoPaciente.Click += new System.EventHandler(this.btnNovoPaciente_Click);
             // 
             // btnExcluirPaciente
             // 
@@ -783,7 +796,7 @@
             this.btnExcluirPaciente.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnExcluirPaciente.Name = "btnExcluirPaciente";
             this.btnExcluirPaciente.Size = new System.Drawing.Size(144, 67);
-            this.btnExcluirPaciente.TabIndex = 3;
+            this.btnExcluirPaciente.TabIndex = 4;
             this.btnExcluirPaciente.Text = "Excluir";
             this.btnExcluirPaciente.UseVisualStyleBackColor = true;
             this.btnExcluirPaciente.Click += new System.EventHandler(this.btnExcluirPaciente_Click);
@@ -795,7 +808,7 @@
             this.btnSalvarPaciente.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnSalvarPaciente.Name = "btnSalvarPaciente";
             this.btnSalvarPaciente.Size = new System.Drawing.Size(128, 67);
-            this.btnSalvarPaciente.TabIndex = 2;
+            this.btnSalvarPaciente.TabIndex = 3;
             this.btnSalvarPaciente.Text = "Salvar";
             this.btnSalvarPaciente.UseVisualStyleBackColor = true;
             this.btnSalvarPaciente.Click += new System.EventHandler(this.btnSalvarPaciente_Click);
@@ -818,9 +831,9 @@
             this.lbDadosPaciente.Location = new System.Drawing.Point(16, 17);
             this.lbDadosPaciente.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
             this.lbDadosPaciente.Name = "lbDadosPaciente";
-            this.lbDadosPaciente.Size = new System.Drawing.Size(223, 32);
+            this.lbDadosPaciente.Size = new System.Drawing.Size(215, 32);
             this.lbDadosPaciente.TabIndex = 44;
-            this.lbDadosPaciente.Text = "Dados Paciente:";
+            this.lbDadosPaciente.Text = "Dados Paciente";
             // 
             // pnlReembolso
             // 
@@ -829,7 +842,7 @@
             this.pnlReembolso.Controls.Add(this.pnlDadosBancarios);
             this.pnlReembolso.Controls.Add(this.lblTituloSolicitacaoReembolso);
             this.pnlReembolso.Controls.Add(this.txtGerarSolicitacaoReembolso);
-            this.pnlReembolso.Location = new System.Drawing.Point(1104, 68);
+            this.pnlReembolso.Location = new System.Drawing.Point(1104, 69);
             this.pnlReembolso.Margin = new System.Windows.Forms.Padding(5, 2, 5, 2);
             this.pnlReembolso.Name = "pnlReembolso";
             this.pnlReembolso.Size = new System.Drawing.Size(1016, 1395);
@@ -862,7 +875,7 @@
             this.pnlDadosReembolso.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pnlDadosReembolso.Name = "pnlDadosReembolso";
             this.pnlDadosReembolso.Size = new System.Drawing.Size(938, 653);
-            this.pnlDadosReembolso.TabIndex = 0;
+            this.pnlDadosReembolso.TabIndex = 1;
             // 
             // lbDadosReembolso
             // 
@@ -898,7 +911,7 @@
             // 
             this.grbTipoAtendimento.Controls.Add(this.rbPresencial);
             this.grbTipoAtendimento.Controls.Add(this.rbTelemedicina);
-            this.grbTipoAtendimento.Location = new System.Drawing.Point(48, 412);
+            this.grbTipoAtendimento.Location = new System.Drawing.Point(48, 413);
             this.grbTipoAtendimento.Margin = new System.Windows.Forms.Padding(5, 2, 5, 2);
             this.grbTipoAtendimento.Name = "grbTipoAtendimento";
             this.grbTipoAtendimento.Padding = new System.Windows.Forms.Padding(5, 2, 5, 2);
@@ -967,7 +980,7 @@
             this.pnlDadosBancarios.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pnlDadosBancarios.Name = "pnlDadosBancarios";
             this.pnlDadosBancarios.Size = new System.Drawing.Size(938, 484);
-            this.pnlDadosBancarios.TabIndex = 1;
+            this.pnlDadosBancarios.TabIndex = 2;
             // 
             // lbDadosBancarios
             // 
@@ -1075,57 +1088,89 @@
             this.txtGerarSolicitacaoReembolso.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
             this.txtGerarSolicitacaoReembolso.Name = "txtGerarSolicitacaoReembolso";
             this.txtGerarSolicitacaoReembolso.Size = new System.Drawing.Size(357, 98);
-            this.txtGerarSolicitacaoReembolso.TabIndex = 6;
+            this.txtGerarSolicitacaoReembolso.TabIndex = 3;
             this.txtGerarSolicitacaoReembolso.Text = "Gerar solicitação de reembolso";
             this.txtGerarSolicitacaoReembolso.UseVisualStyleBackColor = true;
             this.txtGerarSolicitacaoReembolso.Click += new System.EventHandler(this.btnGerarSolicitacaoReembolso_Click);
             // 
             // menuAplicacao
             // 
+            this.menuAplicacao.GripMargin = new System.Windows.Forms.Padding(2, 2, 0, 2);
             this.menuAplicacao.ImageScalingSize = new System.Drawing.Size(40, 40);
             this.menuAplicacao.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.sairToolStripMenuItem,
+            this.clientesToolStripMenuItem,
             this.sobreToolStripMenuItem});
             this.menuAplicacao.Location = new System.Drawing.Point(0, 0);
             this.menuAplicacao.Name = "menuAplicacao";
             this.menuAplicacao.Padding = new System.Windows.Forms.Padding(5, 2, 0, 2);
-            this.menuAplicacao.Size = new System.Drawing.Size(2176, 60);
+            this.menuAplicacao.Size = new System.Drawing.Size(2176, 49);
             this.menuAplicacao.TabIndex = 46;
             this.menuAplicacao.Text = "menuStrip1";
             // 
             // sairToolStripMenuItem
             // 
             this.sairToolStripMenuItem.Name = "sairToolStripMenuItem";
-            this.sairToolStripMenuItem.Size = new System.Drawing.Size(90, 56);
+            this.sairToolStripMenuItem.Size = new System.Drawing.Size(90, 45);
             this.sairToolStripMenuItem.Text = "Sa&ir";
             this.sairToolStripMenuItem.Click += new System.EventHandler(this.sairToolStripMenuItem_Click);
+            // 
+            // clientesToolStripMenuItem
+            // 
+            this.clientesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.adicionarExcluirToolStripMenuItem,
+            this.toolStripMenuItemLinha1});
+            this.clientesToolStripMenuItem.Name = "clientesToolStripMenuItem";
+            this.clientesToolStripMenuItem.Size = new System.Drawing.Size(147, 45);
+            this.clientesToolStripMenuItem.Text = "Clientes";
+            // 
+            // adicionarExcluirToolStripMenuItem
+            // 
+            this.adicionarExcluirToolStripMenuItem.Name = "adicionarExcluirToolStripMenuItem";
+            this.adicionarExcluirToolStripMenuItem.Size = new System.Drawing.Size(448, 54);
+            this.adicionarExcluirToolStripMenuItem.Text = "&Adicionar / Excluir";
+            this.adicionarExcluirToolStripMenuItem.Click += new System.EventHandler(this.adicionarExcluirToolStripMenuItem_Click);
+            // 
+            // toolStripMenuItemLinha1
+            // 
+            this.toolStripMenuItemLinha1.Name = "toolStripMenuItemLinha1";
+            this.toolStripMenuItemLinha1.Size = new System.Drawing.Size(445, 6);
             // 
             // sobreToolStripMenuItem
             // 
             this.sobreToolStripMenuItem.Name = "sobreToolStripMenuItem";
-            this.sobreToolStripMenuItem.Size = new System.Drawing.Size(141, 56);
+            this.sobreToolStripMenuItem.Size = new System.Drawing.Size(141, 45);
             this.sobreToolStripMenuItem.Text = "&Sobre...";
             this.sobreToolStripMenuItem.Click += new System.EventHandler(this.sobreToolStripMenuItem_Click);
             // 
             // pnlSobre
             // 
             this.pnlSobre.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlSobre.Controls.Add(this.lblAjuda);
             this.pnlSobre.Controls.Add(this.picIconeSobre);
             this.pnlSobre.Controls.Add(this.btnFecharSobre);
             this.pnlSobre.Controls.Add(this.lblCopyright);
             this.pnlSobre.Controls.Add(this.lblNomeAplicao);
-            this.pnlSobre.Location = new System.Drawing.Point(757, 506);
+            this.pnlSobre.Location = new System.Drawing.Point(563, 418);
             this.pnlSobre.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pnlSobre.Name = "pnlSobre";
-            this.pnlSobre.Size = new System.Drawing.Size(775, 429);
+            this.pnlSobre.Size = new System.Drawing.Size(1178, 812);
             this.pnlSobre.TabIndex = 45;
             this.pnlSobre.Visible = false;
+            // 
+            // lblAjuda
+            // 
+            this.lblAjuda.Location = new System.Drawing.Point(93, 227);
+            this.lblAjuda.Name = "lblAjuda";
+            this.lblAjuda.Size = new System.Drawing.Size(982, 437);
+            this.lblAjuda.TabIndex = 4;
+            this.lblAjuda.Text = resources.GetString("lblAjuda.Text");
             // 
             // picIconeSobre
             // 
             this.picIconeSobre.BackgroundImage = global::TerapiaReembolso.Properties.Resources.App;
             this.picIconeSobre.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.picIconeSobre.Location = new System.Drawing.Point(667, 93);
+            this.picIconeSobre.Location = new System.Drawing.Point(834, 71);
             this.picIconeSobre.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.picIconeSobre.Name = "picIconeSobre";
             this.picIconeSobre.Size = new System.Drawing.Size(64, 64);
@@ -1135,7 +1180,7 @@
             // btnFecharSobre
             // 
             this.btnFecharSobre.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnFecharSobre.Location = new System.Drawing.Point(304, 303);
+            this.btnFecharSobre.Location = new System.Drawing.Point(524, 705);
             this.btnFecharSobre.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnFecharSobre.Name = "btnFecharSobre";
             this.btnFecharSobre.Size = new System.Drawing.Size(163, 79);
@@ -1147,9 +1192,10 @@
             // lblCopyright
             // 
             this.lblCopyright.AutoSize = true;
-            this.lblCopyright.Location = new System.Drawing.Point(157, 200);
+            this.lblCopyright.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCopyright.Location = new System.Drawing.Point(330, 127);
             this.lblCopyright.Name = "lblCopyright";
-            this.lblCopyright.Size = new System.Drawing.Size(416, 32);
+            this.lblCopyright.Size = new System.Drawing.Size(354, 29);
             this.lblCopyright.TabIndex = 1;
             this.lblCopyright.Text = "Copyright © Daniel Liedke 2022";
             // 
@@ -1157,11 +1203,103 @@
             // 
             this.lblNomeAplicao.AutoSize = true;
             this.lblNomeAplicao.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNomeAplicao.Location = new System.Drawing.Point(107, 93);
+            this.lblNomeAplicao.Location = new System.Drawing.Point(274, 71);
             this.lblNomeAplicao.Name = "lblNomeAplicao";
             this.lblNomeAplicao.Size = new System.Drawing.Size(475, 46);
             this.lblNomeAplicao.TabIndex = 0;
-            this.lblNomeAplicao.Text = "Terapia Reembolso v4.5";
+            this.lblNomeAplicao.Text = "Terapia Reembolso v5.0";
+            // 
+            // pnlCadastroCliente
+            // 
+            this.pnlCadastroCliente.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlCadastroCliente.Controls.Add(this.lbInstrucoesClientes);
+            this.pnlCadastroCliente.Controls.Add(this.btnNovoCliente);
+            this.pnlCadastroCliente.Controls.Add(this.btnExcluirCliente);
+            this.pnlCadastroCliente.Controls.Add(this.cmbNomeCliente);
+            this.pnlCadastroCliente.Controls.Add(this.lbCliente);
+            this.pnlCadastroCliente.Controls.Add(this.lbNomeCliente);
+            this.pnlCadastroCliente.Controls.Add(this.btnFecharDadosCliente);
+            this.pnlCadastroCliente.Location = new System.Drawing.Point(640, 503);
+            this.pnlCadastroCliente.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.pnlCadastroCliente.Name = "pnlCadastroCliente";
+            this.pnlCadastroCliente.Size = new System.Drawing.Size(994, 481);
+            this.pnlCadastroCliente.TabIndex = 45;
+            this.pnlCadastroCliente.Visible = false;
+            // 
+            // lbInstrucoesClientes
+            // 
+            this.lbInstrucoesClientes.AutoSize = true;
+            this.lbInstrucoesClientes.Location = new System.Drawing.Point(104, 83);
+            this.lbInstrucoesClientes.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
+            this.lbInstrucoesClientes.Name = "lbInstrucoesClientes";
+            this.lbInstrucoesClientes.Size = new System.Drawing.Size(653, 64);
+            this.lbInstrucoesClientes.TabIndex = 45;
+            this.lbInstrucoesClientes.Text = "Cada cliente pode ter diferente terapeuta e\r\nconta para reembolso (ex: plano de s" +
+    "aude familiar)";
+            // 
+            // btnNovoCliente
+            // 
+            this.btnNovoCliente.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnNovoCliente.Location = new System.Drawing.Point(613, 255);
+            this.btnNovoCliente.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnNovoCliente.Name = "btnNovoCliente";
+            this.btnNovoCliente.Size = new System.Drawing.Size(125, 67);
+            this.btnNovoCliente.TabIndex = 1;
+            this.btnNovoCliente.Text = "Novo";
+            this.btnNovoCliente.UseVisualStyleBackColor = true;
+            this.btnNovoCliente.Click += new System.EventHandler(this.btnNovoCliente_Click);
+            // 
+            // btnExcluirCliente
+            // 
+            this.btnExcluirCliente.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnExcluirCliente.Location = new System.Drawing.Point(760, 255);
+            this.btnExcluirCliente.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnExcluirCliente.Name = "btnExcluirCliente";
+            this.btnExcluirCliente.Size = new System.Drawing.Size(144, 67);
+            this.btnExcluirCliente.TabIndex = 3;
+            this.btnExcluirCliente.Text = "Excluir";
+            this.btnExcluirCliente.UseVisualStyleBackColor = true;
+            this.btnExcluirCliente.Click += new System.EventHandler(this.btnExcluirCliente_Click);
+            // 
+            // cmbNomeCliente
+            // 
+            this.cmbNomeCliente.FormattingEnabled = true;
+            this.cmbNomeCliente.Location = new System.Drawing.Point(317, 188);
+            this.cmbNomeCliente.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.cmbNomeCliente.Name = "cmbNomeCliente";
+            this.cmbNomeCliente.Size = new System.Drawing.Size(580, 39);
+            this.cmbNomeCliente.TabIndex = 0;
+            // 
+            // lbCliente
+            // 
+            this.lbCliente.AutoSize = true;
+            this.lbCliente.Location = new System.Drawing.Point(16, 17);
+            this.lbCliente.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
+            this.lbCliente.Name = "lbCliente";
+            this.lbCliente.Size = new System.Drawing.Size(437, 32);
+            this.lbCliente.TabIndex = 44;
+            this.lbCliente.Text = "Dados Cliente (Para Reembolso):";
+            // 
+            // lbNomeCliente
+            // 
+            this.lbNomeCliente.Location = new System.Drawing.Point(104, 188);
+            this.lbNomeCliente.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
+            this.lbNomeCliente.Name = "lbNomeCliente";
+            this.lbNomeCliente.Size = new System.Drawing.Size(213, 57);
+            this.lbNomeCliente.TabIndex = 4;
+            this.lbNomeCliente.Text = "Nome Cliente:";
+            // 
+            // btnFecharDadosCliente
+            // 
+            this.btnFecharDadosCliente.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnFecharDadosCliente.Location = new System.Drawing.Point(331, 377);
+            this.btnFecharDadosCliente.Margin = new System.Windows.Forms.Padding(8, 7, 8, 7);
+            this.btnFecharDadosCliente.Name = "btnFecharDadosCliente";
+            this.btnFecharDadosCliente.Size = new System.Drawing.Size(357, 69);
+            this.btnFecharDadosCliente.TabIndex = 7;
+            this.btnFecharDadosCliente.Text = "Fechar";
+            this.btnFecharDadosCliente.UseVisualStyleBackColor = true;
+            this.btnFecharDadosCliente.Click += new System.EventHandler(this.btnFecharDadosCliente_Click);
             // 
             // TelaPrincipal
             // 
@@ -1169,6 +1307,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(2176, 1538);
             this.Controls.Add(this.pnlSobre);
+            this.Controls.Add(this.pnlCadastroCliente);
             this.Controls.Add(this.menuAplicacao);
             this.Controls.Add(this.statusStrip);
             this.Controls.Add(this.pnlReembolso);
@@ -1209,6 +1348,8 @@
             this.pnlSobre.ResumeLayout(false);
             this.pnlSobre.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picIconeSobre)).EndInit();
+            this.pnlCadastroCliente.ResumeLayout(false);
+            this.pnlCadastroCliente.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1295,7 +1436,7 @@
         private System.Windows.Forms.ComboBox cmbNomePaciente;
         private System.Windows.Forms.Button btnExcluirPaciente;
         private System.Windows.Forms.Button btnSalvarPaciente;
-        private System.Windows.Forms.Button btnNovo;
+        private System.Windows.Forms.Button btnNovoPaciente;
         private System.Windows.Forms.MenuStrip menuAplicacao;
         private System.Windows.Forms.ToolStripMenuItem sairToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem sobreToolStripMenuItem;
@@ -1309,6 +1450,18 @@
         private System.Windows.Forms.RadioButton rbJuridica;
         private System.Windows.Forms.Label lbNomeEmpresa;
         private System.Windows.Forms.Label lblCNPJTerapeuta;
+        private System.Windows.Forms.ToolStripMenuItem clientesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem adicionarExcluirToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItemLinha1;
+        private System.Windows.Forms.Panel pnlCadastroCliente;
+        private System.Windows.Forms.Label lbInstrucoesClientes;
+        private System.Windows.Forms.Button btnNovoCliente;
+        private System.Windows.Forms.Button btnExcluirCliente;
+        private System.Windows.Forms.ComboBox cmbNomeCliente;
+        private System.Windows.Forms.Label lbCliente;
+        private System.Windows.Forms.Label lbNomeCliente;
+        private System.Windows.Forms.Button btnFecharDadosCliente;
+        private System.Windows.Forms.Label lblAjuda;
     }
 }
 
