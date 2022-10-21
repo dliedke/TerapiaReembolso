@@ -518,6 +518,8 @@ namespace TerapiaReembolso
                 _listaConfiguracoesClientes = new List<Configuracao>();
                 _listaPacientes = new Dictionary<string, Paciente>();
                 _indiceClienteAtual = 0;
+                cmbNomePaciente.Items.Clear();
+                cmbNomeCliente.Items.Clear();
                 for (int i = clientesToolStripMenuItem.DropDownItems.Count-1; i>=2; i--)
                 {
                     clientesToolStripMenuItem.DropDownItems.RemoveAt(i);
