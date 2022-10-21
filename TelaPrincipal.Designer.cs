@@ -115,7 +115,11 @@
             this.lblTituloSolicitacaoReembolso = new System.Windows.Forms.Label();
             this.txtGerarSolicitacaoReembolso = new System.Windows.Forms.Button();
             this.menuAplicacao = new System.Windows.Forms.MenuStrip();
-            this.sairToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.arquivoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.restaurarBackupToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.fazerBackupToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
+            this.sairToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.clientesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.adicionarExcluirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItemLinha1 = new System.Windows.Forms.ToolStripSeparator();
@@ -134,6 +138,8 @@
             this.lbCliente = new System.Windows.Forms.Label();
             this.lbNomeCliente = new System.Windows.Forms.Label();
             this.btnFecharDadosCliente = new System.Windows.Forms.Button();
+            this.dialogoSalvarBackup = new System.Windows.Forms.SaveFileDialog();
+            this.dialogoRestaurarBackup = new System.Windows.Forms.OpenFileDialog();
             this.statusStrip.SuspendLayout();
             this.pnlConsultas.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numNumeroConsultas)).BeginInit();
@@ -1098,7 +1104,7 @@
             this.menuAplicacao.GripMargin = new System.Windows.Forms.Padding(2, 2, 0, 2);
             this.menuAplicacao.ImageScalingSize = new System.Drawing.Size(40, 40);
             this.menuAplicacao.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.sairToolStripMenuItem,
+            this.arquivoToolStripMenuItem,
             this.clientesToolStripMenuItem,
             this.sobreToolStripMenuItem});
             this.menuAplicacao.Location = new System.Drawing.Point(0, 0);
@@ -1108,12 +1114,42 @@
             this.menuAplicacao.TabIndex = 46;
             this.menuAplicacao.Text = "menuStrip1";
             // 
-            // sairToolStripMenuItem
+            // arquivoToolStripMenuItem
             // 
-            this.sairToolStripMenuItem.Name = "sairToolStripMenuItem";
-            this.sairToolStripMenuItem.Size = new System.Drawing.Size(90, 45);
-            this.sairToolStripMenuItem.Text = "Sa&ir";
-            this.sairToolStripMenuItem.Click += new System.EventHandler(this.sairToolStripMenuItem_Click);
+            this.arquivoToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.restaurarBackupToolStripMenuItem,
+            this.fazerBackupToolStripMenuItem,
+            this.toolStripMenuItem1,
+            this.sairToolStripMenuItem1});
+            this.arquivoToolStripMenuItem.Name = "arquivoToolStripMenuItem";
+            this.arquivoToolStripMenuItem.Size = new System.Drawing.Size(145, 45);
+            this.arquivoToolStripMenuItem.Text = "&Arquivo";
+            // 
+            // restaurarBackupToolStripMenuItem
+            // 
+            this.restaurarBackupToolStripMenuItem.Name = "restaurarBackupToolStripMenuItem";
+            this.restaurarBackupToolStripMenuItem.Size = new System.Drawing.Size(432, 54);
+            this.restaurarBackupToolStripMenuItem.Text = "&Restaurar Backup...";
+            this.restaurarBackupToolStripMenuItem.Click += new System.EventHandler(this.restaurarBackupToolStripMenuItem_Click);
+            // 
+            // fazerBackupToolStripMenuItem
+            // 
+            this.fazerBackupToolStripMenuItem.Name = "fazerBackupToolStripMenuItem";
+            this.fazerBackupToolStripMenuItem.Size = new System.Drawing.Size(432, 54);
+            this.fazerBackupToolStripMenuItem.Text = "&Fazer Backup...";
+            this.fazerBackupToolStripMenuItem.Click += new System.EventHandler(this.fazerBackupToolStripMenuItem_Click);
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(429, 6);
+            // 
+            // sairToolStripMenuItem1
+            // 
+            this.sairToolStripMenuItem1.Name = "sairToolStripMenuItem1";
+            this.sairToolStripMenuItem1.Size = new System.Drawing.Size(432, 54);
+            this.sairToolStripMenuItem1.Text = "&Sair";
+            this.sairToolStripMenuItem1.Click += new System.EventHandler(this.sairToolStripMenuItem_Click);
             // 
             // clientesToolStripMenuItem
             // 
@@ -1127,14 +1163,14 @@
             // adicionarExcluirToolStripMenuItem
             // 
             this.adicionarExcluirToolStripMenuItem.Name = "adicionarExcluirToolStripMenuItem";
-            this.adicionarExcluirToolStripMenuItem.Size = new System.Drawing.Size(421, 54);
+            this.adicionarExcluirToolStripMenuItem.Size = new System.Drawing.Size(448, 54);
             this.adicionarExcluirToolStripMenuItem.Text = "&Adicionar / Excluir";
             this.adicionarExcluirToolStripMenuItem.Click += new System.EventHandler(this.adicionarExcluirToolStripMenuItem_Click);
             // 
             // toolStripMenuItemLinha1
             // 
             this.toolStripMenuItemLinha1.Name = "toolStripMenuItemLinha1";
-            this.toolStripMenuItemLinha1.Size = new System.Drawing.Size(418, 6);
+            this.toolStripMenuItemLinha1.Size = new System.Drawing.Size(445, 6);
             // 
             // sobreToolStripMenuItem
             // 
@@ -1151,10 +1187,10 @@
             this.pnlSobre.Controls.Add(this.btnFecharSobre);
             this.pnlSobre.Controls.Add(this.lblCopyright);
             this.pnlSobre.Controls.Add(this.lblNomeAplicao);
-            this.pnlSobre.Location = new System.Drawing.Point(563, 336);
+            this.pnlSobre.Location = new System.Drawing.Point(563, 206);
             this.pnlSobre.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pnlSobre.Name = "pnlSobre";
-            this.pnlSobre.Size = new System.Drawing.Size(1178, 812);
+            this.pnlSobre.Size = new System.Drawing.Size(1178, 1035);
             this.pnlSobre.TabIndex = 45;
             this.pnlSobre.Visible = false;
             // 
@@ -1162,7 +1198,7 @@
             // 
             this.lblAjuda.Location = new System.Drawing.Point(93, 227);
             this.lblAjuda.Name = "lblAjuda";
-            this.lblAjuda.Size = new System.Drawing.Size(982, 437);
+            this.lblAjuda.Size = new System.Drawing.Size(982, 615);
             this.lblAjuda.TabIndex = 4;
             this.lblAjuda.Text = resources.GetString("lblAjuda.Text");
             // 
@@ -1180,7 +1216,7 @@
             // btnFecharSobre
             // 
             this.btnFecharSobre.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnFecharSobre.Location = new System.Drawing.Point(524, 705);
+            this.btnFecharSobre.Location = new System.Drawing.Point(498, 902);
             this.btnFecharSobre.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnFecharSobre.Name = "btnFecharSobre";
             this.btnFecharSobre.Size = new System.Drawing.Size(163, 79);
@@ -1207,7 +1243,7 @@
             this.lblNomeAplicao.Name = "lblNomeAplicao";
             this.lblNomeAplicao.Size = new System.Drawing.Size(475, 46);
             this.lblNomeAplicao.TabIndex = 0;
-            this.lblNomeAplicao.Text = "Terapia Reembolso v5.2";
+            this.lblNomeAplicao.Text = "Terapia Reembolso v5.5";
             // 
             // pnlCadastroCliente
             // 
@@ -1300,6 +1336,14 @@
             this.btnFecharDadosCliente.Text = "Fechar";
             this.btnFecharDadosCliente.UseVisualStyleBackColor = true;
             this.btnFecharDadosCliente.Click += new System.EventHandler(this.btnFecharDadosCliente_Click);
+            // 
+            // dialogoSalvarBackup
+            // 
+            this.dialogoSalvarBackup.Filter = "ZIP files|*.zip";
+            // 
+            // dialogoRestaurarBackup
+            // 
+            this.dialogoRestaurarBackup.Filter = "ZIP files|*.zip";
             // 
             // TelaPrincipal
             // 
@@ -1438,7 +1482,6 @@
         private System.Windows.Forms.Button btnSalvarPaciente;
         private System.Windows.Forms.Button btnNovoPaciente;
         private System.Windows.Forms.MenuStrip menuAplicacao;
-        private System.Windows.Forms.ToolStripMenuItem sairToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem sobreToolStripMenuItem;
         private System.Windows.Forms.Panel pnlSobre;
         private System.Windows.Forms.Button btnFecharSobre;
@@ -1462,6 +1505,13 @@
         private System.Windows.Forms.Label lbNomeCliente;
         private System.Windows.Forms.Button btnFecharDadosCliente;
         private System.Windows.Forms.Label lblAjuda;
+        private System.Windows.Forms.ToolStripMenuItem arquivoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem restaurarBackupToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem fazerBackupToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem sairToolStripMenuItem1;
+        private System.Windows.Forms.SaveFileDialog dialogoSalvarBackup;
+        private System.Windows.Forms.OpenFileDialog dialogoRestaurarBackup;
     }
 }
 

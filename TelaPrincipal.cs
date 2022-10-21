@@ -21,20 +21,21 @@ using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
+using Aspose.Zip;
+
 namespace TerapiaReembolso
 {
     public partial class TelaPrincipal : Form
     {
         #region Variáveis de Classe e Inicialização da Aplicação
 
-        private static List<Configuracao> ListaConfiguracoesClientes = new List<Configuracao>();
-        private static int IndiceClienteAtual = 0;
-        public static Paciente PacienteAtual;
-
+        private static List<Configuracao> _listaConfiguracoesClientes = new List<Configuracao>();
+        private static int _indiceClienteAtual = 0;
         private DateTimePicker[] _datasConsultasControles;
         private Dictionary<string, Paciente> _listaPacientes = new Dictionary<string, Paciente>();
-
         private string _caminhoConfiguracoes = Environment.ExpandEnvironmentVariables(@"%APPDATA%\..\Local\TerapiaReembolso");
+
+        public static Paciente PacienteAtual;
 
         public TelaPrincipal()
         {
@@ -93,13 +94,13 @@ namespace TerapiaReembolso
         private static void CriaClientePadraoSeNaoExistir()
         {
             // Se não tem nada salvo, cria um cliente padrão para não explodir tudo
-            if (ListaConfiguracoesClientes.Count == 0)
+            if (_listaConfiguracoesClientes.Count == 0)
             {
                 Configuracao configuracao = new Configuracao
                 {
                     NomeCliente = "Cliente 1"
                 };
-                ListaConfiguracoesClientes.Add(configuracao);
+                _listaConfiguracoesClientes.Add(configuracao);
             }
         }
 
@@ -513,6 +514,15 @@ namespace TerapiaReembolso
         {
             try
             {
+                // Limpa tudo
+                _listaConfiguracoesClientes = new List<Configuracao>();
+                _listaPacientes = new Dictionary<string, Paciente>();
+                _indiceClienteAtual = 0;
+                for (int i = clientesToolStripMenuItem.DropDownItems.Count-1; i>=2; i--)
+                {
+                    clientesToolStripMenuItem.DropDownItems.RemoveAt(i);
+                }
+
                 // Cria caminho para os arquivos de configuração se não existir
                 if (!Directory.Exists(_caminhoConfiguracoes))
                 {
@@ -531,8 +541,8 @@ namespace TerapiaReembolso
                 }
 
                 // Busca todos arquivos de configuração existentes
-                ListaConfiguracoesClientes.Clear();
-                IndiceClienteAtual = 0;
+                _listaConfiguracoesClientes.Clear();
+                _indiceClienteAtual = 0;
                 cmbNomeCliente.Items.Clear();
                 for (int i = 0; i < 100; i++)
                 {
@@ -556,7 +566,7 @@ namespace TerapiaReembolso
                         // Adiciona o novo cliente no menu e no dropdown de clientes
                         AdicionaClienteMenu(configuracao.NomeCliente, i);
                         cmbNomeCliente.Items.Add(configuracao.NomeCliente);
-                        ListaConfiguracoesClientes.Add(configuracao);
+                        _listaConfiguracoesClientes.Add(configuracao);
                     }
                     else
                     {
@@ -565,7 +575,7 @@ namespace TerapiaReembolso
                 }
 
                 // Se tem algum cliente carregado
-                if (ListaConfiguracoesClientes.Count > 0)
+                if (_listaConfiguracoesClientes.Count > 0)
                 {
                     // Clica no primeiro cliente
                     nomeClienteMenu_Click(clientesToolStripMenuItem.DropDownItems[2], EventArgs.Empty);
@@ -630,10 +640,10 @@ namespace TerapiaReembolso
             }
 
             // Salva configurações de todos clientes em arquivos binários criptografados
-            for (int i = 0; i < ListaConfiguracoesClientes.Count(); i++)
+            for (int i = 0; i < _listaConfiguracoesClientes.Count(); i++)
             {
                 string arquivoConfiguracao = Path.Combine(caminhoConfiguracoes, $"config_{i}.bin");
-                CryptoSerializer.Serialize<Configuracao>(arquivoConfiguracao, ListaConfiguracoesClientes[i]);
+                CryptoSerializer.Serialize<Configuracao>(arquivoConfiguracao, _listaConfiguracoesClientes[i]);
             }
 
             // Salva lista de pacientes em arquivo binário criptografado se tiver dados
@@ -1208,7 +1218,7 @@ namespace TerapiaReembolso
             // Se não tem nada salvo, cria um cliente padrão
             CriaClientePadraoSeNaoExistir();
 
-            return ListaConfiguracoesClientes[IndiceClienteAtual];
+            return _listaConfiguracoesClientes[_indiceClienteAtual];
         }
 
         private void adicionarExcluirToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1256,9 +1266,9 @@ namespace TerapiaReembolso
                 {
                     NomeCliente = nomeClienteNovo
                 };
-                ListaConfiguracoesClientes.Add(configuracao);
+                _listaConfiguracoesClientes.Add(configuracao);
 
-                int indiceNovoCliente = ListaConfiguracoesClientes.Count - 1;
+                int indiceNovoCliente = _listaConfiguracoesClientes.Count - 1;
 
                 // Adiciona o novo cliente no menu
                 AdicionaClienteMenu(nomeClienteNovo, indiceNovoCliente);
@@ -1310,9 +1320,9 @@ namespace TerapiaReembolso
         private void nomeClienteMenu_Click(object sender, EventArgs e)
         {
             // Remove flecha da seleção anterior
-            if (clientesToolStripMenuItem.DropDownItems[IndiceClienteAtual+2].Text.StartsWith("→ "))
+            if (clientesToolStripMenuItem.DropDownItems[_indiceClienteAtual+2].Text.StartsWith("→ "))
             {
-                clientesToolStripMenuItem.DropDownItems[IndiceClienteAtual+2].Text = clientesToolStripMenuItem.DropDownItems[IndiceClienteAtual+2].Text.Substring(2);
+                clientesToolStripMenuItem.DropDownItems[_indiceClienteAtual+2].Text = clientesToolStripMenuItem.DropDownItems[_indiceClienteAtual+2].Text.Substring(2);
             }
 
             ToolStripMenuItem menu = (ToolStripMenuItem)sender;
@@ -1329,7 +1339,7 @@ namespace TerapiaReembolso
 
             // Pega o índice do cliente selecionado
             int indice = (int)menu.Tag;
-            IndiceClienteAtual = indice;
+            _indiceClienteAtual = indice;
 
             // Mostra toda configuração do cliente selecionado na tela
             AtualizaTelaComConfiguracaoAtual();
@@ -1343,17 +1353,17 @@ namespace TerapiaReembolso
             }
 
             // Busca o cliente selecionado
-            for (int i=0;i<ListaConfiguracoesClientes.Count;i++)
+            for (int i=0;i<_listaConfiguracoesClientes.Count;i++)
             {
                 // Caso encontre pelo nome
-                if (cmbNomeCliente.Text == ListaConfiguracoesClientes[i].NomeCliente)
+                if (cmbNomeCliente.Text == _listaConfiguracoesClientes[i].NomeCliente)
                 {
                     // Remove cliente da lista, do menu e seta indice 0
-                    ListaConfiguracoesClientes.RemoveAt(i);
+                    _listaConfiguracoesClientes.RemoveAt(i);
                     RemoveClienteMenu(i);
-                    IndiceClienteAtual = 0;
+                    _indiceClienteAtual = 0;
 
-                    if (ListaConfiguracoesClientes.Count > 0)
+                    if (_listaConfiguracoesClientes.Count > 0)
                     {
                         // Refaz os indices dos clientes no menu
                         for (int f = 2; f < clientesToolStripMenuItem.DropDownItems.Count; f++)
@@ -1417,5 +1427,134 @@ namespace TerapiaReembolso
         }
 
         #endregion
+
+        private void restaurarBackupToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                // Pede nome do arquivo zip para restaurar backup
+                DialogResult dialogResult = dialogoRestaurarBackup.ShowDialog();
+
+                // Se arquivo foi selecionado
+                if (dialogResult == DialogResult.OK)
+                {
+                    // Verifica extensão do arquivo
+                    if (Path.GetExtension(dialogoRestaurarBackup.FileName).ToLower() != ".zip")
+                    {
+                        MessageBox.Show("Favor selecionar um arquivo ZIP.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        dialogoPDF.FileName = "";
+                        return;
+                    }
+                    else
+                    {
+                        // Confirma com usuário restauração do backup apagando os dados atuais
+                        DialogResult verificacaoUsuario = MessageBox.Show("ATENÇÃO!!!!! Os dados atuais serão sobreescritos por este backup e não poderão ser restaurados.\r\nDeseja continuar?", "Aviso", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button2);
+                        if (verificacaoUsuario!=DialogResult.Yes)
+                        {
+                            return;
+                        }
+
+                        // Abre zip com backup
+                        using (FileStream zipFile = File.Open(dialogoRestaurarBackup.FileName, FileMode.Open))
+                        {
+                            using (var archive = new Archive(zipFile))
+                            {
+                                // Descompacta os arquivos na pasta
+                                archive.ExtractToDirectory(_caminhoConfiguracoes);
+
+                                // Recarrega tudo
+                                CarregaDadosSalvos();
+
+                                // Seleciona primeiro paciente se existir algum cadastrado
+                                if (cmbNomePaciente.Items.Count > 0)
+                                {
+                                    cmbNomePaciente.SelectedIndex = 0;
+                                }
+
+                                // Mostra mensagem de sucesso
+                                MessageBox.Show($"Backup restaurado com sucesso!", "Sucesso!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Erro interno na aplicação ao restaurar backup: " + ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void fazerBackupToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                // Cria nome padrão de arquivo para backup
+                dialogoSalvarBackup.FileName = $"TerapiaReembolsoBackup_{DateTime.Now.ToString("dd.MM.yyyy")}.zip";
+
+                // Pede nome do arquivo zip para criar backup
+                DialogResult dialogResult = dialogoSalvarBackup.ShowDialog();
+
+                // Se arquivo foi selecionado
+                if (dialogResult == DialogResult.OK)
+                {
+                    // Verifica extensão do arquivo
+                    if (Path.GetExtension(dialogoSalvarBackup.FileName).ToLower() != ".zip")
+                    {
+                        MessageBox.Show("Favor selecionar um arquivo ZIP.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        dialogoPDF.FileName = "";
+                        return;
+                    }
+                    else
+                    {
+                        // Salva dados antes de fazer o backup
+                        SalvaDadosAtuais();
+
+                        List<FileInfo> listaArquvosParaBackup = new List<FileInfo>();
+
+                        // Pega informação do arquivos de pacientes
+                        string arquivoPacientes = Path.Combine(_caminhoConfiguracoes, "pacientes.bin");
+                        if (File.Exists(arquivoPacientes))
+                        {
+                            FileInfo fileInfo = new FileInfo(arquivoPacientes);
+                            listaArquvosParaBackup.Add(fileInfo);
+                        }
+
+                        // Pega informação de todos arquivos de clientes
+                        for (int i = 0; i < 100; i++)
+                        {
+                            string arquivoConfiguracao = Path.Combine(_caminhoConfiguracoes, $"config_{i}.bin");
+                            if (File.Exists(arquivoConfiguracao))
+                            {
+                                FileInfo fileInfo = new FileInfo(arquivoConfiguracao);
+                                listaArquvosParaBackup.Add(fileInfo);
+                            }
+                        }
+
+                        // Cria FileStream para gerar o backup como arquivo zip
+                        using (FileStream zipFile = File.Open(dialogoSalvarBackup.FileName, FileMode.Create))
+                        {
+                            using (var archive = new Archive())
+                            {
+                                // Adiciona arquivos ao zip
+                                foreach (FileInfo fileInfo in listaArquvosParaBackup)
+                                {
+                                    archive.CreateEntry(fileInfo.Name, fileInfo);
+                                }
+
+                                // Cria arquivo zip
+                                archive.Save(zipFile);
+
+                                // Mostra mensagem de sucesso
+                                MessageBox.Show($"Backup criado e salvo em:\r\n {dialogoSalvarBackup.FileName}\r\n\r\nGuarde o arquivo com segurança\r\nna Cloud (OneDrive ou Google Drive) para evitar perda de dados.", "Sucesso!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Erro interno na aplicação ao realizar backup: " + ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
     }
 }
