@@ -1243,7 +1243,7 @@
             this.lblNomeAplicao.Name = "lblNomeAplicao";
             this.lblNomeAplicao.Size = new System.Drawing.Size(475, 46);
             this.lblNomeAplicao.TabIndex = 0;
-            this.lblNomeAplicao.Text = "Terapia Reembolso v6.0";
+            this.lblNomeAplicao.Text = "Terapia Reembolso v6.1";
             // 
             // pnlCadastroCliente
             // 

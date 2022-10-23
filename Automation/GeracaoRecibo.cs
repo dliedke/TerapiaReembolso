@@ -16,6 +16,7 @@ using System.Globalization;
 // Selenium para automação web
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Support.Extensions;
 
 // Pacote para baixar automaticamente último ChormeDriver da Internet
 using WebDriverManager;
@@ -57,9 +58,34 @@ namespace TerapiaReembolso
             _chromeDriver = new ChromeDriver(options);
 
             // Navega para recibo online
-            _chromeDriver.Navigate().GoToUrl("https://www.google.com.br");
-            System.Threading.Thread.Sleep(2000);
             _chromeDriver.Navigate().GoToUrl("https://www.reciboonline.com.br/recibo-de-pagamento");
+            System.Threading.Thread.Sleep(1000);
+            _chromeDriver.Navigate().Refresh();
+
+            int contadorRetry = 0;
+
+        retryLoad:
+
+            try
+            {
+                // Erro ao carregar (já tentou 3 vezes)
+                if (contadorRetry == 3)
+                {
+                    throw new ApplicationException("Erro ao carregar recibo online!");
+                }
+
+                // Tenta carregar o recibo online
+                _chromeDriver.Navigate().GoToUrl("https://www.reciboonline.com.br/recibo-de-pagamento");
+                _chromeDriver.Manage().Window.Maximize();
+
+                // Verifica se elemento do valor já está na página
+                WaitExtension.WaitUntilElement(_chromeDriver, By.Id("valor"), 3);
+            }
+            catch
+            {
+                contadorRetry++;
+                goto retryLoad;
+            }
 
             // Espera carregar elemento
             WaitExtension.WaitUntilElement(_chromeDriver, By.Id("valor"));

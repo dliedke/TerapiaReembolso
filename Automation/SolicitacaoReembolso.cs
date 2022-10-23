@@ -39,7 +39,7 @@ namespace TerapiaReembolso
             // Inicia o Chrome maximizado
             ChromeOptions options = new ChromeOptions();
             options.AddArgument("--start-maximized");
-            
+
             // Baixa ultimo ChromeDriver usando proxy se necessário e usa ele
             if (Utilitarios.NecessitaProxy())
             {
@@ -56,10 +56,30 @@ namespace TerapiaReembolso
             }
             _chromeDriver = new ChromeDriver(options);
 
-            // Navega para Seguros Unimed Login Cliente
-            _chromeDriver.Navigate().GoToUrl("https://www.google.com.br");
-            System.Threading.Thread.Sleep(2000);
-            _chromeDriver.Navigate().GoToUrl("https://www.segurosunimed.com.br/login-cliente");
+            int contadorRetry = 0;
+
+        retryLoad:
+
+            try
+            {
+                // Erro ao carregar (já tentou 3 vezes)
+                if (contadorRetry == 3)
+                {
+                    throw new ApplicationException("Erro ao carregar site da Unimed Seguros!");
+                }
+
+                // Navega para Seguros Unimed Login Cliente
+                _chromeDriver.Navigate().GoToUrl("https://www.segurosunimed.com.br/login-cliente");
+                _chromeDriver.Manage().Window.Maximize();
+
+                // Verifica se elemento loginInput já está na página
+                WaitExtension.WaitUntilElement(_chromeDriver, By.Id("loginInput"), 3);
+            }
+            catch
+            {
+                contadorRetry++;
+                goto retryLoad;
+            }
 
             // Espera carregar elemento
             WaitExtension.WaitUntilElement(_chromeDriver, By.Id("loginInput"));
@@ -71,19 +91,40 @@ namespace TerapiaReembolso
             // Caso se tenha um login e senha para entrar
             if (!string.IsNullOrEmpty(TelaPrincipal.PegaClienteAtual().LoginUnimed) && !string.IsNullOrEmpty(TelaPrincipal.PegaClienteAtual().SenhaUnimed))
             {
-                // Seta CPF para logar
-                var emailText = _chromeDriver.FindElement(By.Id("loginInput"));
-                emailText.SendKeys(TelaPrincipal.PegaClienteAtual().LoginUnimed);
-                System.Threading.Thread.Sleep(1000);
+                int contadorRetry = 0;
 
-                // Seta senha para logar
-                var passwordText = _chromeDriver.FindElement(By.Id("senhaInput"));
-                passwordText.SendKeys(TelaPrincipal.PegaClienteAtual().SenhaUnimed);
-                System.Threading.Thread.Sleep(1000);
+            retryLogin:
 
-                // Submete o formulário
-                emailText.Submit();
-                System.Threading.Thread.Sleep(2000);
+                try
+                {
+                    // Erro ao carregar (já tentou 3 vezes)
+                    if (contadorRetry == 3)
+                    {
+                        throw new ApplicationException("Erro ao logar no site da Unimed Seguros!");
+                    }
+
+                    // Seta CPF para logar
+                    var emailText = _chromeDriver.FindElement(By.Id("loginInput"));
+                    emailText.Clear();
+                    emailText.SendKeys(TelaPrincipal.PegaClienteAtual().LoginUnimed);
+
+                    // Seta senha para logar
+                    var passwordText = _chromeDriver.FindElement(By.Id("senhaInput"));
+                    passwordText.Clear();
+                    passwordText.SendKeys(TelaPrincipal.PegaClienteAtual().SenhaUnimed);
+
+                    // Submete o formulário
+                    emailText.Submit();
+                    System.Threading.Thread.Sleep(2000);
+
+                    // Espera aparecer o botão de "Reembolsos e Prévias"
+                    WaitExtension.WaitUntilElement(_chromeDriver, By.XPath("//div[.=' Reembolsos e Prévias ']"), 5);
+                }
+                catch
+                {
+                    contadorRetry++;
+                    goto retryLogin;
+                }
             }
         }
 
@@ -126,7 +167,7 @@ namespace TerapiaReembolso
 
             // Espera ainda mais um pouquinho 
             System.Threading.Thread.Sleep(2500);
-            
+
             try
             {
                 // Ve se acha o botão de Tente Novamente e clica nele
