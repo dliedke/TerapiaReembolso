@@ -25,7 +25,7 @@ namespace TerapiaReembolso
 
         public static void AguardaSpinner(ChromeDriver chromeDriver, int timeoutSecs = 15)
         {
-            // Aguarda X segundos enquanto spinner na página está ativo
+            // Aguarda X segundos enquanto spinner na página ainda está ativo
             for (var i = 0; i < timeoutSecs; i++)
             {
                 var ajaxIsComplete = !TentaEncontrarElemento(chromeDriver, By.ClassName("spinner"));
@@ -57,6 +57,7 @@ namespace TerapiaReembolso
 
         public static void CloseChromeDriver(ChromeDriver chromeDriver)
         {
+            // Fecha o ChromeDriver atual e outros processos
             if (chromeDriver != null)
             {
                 try
@@ -76,6 +77,7 @@ namespace TerapiaReembolso
 
         public static bool NecessitaProxy()
         {
+            // Verifica se necessita usar proxy
             try
             {
                 string proxyUrl = "proxy";

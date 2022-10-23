@@ -11,26 +11,26 @@ namespace TerapiaReembolso
 
         private static DESCryptoServiceProvider des = new DESCryptoServiceProvider();
 
-        public static void Serialize<T>(string path, T _listaPacientes)
+        public static void Serialize<T>(string path, T objeto)
         {
-            // Encryption
-            using (var fs = new FileStream(path, FileMode.Create, FileAccess.Write))
-            using (var cryptoStream = new CryptoStream(fs, des.CreateEncryptor(key, iv), CryptoStreamMode.Write))
+            // Criptografia
+            using (var fileStream = new FileStream(path, FileMode.Create, FileAccess.Write))
+            using (var cryptoStream = new CryptoStream(fileStream, des.CreateEncryptor(key, iv), CryptoStreamMode.Write))
             {
                 BinaryFormatter formatter = new BinaryFormatter();
 
-                // This is where you serialize the class
-                formatter.Serialize(cryptoStream, _listaPacientes);
+                // Serializa o objeto como binario pro disco
+                formatter.Serialize(cryptoStream, objeto);
             }
         }
 
         public static T DeSerialize<T>(string path)
         {
-            // Decryption
+            // Decriptografa
             using (var fs = new FileStream(path, FileMode.Open, FileAccess.Read))
             using (var cryptoStream = new CryptoStream(fs, des.CreateDecryptor(key, iv), CryptoStreamMode.Read))
             {
-                // This is where you deserialize the class
+                // Deserializa o objeto
                 BinaryFormatter formatter = new BinaryFormatter();
                 T deserialized = (T)formatter.Deserialize(cryptoStream);
                 return deserialized;

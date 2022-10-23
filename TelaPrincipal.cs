@@ -33,6 +33,8 @@ namespace TerapiaReembolso
         private static int _indiceClienteAtual = 0;
         private DateTimePicker[] _datasConsultasControles;
         private Dictionary<string, Paciente> _listaPacientes = new Dictionary<string, Paciente>();
+
+        // Path onde serão serializados as configurações de clientes e pacientes
         private string _caminhoConfiguracoes = Environment.ExpandEnvironmentVariables(@"%APPDATA%\..\Local\TerapiaReembolso");
 
         public static Paciente PacienteAtual;
@@ -44,51 +46,58 @@ namespace TerapiaReembolso
 
         private void MainScreen_Load(object sender, EventArgs e)
         {
-            // Copia configurações da versão anterior caso necessário
-            if (Properties.Settings.Default.UpdateSettings)
+            try
             {
-                Properties.Settings.Default.Upgrade();
-                Properties.Settings.Default.UpdateSettings = false;
-                Properties.Settings.Default.Save();
-            }
+                // Copia configurações da versão anterior caso necessário
+                if (Properties.Settings.Default.UpdateSettings)
+                {
+                    Properties.Settings.Default.Upgrade();
+                    Properties.Settings.Default.UpdateSettings = false;
+                    Properties.Settings.Default.Save();
+                }
 
-            // Se tiver dados salvos do tamanho já restaura tamanho e posição da janela
-            if (!(Properties.Settings.Default.F1Size.Width == 0 && Properties.Settings.Default.F1Size.Height == 0))
+                // Se tiver dados salvos do tamanho já restaura tamanho e posição da janela
+                if (!(Properties.Settings.Default.F1Size.Width == 0 && Properties.Settings.Default.F1Size.Height == 0))
+                {
+                    this.WindowState = Properties.Settings.Default.F1State;
+
+                    // Sem janela minimizada na inicialização
+                    if (this.WindowState == FormWindowState.Minimized) this.WindowState = FormWindowState.Normal;
+
+                    this.Location = Properties.Settings.Default.F1Location;
+                    this.Size = Properties.Settings.Default.F1Size;
+                }
+
+                // Seta lista de controles de datas e atualiza a tela
+                _datasConsultasControles = new DateTimePicker[] { dtDataConsulta1, dtDataConsulta2, dtDataConsulta3, dtDataConsulta4, dtDataConsulta5, dtDataConsulta6, dtDataConsulta7, dtDataConsulta8, dtDataConsulta9, dtDataConsulta10 };
+                numNumeroConsultas_ValueChanged(null, EventArgs.Empty);
+
+                // Migra config antigo para novo padrão se precisar
+                string arquivoConfig = Path.Combine(_caminhoConfiguracoes, "config.bin");
+                if (File.Exists(arquivoConfig))
+                {
+                    File.Move(arquivoConfig, Path.Combine(_caminhoConfiguracoes, "config_0.bin"));
+                }
+
+                // Faz o processamento inicial
+                PopulaMesesEDiasDaSemana();
+                MostraVersaoAplicacao();
+                MostraMensagemDeBoasVindas();
+                CarregaDadosSalvos();
+
+                // Seleciona primeiro paciente se existir algum cadastrado
+                if (cmbNomePaciente.Items.Count > 0)
+                {
+                    cmbNomePaciente.SelectedIndex = 0;
+                }
+
+                // Se não tem nada salvo, cria um cliente padrão
+                CriaClientePadraoSeNaoExistir();
+            }
+            catch (Exception ex)
             {
-                this.WindowState = Properties.Settings.Default.F1State;
-
-                // Sem janela minimizada na inicialização
-                if (this.WindowState == FormWindowState.Minimized) this.WindowState = FormWindowState.Normal;
-
-                this.Location = Properties.Settings.Default.F1Location;
-                this.Size = Properties.Settings.Default.F1Size;
+                MessageBox.Show("Erro Inicializando a Aplicação: " + ex.Message + ex.StackTrace, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
-            // Seta lista de controles de datas e atualiza a tela
-            _datasConsultasControles = new DateTimePicker[] { dtDataConsulta1, dtDataConsulta2, dtDataConsulta3, dtDataConsulta4, dtDataConsulta5, dtDataConsulta6, dtDataConsulta7, dtDataConsulta8, dtDataConsulta9, dtDataConsulta10 };
-            numNumeroConsultas_ValueChanged(null, EventArgs.Empty);
-
-            // Migra config antigo para novo padrão se precisar
-            string arquivoConfig = Path.Combine(_caminhoConfiguracoes, "config.bin");
-            if (File.Exists(arquivoConfig))
-            {
-                File.Move(arquivoConfig, Path.Combine(_caminhoConfiguracoes, "config_0.bin"));
-            }
-
-            // Faz o processamento inicial
-            PopulaMesesEDiasDaSemana();
-            MostraVersaoAplicacao();
-            MostraMensagemDeBoasVindas();
-            CarregaDadosSalvos();
-
-            // Seleciona primeiro paciente se existir algum cadastrado
-            if (cmbNomePaciente.Items.Count > 0)
-            {
-                cmbNomePaciente.SelectedIndex = 0;
-            }
-
-            // Se não tem nada salvo, cria um cliente padrão
-            CriaClientePadraoSeNaoExistir();
         }
 
         private static void CriaClientePadraoSeNaoExistir()
@@ -165,25 +174,32 @@ namespace TerapiaReembolso
 
         private void btnSelectPDF_Click(object sender, EventArgs e)
         {
-            // Pede arquivo PDF do recibo pro usuário
-            DialogResult dialogResult = dialogoPDF.ShowDialog();
-
-            // Se arquivo foi selecionado
-            if (dialogResult == DialogResult.OK)
+            try
             {
-                // Verifica extensão do arquivo
-                if (Path.GetExtension(dialogoPDF.FileName).ToLower() != ".pdf")
-                {
-                    MessageBox.Show("Favor selecionar um arquivo PDF.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    dialogoPDF.FileName = "";
-                }
-                else
-                {
-                    TelaPrincipal.PegaClienteAtual().PDFRecibo = dialogoPDF.FileName;
-                }
+                // Pede arquivo PDF do recibo pro usuário
+                DialogResult dialogResult = dialogoPDF.ShowDialog();
 
-                // Mostra nome do PDF na tela
-                lblNomeArquivoPDF.Text = Path.GetFileName(dialogoPDF.FileName);
+                // Se arquivo foi selecionado
+                if (dialogResult == DialogResult.OK)
+                {
+                    // Verifica extensão do arquivo
+                    if (Path.GetExtension(dialogoPDF.FileName).ToLower() != ".pdf")
+                    {
+                        MessageBox.Show("Favor selecionar um arquivo PDF.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        dialogoPDF.FileName = "";
+                    }
+                    else
+                    {
+                        TelaPrincipal.PegaClienteAtual().PDFRecibo = dialogoPDF.FileName;
+                    }
+
+                    // Mostra nome do PDF na tela
+                    lblNomeArquivoPDF.Text = Path.GetFileName(dialogoPDF.FileName);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Erro selecionando PDF: " + ex.Message + ex.StackTrace, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -520,7 +536,7 @@ namespace TerapiaReembolso
                 _indiceClienteAtual = 0;
                 cmbNomePaciente.Items.Clear();
                 cmbNomeCliente.Items.Clear();
-                for (int i = clientesToolStripMenuItem.DropDownItems.Count-1; i>=2; i--)
+                for (int i = clientesToolStripMenuItem.DropDownItems.Count - 1; i >= 2; i--)
                 {
                     clientesToolStripMenuItem.DropDownItems.RemoveAt(i);
                 }
@@ -627,36 +643,43 @@ namespace TerapiaReembolso
 
         private void SalvaDadosAtuais()
         {
-            // Salva todos dados da tela em classe Configuracao
-            CarregaDadosTelaEmMemoria();
-
-            // Não salva o PDF do recibo
-            string pdfRecibo = TelaPrincipal.PegaClienteAtual().PDFRecibo;
-            TelaPrincipal.PegaClienteAtual().PDFRecibo = string.Empty;
-
-            // Cria diretório para os arquivos de configuração se não existir
-            string caminhoConfiguracoes = Environment.ExpandEnvironmentVariables(@"%APPDATA%\..\Local\TerapiaReembolso");
-            if (!Directory.Exists(caminhoConfiguracoes))
+            try
             {
-                Directory.CreateDirectory(caminhoConfiguracoes);
-            }
+                // Salva todos dados da tela em classe Configuracao
+                CarregaDadosTelaEmMemoria();
 
-            // Salva configurações de todos clientes em arquivos binários criptografados
-            for (int i = 0; i < _listaConfiguracoesClientes.Count(); i++)
+                // Não salva o PDF do recibo
+                string pdfRecibo = TelaPrincipal.PegaClienteAtual().PDFRecibo;
+                TelaPrincipal.PegaClienteAtual().PDFRecibo = string.Empty;
+
+                // Cria diretório para os arquivos de configuração se não existir
+                string caminhoConfiguracoes = Environment.ExpandEnvironmentVariables(@"%APPDATA%\..\Local\TerapiaReembolso");
+                if (!Directory.Exists(caminhoConfiguracoes))
+                {
+                    Directory.CreateDirectory(caminhoConfiguracoes);
+                }
+
+                // Salva configurações de todos clientes em arquivos binários criptografados
+                for (int i = 0; i < _listaConfiguracoesClientes.Count(); i++)
+                {
+                    string arquivoConfiguracao = Path.Combine(caminhoConfiguracoes, $"config_{i}.bin");
+                    CryptoSerializer.Serialize<Configuracao>(arquivoConfiguracao, _listaConfiguracoesClientes[i]);
+                }
+
+                // Salva lista de pacientes em arquivo binário criptografado se tiver dados
+                if (_listaPacientes.Count > 0)
+                {
+                    string arquivoPacientes = Path.Combine(caminhoConfiguracoes, "pacientes.bin");
+                    CryptoSerializer.Serialize<Dictionary<string, Paciente>>(arquivoPacientes, _listaPacientes);
+                }
+
+                // Mantem em memoria o pdf do recibo
+                TelaPrincipal.PegaClienteAtual().PDFRecibo = pdfRecibo;
+            }
+            catch (Exception ex)
             {
-                string arquivoConfiguracao = Path.Combine(caminhoConfiguracoes, $"config_{i}.bin");
-                CryptoSerializer.Serialize<Configuracao>(arquivoConfiguracao, _listaConfiguracoesClientes[i]);
+                MessageBox.Show("Erro Salvando Dados Atuais: " + ex.Message + ex.StackTrace, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
-            // Salva lista de pacientes em arquivo binário criptografado se tiver dados
-            if (_listaPacientes.Count > 0)
-            {
-                string arquivoPacientes = Path.Combine(caminhoConfiguracoes, "pacientes.bin");
-                CryptoSerializer.Serialize<Dictionary<string, Paciente>>(arquivoPacientes, _listaPacientes);
-            }
-
-            // Mantem em memoria o pdf do recibo
-            TelaPrincipal.PegaClienteAtual().PDFRecibo = pdfRecibo;
         }
 
         private void CarregaDadosTelaEmMemoria()
@@ -683,25 +706,32 @@ namespace TerapiaReembolso
 
         private void MainScreen_FormClosing(object sender, FormClosingEventArgs e)
         {
-            // Salva dados na tela quando fecha a aplicação
-            SalvaDadosAtuais();
-
-            // Fecha Chrome Driver
-            Utilitarios.CloseChromeDriver(null);
-
-            // Salvo posição e tamanho da janela
-            Properties.Settings.Default.F1State = this.WindowState;
-            if (this.WindowState == FormWindowState.Normal)
+            try
             {
-                Properties.Settings.Default.F1Location = this.Location;
-                Properties.Settings.Default.F1Size = this.Size;
+                // Salva dados na tela quando fecha a aplicação
+                SalvaDadosAtuais();
+
+                // Fecha Chrome Driver
+                Utilitarios.CloseChromeDriver(null);
+
+                // Salvo posição e tamanho da janela
+                Properties.Settings.Default.F1State = this.WindowState;
+                if (this.WindowState == FormWindowState.Normal)
+                {
+                    Properties.Settings.Default.F1Location = this.Location;
+                    Properties.Settings.Default.F1Size = this.Size;
+                }
+                else
+                {
+                    Properties.Settings.Default.F1Location = this.RestoreBounds.Location;
+                    Properties.Settings.Default.F1Size = this.RestoreBounds.Size;
+                }
+                Properties.Settings.Default.Save();
             }
-            else
+            catch (Exception ex)
             {
-                Properties.Settings.Default.F1Location = this.RestoreBounds.Location;
-                Properties.Settings.Default.F1Size = this.RestoreBounds.Size;
+                MessageBox.Show("Erro ao Fechar a Aplicação: " + ex.Message + ex.StackTrace, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            Properties.Settings.Default.Save();
         }
 
         #endregion
@@ -728,11 +758,11 @@ namespace TerapiaReembolso
 
                 if (ex.Message.Contains("This version of ChromeDriver only supports Chrome version"))
                 {
-                    MessageBox.Show("Erro interno na aplicação: " + ex.Message + "\r\n\r\nAbra o Chrome manualmente, clique nos 3 pontos no canto superior direito, vá para \"Ajuda\", depois em \"Sobre o Google Chrome\" e atualize seu navegador Chrome para a versão mais recente. Então tente novamente.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show($"Erro ao Rodar Automação (Chrome Desatualizado): {ex.Message}\r\n\r\nAbra o Chrome manualmente, clique nos 3 pontos no canto superior direito, vá para \"Ajuda\", depois em \"Sobre o Google Chrome\" e atualize seu navegador Chrome para a versão mais recente. Então tente novamente.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 else
                 {
-                    MessageBox.Show("Erro interno na aplicação: " + ex.Message + "\r\n\r\nFavor tentar de novo o mesmo processo.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show($"Erro ao Rodar Automação: {ex.Message}\r\n\r\nFavor tentar de novo o mesmo processo.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 toolStripStatus.Text = "Aguardando";
             }
@@ -813,11 +843,11 @@ namespace TerapiaReembolso
 
                 if (ex.Message.Contains("This version of ChromeDriver only supports Chrome version"))
                 {
-                    MessageBox.Show("Erro interno na aplicação: " + ex.Message + "\r\n\r\nAbra o Chrome manualmente, clique nos 3 pontos no canto superior direito, vá para \"Ajuda\", depois em \"Sobre o Google Chrome\" e atualize seu navegador Chrome para a versão mais recente. Então tente de novo o processo.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show($"Erro ao Rodar Automação (Chrome Desatualizado): {ex.Message}\r\n\r\nAbra o Chrome manualmente, clique nos 3 pontos no canto superior direito, vá para \"Ajuda\", depois em \"Sobre o Google Chrome\" e atualize seu navegador Chrome para a versão mais recente. Então tente de novo o processo.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 else
                 {
-                    MessageBox.Show("Erro interno na aplicação: " + ex.Message + "\r\n\r\nFavor tentar de novo.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show($"Erro ao Rodar Automação: {ex.Message}\r\n\r\nFavor tentar de novo.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 toolStripStatus.Text = "Aguardando";
             }
@@ -840,11 +870,18 @@ namespace TerapiaReembolso
 
         private void lnkUnimedLogin_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            if (ValidaDadosParaReembolso())
+            try
             {
-                CarregaDadosTelaEmMemoria();
-                SolicitacaoReembolso.AbreSegurosUnimedCliente();
-                SolicitacaoReembolso.LoginUnimed();
+                if (ValidaDadosParaReembolso())
+                {
+                    CarregaDadosTelaEmMemoria();
+                    SolicitacaoReembolso.AbreSegurosUnimedCliente();
+                    SolicitacaoReembolso.LoginUnimed();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Erro ao Logar na Unimed: " + ex.Message + ex.StackTrace, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -854,28 +891,35 @@ namespace TerapiaReembolso
 
         private void btnSelecionarConsultas_Click(object sender, EventArgs e)
         {
-            // Não deixa selecionar datas das consultas sem nome do paciente
-            if (pnlConsultas.Visible == false &&
-                cmbNomePaciente.Text == string.Empty)
+            try
             {
-                MessageBox.Show("Favor informar o nome do paciente primeiro!", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                cmbNomePaciente.Focus();
-                return;
-            }
+                // Não deixa selecionar datas das consultas sem nome do paciente
+                if (pnlConsultas.Visible == false &&
+                    cmbNomePaciente.Text == string.Empty)
+                {
+                    MessageBox.Show("Favor informar o nome do paciente primeiro!", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    cmbNomePaciente.Focus();
+                    return;
+                }
 
-            // Mostra tabs corretas
-            pnlConsultas.BringToFront();
-            pnlConsultas.Visible = !pnlConsultas.Visible;
+                // Mostra tabs corretas
+                pnlConsultas.BringToFront();
+                pnlConsultas.Visible = !pnlConsultas.Visible;
 
-            // Se necessário já salva os dados do paciente
-            if (!pnlConsultas.Visible)
-            {
-                SalvaDadosPaciente();
-                btnGerarRecibo.Enabled = true;
+                // Se necessário já salva os dados do paciente
+                if (!pnlConsultas.Visible)
+                {
+                    SalvaDadosPaciente();
+                    btnGerarRecibo.Enabled = true;
+                }
+                else
+                {
+                    btnGerarRecibo.Enabled = false;
+                }
             }
-            else
+            catch (Exception ex)
             {
-                btnGerarRecibo.Enabled = false;
+                MessageBox.Show("Erro ao Selecionar Consultas: " + ex.Message + ex.StackTrace, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -920,40 +964,47 @@ namespace TerapiaReembolso
 
         private void MostraDatasPorMesEDiaDaSemana()
         {
-            // Se não tem dados que chegue, não processa
-            if (cmbMes.SelectedIndex == -1 || cmbDiaSemana.SelectedIndex == -1)
-                return;
-
-            // Pega o mes e dia da semana selecionado, além do ano atual
-            Item mesSelecionado = (Item)cmbMes.Items[cmbMes.SelectedIndex];
-            Item diaDaSemanaSelecionado = (Item)cmbDiaSemana.Items[cmbDiaSemana.SelectedIndex];
-            int ano = DateTime.Now.Year;
-            int mes = mesSelecionado.Value;
-
-            // Calcula inicio e final do mes
-            var dataInicio = new DateTime(ano, mes, 1);
-            var dataFim = dataInicio.AddMonths(1).AddDays(-1);
-
-            // Calcula total de dias no mes
-            int numeroDeDias = dataFim.Subtract(dataInicio).Days + 1;
-
-            // Filtro do dia da semana
-            var diasDaSemana = new[] { (DayOfWeek)diaDaSemanaSelecionado.Value - 1 };
-
-            // Seleciona dias filtrado por dia da semana
-            var datasFiltradas = Enumerable.Range(0, numeroDeDias)
-                                  .Select(i => dataInicio.AddDays(i))
-                                  .Where(d => diasDaSemana.Contains(d.DayOfWeek));
-
-            // Atualiza total de consultas
-            numNumeroConsultas.Value = datasFiltradas.Count();
-
-            // Mostra as datas filtradas
-            int count = 0;
-            foreach (var date in datasFiltradas)
+            try
             {
-                _datasConsultasControles[count].Value = date;
-                count++;
+                // Se não tem dados que chegue, não processa
+                if (cmbMes.SelectedIndex == -1 || cmbDiaSemana.SelectedIndex == -1)
+                    return;
+
+                // Pega o mes e dia da semana selecionado, além do ano atual
+                Item mesSelecionado = (Item)cmbMes.Items[cmbMes.SelectedIndex];
+                Item diaDaSemanaSelecionado = (Item)cmbDiaSemana.Items[cmbDiaSemana.SelectedIndex];
+                int ano = DateTime.Now.Year;
+                int mes = mesSelecionado.Value;
+
+                // Calcula inicio e final do mes
+                var dataInicio = new DateTime(ano, mes, 1);
+                var dataFim = dataInicio.AddMonths(1).AddDays(-1);
+
+                // Calcula total de dias no mes
+                int numeroDeDias = dataFim.Subtract(dataInicio).Days + 1;
+
+                // Filtro do dia da semana
+                var diasDaSemana = new[] { (DayOfWeek)diaDaSemanaSelecionado.Value - 1 };
+
+                // Seleciona dias filtrado por dia da semana
+                var datasFiltradas = Enumerable.Range(0, numeroDeDias)
+                                      .Select(i => dataInicio.AddDays(i))
+                                      .Where(d => diasDaSemana.Contains(d.DayOfWeek));
+
+                // Atualiza total de consultas
+                numNumeroConsultas.Value = datasFiltradas.Count();
+
+                // Mostra as datas filtradas
+                int count = 0;
+                foreach (var date in datasFiltradas)
+                {
+                    _datasConsultasControles[count].Value = date;
+                    count++;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Erro ao Calcular Datas das Consultas: " + ex.Message + ex.StackTrace, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -1050,89 +1101,110 @@ namespace TerapiaReembolso
 
         private void SalvaDadosPaciente()
         {
-            // Pega nome do paciente e cria nova classe com dados atualizados
-            string nomePaciente = cmbNomePaciente.Text;
-            Paciente pacienteAtualizado = new Paciente(nomePaciente,
-                                                       txtValorConsulta.Text,
-                                                       txtCPFPaciente.Text,
-                                                       txtReferenteA.Text,
-                                                       cmbDiaSemana.Text,
-                                                       (int)numNumeroConsultas.Value,
-                                                       _datasConsultasControles);
-
-            if (!cmbNomePaciente.Items.Contains(nomePaciente))
+            try
             {
-                // Adiciona novo paciente na lista e no dropdown
-                _listaPacientes.Add(nomePaciente, pacienteAtualizado);
-                cmbNomePaciente.Items.Add(cmbNomePaciente.Text);
-            }
-            else
-            {
-                // Atualiza dados do paciente
-                _listaPacientes[nomePaciente] = pacienteAtualizado;
-            }
+                // Pega nome do paciente e cria nova classe com dados atualizados
+                string nomePaciente = cmbNomePaciente.Text;
+                Paciente pacienteAtualizado = new Paciente(nomePaciente,
+                                                           txtValorConsulta.Text,
+                                                           txtCPFPaciente.Text,
+                                                           txtReferenteA.Text,
+                                                           cmbDiaSemana.Text,
+                                                           (int)numNumeroConsultas.Value,
+                                                           _datasConsultasControles);
 
-            // Mostra status da operação
-            toolStripStatus.Text = $"Paciente \"{nomePaciente}\" salvo!";
+                if (!cmbNomePaciente.Items.Contains(nomePaciente))
+                {
+                    // Adiciona novo paciente na lista e no dropdown
+                    _listaPacientes.Add(nomePaciente, pacienteAtualizado);
+                    cmbNomePaciente.Items.Add(cmbNomePaciente.Text);
+                }
+                else
+                {
+                    // Atualiza dados do paciente
+                    _listaPacientes[nomePaciente] = pacienteAtualizado;
+                }
+
+                // Mostra status da operação
+                toolStripStatus.Text = $"Paciente \"{nomePaciente}\" salvo!";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Erro ao Salvar Dados do Paciente: " + ex.Message + ex.StackTrace, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void cmbNomePaciente_SelectedIndexChanged(object sender, EventArgs e)
         {
-            // Carrega dados do paciente selecionado
-            string nomePaciente = cmbNomePaciente.Text;
-            if (_listaPacientes.ContainsKey(nomePaciente))
+            try
             {
-                Paciente paciente = _listaPacientes[nomePaciente];
-                txtValorConsulta.Text = paciente.Valor;
-                txtCPFPaciente.Text = paciente.CPF;
-                txtReferenteA.Text = paciente.ReferenteA;
-                cmbDiaSemana.Text = paciente.DiaSemana;
-
-                // Carrega número datas das consultas se tiver
-                if (paciente.NumeroConsultas > 0)
+                // Carrega dados do paciente selecionado
+                string nomePaciente = cmbNomePaciente.Text;
+                if (_listaPacientes.ContainsKey(nomePaciente))
                 {
-                    numNumeroConsultas.Value = (decimal)paciente.NumeroConsultas;
+                    Paciente paciente = _listaPacientes[nomePaciente];
+                    txtValorConsulta.Text = paciente.Valor;
+                    txtCPFPaciente.Text = paciente.CPF;
+                    txtReferenteA.Text = paciente.ReferenteA;
+                    cmbDiaSemana.Text = paciente.DiaSemana;
 
-                    int count = 0;
-                    foreach (DateTime data in paciente.DataConsultaLista)
+                    // Carrega número datas das consultas se tiver
+                    if (paciente.NumeroConsultas > 0)
                     {
-                        _datasConsultasControles[count].Value = data;
-                        if (count + 1 > numNumeroConsultas.Value)
+                        numNumeroConsultas.Value = (decimal)paciente.NumeroConsultas;
+
+                        int count = 0;
+                        foreach (DateTime data in paciente.DataConsultaLista)
                         {
-                            break;
+                            _datasConsultasControles[count].Value = data;
+                            if (count + 1 > numNumeroConsultas.Value)
+                            {
+                                break;
+                            }
+                            count++;
                         }
-                        count++;
                     }
                 }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Erro ao Carregar Dados do Paciente: " + ex.Message + ex.StackTrace, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
         private void btnExcluirPaciente_Click(object sender, EventArgs e)
         {
-            // Pede confirmação para exclusão
-            string nomePaciente = cmbNomePaciente.Text;
-
-            if (!string.IsNullOrEmpty(nomePaciente))
+            try
             {
-                DialogResult resultadoPergunta = MessageBox.Show($"Deseja excluir o(a) paciente \"{nomePaciente}\"?", "Confirmação", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
+                // Pede confirmação para exclusão
+                string nomePaciente = cmbNomePaciente.Text;
 
-                // Usuário confirmou
-                if (resultadoPergunta == DialogResult.Yes)
+                if (!string.IsNullOrEmpty(nomePaciente))
                 {
-                    // Algum paciente está selecionado
-                    if (cmbNomePaciente.SelectedIndex != -1)
+                    DialogResult resultadoPergunta = MessageBox.Show($"Deseja excluir o(a) paciente \"{nomePaciente}\"?", "Confirmação", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
+
+                    // Usuário confirmou
+                    if (resultadoPergunta == DialogResult.Yes)
                     {
-                        // Remove da lista e do dropdown
-                        _listaPacientes.Remove(nomePaciente);
-                        cmbNomePaciente.Items.RemoveAt(cmbNomePaciente.SelectedIndex);
+                        // Algum paciente está selecionado
+                        if (cmbNomePaciente.SelectedIndex != -1)
+                        {
+                            // Remove da lista e do dropdown
+                            _listaPacientes.Remove(nomePaciente);
+                            cmbNomePaciente.Items.RemoveAt(cmbNomePaciente.SelectedIndex);
+                        }
+
+                        // Limpa tudo
+                        btnNovoPaciente_Click(sender, e);
+
+                        // Mostra status da operação
+                        toolStripStatus.Text = $"Paciente \"{nomePaciente}\" excluído!";
                     }
-
-                    // Limpa tudo
-                    btnNovoPaciente_Click(sender, e);
-
-                    // Mostra status da operação
-                    toolStripStatus.Text = $"Paciente \"{nomePaciente}\" excluído!";
                 }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Erro ao Excluir Paciente: " + ex.Message + ex.StackTrace, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -1165,15 +1237,23 @@ namespace TerapiaReembolso
 
         public static string RemoveAcentos(string text)
         {
-            // Remove todos acentos do nome do paciente
-            StringBuilder sbReturn = new StringBuilder();
-            var arrayText = text.Normalize(NormalizationForm.FormD).ToCharArray();
-            foreach (char letter in arrayText)
+            try
             {
-                if (CharUnicodeInfo.GetUnicodeCategory(letter) != UnicodeCategory.NonSpacingMark)
-                    sbReturn.Append(letter);
+                // Remove todos acentos do nome do paciente
+                StringBuilder sbReturn = new StringBuilder();
+                var arrayText = text.Normalize(NormalizationForm.FormD).ToCharArray();
+                foreach (char letter in arrayText)
+                {
+                    if (CharUnicodeInfo.GetUnicodeCategory(letter) != UnicodeCategory.NonSpacingMark)
+                        sbReturn.Append(letter);
+                }
+                return sbReturn.ToString();
             }
-            return sbReturn.ToString();
+            catch (Exception ex)
+            {
+                MessageBox.Show("Erro ao Remover Acenteos: " + ex.Message + ex.StackTrace, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return text;
+            }
         }
 
         private void cmbNomePaciente_TextChanged(object sender, EventArgs e)
@@ -1182,7 +1262,7 @@ namespace TerapiaReembolso
         }
 
         #endregion
-                
+
         #region Pessoal Física e Jurídica
 
         private void rbFisica_CheckedChanged(object sender, EventArgs e)
@@ -1246,43 +1326,50 @@ namespace TerapiaReembolso
 
         private void btnNovoCliente_Click(object sender, EventArgs e)
         {
-            // Nome do paciente necessário para salvar
-            if (cmbNomeCliente.Text == string.Empty)
+            try
             {
-                MessageBox.Show("Favor informar o nome do cliente primeiro!", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                cmbNomeCliente.Focus();
-                return;
-            }
-
-            // Busca nome do novo cliente
-            string nomeClienteNovo = cmbNomeCliente.Text;
-
-            // Verifica se cliente foi preenchido e não existe ainda
-            if (!string.IsNullOrEmpty(nomeClienteNovo) && cmbNomeCliente.FindStringExact(nomeClienteNovo) == -1)
-            {
-                // Limpa todos campos que não são do paciente
-                LimpaCamposCliente();
-
-                // Adiciona novo cliente na lista e seta indice para novo cliente
-                Configuracao configuracao = new Configuracao
+                // Nome do paciente necessário para salvar
+                if (cmbNomeCliente.Text == string.Empty)
                 {
-                    NomeCliente = nomeClienteNovo
-                };
-                _listaConfiguracoesClientes.Add(configuracao);
+                    MessageBox.Show("Favor informar o nome do cliente primeiro!", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    cmbNomeCliente.Focus();
+                    return;
+                }
 
-                int indiceNovoCliente = _listaConfiguracoesClientes.Count - 1;
+                // Busca nome do novo cliente
+                string nomeClienteNovo = cmbNomeCliente.Text;
 
-                // Adiciona o novo cliente no menu
-                AdicionaClienteMenu(nomeClienteNovo, indiceNovoCliente);
+                // Verifica se cliente foi preenchido e não existe ainda
+                if (!string.IsNullOrEmpty(nomeClienteNovo) && cmbNomeCliente.FindStringExact(nomeClienteNovo) == -1)
+                {
+                    // Limpa todos campos que não são do paciente
+                    LimpaCamposCliente();
 
-                // Clica no cliente criado
-                nomeClienteMenu_Click(clientesToolStripMenuItem.DropDownItems[2 + indiceNovoCliente], EventArgs.Empty);
+                    // Adiciona novo cliente na lista e seta indice para novo cliente
+                    Configuracao configuracao = new Configuracao
+                    {
+                        NomeCliente = nomeClienteNovo
+                    };
+                    _listaConfiguracoesClientes.Add(configuracao);
 
-                // Seta nome do paciente igual ao nome do cliente criado
-                cmbNomePaciente.Text = nomeClienteNovo;
+                    int indiceNovoCliente = _listaConfiguracoesClientes.Count - 1;
 
-                // Fecha o panel
-                btnFecharDadosCliente_Click(null, EventArgs.Empty);
+                    // Adiciona o novo cliente no menu
+                    AdicionaClienteMenu(nomeClienteNovo, indiceNovoCliente);
+
+                    // Clica no cliente criado
+                    nomeClienteMenu_Click(clientesToolStripMenuItem.DropDownItems[2 + indiceNovoCliente], EventArgs.Empty);
+
+                    // Seta nome do paciente igual ao nome do cliente criado
+                    cmbNomePaciente.Text = nomeClienteNovo;
+
+                    // Fecha o panel
+                    btnFecharDadosCliente_Click(null, EventArgs.Empty);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Erro ao Criar Novo Cliente: " + ex.Message + ex.StackTrace, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -1321,78 +1408,92 @@ namespace TerapiaReembolso
 
         private void nomeClienteMenu_Click(object sender, EventArgs e)
         {
-            // Remove flecha da seleção anterior
-            if (clientesToolStripMenuItem.DropDownItems[_indiceClienteAtual+2].Text.StartsWith("→ "))
+            try
             {
-                clientesToolStripMenuItem.DropDownItems[_indiceClienteAtual+2].Text = clientesToolStripMenuItem.DropDownItems[_indiceClienteAtual+2].Text.Substring(2);
+                // Remove flecha da seleção anterior
+                if (clientesToolStripMenuItem.DropDownItems[_indiceClienteAtual + 2].Text.StartsWith("→ "))
+                {
+                    clientesToolStripMenuItem.DropDownItems[_indiceClienteAtual + 2].Text = clientesToolStripMenuItem.DropDownItems[_indiceClienteAtual + 2].Text.Substring(2);
+                }
+
+                ToolStripMenuItem menu = (ToolStripMenuItem)sender;
+
+                // Tenta achar o nome do paciente igual se tiver e já seleciona
+                int indicePaciente = cmbNomePaciente.FindStringExact(menu.Text);
+                if (indicePaciente >= 0)
+                {
+                    cmbNomePaciente.SelectedIndex = indicePaciente;
+                }
+
+                // Adiciona flecha na seleção atual
+                menu.Text = "→ " + menu.Text;
+
+                // Pega o índice do cliente selecionado
+                int indice = (int)menu.Tag;
+                _indiceClienteAtual = indice;
+
+                // Mostra toda configuração do cliente selecionado na tela
+                AtualizaTelaComConfiguracaoAtual();
             }
-
-            ToolStripMenuItem menu = (ToolStripMenuItem)sender;
-
-            // Tenta achar o nome do paciente igual se tiver e já seleciona
-            int indicePaciente = cmbNomePaciente.FindStringExact(menu.Text);
-            if (indicePaciente >= 0)
+            catch (Exception ex)
             {
-                cmbNomePaciente.SelectedIndex = indicePaciente;
+                MessageBox.Show("Erro Carregando Dados do Cliente: " + ex.Message + ex.StackTrace, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
-            // Adiciona flecha na seleção atual
-            menu.Text = "→ " + menu.Text;
-
-            // Pega o índice do cliente selecionado
-            int indice = (int)menu.Tag;
-            _indiceClienteAtual = indice;
-
-            // Mostra toda configuração do cliente selecionado na tela
-            AtualizaTelaComConfiguracaoAtual();
         }
 
         private void btnExcluirCliente_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(cmbNomeCliente.Text))
+            try
             {
-                return;
-            }
-
-            // Busca o cliente selecionado
-            for (int i=0;i<_listaConfiguracoesClientes.Count;i++)
-            {
-                // Caso encontre pelo nome
-                if (cmbNomeCliente.Text == _listaConfiguracoesClientes[i].NomeCliente)
+                if (string.IsNullOrEmpty(cmbNomeCliente.Text))
                 {
-                    // Remove cliente da lista, do menu e seta indice 0
-                    _listaConfiguracoesClientes.RemoveAt(i);
-                    RemoveClienteMenu(i);
-                    _indiceClienteAtual = 0;
+                    return;
+                }
 
-                    if (_listaConfiguracoesClientes.Count > 0)
+                // Busca o cliente selecionado
+                for (int i = 0; i < _listaConfiguracoesClientes.Count; i++)
+                {
+                    // Caso encontre pelo nome
+                    if (cmbNomeCliente.Text == _listaConfiguracoesClientes[i].NomeCliente)
                     {
-                        // Refaz os indices dos clientes no menu
-                        for (int f = 2; f < clientesToolStripMenuItem.DropDownItems.Count; f++)
+                        // Remove cliente da lista, do menu e seta indice 0
+                        _listaConfiguracoesClientes.RemoveAt(i);
+                        RemoveClienteMenu(i);
+                        _indiceClienteAtual = 0;
+
+                        if (_listaConfiguracoesClientes.Count > 0)
                         {
-                            clientesToolStripMenuItem.DropDownItems[f].Tag = f - 2;
+                            // Refaz os indices dos clientes no menu
+                            for (int f = 2; f < clientesToolStripMenuItem.DropDownItems.Count; f++)
+                            {
+                                clientesToolStripMenuItem.DropDownItems[f].Tag = f - 2;
+                            }
+
+                            // Clica no primeiro cliente
+                            nomeClienteMenu_Click(clientesToolStripMenuItem.DropDownItems[2], EventArgs.Empty);
+                        }
+                        else
+                        {
+                            LimpaCamposCliente();
                         }
 
-                        // Clica no primeiro cliente
-                        nomeClienteMenu_Click(clientesToolStripMenuItem.DropDownItems[2], EventArgs.Empty);
-                    }
-                    else
-                    {
-                        LimpaCamposCliente();
-                    }
+                        // Remove do dropdown
+                        cmbNomeCliente.Items.RemoveAt(cmbNomeCliente.FindStringExact(cmbNomeCliente.Text));
+                        cmbNomeCliente.Text = String.Empty;
+                        cmbNomeCliente.SelectedIndex = -1;
 
-                    // Remove do dropdown
-                    cmbNomeCliente.Items.RemoveAt(cmbNomeCliente.FindStringExact(cmbNomeCliente.Text));
-                    cmbNomeCliente.Text = String.Empty;
-                    cmbNomeCliente.SelectedIndex = -1;
-
-                    // Remove arquivo com configuração
-                    string arquivoConfiguracao = Path.Combine(_caminhoConfiguracoes, $"config_{i}.bin");
-                    if (File.Exists(arquivoConfiguracao))
-                    {
-                        File.Delete(arquivoConfiguracao);
+                        // Remove arquivo com configuração
+                        string arquivoConfiguracao = Path.Combine(_caminhoConfiguracoes, $"config_{i}.bin");
+                        if (File.Exists(arquivoConfiguracao))
+                        {
+                            File.Delete(arquivoConfiguracao);
+                        }
                     }
                 }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Erro ao Excluir Cliente: " + ex.Message + ex.StackTrace, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -1451,7 +1552,7 @@ namespace TerapiaReembolso
                     {
                         // Confirma com usuário restauração do backup apagando os dados atuais
                         DialogResult verificacaoUsuario = MessageBox.Show("ATENÇÃO!!!!! Os dados atuais serão sobreescritos por este backup e não poderão ser restaurados.\r\nDeseja continuar?", "Aviso", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button2);
-                        if (verificacaoUsuario!=DialogResult.Yes)
+                        if (verificacaoUsuario != DialogResult.Yes)
                         {
                             return;
                         }
@@ -1482,7 +1583,7 @@ namespace TerapiaReembolso
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Erro interno na aplicação ao restaurar backup: " + ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Erro ao Restaurar Backup: " + ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -1547,7 +1648,7 @@ namespace TerapiaReembolso
                                 archive.Save(zipFile);
 
                                 // Mostra mensagem de sucesso
-                                MessageBox.Show($"Backup criado e salvo em:\r\n {dialogoSalvarBackup.FileName}\r\n\r\nGuarde o arquivo com segurança\r\nna Cloud (OneDrive ou Google Drive) para evitar perda de dados.", "Sucesso!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                MessageBox.Show($"Backup criado e salvo em:\r\n\r\n{dialogoSalvarBackup.FileName}\r\n\r\nGuarde o arquivo na Internet (ex: OneDrive ou Google Drive) para evitar perda de dados.", "Sucesso!", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             }
                         }
                     }
@@ -1555,7 +1656,7 @@ namespace TerapiaReembolso
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Erro interno na aplicação ao realizar backup: " + ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Erro ao Realizar Backup: " + ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }

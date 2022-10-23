@@ -74,10 +74,12 @@ namespace TerapiaReembolso
                 // Seta CPF para logar
                 var emailText = _chromeDriver.FindElement(By.Id("loginInput"));
                 emailText.SendKeys(TelaPrincipal.PegaClienteAtual().LoginUnimed);
+                System.Threading.Thread.Sleep(1000);
 
                 // Seta senha para logar
                 var passwordText = _chromeDriver.FindElement(By.Id("senhaInput"));
                 passwordText.SendKeys(TelaPrincipal.PegaClienteAtual().SenhaUnimed);
+                System.Threading.Thread.Sleep(1000);
 
                 // Submete o formulário
                 emailText.Submit();
@@ -124,6 +126,23 @@ namespace TerapiaReembolso
 
             // Espera ainda mais um pouquinho 
             System.Threading.Thread.Sleep(2500);
+            
+            try
+            {
+                // Ve se acha o botão de Tente Novamente e clica nele
+                By tenteNovamenteBy = By.XPath($"//button[.=' Tente novamente ']");
+                WaitExtension.WaitUntilElement(_chromeDriver, tenteNovamenteBy, 3);
+
+                var botaoTenteNovamente = _chromeDriver.FindElement(tenteNovamenteBy);
+                botaoTenteNovamente.Click();
+
+                // Espera ainda mais um pouquinho 
+                System.Threading.Thread.Sleep(2000);
+            }
+            catch
+            {
+
+            }
 
             // Espera elemento na página
             WaitExtension.WaitUntilElement(_chromeDriver, By.Id("patientInput"));

@@ -19,17 +19,17 @@ namespace TerapiaReembolso
 {
     public class WaitExtension
     {
-        public static IWebElement WaitUntilElement(IWebDriver driver, By elementLocator, int timeout = 30)
+        public static IWebElement WaitUntilElement(IWebDriver driver, By elementLocator, int timeoutSeconds = 30)
         {
-            WaitUntilElementExists(driver, elementLocator, timeout);
-            return WaitUntilElementIsClicable(driver, elementLocator, timeout);
+            WaitUntilElementExists(driver, elementLocator, timeoutSeconds);
+            return WaitUntilElementIsClicable(driver, elementLocator, timeoutSeconds);
         }
 
-        private static IWebElement WaitUntilElementExists(IWebDriver driver, By elementLocator, int timeout = 30)
+        private static IWebElement WaitUntilElementExists(IWebDriver driver, By elementLocator, int timeoutSeconds = 30)
         {
             try
             {
-                var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(timeout));
+                var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(timeoutSeconds));
                 return wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementExists(elementLocator));
             }
             catch (NoSuchElementException)
