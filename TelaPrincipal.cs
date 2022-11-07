@@ -790,7 +790,7 @@ namespace TerapiaReembolso
                 {
                     MessageBox.Show($"Erro ao Rodar Automação: {ex.Message}\r\n\r\nFavor tentar de novo o mesmo processo.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-                toolStripStatus.Text = "Aguardando";
+                toolStripStatus.Text = "Aguardando.";
             }
             finally
             {
@@ -913,7 +913,7 @@ namespace TerapiaReembolso
                 {
                     MessageBox.Show($"Erro ao Rodar Automação: {ex.Message}\r\n\r\nFavor tentar de novo.", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-                toolStripStatus.Text = "Aguardando";
+                toolStripStatus.Text = "Aguardando.";
             }
             finally
             {
