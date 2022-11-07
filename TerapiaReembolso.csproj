@@ -149,6 +149,9 @@
     <Compile Include="Automation\GeracaoRecibo.cs" />
     <Compile Include="Automation\SolicitacaoReembolso.cs" />
     <Compile Include="Data\Configuracao.cs" />
+    <Compile Include="DateTimePickerWithBackColor.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Utils\CryptoSerializer.cs" />
     <Compile Include="Data\Item.cs" />
     <Compile Include="Data\Paciente.cs" />

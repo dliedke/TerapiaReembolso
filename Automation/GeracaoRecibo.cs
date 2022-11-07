@@ -40,7 +40,8 @@ namespace TerapiaReembolso
             // Inicia o Chrome maximizado
             ChromeOptions options = new ChromeOptions();
             options.AddArgument("--start-maximized");
-            
+            options.AddArgument("no-sandbox");
+
             // Baixa ultimo ChromeDriver usando proxy se necessário e usa ele
             if (Utilitarios.NecessitaProxy())
             {

@@ -14,6 +14,7 @@ using System;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Drawing;
 using System.Diagnostics;
 using System.Globalization;
 using System.Windows.Forms;
@@ -31,7 +32,7 @@ namespace TerapiaReembolso
 
         private static List<Configuracao> _listaConfiguracoesClientes = new List<Configuracao>();
         private static int _indiceClienteAtual = 0;
-        private DateTimePicker[] _datasConsultasControles;
+        private DateTimePickerWithBackColor[] _datasConsultasControles;
         private Dictionary<string, Paciente> _listaPacientes = new Dictionary<string, Paciente>();
 
         // Path onde serão serializados as configurações de clientes e pacientes
@@ -69,7 +70,7 @@ namespace TerapiaReembolso
                 }
 
                 // Seta lista de controles de datas e atualiza a tela
-                _datasConsultasControles = new DateTimePicker[] { dtDataConsulta1, dtDataConsulta2, dtDataConsulta3, dtDataConsulta4, dtDataConsulta5, dtDataConsulta6, dtDataConsulta7, dtDataConsulta8, dtDataConsulta9, dtDataConsulta10 };
+                _datasConsultasControles = new DateTimePickerWithBackColor[] { dtDataConsulta1, dtDataConsulta2, dtDataConsulta3, dtDataConsulta4, dtDataConsulta5, dtDataConsulta6, dtDataConsulta7, dtDataConsulta8, dtDataConsulta9, dtDataConsulta10 };
                 numNumeroConsultas_ValueChanged(null, EventArgs.Empty);
 
                 // Migra config antigo para novo padrão se precisar
@@ -93,10 +94,35 @@ namespace TerapiaReembolso
 
                 // Se não tem nada salvo, cria um cliente padrão
                 CriaClientePadraoSeNaoExistir();
+
+                // Configura cor dos controles
+                SetaEstilos();
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Erro Inicializando a Aplicação: " + ex.Message + ex.StackTrace, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void SetaEstilos()
+        {
+            // Seta cor da barra de status
+            statusStrip.BackColor = this.BackColor;
+            statusStrip.ForeColor = this.ForeColor;
+
+            // Seta cor dos calendários
+            foreach (var controle in _datasConsultasControles)
+            {
+                controle.BackColor = Color.FromArgb(74, 74, 74);
+                controle.ForeColor = Color.White;
+                controle.CalendarForeColor = Color.White;
+                controle.CalendarMonthBackground = Color.FromArgb(74, 74, 74);
+                controle.CalendarTitleBackColor = Color.FromArgb(160, 160, 255);
+                controle.CalendarTitleForeColor = Color.White;
+                controle.CalendarTrailingForeColor = Color.White;
+                controle.BackDisabledColor = Color.FromArgb(74, 74, 74);
+                controle.ForeDisabledColor = Color.FromArgb(103, 109, 103);
+                controle.Refresh();
             }
         }
 
@@ -768,14 +794,14 @@ namespace TerapiaReembolso
             }
             finally
             {
-                EnableDisableControls(true);
+                HabilitaDesabilitaControles(true);
             }
         }
 
         private void RodaAutomacao(Action action)
         {
             toolStripStatus.Text = "Rodando automação (feche o Chrome se quiser abortar). Por favor, espere... Primeira vez que rodar demora um pouco mais.";
-            EnableDisableControls(false);
+            HabilitaDesabilitaControles(false);
             Application.DoEvents();
 
             // Salva tudo
@@ -805,11 +831,49 @@ namespace TerapiaReembolso
             }
         }
 
-        private void EnableDisableControls(bool enable)
+        private void HabilitaDesabilitaControles(bool habilitado)
         {
-            pnlConsultas.Enabled = enable;
-            pnlRecibo.Enabled = enable;
-            pnlReembolso.Enabled = enable;
+            btnExcluirCliente.Enabled = habilitado;
+            btnExcluirPaciente.Enabled = habilitado;
+            btnFecharDadosCliente.Enabled = habilitado;
+            btnFecharSobre.Enabled = habilitado;
+            btnGerarRecibo.Enabled = habilitado;
+            btnGerarSolicitacaoReembolso.Enabled = habilitado;
+            btnNovoCliente.Enabled = habilitado;
+            btnNovoPaciente.Enabled = habilitado;
+            btnSalvarConsultas.Enabled = habilitado;
+            btnSalvarPaciente.Enabled = habilitado;
+            btnSelecionarConsultas.Enabled = habilitado;
+            btnSelecionarPDFRecibo.Enabled = habilitado;
+            
+            rbFisica.Enabled = habilitado;
+            rbJuridica.Enabled = habilitado;
+            rbPresencial.Enabled = habilitado;
+            rbTelemedicina.Enabled = habilitado;
+
+            txtAgenciaSemDigito.Enabled = habilitado;
+            txtCEP.Enabled = habilitado;
+            txtCidade.Enabled = habilitado;
+            txtContaSemDigito.Enabled = habilitado;
+            txtCPFPaciente.Enabled = habilitado;
+            txtCPFTerapeuta.Enabled = habilitado;
+            txtCRP.Enabled = habilitado;
+            txtDigitoDaConta.Enabled = habilitado;
+            txtEnderecoTerapeuta.Enabled = habilitado;
+            txtLoginUnimed.Enabled = habilitado;
+            txtNomeDoBanco.Enabled = habilitado;
+            txtNomeDoTerapeuta.Enabled = habilitado;
+            txtReferenteA.Enabled = habilitado;
+            txtSenhaUnimed.Enabled = habilitado;
+            txtValorConsulta.Enabled = habilitado;
+
+            cmbDiaSemana.Enabled = habilitado;
+            cmbMes.Enabled = habilitado;
+            cmbNomeCliente.Enabled = habilitado;
+            cmbNomePaciente.Enabled = habilitado;
+
+            lnkUnimedLogin.Enabled = habilitado;
+            lnkAssinarPDF.Enabled = habilitado;
         }
 
         #endregion
@@ -853,7 +917,7 @@ namespace TerapiaReembolso
             }
             finally
             {
-                EnableDisableControls(true);
+                HabilitaDesabilitaControles(true);
             }
         }
 

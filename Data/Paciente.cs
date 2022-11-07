@@ -28,7 +28,7 @@ namespace TerapiaReembolso
                         string referentea,
                         string diaSemana,
                         int numeroConsultas,
-                        DateTimePicker[] datasConsultasControles)
+                        DateTimePickerWithBackColor[] datasConsultasControles)
         {
             Nome = nome;
             Valor = valor;
