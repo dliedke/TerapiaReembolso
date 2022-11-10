@@ -22,7 +22,7 @@ using WebDriverManager.DriverConfigs.Impl;
 
 namespace TerapiaReembolso
 {
-    public class SolicitacaoReembolso
+    public class SolicitacaoReembolsoUnimedSeguros
     {
         private static ChromeDriver _chromeDriver;
         private static IWebElement _element;
@@ -187,14 +187,22 @@ namespace TerapiaReembolso
             }
 
             // Espera elemento na página
-            WaitExtension.WaitUntilElement(_chromeDriver, By.Id("patientInput"));
+            try
+            {
+                WaitExtension.WaitUntilElement(_chromeDriver, By.Id("patientInput"), 5);
+            }
+            catch { }
         }
 
         public static void SelecionaPacienteTipoConsulta()
         {
             // Seleciona paciente
-            _element = _chromeDriver.FindElement(By.XPath($"//option[.='{TelaPrincipal.PacienteAtual.Nome}']"));
-            _element.Click();
+            try
+            {
+                _element = _chromeDriver.FindElement(By.XPath($"//option[.='{TelaPrincipal.PacienteAtual.Nome}']"));
+                _element.Click();
+            }
+            catch { }
 
             // Seleciona psicólogo
             _element = _chromeDriver.FindElement(By.XPath($"//option[.='Psicólogo']"));

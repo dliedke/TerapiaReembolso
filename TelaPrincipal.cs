@@ -97,6 +97,11 @@ namespace TerapiaReembolso
 
                 // Configura cor dos controles
                 SetaEstilos();
+
+                //_listaConfiguracoesClientes[0].LoginUnimed = "2667664000062100";
+                //_listaConfiguracoesClientes[0].SenhaUnimed = "2667664000062100";
+
+                //SolicitacaoReembolsoUnimedAcre.GerarSolicitacaoReembolso();
             }
             catch (Exception ex)
             {
@@ -890,7 +895,7 @@ namespace TerapiaReembolso
                 {
                     CarregaDadosTelaEmMemoria();
 
-                    Action action = (Action)SolicitacaoReembolso.GerarSolicitacaoReembolso;
+                    Action action = (Action)SolicitacaoReembolsoUnimedSeguros.GerarSolicitacaoReembolso;
                     RodaAutomacao(action);
 
                     // Mostra mensagem de sucesso
@@ -939,8 +944,8 @@ namespace TerapiaReembolso
                 if (ValidaDadosParaReembolso())
                 {
                     CarregaDadosTelaEmMemoria();
-                    SolicitacaoReembolso.AbreSegurosUnimedCliente();
-                    SolicitacaoReembolso.LoginUnimed();
+                    SolicitacaoReembolsoUnimedSeguros.AbreSegurosUnimedCliente();
+                    SolicitacaoReembolsoUnimedSeguros.LoginUnimed();
                 }
             }
             catch (Exception ex)
