@@ -189,7 +189,7 @@ namespace TerapiaReembolso
             // Espera elemento na página
             try
             {
-                WaitExtension.WaitUntilElement(_chromeDriver, By.Id("patientInput"), 5);
+                WaitExtension.WaitUntilElement(_chromeDriver, By.XPath($"//option[.='Psicólogo']"));
             }
             catch { }
         }
