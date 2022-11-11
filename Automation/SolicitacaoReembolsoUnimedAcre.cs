@@ -21,6 +21,7 @@ using OpenQA.Selenium.Chrome;
 // Pacote para baixar automaticamente último ChormeDriver da Internet
 using WebDriverManager;
 using WebDriverManager.DriverConfigs.Impl;
+using System.Text;
 
 namespace TerapiaReembolso
 {
@@ -274,6 +275,25 @@ namespace TerapiaReembolso
 
         private static void SetaProcedimentos()
         {
+            // Cria descrição com as datas das consultas
+            StringBuilder sbDescricao; 
+
+            if (TelaPrincipal.PacienteAtual.NumeroConsultas==1)
+            {
+                sbDescricao = new StringBuilder("Consulta na data: ");
+            }
+            else
+            {
+                sbDescricao = new StringBuilder("Consultas nas datas: ");
+            }
+
+            for (int f = 0; f < TelaPrincipal.PacienteAtual.NumeroConsultas; f++)
+            {
+                sbDescricao.Append(TelaPrincipal.PacienteAtual.DataConsultaLista[f].ToString("dd/MM/yyyy") + ", ");
+            }
+
+            string descricao = sbDescricao.ToString().Trim().TrimEnd(',');
+
             // Clica botao Buscar procedimento
             WaitExtension.WaitUntilElement(_chromeDriver, By.XPath("//button[contains(text(),'Buscar procedimento')]"), 15);
             _element = _chromeDriver.FindElement(By.XPath("//button[contains(text(),'Buscar procedimento')]"));
@@ -313,15 +333,28 @@ namespace TerapiaReembolso
             _element = _chromeDriver.FindElement(By.Name("dtrealizacao"));
             _element.SendKeys(TelaPrincipal.PacienteAtual.DataConsultaLista[0].ToString("dd/MM/yyyy"));
 
+            // Seta data do recibo
+            WaitExtension.WaitUntilElement(_chromeDriver, By.Name("dtreceita"), 15);
+            _element = _chromeDriver.FindElement(By.Name("dtreceita"));
+            _element.SendKeys(TelaPrincipal.PegaPacienteAcre().DataRecibo);
+
             // Seta quantidade
             WaitExtension.WaitUntilElement(_chromeDriver, By.Name("quantidade"), 15);
             _element = _chromeDriver.FindElement(By.Name("quantidade"));
-            _element.SendKeys("1");
+            _element.SendKeys(TelaPrincipal.PacienteAtual.NumeroConsultas.ToString());
 
             // Seta valor da consulta
             WaitExtension.WaitUntilElement(_chromeDriver, By.Name("vlcobrado"), 15);
             _element = _chromeDriver.FindElement(By.Name("vlcobrado"));
             _element.SendKeys(TelaPrincipal.PacienteAtual.Valor);
+
+            // Seta descricao com as datas das consultas
+            WaitExtension.WaitUntilElement(_chromeDriver, By.Name("dsadicional"), 15);
+            _element = _chromeDriver.FindElement(By.Name("dsadicional"));
+            _element.SendKeys(descricao);
+
+            // Espera um pouco para usuário poder verificar os campos
+            Thread.Sleep(5000);
 
             // Clica no botão adicionar
             WaitExtension.WaitUntilElement(_chromeDriver, By.XPath("//button[contains(text(),'Adicionar')]"), 15);
@@ -331,7 +364,7 @@ namespace TerapiaReembolso
             // Espera os spinners todos da página
             Thread.Sleep(1000);
             Utilitarios.AguardaSpinner(_chromeDriver);
-
+            
             // Clica no botão Próximo
             WaitExtension.WaitUntilElement(_chromeDriver, By.XPath("//button[contains(text(),'Próximo')]"), 15);
             _element = _chromeDriver.FindElement(By.XPath("//button[contains(text(),'Próximo')]"));

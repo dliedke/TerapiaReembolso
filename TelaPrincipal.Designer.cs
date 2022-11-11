@@ -39,7 +39,7 @@
             this.dialogoPDFRecibo = new System.Windows.Forms.OpenFileDialog();
             this.lblCPFPaciente = new System.Windows.Forms.Label();
             this.txtCPFPaciente = new System.Windows.Forms.TextBox();
-            this.lblNomeArquivoPDF = new System.Windows.Forms.Label();
+            this.lblNomeArquivoRecibo = new System.Windows.Forms.Label();
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.toolStripStatus = new System.Windows.Forms.ToolStripStatusLabel();
             this.lnkAssinarPDF = new System.Windows.Forms.LinkLabel();
@@ -58,20 +58,10 @@
             this.lbMes = new System.Windows.Forms.Label();
             this.cmbDiaSemana = new System.Windows.Forms.ComboBox();
             this.cmbMes = new System.Windows.Forms.ComboBox();
-            this.dtDataConsulta10 = new TerapiaReembolso.DateTimePickerWithBackColor();
-            this.dtDataConsulta9 = new TerapiaReembolso.DateTimePickerWithBackColor();
-            this.dtDataConsulta8 = new TerapiaReembolso.DateTimePickerWithBackColor();
-            this.dtDataConsulta7 = new TerapiaReembolso.DateTimePickerWithBackColor();
-            this.dtDataConsulta6 = new TerapiaReembolso.DateTimePickerWithBackColor();
             this.btnSalvarConsultas = new System.Windows.Forms.Button();
             this.lblNumeroDeConsultas = new System.Windows.Forms.Label();
             this.numNumeroConsultas = new System.Windows.Forms.NumericUpDown();
             this.lblSelecioneDataConsultas = new System.Windows.Forms.Label();
-            this.dtDataConsulta4 = new TerapiaReembolso.DateTimePickerWithBackColor();
-            this.dtDataConsulta3 = new TerapiaReembolso.DateTimePickerWithBackColor();
-            this.dtDataConsulta5 = new TerapiaReembolso.DateTimePickerWithBackColor();
-            this.dtDataConsulta2 = new TerapiaReembolso.DateTimePickerWithBackColor();
-            this.dtDataConsulta1 = new TerapiaReembolso.DateTimePickerWithBackColor();
             this.pnlRecibo = new System.Windows.Forms.Panel();
             this.pnlDadosTerapeuta = new System.Windows.Forms.Panel();
             this.lblCNPJTerapeuta = new System.Windows.Forms.Label();
@@ -95,6 +85,26 @@
             this.lnkUnimedLogin = new System.Windows.Forms.LinkLabel();
             this.lblTituloSolicitacaoReembolso = new System.Windows.Forms.Label();
             this.btnGerarSolicitacaoReembolso = new System.Windows.Forms.Button();
+            this.pnlDadosReembolso = new System.Windows.Forms.Panel();
+            this.btnMostraDadosUnimedAcre = new System.Windows.Forms.Button();
+            this.lbDadosReembolso = new System.Windows.Forms.Label();
+            this.lblLoginUnimed = new System.Windows.Forms.Label();
+            this.txtLoginUnimed = new System.Windows.Forms.TextBox();
+            this.grbTipoAtendimento = new System.Windows.Forms.GroupBox();
+            this.rbPresencial = new System.Windows.Forms.RadioButton();
+            this.rbTelemedicina = new System.Windows.Forms.RadioButton();
+            this.txtSenhaUnimed = new System.Windows.Forms.TextBox();
+            this.lblSenhaUnimed = new System.Windows.Forms.Label();
+            this.pnlDadosBancarios = new System.Windows.Forms.Panel();
+            this.lbDadosBancarios = new System.Windows.Forms.Label();
+            this.lblNomeDoBanco = new System.Windows.Forms.Label();
+            this.lblDigitoDaConta = new System.Windows.Forms.Label();
+            this.txtNomeDoBanco = new System.Windows.Forms.TextBox();
+            this.txtDigitoDaConta = new System.Windows.Forms.TextBox();
+            this.txtAgenciaSemDigito = new System.Windows.Forms.TextBox();
+            this.lblContaSemDigito = new System.Windows.Forms.Label();
+            this.txtContaSemDigito = new System.Windows.Forms.TextBox();
+            this.lblAgenciaSemDigito = new System.Windows.Forms.Label();
             this.pnlUnimedAcre = new System.Windows.Forms.Panel();
             this.lblEstado = new System.Windows.Forms.Label();
             this.txtEstadoAcre = new System.Windows.Forms.TextBox();
@@ -118,26 +128,6 @@
             this.lblRua = new System.Windows.Forms.Label();
             this.txtEnderecoRuaAcre = new System.Windows.Forms.TextBox();
             this.lblNomeBancoAcre = new System.Windows.Forms.Label();
-            this.pnlDadosReembolso = new System.Windows.Forms.Panel();
-            this.btnMostraDadosUnimedAcre = new System.Windows.Forms.Button();
-            this.lbDadosReembolso = new System.Windows.Forms.Label();
-            this.lblLoginUnimed = new System.Windows.Forms.Label();
-            this.txtLoginUnimed = new System.Windows.Forms.TextBox();
-            this.grbTipoAtendimento = new System.Windows.Forms.GroupBox();
-            this.rbPresencial = new System.Windows.Forms.RadioButton();
-            this.rbTelemedicina = new System.Windows.Forms.RadioButton();
-            this.txtSenhaUnimed = new System.Windows.Forms.TextBox();
-            this.lblSenhaUnimed = new System.Windows.Forms.Label();
-            this.pnlDadosBancarios = new System.Windows.Forms.Panel();
-            this.lbDadosBancarios = new System.Windows.Forms.Label();
-            this.lblNomeDoBanco = new System.Windows.Forms.Label();
-            this.lblDigitoDaConta = new System.Windows.Forms.Label();
-            this.txtNomeDoBanco = new System.Windows.Forms.TextBox();
-            this.txtDigitoDaConta = new System.Windows.Forms.TextBox();
-            this.txtAgenciaSemDigito = new System.Windows.Forms.TextBox();
-            this.lblContaSemDigito = new System.Windows.Forms.Label();
-            this.txtContaSemDigito = new System.Windows.Forms.TextBox();
-            this.lblAgenciaSemDigito = new System.Windows.Forms.Label();
             this.menuAplicacao = new System.Windows.Forms.MenuStrip();
             this.arquivoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.restaurarBackupToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -166,6 +156,18 @@
             this.dialogoRestaurarBackup = new System.Windows.Forms.OpenFileDialog();
             this.dialogoPDFCarteirinha = new System.Windows.Forms.OpenFileDialog();
             this.dialogoPDFIdentidade = new System.Windows.Forms.OpenFileDialog();
+            this.lbDataRecibo = new System.Windows.Forms.Label();
+            this.dtDataRecibo = new TerapiaReembolso.DateTimePickerWithBackColor();
+            this.dtDataConsulta10 = new TerapiaReembolso.DateTimePickerWithBackColor();
+            this.dtDataConsulta9 = new TerapiaReembolso.DateTimePickerWithBackColor();
+            this.dtDataConsulta8 = new TerapiaReembolso.DateTimePickerWithBackColor();
+            this.dtDataConsulta7 = new TerapiaReembolso.DateTimePickerWithBackColor();
+            this.dtDataConsulta6 = new TerapiaReembolso.DateTimePickerWithBackColor();
+            this.dtDataConsulta4 = new TerapiaReembolso.DateTimePickerWithBackColor();
+            this.dtDataConsulta3 = new TerapiaReembolso.DateTimePickerWithBackColor();
+            this.dtDataConsulta5 = new TerapiaReembolso.DateTimePickerWithBackColor();
+            this.dtDataConsulta2 = new TerapiaReembolso.DateTimePickerWithBackColor();
+            this.dtDataConsulta1 = new TerapiaReembolso.DateTimePickerWithBackColor();
             this.statusStrip.SuspendLayout();
             this.pnlConsultas.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numNumeroConsultas)).BeginInit();
@@ -174,10 +176,10 @@
             this.gbTipoPessoa.SuspendLayout();
             this.pnlDadosPaciente.SuspendLayout();
             this.pnlReembolso.SuspendLayout();
-            this.pnlUnimedAcre.SuspendLayout();
             this.pnlDadosReembolso.SuspendLayout();
             this.grbTipoAtendimento.SuspendLayout();
             this.pnlDadosBancarios.SuspendLayout();
+            this.pnlUnimedAcre.SuspendLayout();
             this.menuAplicacao.SuspendLayout();
             this.pnlSobre.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picIconeSobre)).BeginInit();
@@ -295,13 +297,13 @@
             // 
             // lblNomeArquivoPDF
             // 
-            this.lblNomeArquivoPDF.AutoEllipsis = true;
-            this.lblNomeArquivoPDF.ForeColor = System.Drawing.Color.White;
-            this.lblNomeArquivoPDF.Location = new System.Drawing.Point(156, 180);
-            this.lblNomeArquivoPDF.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblNomeArquivoPDF.Name = "lblNomeArquivoPDF";
-            this.lblNomeArquivoPDF.Size = new System.Drawing.Size(292, 21);
-            this.lblNomeArquivoPDF.TabIndex = 11;
+            this.lblNomeArquivoRecibo.AutoEllipsis = true;
+            this.lblNomeArquivoRecibo.ForeColor = System.Drawing.Color.White;
+            this.lblNomeArquivoRecibo.Location = new System.Drawing.Point(156, 180);
+            this.lblNomeArquivoRecibo.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblNomeArquivoRecibo.Name = "lblNomeArquivoPDF";
+            this.lblNomeArquivoRecibo.Size = new System.Drawing.Size(292, 21);
+            this.lblNomeArquivoRecibo.TabIndex = 11;
             // 
             // statusStrip
             // 
@@ -530,56 +532,6 @@
             this.cmbMes.ValueMember = "Value";
             this.cmbMes.SelectedIndexChanged += new System.EventHandler(this.cmbMes_SelectedIndexChanged);
             // 
-            // dtDataConsulta10
-            // 
-            this.dtDataConsulta10.BackDisabledColor = System.Drawing.SystemColors.Control;
-            this.dtDataConsulta10.ForeDisabledColor = System.Drawing.Color.Empty;
-            this.dtDataConsulta10.Location = new System.Drawing.Point(119, 544);
-            this.dtDataConsulta10.Margin = new System.Windows.Forms.Padding(4);
-            this.dtDataConsulta10.Name = "dtDataConsulta10";
-            this.dtDataConsulta10.Size = new System.Drawing.Size(305, 22);
-            this.dtDataConsulta10.TabIndex = 12;
-            // 
-            // dtDataConsulta9
-            // 
-            this.dtDataConsulta9.BackDisabledColor = System.Drawing.SystemColors.Control;
-            this.dtDataConsulta9.ForeDisabledColor = System.Drawing.Color.Empty;
-            this.dtDataConsulta9.Location = new System.Drawing.Point(119, 506);
-            this.dtDataConsulta9.Margin = new System.Windows.Forms.Padding(4);
-            this.dtDataConsulta9.Name = "dtDataConsulta9";
-            this.dtDataConsulta9.Size = new System.Drawing.Size(305, 22);
-            this.dtDataConsulta9.TabIndex = 11;
-            // 
-            // dtDataConsulta8
-            // 
-            this.dtDataConsulta8.BackDisabledColor = System.Drawing.SystemColors.Control;
-            this.dtDataConsulta8.ForeDisabledColor = System.Drawing.Color.Empty;
-            this.dtDataConsulta8.Location = new System.Drawing.Point(119, 464);
-            this.dtDataConsulta8.Margin = new System.Windows.Forms.Padding(4);
-            this.dtDataConsulta8.Name = "dtDataConsulta8";
-            this.dtDataConsulta8.Size = new System.Drawing.Size(305, 22);
-            this.dtDataConsulta8.TabIndex = 10;
-            // 
-            // dtDataConsulta7
-            // 
-            this.dtDataConsulta7.BackDisabledColor = System.Drawing.SystemColors.Control;
-            this.dtDataConsulta7.ForeDisabledColor = System.Drawing.Color.Empty;
-            this.dtDataConsulta7.Location = new System.Drawing.Point(119, 422);
-            this.dtDataConsulta7.Margin = new System.Windows.Forms.Padding(4);
-            this.dtDataConsulta7.Name = "dtDataConsulta7";
-            this.dtDataConsulta7.Size = new System.Drawing.Size(305, 22);
-            this.dtDataConsulta7.TabIndex = 9;
-            // 
-            // dtDataConsulta6
-            // 
-            this.dtDataConsulta6.BackDisabledColor = System.Drawing.SystemColors.Control;
-            this.dtDataConsulta6.ForeDisabledColor = System.Drawing.Color.Empty;
-            this.dtDataConsulta6.Location = new System.Drawing.Point(119, 378);
-            this.dtDataConsulta6.Margin = new System.Windows.Forms.Padding(4);
-            this.dtDataConsulta6.Name = "dtDataConsulta6";
-            this.dtDataConsulta6.Size = new System.Drawing.Size(305, 22);
-            this.dtDataConsulta6.TabIndex = 8;
-            // 
             // btnSalvarConsultas
             // 
             this.btnSalvarConsultas.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -638,58 +590,6 @@
             this.lblSelecioneDataConsultas.Size = new System.Drawing.Size(194, 16);
             this.lblSelecioneDataConsultas.TabIndex = 37;
             this.lblSelecioneDataConsultas.Text = "Selecione datas das consultas:";
-            // 
-            // dtDataConsulta4
-            // 
-            this.dtDataConsulta4.BackDisabledColor = System.Drawing.SystemColors.Control;
-            this.dtDataConsulta4.ForeDisabledColor = System.Drawing.Color.Empty;
-            this.dtDataConsulta4.Location = new System.Drawing.Point(119, 286);
-            this.dtDataConsulta4.Margin = new System.Windows.Forms.Padding(4);
-            this.dtDataConsulta4.Name = "dtDataConsulta4";
-            this.dtDataConsulta4.Size = new System.Drawing.Size(305, 22);
-            this.dtDataConsulta4.TabIndex = 6;
-            // 
-            // dtDataConsulta3
-            // 
-            this.dtDataConsulta3.BackDisabledColor = System.Drawing.SystemColors.Control;
-            this.dtDataConsulta3.ForeDisabledColor = System.Drawing.Color.Empty;
-            this.dtDataConsulta3.Location = new System.Drawing.Point(119, 239);
-            this.dtDataConsulta3.Margin = new System.Windows.Forms.Padding(4);
-            this.dtDataConsulta3.Name = "dtDataConsulta3";
-            this.dtDataConsulta3.Size = new System.Drawing.Size(305, 22);
-            this.dtDataConsulta3.TabIndex = 5;
-            // 
-            // dtDataConsulta5
-            // 
-            this.dtDataConsulta5.BackDisabledColor = System.Drawing.SystemColors.Control;
-            this.dtDataConsulta5.ForeDisabledColor = System.Drawing.Color.Empty;
-            this.dtDataConsulta5.Location = new System.Drawing.Point(119, 331);
-            this.dtDataConsulta5.Margin = new System.Windows.Forms.Padding(4);
-            this.dtDataConsulta5.Name = "dtDataConsulta5";
-            this.dtDataConsulta5.Size = new System.Drawing.Size(305, 22);
-            this.dtDataConsulta5.TabIndex = 7;
-            // 
-            // dtDataConsulta2
-            // 
-            this.dtDataConsulta2.BackDisabledColor = System.Drawing.SystemColors.Control;
-            this.dtDataConsulta2.ForeDisabledColor = System.Drawing.Color.Empty;
-            this.dtDataConsulta2.Location = new System.Drawing.Point(119, 194);
-            this.dtDataConsulta2.Margin = new System.Windows.Forms.Padding(4);
-            this.dtDataConsulta2.Name = "dtDataConsulta2";
-            this.dtDataConsulta2.Size = new System.Drawing.Size(305, 22);
-            this.dtDataConsulta2.TabIndex = 4;
-            // 
-            // dtDataConsulta1
-            // 
-            this.dtDataConsulta1.BackDisabledColor = System.Drawing.SystemColors.Control;
-            this.dtDataConsulta1.CalendarForeColor = System.Drawing.Color.White;
-            this.dtDataConsulta1.CalendarMonthBackground = System.Drawing.Color.FromArgb(((int)(((byte)(74)))), ((int)(((byte)(74)))), ((int)(((byte)(74)))));
-            this.dtDataConsulta1.ForeDisabledColor = System.Drawing.Color.Empty;
-            this.dtDataConsulta1.Location = new System.Drawing.Point(119, 149);
-            this.dtDataConsulta1.Margin = new System.Windows.Forms.Padding(4);
-            this.dtDataConsulta1.Name = "dtDataConsulta1";
-            this.dtDataConsulta1.Size = new System.Drawing.Size(305, 22);
-            this.dtDataConsulta1.TabIndex = 3;
             // 
             // pnlRecibo
             // 
@@ -953,12 +853,12 @@
             // pnlReembolso
             // 
             this.pnlReembolso.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(36)))), ((int)(((byte)(36)))), ((int)(((byte)(36)))));
+            this.pnlReembolso.Controls.Add(this.pnlUnimedAcre);
             this.pnlReembolso.Controls.Add(this.lnkUnimedLogin);
             this.pnlReembolso.Controls.Add(this.lblTituloSolicitacaoReembolso);
             this.pnlReembolso.Controls.Add(this.btnGerarSolicitacaoReembolso);
             this.pnlReembolso.Controls.Add(this.pnlDadosReembolso);
             this.pnlReembolso.Controls.Add(this.pnlDadosBancarios);
-            this.pnlReembolso.Controls.Add(this.pnlUnimedAcre);
             this.pnlReembolso.Location = new System.Drawing.Point(552, 36);
             this.pnlReembolso.Margin = new System.Windows.Forms.Padding(3, 1, 3, 1);
             this.pnlReembolso.Name = "pnlReembolso";
@@ -1002,282 +902,6 @@
             this.btnGerarSolicitacaoReembolso.UseVisualStyleBackColor = true;
             this.btnGerarSolicitacaoReembolso.Click += new System.EventHandler(this.btnGerarSolicitacaoReembolso_Click);
             // 
-            // pnlUnimedAcre
-            // 
-            this.pnlUnimedAcre.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnlUnimedAcre.Controls.Add(this.lblEstado);
-            this.pnlUnimedAcre.Controls.Add(this.txtEstadoAcre);
-            this.pnlUnimedAcre.Controls.Add(this.lblNomeArquivoIdentidade);
-            this.pnlUnimedAcre.Controls.Add(this.lblNomeArquivoCarteirinha);
-            this.pnlUnimedAcre.Controls.Add(this.lblBairro);
-            this.pnlUnimedAcre.Controls.Add(this.txtEnderecoBairroAcre);
-            this.pnlUnimedAcre.Controls.Add(this.lblComplemento);
-            this.pnlUnimedAcre.Controls.Add(this.txtEnderecoComplementoAcre);
-            this.pnlUnimedAcre.Controls.Add(this.btnSalvarDadosAcre);
-            this.pnlUnimedAcre.Controls.Add(this.btnSelecionarPDFIdentidade);
-            this.pnlUnimedAcre.Controls.Add(this.lblIdentidade);
-            this.pnlUnimedAcre.Controls.Add(this.btnSelecionarPDFCarteirinha);
-            this.pnlUnimedAcre.Controls.Add(this.lblCarteirinha);
-            this.pnlUnimedAcre.Controls.Add(this.lblDadosUnimedAcre);
-            this.pnlUnimedAcre.Controls.Add(this.lblNumeroCarteirinha);
-            this.pnlUnimedAcre.Controls.Add(this.lblNumero);
-            this.pnlUnimedAcre.Controls.Add(this.txtLoginUnimedAcre);
-            this.pnlUnimedAcre.Controls.Add(this.txtEnderecoNumeroAcre);
-            this.pnlUnimedAcre.Controls.Add(this.txtNomeBancoAcre);
-            this.pnlUnimedAcre.Controls.Add(this.lblRua);
-            this.pnlUnimedAcre.Controls.Add(this.txtEnderecoRuaAcre);
-            this.pnlUnimedAcre.Controls.Add(this.lblNomeBancoAcre);
-            this.pnlUnimedAcre.Location = new System.Drawing.Point(17, 36);
-            this.pnlUnimedAcre.Margin = new System.Windows.Forms.Padding(1);
-            this.pnlUnimedAcre.Name = "pnlUnimedAcre";
-            this.pnlUnimedAcre.Size = new System.Drawing.Size(479, 616);
-            this.pnlUnimedAcre.TabIndex = 43;
-            this.pnlUnimedAcre.Visible = false;
-            // 
-            // lblEstado
-            // 
-            this.lblEstado.AutoSize = true;
-            this.lblEstado.ForeColor = System.Drawing.Color.White;
-            this.lblEstado.Location = new System.Drawing.Point(84, 339);
-            this.lblEstado.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblEstado.Name = "lblEstado";
-            this.lblEstado.Size = new System.Drawing.Size(53, 16);
-            this.lblEstado.TabIndex = 57;
-            this.lblEstado.Text = "Estado:";
-            // 
-            // txtEstadoAcre
-            // 
-            this.txtEstadoAcre.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(74)))), ((int)(((byte)(74)))), ((int)(((byte)(74)))));
-            this.txtEstadoAcre.ForeColor = System.Drawing.Color.White;
-            this.txtEstadoAcre.Location = new System.Drawing.Point(153, 341);
-            this.txtEstadoAcre.Margin = new System.Windows.Forms.Padding(4);
-            this.txtEstadoAcre.MaxLength = 32;
-            this.txtEstadoAcre.Name = "txtEstadoAcre";
-            this.txtEstadoAcre.Size = new System.Drawing.Size(281, 22);
-            this.txtEstadoAcre.TabIndex = 56;
-            // 
-            // lblNomeArquivoIdentidade
-            // 
-            this.lblNomeArquivoIdentidade.AutoEllipsis = true;
-            this.lblNomeArquivoIdentidade.ForeColor = System.Drawing.Color.White;
-            this.lblNomeArquivoIdentidade.Location = new System.Drawing.Point(166, 516);
-            this.lblNomeArquivoIdentidade.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblNomeArquivoIdentidade.Name = "lblNomeArquivoIdentidade";
-            this.lblNomeArquivoIdentidade.Size = new System.Drawing.Size(247, 19);
-            this.lblNomeArquivoIdentidade.TabIndex = 53;
-            // 
-            // lblNomeArquivoCarteirinha
-            // 
-            this.lblNomeArquivoCarteirinha.AutoEllipsis = true;
-            this.lblNomeArquivoCarteirinha.ForeColor = System.Drawing.Color.White;
-            this.lblNomeArquivoCarteirinha.Location = new System.Drawing.Point(166, 433);
-            this.lblNomeArquivoCarteirinha.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblNomeArquivoCarteirinha.Name = "lblNomeArquivoCarteirinha";
-            this.lblNomeArquivoCarteirinha.Size = new System.Drawing.Size(247, 19);
-            this.lblNomeArquivoCarteirinha.TabIndex = 52;
-            // 
-            // lblBairro
-            // 
-            this.lblBairro.AutoSize = true;
-            this.lblBairro.ForeColor = System.Drawing.Color.White;
-            this.lblBairro.Location = new System.Drawing.Point(96, 288);
-            this.lblBairro.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblBairro.Name = "lblBairro";
-            this.lblBairro.Size = new System.Drawing.Size(46, 16);
-            this.lblBairro.TabIndex = 51;
-            this.lblBairro.Text = "Bairro:";
-            // 
-            // txtEnderecoBairroAcre
-            // 
-            this.txtEnderecoBairroAcre.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(74)))), ((int)(((byte)(74)))), ((int)(((byte)(74)))));
-            this.txtEnderecoBairroAcre.ForeColor = System.Drawing.Color.White;
-            this.txtEnderecoBairroAcre.Location = new System.Drawing.Point(153, 290);
-            this.txtEnderecoBairroAcre.Margin = new System.Windows.Forms.Padding(4);
-            this.txtEnderecoBairroAcre.MaxLength = 32;
-            this.txtEnderecoBairroAcre.Name = "txtEnderecoBairroAcre";
-            this.txtEnderecoBairroAcre.Size = new System.Drawing.Size(281, 22);
-            this.txtEnderecoBairroAcre.TabIndex = 5;
-            // 
-            // lblComplemento
-            // 
-            this.lblComplemento.AutoSize = true;
-            this.lblComplemento.ForeColor = System.Drawing.Color.White;
-            this.lblComplemento.Location = new System.Drawing.Point(48, 245);
-            this.lblComplemento.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblComplemento.Name = "lblComplemento";
-            this.lblComplemento.Size = new System.Drawing.Size(94, 16);
-            this.lblComplemento.TabIndex = 49;
-            this.lblComplemento.Text = "Complemento:";
-            // 
-            // txtEnderecoComplementoAcre
-            // 
-            this.txtEnderecoComplementoAcre.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(74)))), ((int)(((byte)(74)))), ((int)(((byte)(74)))));
-            this.txtEnderecoComplementoAcre.ForeColor = System.Drawing.Color.White;
-            this.txtEnderecoComplementoAcre.Location = new System.Drawing.Point(153, 243);
-            this.txtEnderecoComplementoAcre.Margin = new System.Windows.Forms.Padding(4);
-            this.txtEnderecoComplementoAcre.MaxLength = 32;
-            this.txtEnderecoComplementoAcre.Name = "txtEnderecoComplementoAcre";
-            this.txtEnderecoComplementoAcre.Size = new System.Drawing.Size(281, 22);
-            this.txtEnderecoComplementoAcre.TabIndex = 4;
-            // 
-            // btnSalvarDadosAcre
-            // 
-            this.btnSalvarDadosAcre.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSalvarDadosAcre.ForeColor = System.Drawing.Color.White;
-            this.btnSalvarDadosAcre.Location = new System.Drawing.Point(153, 549);
-            this.btnSalvarDadosAcre.Margin = new System.Windows.Forms.Padding(4);
-            this.btnSalvarDadosAcre.Name = "btnSalvarDadosAcre";
-            this.btnSalvarDadosAcre.Size = new System.Drawing.Size(179, 36);
-            this.btnSalvarDadosAcre.TabIndex = 8;
-            this.btnSalvarDadosAcre.Text = "Salvar";
-            this.btnSalvarDadosAcre.UseVisualStyleBackColor = true;
-            this.btnSalvarDadosAcre.Click += new System.EventHandler(this.btnSalvarDadosAcre_Click);
-            // 
-            // btnSelecionarPDFIdentidade
-            // 
-            this.btnSelecionarPDFIdentidade.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSelecionarPDFIdentidade.ForeColor = System.Drawing.Color.White;
-            this.btnSelecionarPDFIdentidade.Location = new System.Drawing.Point(163, 479);
-            this.btnSelecionarPDFIdentidade.Margin = new System.Windows.Forms.Padding(4);
-            this.btnSelecionarPDFIdentidade.Name = "btnSelecionarPDFIdentidade";
-            this.btnSelecionarPDFIdentidade.Size = new System.Drawing.Size(199, 28);
-            this.btnSelecionarPDFIdentidade.TabIndex = 7;
-            this.btnSelecionarPDFIdentidade.Text = "Selecionar PDF Identidade";
-            this.btnSelecionarPDFIdentidade.UseVisualStyleBackColor = true;
-            this.btnSelecionarPDFIdentidade.Click += new System.EventHandler(this.btnSelecionarPDFIdentidade_Click);
-            // 
-            // lblIdentidade
-            // 
-            this.lblIdentidade.AutoSize = true;
-            this.lblIdentidade.ForeColor = System.Drawing.Color.White;
-            this.lblIdentidade.Location = new System.Drawing.Point(63, 480);
-            this.lblIdentidade.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblIdentidade.Name = "lblIdentidade";
-            this.lblIdentidade.Size = new System.Drawing.Size(74, 16);
-            this.lblIdentidade.TabIndex = 46;
-            this.lblIdentidade.Text = "Identidade:";
-            // 
-            // btnSelecionarPDFCarteirinha
-            // 
-            this.btnSelecionarPDFCarteirinha.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSelecionarPDFCarteirinha.ForeColor = System.Drawing.Color.White;
-            this.btnSelecionarPDFCarteirinha.Location = new System.Drawing.Point(163, 401);
-            this.btnSelecionarPDFCarteirinha.Margin = new System.Windows.Forms.Padding(4);
-            this.btnSelecionarPDFCarteirinha.Name = "btnSelecionarPDFCarteirinha";
-            this.btnSelecionarPDFCarteirinha.Size = new System.Drawing.Size(199, 28);
-            this.btnSelecionarPDFCarteirinha.TabIndex = 6;
-            this.btnSelecionarPDFCarteirinha.Text = "Selecionar PDF Carteirinha";
-            this.btnSelecionarPDFCarteirinha.UseVisualStyleBackColor = true;
-            this.btnSelecionarPDFCarteirinha.Click += new System.EventHandler(this.btnSelecionarPDFCarteirinha_Click);
-            // 
-            // lblCarteirinha
-            // 
-            this.lblCarteirinha.ForeColor = System.Drawing.Color.White;
-            this.lblCarteirinha.Location = new System.Drawing.Point(16, 393);
-            this.lblCarteirinha.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblCarteirinha.Name = "lblCarteirinha";
-            this.lblCarteirinha.Size = new System.Drawing.Size(136, 37);
-            this.lblCarteirinha.TabIndex = 44;
-            this.lblCarteirinha.Text = "Carteirinha e Requisição Médica:";
-            // 
-            // lblDadosUnimedAcre
-            // 
-            this.lblDadosUnimedAcre.AutoSize = true;
-            this.lblDadosUnimedAcre.ForeColor = System.Drawing.Color.White;
-            this.lblDadosUnimedAcre.Location = new System.Drawing.Point(8, 12);
-            this.lblDadosUnimedAcre.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblDadosUnimedAcre.Name = "lblDadosUnimedAcre";
-            this.lblDadosUnimedAcre.Size = new System.Drawing.Size(132, 16);
-            this.lblDadosUnimedAcre.TabIndex = 42;
-            this.lblDadosUnimedAcre.Text = "Dados Unimed Acre:";
-            // 
-            // lblNumeroCarteirinha
-            // 
-            this.lblNumeroCarteirinha.ForeColor = System.Drawing.Color.White;
-            this.lblNumeroCarteirinha.Location = new System.Drawing.Point(11, 68);
-            this.lblNumeroCarteirinha.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblNumeroCarteirinha.Name = "lblNumeroCarteirinha";
-            this.lblNumeroCarteirinha.Size = new System.Drawing.Size(134, 24);
-            this.lblNumeroCarteirinha.TabIndex = 35;
-            this.lblNumeroCarteirinha.Text = "Número Carteirinha:";
-            // 
-            // lblNumero
-            // 
-            this.lblNumero.AutoSize = true;
-            this.lblNumero.ForeColor = System.Drawing.Color.White;
-            this.lblNumero.Location = new System.Drawing.Point(84, 199);
-            this.lblNumero.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblNumero.Name = "lblNumero";
-            this.lblNumero.Size = new System.Drawing.Size(58, 16);
-            this.lblNumero.TabIndex = 41;
-            this.lblNumero.Text = "Número:";
-            // 
-            // txtLoginUnimedAcre
-            // 
-            this.txtLoginUnimedAcre.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(74)))), ((int)(((byte)(74)))), ((int)(((byte)(74)))));
-            this.txtLoginUnimedAcre.ForeColor = System.Drawing.Color.White;
-            this.txtLoginUnimedAcre.Location = new System.Drawing.Point(153, 65);
-            this.txtLoginUnimedAcre.Margin = new System.Windows.Forms.Padding(4);
-            this.txtLoginUnimedAcre.MaxLength = 32;
-            this.txtLoginUnimedAcre.Name = "txtLoginUnimedAcre";
-            this.txtLoginUnimedAcre.Size = new System.Drawing.Size(281, 22);
-            this.txtLoginUnimedAcre.TabIndex = 0;
-            // 
-            // txtEnderecoNumeroAcre
-            // 
-            this.txtEnderecoNumeroAcre.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(74)))), ((int)(((byte)(74)))), ((int)(((byte)(74)))));
-            this.txtEnderecoNumeroAcre.ForeColor = System.Drawing.Color.White;
-            this.txtEnderecoNumeroAcre.Location = new System.Drawing.Point(153, 196);
-            this.txtEnderecoNumeroAcre.Margin = new System.Windows.Forms.Padding(4);
-            this.txtEnderecoNumeroAcre.MaxLength = 32;
-            this.txtEnderecoNumeroAcre.Name = "txtEnderecoNumeroAcre";
-            this.txtEnderecoNumeroAcre.Size = new System.Drawing.Size(281, 22);
-            this.txtEnderecoNumeroAcre.TabIndex = 3;
-            // 
-            // txtNomeBancoAcre
-            // 
-            this.txtNomeBancoAcre.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(74)))), ((int)(((byte)(74)))), ((int)(((byte)(74)))));
-            this.txtNomeBancoAcre.ForeColor = System.Drawing.Color.White;
-            this.txtNomeBancoAcre.Location = new System.Drawing.Point(153, 108);
-            this.txtNomeBancoAcre.Margin = new System.Windows.Forms.Padding(4);
-            this.txtNomeBancoAcre.MaxLength = 32;
-            this.txtNomeBancoAcre.Name = "txtNomeBancoAcre";
-            this.txtNomeBancoAcre.Size = new System.Drawing.Size(281, 22);
-            this.txtNomeBancoAcre.TabIndex = 1;
-            // 
-            // lblRua
-            // 
-            this.lblRua.AutoSize = true;
-            this.lblRua.ForeColor = System.Drawing.Color.White;
-            this.lblRua.Location = new System.Drawing.Point(37, 153);
-            this.lblRua.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblRua.Name = "lblRua";
-            this.lblRua.Size = new System.Drawing.Size(105, 16);
-            this.lblRua.TabIndex = 39;
-            this.lblRua.Text = "Endereço (Rua):";
-            // 
-            // txtEnderecoRuaAcre
-            // 
-            this.txtEnderecoRuaAcre.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(74)))), ((int)(((byte)(74)))), ((int)(((byte)(74)))));
-            this.txtEnderecoRuaAcre.ForeColor = System.Drawing.Color.White;
-            this.txtEnderecoRuaAcre.Location = new System.Drawing.Point(153, 150);
-            this.txtEnderecoRuaAcre.Margin = new System.Windows.Forms.Padding(4);
-            this.txtEnderecoRuaAcre.MaxLength = 32;
-            this.txtEnderecoRuaAcre.Name = "txtEnderecoRuaAcre";
-            this.txtEnderecoRuaAcre.Size = new System.Drawing.Size(281, 22);
-            this.txtEnderecoRuaAcre.TabIndex = 2;
-            // 
-            // lblNomeBancoAcre
-            // 
-            this.lblNomeBancoAcre.AutoSize = true;
-            this.lblNomeBancoAcre.ForeColor = System.Drawing.Color.White;
-            this.lblNomeBancoAcre.Location = new System.Drawing.Point(34, 107);
-            this.lblNomeBancoAcre.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblNomeBancoAcre.Name = "lblNomeBancoAcre";
-            this.lblNomeBancoAcre.Size = new System.Drawing.Size(108, 16);
-            this.lblNomeBancoAcre.TabIndex = 37;
-            this.lblNomeBancoAcre.Text = "Nome do Banco:";
-            // 
             // pnlDadosReembolso
             // 
             this.pnlDadosReembolso.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(36)))), ((int)(((byte)(36)))), ((int)(((byte)(36)))));
@@ -1289,7 +913,7 @@
             this.pnlDadosReembolso.Controls.Add(this.lblReciboConsulta);
             this.pnlDadosReembolso.Controls.Add(this.txtLoginUnimed);
             this.pnlDadosReembolso.Controls.Add(this.grbTipoAtendimento);
-            this.pnlDadosReembolso.Controls.Add(this.lblNomeArquivoPDF);
+            this.pnlDadosReembolso.Controls.Add(this.lblNomeArquivoRecibo);
             this.pnlDadosReembolso.Controls.Add(this.txtSenhaUnimed);
             this.pnlDadosReembolso.Controls.Add(this.lblSenhaUnimed);
             this.pnlDadosReembolso.Location = new System.Drawing.Point(20, 37);
@@ -1528,6 +1152,284 @@
             this.lblAgenciaSemDigito.TabIndex = 37;
             this.lblAgenciaSemDigito.Text = "Agência sem dígito:";
             // 
+            // pnlUnimedAcre
+            // 
+            this.pnlUnimedAcre.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlUnimedAcre.Controls.Add(this.lbDataRecibo);
+            this.pnlUnimedAcre.Controls.Add(this.dtDataRecibo);
+            this.pnlUnimedAcre.Controls.Add(this.lblEstado);
+            this.pnlUnimedAcre.Controls.Add(this.txtEstadoAcre);
+            this.pnlUnimedAcre.Controls.Add(this.lblNomeArquivoIdentidade);
+            this.pnlUnimedAcre.Controls.Add(this.lblNomeArquivoCarteirinha);
+            this.pnlUnimedAcre.Controls.Add(this.lblBairro);
+            this.pnlUnimedAcre.Controls.Add(this.txtEnderecoBairroAcre);
+            this.pnlUnimedAcre.Controls.Add(this.lblComplemento);
+            this.pnlUnimedAcre.Controls.Add(this.txtEnderecoComplementoAcre);
+            this.pnlUnimedAcre.Controls.Add(this.btnSalvarDadosAcre);
+            this.pnlUnimedAcre.Controls.Add(this.btnSelecionarPDFIdentidade);
+            this.pnlUnimedAcre.Controls.Add(this.lblIdentidade);
+            this.pnlUnimedAcre.Controls.Add(this.btnSelecionarPDFCarteirinha);
+            this.pnlUnimedAcre.Controls.Add(this.lblCarteirinha);
+            this.pnlUnimedAcre.Controls.Add(this.lblDadosUnimedAcre);
+            this.pnlUnimedAcre.Controls.Add(this.lblNumeroCarteirinha);
+            this.pnlUnimedAcre.Controls.Add(this.lblNumero);
+            this.pnlUnimedAcre.Controls.Add(this.txtLoginUnimedAcre);
+            this.pnlUnimedAcre.Controls.Add(this.txtEnderecoNumeroAcre);
+            this.pnlUnimedAcre.Controls.Add(this.txtNomeBancoAcre);
+            this.pnlUnimedAcre.Controls.Add(this.lblRua);
+            this.pnlUnimedAcre.Controls.Add(this.txtEnderecoRuaAcre);
+            this.pnlUnimedAcre.Controls.Add(this.lblNomeBancoAcre);
+            this.pnlUnimedAcre.Location = new System.Drawing.Point(17, 36);
+            this.pnlUnimedAcre.Margin = new System.Windows.Forms.Padding(1);
+            this.pnlUnimedAcre.Name = "pnlUnimedAcre";
+            this.pnlUnimedAcre.Size = new System.Drawing.Size(479, 616);
+            this.pnlUnimedAcre.TabIndex = 43;
+            this.pnlUnimedAcre.Visible = false;
+            // 
+            // lblEstado
+            // 
+            this.lblEstado.AutoSize = true;
+            this.lblEstado.ForeColor = System.Drawing.Color.White;
+            this.lblEstado.Location = new System.Drawing.Point(84, 319);
+            this.lblEstado.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblEstado.Name = "lblEstado";
+            this.lblEstado.Size = new System.Drawing.Size(53, 16);
+            this.lblEstado.TabIndex = 57;
+            this.lblEstado.Text = "Estado:";
+            // 
+            // txtEstadoAcre
+            // 
+            this.txtEstadoAcre.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(74)))), ((int)(((byte)(74)))), ((int)(((byte)(74)))));
+            this.txtEstadoAcre.ForeColor = System.Drawing.Color.White;
+            this.txtEstadoAcre.Location = new System.Drawing.Point(153, 321);
+            this.txtEstadoAcre.Margin = new System.Windows.Forms.Padding(4);
+            this.txtEstadoAcre.MaxLength = 32;
+            this.txtEstadoAcre.Name = "txtEstadoAcre";
+            this.txtEstadoAcre.Size = new System.Drawing.Size(281, 22);
+            this.txtEstadoAcre.TabIndex = 56;
+            // 
+            // lblNomeArquivoIdentidade
+            // 
+            this.lblNomeArquivoIdentidade.AutoEllipsis = true;
+            this.lblNomeArquivoIdentidade.ForeColor = System.Drawing.Color.White;
+            this.lblNomeArquivoIdentidade.Location = new System.Drawing.Point(166, 516);
+            this.lblNomeArquivoIdentidade.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblNomeArquivoIdentidade.Name = "lblNomeArquivoIdentidade";
+            this.lblNomeArquivoIdentidade.Size = new System.Drawing.Size(247, 19);
+            this.lblNomeArquivoIdentidade.TabIndex = 53;
+            // 
+            // lblNomeArquivoCarteirinha
+            // 
+            this.lblNomeArquivoCarteirinha.AutoEllipsis = true;
+            this.lblNomeArquivoCarteirinha.ForeColor = System.Drawing.Color.White;
+            this.lblNomeArquivoCarteirinha.Location = new System.Drawing.Point(166, 433);
+            this.lblNomeArquivoCarteirinha.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblNomeArquivoCarteirinha.Name = "lblNomeArquivoCarteirinha";
+            this.lblNomeArquivoCarteirinha.Size = new System.Drawing.Size(247, 19);
+            this.lblNomeArquivoCarteirinha.TabIndex = 52;
+            // 
+            // lblBairro
+            // 
+            this.lblBairro.AutoSize = true;
+            this.lblBairro.ForeColor = System.Drawing.Color.White;
+            this.lblBairro.Location = new System.Drawing.Point(96, 268);
+            this.lblBairro.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblBairro.Name = "lblBairro";
+            this.lblBairro.Size = new System.Drawing.Size(46, 16);
+            this.lblBairro.TabIndex = 51;
+            this.lblBairro.Text = "Bairro:";
+            // 
+            // txtEnderecoBairroAcre
+            // 
+            this.txtEnderecoBairroAcre.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(74)))), ((int)(((byte)(74)))), ((int)(((byte)(74)))));
+            this.txtEnderecoBairroAcre.ForeColor = System.Drawing.Color.White;
+            this.txtEnderecoBairroAcre.Location = new System.Drawing.Point(153, 270);
+            this.txtEnderecoBairroAcre.Margin = new System.Windows.Forms.Padding(4);
+            this.txtEnderecoBairroAcre.MaxLength = 32;
+            this.txtEnderecoBairroAcre.Name = "txtEnderecoBairroAcre";
+            this.txtEnderecoBairroAcre.Size = new System.Drawing.Size(281, 22);
+            this.txtEnderecoBairroAcre.TabIndex = 5;
+            // 
+            // lblComplemento
+            // 
+            this.lblComplemento.AutoSize = true;
+            this.lblComplemento.ForeColor = System.Drawing.Color.White;
+            this.lblComplemento.Location = new System.Drawing.Point(48, 225);
+            this.lblComplemento.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblComplemento.Name = "lblComplemento";
+            this.lblComplemento.Size = new System.Drawing.Size(94, 16);
+            this.lblComplemento.TabIndex = 49;
+            this.lblComplemento.Text = "Complemento:";
+            // 
+            // txtEnderecoComplementoAcre
+            // 
+            this.txtEnderecoComplementoAcre.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(74)))), ((int)(((byte)(74)))), ((int)(((byte)(74)))));
+            this.txtEnderecoComplementoAcre.ForeColor = System.Drawing.Color.White;
+            this.txtEnderecoComplementoAcre.Location = new System.Drawing.Point(153, 223);
+            this.txtEnderecoComplementoAcre.Margin = new System.Windows.Forms.Padding(4);
+            this.txtEnderecoComplementoAcre.MaxLength = 32;
+            this.txtEnderecoComplementoAcre.Name = "txtEnderecoComplementoAcre";
+            this.txtEnderecoComplementoAcre.Size = new System.Drawing.Size(281, 22);
+            this.txtEnderecoComplementoAcre.TabIndex = 4;
+            // 
+            // btnSalvarDadosAcre
+            // 
+            this.btnSalvarDadosAcre.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSalvarDadosAcre.ForeColor = System.Drawing.Color.White;
+            this.btnSalvarDadosAcre.Location = new System.Drawing.Point(153, 549);
+            this.btnSalvarDadosAcre.Margin = new System.Windows.Forms.Padding(4);
+            this.btnSalvarDadosAcre.Name = "btnSalvarDadosAcre";
+            this.btnSalvarDadosAcre.Size = new System.Drawing.Size(179, 36);
+            this.btnSalvarDadosAcre.TabIndex = 8;
+            this.btnSalvarDadosAcre.Text = "Salvar";
+            this.btnSalvarDadosAcre.UseVisualStyleBackColor = true;
+            this.btnSalvarDadosAcre.Click += new System.EventHandler(this.btnSalvarDadosAcre_Click);
+            // 
+            // btnSelecionarPDFIdentidade
+            // 
+            this.btnSelecionarPDFIdentidade.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSelecionarPDFIdentidade.ForeColor = System.Drawing.Color.White;
+            this.btnSelecionarPDFIdentidade.Location = new System.Drawing.Point(163, 479);
+            this.btnSelecionarPDFIdentidade.Margin = new System.Windows.Forms.Padding(4);
+            this.btnSelecionarPDFIdentidade.Name = "btnSelecionarPDFIdentidade";
+            this.btnSelecionarPDFIdentidade.Size = new System.Drawing.Size(199, 28);
+            this.btnSelecionarPDFIdentidade.TabIndex = 7;
+            this.btnSelecionarPDFIdentidade.Text = "Selecionar PDF Identidade";
+            this.btnSelecionarPDFIdentidade.UseVisualStyleBackColor = true;
+            this.btnSelecionarPDFIdentidade.Click += new System.EventHandler(this.btnSelecionarPDFIdentidade_Click);
+            // 
+            // lblIdentidade
+            // 
+            this.lblIdentidade.AutoSize = true;
+            this.lblIdentidade.ForeColor = System.Drawing.Color.White;
+            this.lblIdentidade.Location = new System.Drawing.Point(63, 480);
+            this.lblIdentidade.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblIdentidade.Name = "lblIdentidade";
+            this.lblIdentidade.Size = new System.Drawing.Size(74, 16);
+            this.lblIdentidade.TabIndex = 46;
+            this.lblIdentidade.Text = "Identidade:";
+            // 
+            // btnSelecionarPDFCarteirinha
+            // 
+            this.btnSelecionarPDFCarteirinha.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSelecionarPDFCarteirinha.ForeColor = System.Drawing.Color.White;
+            this.btnSelecionarPDFCarteirinha.Location = new System.Drawing.Point(163, 401);
+            this.btnSelecionarPDFCarteirinha.Margin = new System.Windows.Forms.Padding(4);
+            this.btnSelecionarPDFCarteirinha.Name = "btnSelecionarPDFCarteirinha";
+            this.btnSelecionarPDFCarteirinha.Size = new System.Drawing.Size(199, 28);
+            this.btnSelecionarPDFCarteirinha.TabIndex = 6;
+            this.btnSelecionarPDFCarteirinha.Text = "Selecionar PDF Carteirinha";
+            this.btnSelecionarPDFCarteirinha.UseVisualStyleBackColor = true;
+            this.btnSelecionarPDFCarteirinha.Click += new System.EventHandler(this.btnSelecionarPDFCarteirinha_Click);
+            // 
+            // lblCarteirinha
+            // 
+            this.lblCarteirinha.ForeColor = System.Drawing.Color.White;
+            this.lblCarteirinha.Location = new System.Drawing.Point(16, 393);
+            this.lblCarteirinha.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblCarteirinha.Name = "lblCarteirinha";
+            this.lblCarteirinha.Size = new System.Drawing.Size(136, 37);
+            this.lblCarteirinha.TabIndex = 44;
+            this.lblCarteirinha.Text = "Carteirinha e Requisição Médica:";
+            // 
+            // lblDadosUnimedAcre
+            // 
+            this.lblDadosUnimedAcre.AutoSize = true;
+            this.lblDadosUnimedAcre.ForeColor = System.Drawing.Color.White;
+            this.lblDadosUnimedAcre.Location = new System.Drawing.Point(8, 12);
+            this.lblDadosUnimedAcre.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblDadosUnimedAcre.Name = "lblDadosUnimedAcre";
+            this.lblDadosUnimedAcre.Size = new System.Drawing.Size(132, 16);
+            this.lblDadosUnimedAcre.TabIndex = 42;
+            this.lblDadosUnimedAcre.Text = "Dados Unimed Acre:";
+            // 
+            // lblNumeroCarteirinha
+            // 
+            this.lblNumeroCarteirinha.ForeColor = System.Drawing.Color.White;
+            this.lblNumeroCarteirinha.Location = new System.Drawing.Point(11, 48);
+            this.lblNumeroCarteirinha.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblNumeroCarteirinha.Name = "lblNumeroCarteirinha";
+            this.lblNumeroCarteirinha.Size = new System.Drawing.Size(134, 24);
+            this.lblNumeroCarteirinha.TabIndex = 35;
+            this.lblNumeroCarteirinha.Text = "Número Carteirinha:";
+            // 
+            // lblNumero
+            // 
+            this.lblNumero.AutoSize = true;
+            this.lblNumero.ForeColor = System.Drawing.Color.White;
+            this.lblNumero.Location = new System.Drawing.Point(84, 179);
+            this.lblNumero.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblNumero.Name = "lblNumero";
+            this.lblNumero.Size = new System.Drawing.Size(58, 16);
+            this.lblNumero.TabIndex = 41;
+            this.lblNumero.Text = "Número:";
+            // 
+            // txtLoginUnimedAcre
+            // 
+            this.txtLoginUnimedAcre.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(74)))), ((int)(((byte)(74)))), ((int)(((byte)(74)))));
+            this.txtLoginUnimedAcre.ForeColor = System.Drawing.Color.White;
+            this.txtLoginUnimedAcre.Location = new System.Drawing.Point(153, 45);
+            this.txtLoginUnimedAcre.Margin = new System.Windows.Forms.Padding(4);
+            this.txtLoginUnimedAcre.MaxLength = 32;
+            this.txtLoginUnimedAcre.Name = "txtLoginUnimedAcre";
+            this.txtLoginUnimedAcre.Size = new System.Drawing.Size(281, 22);
+            this.txtLoginUnimedAcre.TabIndex = 0;
+            // 
+            // txtEnderecoNumeroAcre
+            // 
+            this.txtEnderecoNumeroAcre.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(74)))), ((int)(((byte)(74)))), ((int)(((byte)(74)))));
+            this.txtEnderecoNumeroAcre.ForeColor = System.Drawing.Color.White;
+            this.txtEnderecoNumeroAcre.Location = new System.Drawing.Point(153, 176);
+            this.txtEnderecoNumeroAcre.Margin = new System.Windows.Forms.Padding(4);
+            this.txtEnderecoNumeroAcre.MaxLength = 32;
+            this.txtEnderecoNumeroAcre.Name = "txtEnderecoNumeroAcre";
+            this.txtEnderecoNumeroAcre.Size = new System.Drawing.Size(281, 22);
+            this.txtEnderecoNumeroAcre.TabIndex = 3;
+            // 
+            // txtNomeBancoAcre
+            // 
+            this.txtNomeBancoAcre.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(74)))), ((int)(((byte)(74)))), ((int)(((byte)(74)))));
+            this.txtNomeBancoAcre.ForeColor = System.Drawing.Color.White;
+            this.txtNomeBancoAcre.Location = new System.Drawing.Point(153, 88);
+            this.txtNomeBancoAcre.Margin = new System.Windows.Forms.Padding(4);
+            this.txtNomeBancoAcre.MaxLength = 32;
+            this.txtNomeBancoAcre.Name = "txtNomeBancoAcre";
+            this.txtNomeBancoAcre.Size = new System.Drawing.Size(281, 22);
+            this.txtNomeBancoAcre.TabIndex = 1;
+            // 
+            // lblRua
+            // 
+            this.lblRua.AutoSize = true;
+            this.lblRua.ForeColor = System.Drawing.Color.White;
+            this.lblRua.Location = new System.Drawing.Point(37, 133);
+            this.lblRua.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblRua.Name = "lblRua";
+            this.lblRua.Size = new System.Drawing.Size(105, 16);
+            this.lblRua.TabIndex = 39;
+            this.lblRua.Text = "Endereço (Rua):";
+            // 
+            // txtEnderecoRuaAcre
+            // 
+            this.txtEnderecoRuaAcre.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(74)))), ((int)(((byte)(74)))), ((int)(((byte)(74)))));
+            this.txtEnderecoRuaAcre.ForeColor = System.Drawing.Color.White;
+            this.txtEnderecoRuaAcre.Location = new System.Drawing.Point(153, 130);
+            this.txtEnderecoRuaAcre.Margin = new System.Windows.Forms.Padding(4);
+            this.txtEnderecoRuaAcre.MaxLength = 32;
+            this.txtEnderecoRuaAcre.Name = "txtEnderecoRuaAcre";
+            this.txtEnderecoRuaAcre.Size = new System.Drawing.Size(281, 22);
+            this.txtEnderecoRuaAcre.TabIndex = 2;
+            // 
+            // lblNomeBancoAcre
+            // 
+            this.lblNomeBancoAcre.AutoSize = true;
+            this.lblNomeBancoAcre.ForeColor = System.Drawing.Color.White;
+            this.lblNomeBancoAcre.Location = new System.Drawing.Point(34, 87);
+            this.lblNomeBancoAcre.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblNomeBancoAcre.Name = "lblNomeBancoAcre";
+            this.lblNomeBancoAcre.Size = new System.Drawing.Size(108, 16);
+            this.lblNomeBancoAcre.TabIndex = 37;
+            this.lblNomeBancoAcre.Text = "Nome do Banco:";
+            // 
             // menuAplicacao
             // 
             this.menuAplicacao.ImageScalingSize = new System.Drawing.Size(40, 40);
@@ -1538,7 +1440,7 @@
             this.menuAplicacao.Location = new System.Drawing.Point(0, 0);
             this.menuAplicacao.Name = "menuAplicacao";
             this.menuAplicacao.Padding = new System.Windows.Forms.Padding(3, 1, 0, 1);
-            this.menuAplicacao.Size = new System.Drawing.Size(1076, 26);
+            this.menuAplicacao.Size = new System.Drawing.Size(1076, 30);
             this.menuAplicacao.TabIndex = 46;
             this.menuAplicacao.Text = "menuStrip1";
             // 
@@ -1550,7 +1452,7 @@
             this.toolStripMenuItem1,
             this.sairToolStripMenuItem1});
             this.arquivoToolStripMenuItem.Name = "arquivoToolStripMenuItem";
-            this.arquivoToolStripMenuItem.Size = new System.Drawing.Size(75, 24);
+            this.arquivoToolStripMenuItem.Size = new System.Drawing.Size(75, 28);
             this.arquivoToolStripMenuItem.Text = "&Arquivo";
             // 
             // restaurarBackupToolStripMenuItem
@@ -1585,7 +1487,7 @@
             this.adicionarExcluirToolStripMenuItem,
             this.toolStripMenuItemLinha1});
             this.clientesToolStripMenuItem.Name = "clientesToolStripMenuItem";
-            this.clientesToolStripMenuItem.Size = new System.Drawing.Size(75, 24);
+            this.clientesToolStripMenuItem.Size = new System.Drawing.Size(75, 28);
             this.clientesToolStripMenuItem.Text = "Clientes";
             // 
             // adicionarExcluirToolStripMenuItem
@@ -1603,7 +1505,7 @@
             // sobreToolStripMenuItem
             // 
             this.sobreToolStripMenuItem.Name = "sobreToolStripMenuItem";
-            this.sobreToolStripMenuItem.Size = new System.Drawing.Size(71, 24);
+            this.sobreToolStripMenuItem.Size = new System.Drawing.Size(71, 28);
             this.sobreToolStripMenuItem.Text = "&Sobre...";
             this.sobreToolStripMenuItem.Click += new System.EventHandler(this.sobreToolStripMenuItem_Click);
             // 
@@ -1794,19 +1696,144 @@
             // 
             this.dialogoPDFIdentidade.Filter = "PDF files|*.pdf";
             // 
+            // lbDataRecibo
+            // 
+            this.lbDataRecibo.AutoSize = true;
+            this.lbDataRecibo.ForeColor = System.Drawing.Color.White;
+            this.lbDataRecibo.Location = new System.Drawing.Point(75, 363);
+            this.lbDataRecibo.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lbDataRecibo.Name = "lbDataRecibo";
+            this.lbDataRecibo.Size = new System.Drawing.Size(53, 16);
+            this.lbDataRecibo.TabIndex = 59;
+            this.lbDataRecibo.Text = "Estado:";
+            // 
+            // dtDataRecibo
+            // 
+            this.dtDataRecibo.BackDisabledColor = System.Drawing.SystemColors.Control;
+            this.dtDataRecibo.CalendarForeColor = System.Drawing.Color.White;
+            this.dtDataRecibo.CalendarMonthBackground = System.Drawing.Color.FromArgb(((int)(((byte)(74)))), ((int)(((byte)(74)))), ((int)(((byte)(74)))));
+            this.dtDataRecibo.ForeDisabledColor = System.Drawing.Color.Empty;
+            this.dtDataRecibo.Location = new System.Drawing.Point(153, 363);
+            this.dtDataRecibo.Margin = new System.Windows.Forms.Padding(4);
+            this.dtDataRecibo.Name = "dtDataRecibo";
+            this.dtDataRecibo.Size = new System.Drawing.Size(281, 22);
+            this.dtDataRecibo.TabIndex = 58;
+            // 
+            // dtDataConsulta10
+            // 
+            this.dtDataConsulta10.BackDisabledColor = System.Drawing.SystemColors.Control;
+            this.dtDataConsulta10.ForeDisabledColor = System.Drawing.Color.Empty;
+            this.dtDataConsulta10.Location = new System.Drawing.Point(119, 544);
+            this.dtDataConsulta10.Margin = new System.Windows.Forms.Padding(4);
+            this.dtDataConsulta10.Name = "dtDataConsulta10";
+            this.dtDataConsulta10.Size = new System.Drawing.Size(305, 22);
+            this.dtDataConsulta10.TabIndex = 12;
+            // 
+            // dtDataConsulta9
+            // 
+            this.dtDataConsulta9.BackDisabledColor = System.Drawing.SystemColors.Control;
+            this.dtDataConsulta9.ForeDisabledColor = System.Drawing.Color.Empty;
+            this.dtDataConsulta9.Location = new System.Drawing.Point(119, 506);
+            this.dtDataConsulta9.Margin = new System.Windows.Forms.Padding(4);
+            this.dtDataConsulta9.Name = "dtDataConsulta9";
+            this.dtDataConsulta9.Size = new System.Drawing.Size(305, 22);
+            this.dtDataConsulta9.TabIndex = 11;
+            // 
+            // dtDataConsulta8
+            // 
+            this.dtDataConsulta8.BackDisabledColor = System.Drawing.SystemColors.Control;
+            this.dtDataConsulta8.ForeDisabledColor = System.Drawing.Color.Empty;
+            this.dtDataConsulta8.Location = new System.Drawing.Point(119, 464);
+            this.dtDataConsulta8.Margin = new System.Windows.Forms.Padding(4);
+            this.dtDataConsulta8.Name = "dtDataConsulta8";
+            this.dtDataConsulta8.Size = new System.Drawing.Size(305, 22);
+            this.dtDataConsulta8.TabIndex = 10;
+            // 
+            // dtDataConsulta7
+            // 
+            this.dtDataConsulta7.BackDisabledColor = System.Drawing.SystemColors.Control;
+            this.dtDataConsulta7.ForeDisabledColor = System.Drawing.Color.Empty;
+            this.dtDataConsulta7.Location = new System.Drawing.Point(119, 422);
+            this.dtDataConsulta7.Margin = new System.Windows.Forms.Padding(4);
+            this.dtDataConsulta7.Name = "dtDataConsulta7";
+            this.dtDataConsulta7.Size = new System.Drawing.Size(305, 22);
+            this.dtDataConsulta7.TabIndex = 9;
+            // 
+            // dtDataConsulta6
+            // 
+            this.dtDataConsulta6.BackDisabledColor = System.Drawing.SystemColors.Control;
+            this.dtDataConsulta6.ForeDisabledColor = System.Drawing.Color.Empty;
+            this.dtDataConsulta6.Location = new System.Drawing.Point(119, 378);
+            this.dtDataConsulta6.Margin = new System.Windows.Forms.Padding(4);
+            this.dtDataConsulta6.Name = "dtDataConsulta6";
+            this.dtDataConsulta6.Size = new System.Drawing.Size(305, 22);
+            this.dtDataConsulta6.TabIndex = 8;
+            // 
+            // dtDataConsulta4
+            // 
+            this.dtDataConsulta4.BackDisabledColor = System.Drawing.SystemColors.Control;
+            this.dtDataConsulta4.ForeDisabledColor = System.Drawing.Color.Empty;
+            this.dtDataConsulta4.Location = new System.Drawing.Point(119, 286);
+            this.dtDataConsulta4.Margin = new System.Windows.Forms.Padding(4);
+            this.dtDataConsulta4.Name = "dtDataConsulta4";
+            this.dtDataConsulta4.Size = new System.Drawing.Size(305, 22);
+            this.dtDataConsulta4.TabIndex = 6;
+            // 
+            // dtDataConsulta3
+            // 
+            this.dtDataConsulta3.BackDisabledColor = System.Drawing.SystemColors.Control;
+            this.dtDataConsulta3.ForeDisabledColor = System.Drawing.Color.Empty;
+            this.dtDataConsulta3.Location = new System.Drawing.Point(119, 239);
+            this.dtDataConsulta3.Margin = new System.Windows.Forms.Padding(4);
+            this.dtDataConsulta3.Name = "dtDataConsulta3";
+            this.dtDataConsulta3.Size = new System.Drawing.Size(305, 22);
+            this.dtDataConsulta3.TabIndex = 5;
+            // 
+            // dtDataConsulta5
+            // 
+            this.dtDataConsulta5.BackDisabledColor = System.Drawing.SystemColors.Control;
+            this.dtDataConsulta5.ForeDisabledColor = System.Drawing.Color.Empty;
+            this.dtDataConsulta5.Location = new System.Drawing.Point(119, 331);
+            this.dtDataConsulta5.Margin = new System.Windows.Forms.Padding(4);
+            this.dtDataConsulta5.Name = "dtDataConsulta5";
+            this.dtDataConsulta5.Size = new System.Drawing.Size(305, 22);
+            this.dtDataConsulta5.TabIndex = 7;
+            // 
+            // dtDataConsulta2
+            // 
+            this.dtDataConsulta2.BackDisabledColor = System.Drawing.SystemColors.Control;
+            this.dtDataConsulta2.ForeDisabledColor = System.Drawing.Color.Empty;
+            this.dtDataConsulta2.Location = new System.Drawing.Point(119, 194);
+            this.dtDataConsulta2.Margin = new System.Windows.Forms.Padding(4);
+            this.dtDataConsulta2.Name = "dtDataConsulta2";
+            this.dtDataConsulta2.Size = new System.Drawing.Size(305, 22);
+            this.dtDataConsulta2.TabIndex = 4;
+            // 
+            // dtDataConsulta1
+            // 
+            this.dtDataConsulta1.BackDisabledColor = System.Drawing.SystemColors.Control;
+            this.dtDataConsulta1.CalendarForeColor = System.Drawing.Color.White;
+            this.dtDataConsulta1.CalendarMonthBackground = System.Drawing.Color.FromArgb(((int)(((byte)(74)))), ((int)(((byte)(74)))), ((int)(((byte)(74)))));
+            this.dtDataConsulta1.ForeDisabledColor = System.Drawing.Color.Empty;
+            this.dtDataConsulta1.Location = new System.Drawing.Point(119, 149);
+            this.dtDataConsulta1.Margin = new System.Windows.Forms.Padding(4);
+            this.dtDataConsulta1.Name = "dtDataConsulta1";
+            this.dtDataConsulta1.Size = new System.Drawing.Size(305, 22);
+            this.dtDataConsulta1.TabIndex = 3;
+            // 
             // TelaPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(36)))), ((int)(((byte)(36)))), ((int)(((byte)(36)))));
             this.ClientSize = new System.Drawing.Size(1076, 795);
-            this.Controls.Add(this.pnlCadastroCliente);
-            this.Controls.Add(this.pnlSobre);
             this.Controls.Add(this.menuAplicacao);
             this.Controls.Add(this.statusStrip);
             this.Controls.Add(this.pnlRecibo);
             this.Controls.Add(this.pnlReembolso);
             this.Controls.Add(this.pnlConsultas);
+            this.Controls.Add(this.pnlSobre);
+            this.Controls.Add(this.pnlCadastroCliente);
             this.ForeColor = System.Drawing.Color.Black;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -1832,14 +1859,14 @@
             this.pnlDadosPaciente.PerformLayout();
             this.pnlReembolso.ResumeLayout(false);
             this.pnlReembolso.PerformLayout();
-            this.pnlUnimedAcre.ResumeLayout(false);
-            this.pnlUnimedAcre.PerformLayout();
             this.pnlDadosReembolso.ResumeLayout(false);
             this.pnlDadosReembolso.PerformLayout();
             this.grbTipoAtendimento.ResumeLayout(false);
             this.grbTipoAtendimento.PerformLayout();
             this.pnlDadosBancarios.ResumeLayout(false);
             this.pnlDadosBancarios.PerformLayout();
+            this.pnlUnimedAcre.ResumeLayout(false);
+            this.pnlUnimedAcre.PerformLayout();
             this.menuAplicacao.ResumeLayout(false);
             this.menuAplicacao.PerformLayout();
             this.pnlSobre.ResumeLayout(false);
@@ -1865,7 +1892,7 @@
         private System.Windows.Forms.OpenFileDialog dialogoPDFRecibo;
         private System.Windows.Forms.Label lblCPFPaciente;
         private System.Windows.Forms.TextBox txtCPFPaciente;
-        private System.Windows.Forms.Label lblNomeArquivoPDF;
+        private System.Windows.Forms.Label lblNomeArquivoRecibo;
         private System.Windows.Forms.StatusStrip statusStrip;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatus;
         private System.Windows.Forms.LinkLabel lnkAssinarPDF;
@@ -1991,6 +2018,8 @@
         private System.Windows.Forms.OpenFileDialog dialogoPDFIdentidade;
         private System.Windows.Forms.Label lblEstado;
         private System.Windows.Forms.TextBox txtEstadoAcre;
+        private System.Windows.Forms.Label lbDataRecibo;
+        private DateTimePickerWithBackColor dtDataRecibo;
     }
 }
 

@@ -14,5 +14,6 @@ namespace TerapiaReembolso
         public string Estado { get; set; }
         public string PDFCarteirinhaRequisicao { get; set; }
         public string PDFIdentidade { get; set; }
+        public string DataRecibo { get; set; }
     }
 }
