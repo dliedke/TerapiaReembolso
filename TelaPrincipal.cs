@@ -702,6 +702,7 @@ namespace TerapiaReembolso
             txtEnderecoComplementoAcre.Text = _pacienteAcre.EnderecoComplemento;
             txtEnderecoRuaAcre.Text = _pacienteAcre.EnderecoRua;
             txtEnderecoNumeroAcre.Text = _pacienteAcre.EnderecoNumero;
+            txtObservacoes.Text = _pacienteAcre.Observacoes;
         }
 
         private void SalvaDadosAtuais()
@@ -783,6 +784,7 @@ namespace TerapiaReembolso
             _pacienteAcre.EnderecoRua = txtEnderecoRuaAcre.Text;
             _pacienteAcre.EnderecoNumero = txtEnderecoNumeroAcre.Text;
             _pacienteAcre.DataRecibo = dtDataRecibo.Value.ToString("dd/MM/yyyy");
+            _pacienteAcre.Observacoes = txtObservacoes.Text;
         }
 
         private void MainScreen_FormClosing(object sender, FormClosingEventArgs e)

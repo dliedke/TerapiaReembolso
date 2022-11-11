@@ -189,6 +189,14 @@ namespace TerapiaReembolso
             _element = _chromeDriver.FindElement(By.Name("nr_conta"));
             _element.SendKeys(TelaPrincipal.PegaClienteAtual().Conta + TelaPrincipal.PegaClienteAtual().Digito);
 
+            // Seta observações
+            WaitExtension.WaitUntilElement(_chromeDriver, By.Name("dsobservacao"), 15);
+            _element = _chromeDriver.FindElement(By.Name("dsobservacao"));
+            _element.SendKeys(TelaPrincipal.PegaPacienteAcre().Observacoes);
+
+            // Aguarda usuário olhar os campos preenchidos
+            Thread.Sleep(5000);
+
             // Submete e vai para próxima etapa
             _element.Submit();
 
@@ -263,6 +271,9 @@ namespace TerapiaReembolso
             WaitExtension.WaitUntilElement(_chromeDriver, By.XPath($"//div[contains(text(),'{TelaPrincipal.PegaPacienteAcre().Estado}')]"), 15);
             _element = _chromeDriver.FindElement(By.XPath($"//div[contains(text(),'{TelaPrincipal.PegaPacienteAcre().Estado}')]"));
             _element.Click();
+
+            // Aguarda usuário olhar os campos preenchidos
+            Thread.Sleep(5000);
 
             // Submete o form
             _element = _chromeDriver.FindElement(By.Name("nmcidade"));
@@ -353,7 +364,7 @@ namespace TerapiaReembolso
             _element = _chromeDriver.FindElement(By.Name("dsadicional"));
             _element.SendKeys(descricao);
 
-            // Espera um pouco para usuário poder verificar os campos
+            // Aguarda usuário olhar os campos preenchidos
             Thread.Sleep(5000);
 
             // Clica no botão adicionar
@@ -364,7 +375,10 @@ namespace TerapiaReembolso
             // Espera os spinners todos da página
             Thread.Sleep(1000);
             Utilitarios.AguardaSpinner(_chromeDriver);
-            
+
+            // Aguarda usuário olhar os campos preenchidos
+            Thread.Sleep(3000);
+
             // Clica no botão Próximo
             WaitExtension.WaitUntilElement(_chromeDriver, By.XPath("//button[contains(text(),'Próximo')]"), 15);
             _element = _chromeDriver.FindElement(By.XPath("//button[contains(text(),'Próximo')]"));
@@ -390,7 +404,7 @@ namespace TerapiaReembolso
 
             // Carrega arquivo do recibo
             inputFiles[0].SendKeys(TelaPrincipal.PegaClienteAtual().PDFRecibo);
-            Thread.Sleep(8000);
+            Thread.Sleep(4000);
         }
     }
 }
