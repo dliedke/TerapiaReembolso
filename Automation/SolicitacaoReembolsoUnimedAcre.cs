@@ -394,16 +394,37 @@ namespace TerapiaReembolso
             // Busca todos elementos input type=file
             var inputFiles = _chromeDriver.FindElements(By.XPath("//input[@type='file']"));
 
+            // Busca todas flechinas dos dropdowns
+            var arrows = _chromeDriver.FindElements(By.XPath("//span[@class='select2-arrow']"));
+
+            // Seleciona "CARTÃO DO BENEFICIARIO ATENDIDO"
+            arrows[0].Click();
+            WaitExtension.WaitUntilElement(_chromeDriver, By.XPath("//div[contains(text(),'CARTÃO DO BENEFICIARIO ATENDIDO')]"), 15);
+            _element = _chromeDriver.FindElement(By.XPath("//div[contains(text(),'CARTÃO DO BENEFICIARIO ATENDIDO')]"));
+            _element.Click();
+
             // Carrega arquivo da carteirinha e pedido médico
-            inputFiles[0].SendKeys(TelaPrincipal.PegaPacienteAcre().PDFCarteirinhaRequisicao);
+            inputFiles[3].SendKeys(TelaPrincipal.PegaPacienteAcre().PDFCarteirinhaRequisicao);
             Thread.Sleep(8000);
+
+            // Seleciona "CARTÃO DO BENEFICIARIO ATENDIDO"
+            arrows[0].Click();
+            WaitExtension.WaitUntilElement(_chromeDriver, By.XPath("//div[contains(text(),'IDENTIDADE DO BENEFICIARIO OU RESPONSAVEL')]"), 15);
+            _element = _chromeDriver.FindElement(By.XPath("//div[contains(text(),'IDENTIDADE DO BENEFICIARIO OU RESPONSAVEL')]"));
+            _element.Click();
 
             // Carrega arquivo da identidade
-            inputFiles[0].SendKeys(TelaPrincipal.PegaPacienteAcre().PDFIdentidade);
+            inputFiles[3].SendKeys(TelaPrincipal.PegaPacienteAcre().PDFIdentidade);
             Thread.Sleep(8000);
 
+            // Seleciona "NOTA FISCAL"
+            arrows[0].Click();
+            WaitExtension.WaitUntilElement(_chromeDriver, By.XPath("//div[contains(text(),'NOTA FISCAL')]"), 15);
+            _element = _chromeDriver.FindElement(By.XPath("//div[contains(text(),'NOTA FISCAL')]"));
+            _element.Click();
+
             // Carrega arquivo do recibo
-            inputFiles[0].SendKeys(TelaPrincipal.PegaClienteAtual().PDFRecibo);
+            inputFiles[3].SendKeys(TelaPrincipal.PegaClienteAtual().PDFRecibo);
             Thread.Sleep(4000);
         }
     }
