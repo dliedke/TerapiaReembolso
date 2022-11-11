@@ -23,6 +23,7 @@ namespace TerapiaReembolso
         [STAThread]
         static void Main()
         {
+            int a = 0;
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new TelaPrincipal());
         }
