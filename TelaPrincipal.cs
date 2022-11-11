@@ -643,6 +643,17 @@ namespace TerapiaReembolso
                 if (File.Exists(arquivoPacienteAcre))
                 {
                     _pacienteAcre = CryptoSerializer.DeSerialize<PacienteAcre>(arquivoPacienteAcre);
+
+                    // Se não existe os arquivos na máquina, já exclui os nomes de arquivos
+                    if (!File.Exists(_pacienteAcre.PDFIdentidade))
+                    {
+                        _pacienteAcre.PDFIdentidade = string.Empty;
+                    }
+
+                    if (!File.Exists(_pacienteAcre.PDFCarteirinhaRequisicao))
+                    {
+                        _pacienteAcre.PDFCarteirinhaRequisicao = string.Empty;
+                    }
                 }
 
                 AtualizaTelaComConfiguracaoAtual();
@@ -712,9 +723,11 @@ namespace TerapiaReembolso
                 // Salva todos dados da tela em classe Configuracao
                 CarregaDadosTelaEmMemoria();
 
-                // Não salva o PDF do recibo
+                // Não salva o PDF do recibo e data do recibo
                 string pdfRecibo = TelaPrincipal.PegaClienteAtual().PDFRecibo;
+                string dataRecibo = TelaPrincipal.PegaPacienteAcre().DataRecibo;
                 TelaPrincipal.PegaClienteAtual().PDFRecibo = string.Empty;
+                TelaPrincipal.PegaPacienteAcre().DataRecibo = string.Empty;
 
                 // Cria diretório para os arquivos de configuração se não existir
                 string caminhoConfiguracoes = Environment.ExpandEnvironmentVariables(@"%APPDATA%\..\Local\TerapiaReembolso");
@@ -744,8 +757,9 @@ namespace TerapiaReembolso
                     CryptoSerializer.Serialize<PacienteAcre>(arquivoPacienteAcre, _pacienteAcre);
                 }
 
-                // Mantem em memoria o pdf do recibo
+                // Mantem em memoria o pdf do recibo e data do recibo
                 TelaPrincipal.PegaClienteAtual().PDFRecibo = pdfRecibo;
+                TelaPrincipal.PegaPacienteAcre().DataRecibo = dataRecibo;
             }
             catch (Exception ex)
             {
@@ -1730,6 +1744,14 @@ namespace TerapiaReembolso
                         if (File.Exists(arquivoPacientes))
                         {
                             FileInfo fileInfo = new FileInfo(arquivoPacientes);
+                            listaArquvosParaBackup.Add(fileInfo);
+                        }
+
+                        // Pega informação do arquivos de paciente acre
+                        string arquivoPacienteAcre = Path.Combine(_caminhoConfiguracoes, "pacienteacre.bin");
+                        if (File.Exists(arquivoPacienteAcre))
+                        {
+                            FileInfo fileInfo = new FileInfo(arquivoPacienteAcre);
                             listaArquvosParaBackup.Add(fileInfo);
                         }
 
