@@ -5,6 +5,10 @@ using System.Diagnostics;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.Extensions;
+using System.Globalization;
+using System.Text;
+using System.Windows.Forms;
+using System;
 
 namespace TerapiaReembolso
 {
@@ -89,6 +93,28 @@ namespace TerapiaReembolso
             }
 
             return false;
+        }
+
+
+        public static string RemoveAcentos(string text)
+        {
+            try
+            {
+                // Remove todos acentos do nome do paciente
+                StringBuilder sbReturn = new StringBuilder();
+                var arrayText = text.Normalize(NormalizationForm.FormD).ToCharArray();
+                foreach (char letter in arrayText)
+                {
+                    if (CharUnicodeInfo.GetUnicodeCategory(letter) != UnicodeCategory.NonSpacingMark)
+                        sbReturn.Append(letter);
+                }
+                return sbReturn.ToString();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Erro ao Remover Acenteos: " + ex.Message + ex.StackTrace, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return text;
+            }
         }
     }
 }

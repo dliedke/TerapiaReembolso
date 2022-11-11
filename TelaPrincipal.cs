@@ -34,6 +34,7 @@ namespace TerapiaReembolso
         private static int _indiceClienteAtual = 0;
         private DateTimePickerWithBackColor[] _datasConsultasControles;
         private Dictionary<string, Paciente> _listaPacientes = new Dictionary<string, Paciente>();
+        private static PacienteAcre _pacienteAcre = new PacienteAcre();
 
         // Path onde serão serializados as configurações de clientes e pacientes
         private string _caminhoConfiguracoes = Environment.ExpandEnvironmentVariables(@"%APPDATA%\..\Local\TerapiaReembolso");
@@ -97,11 +98,6 @@ namespace TerapiaReembolso
 
                 // Configura cor dos controles
                 SetaEstilos();
-
-                //_listaConfiguracoesClientes[0].LoginUnimed = "2667664000062100";
-                //_listaConfiguracoesClientes[0].SenhaUnimed = "2667664000062100";
-
-                //SolicitacaoReembolsoUnimedAcre.GerarSolicitacaoReembolso();
             }
             catch (Exception ex)
             {
@@ -208,24 +204,24 @@ namespace TerapiaReembolso
             try
             {
                 // Pede arquivo PDF do recibo pro usuário
-                DialogResult dialogResult = dialogoPDF.ShowDialog();
+                DialogResult dialogResult = dialogoPDFRecibo.ShowDialog();
 
                 // Se arquivo foi selecionado
                 if (dialogResult == DialogResult.OK)
                 {
                     // Verifica extensão do arquivo
-                    if (Path.GetExtension(dialogoPDF.FileName).ToLower() != ".pdf")
+                    if (Path.GetExtension(dialogoPDFRecibo.FileName).ToLower() != ".pdf")
                     {
                         MessageBox.Show("Favor selecionar um arquivo PDF.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        dialogoPDF.FileName = "";
+                        dialogoPDFRecibo.FileName = "";
                     }
                     else
                     {
-                        TelaPrincipal.PegaClienteAtual().PDFRecibo = dialogoPDF.FileName;
+                        TelaPrincipal.PegaClienteAtual().PDFRecibo = dialogoPDFRecibo.FileName;
                     }
 
                     // Mostra nome do PDF na tela
-                    lblNomeArquivoPDF.Text = Path.GetFileName(dialogoPDF.FileName);
+                    lblNomeArquivoPDF.Text = Path.GetFileName(dialogoPDFRecibo.FileName);
                 }
             }
             catch (Exception ex)
@@ -532,7 +528,7 @@ namespace TerapiaReembolso
             if (rbFisica.Checked)
             {
                 // Valida PDF do recibo
-                if (string.IsNullOrEmpty(dialogoPDF.FileName))
+                if (string.IsNullOrEmpty(dialogoPDFRecibo.FileName))
                 {
                     MessageBox.Show("Favor selecionar PDF do recibo.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     btnSelecionarPDFRecibo.Focus();
@@ -542,7 +538,7 @@ namespace TerapiaReembolso
             else
             {
                 // Valida PDF do recibo
-                if (string.IsNullOrEmpty(dialogoPDF.FileName))
+                if (string.IsNullOrEmpty(dialogoPDFRecibo.FileName))
                 {
                     MessageBox.Show("Favor selecionar PDF da nota fiscal.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     btnSelecionarPDFRecibo.Focus();
@@ -553,6 +549,7 @@ namespace TerapiaReembolso
             return true;
         }
 
+        
         #endregion
 
         #region Carrega/Salva Dados
@@ -629,6 +626,15 @@ namespace TerapiaReembolso
                     // Clica no primeiro cliente
                     nomeClienteMenu_Click(clientesToolStripMenuItem.DropDownItems[2], EventArgs.Empty);
                 }
+
+                // Carrega dados do PacienteAcre de arquivo binario criptografado
+                string arquivoPacienteAcre = Path.Combine(_caminhoConfiguracoes, "pacienteacre.bin");
+                if (File.Exists(arquivoPacienteAcre))
+                {
+                    _pacienteAcre = CryptoSerializer.DeSerialize<PacienteAcre>(arquivoPacienteAcre);
+                }
+
+                AtualizaTelaComConfiguracaoAtual();
             }
             catch (Exception ex)
             {
@@ -648,6 +654,7 @@ namespace TerapiaReembolso
                 rbFisica.Checked = true;
             }
 
+            // Mostra dados do cliente atual
             txtCidade.Text = TelaPrincipal.PegaClienteAtual().Cidade;
             txtNomeDoTerapeuta.Text = TelaPrincipal.PegaClienteAtual().NomeTerapeuta;
             txtCPFTerapeuta.Text = TelaPrincipal.PegaClienteAtual().CPFTerapeuta;
@@ -664,12 +671,26 @@ namespace TerapiaReembolso
                 rbTelemedicina.Checked = true;
             }
 
+            // Mostra dados do cliente atual
             txtNomeDoBanco.Text = TelaPrincipal.PegaClienteAtual().NomeBanco;
             txtAgenciaSemDigito.Text = TelaPrincipal.PegaClienteAtual().Agencia;
             txtContaSemDigito.Text = TelaPrincipal.PegaClienteAtual().Conta;
             txtDigitoDaConta.Text = TelaPrincipal.PegaClienteAtual().Digito;
             txtLoginUnimed.Text = TelaPrincipal.PegaClienteAtual().LoginUnimed;
             txtSenhaUnimed.Text = TelaPrincipal.PegaClienteAtual().SenhaUnimed;
+
+            // Mostra na tela os dados da Unimed Acre
+            txtLoginUnimedAcre.Text = _pacienteAcre.CarteirinhaUnimed;
+            txtNomeBancoAcre.Text = _pacienteAcre.NomeBanco;
+            dialogoPDFCarteirinha.FileName = _pacienteAcre.PDFCarteirinhaRequisicao;
+            lblNomeArquivoCarteirinha.Text = Path.GetFileName(_pacienteAcre.PDFCarteirinhaRequisicao);
+            dialogoPDFIdentidade.FileName = _pacienteAcre.PDFIdentidade;
+            lblNomeArquivoIdentidade.Text = Path.GetFileName(_pacienteAcre.PDFIdentidade);
+            txtEnderecoBairroAcre.Text = _pacienteAcre.Bairro;
+            txtEstadoAcre.Text = _pacienteAcre.Estado;
+            txtEnderecoComplementoAcre.Text = _pacienteAcre.ComplementoEndereco;
+            txtEnderecoRuaAcre.Text = _pacienteAcre.EnderecoSemNumero;
+            txtEnderecoNumeroAcre.Text = _pacienteAcre.NumeroEndereco;
         }
 
         private void SalvaDadosAtuais()
@@ -704,6 +725,13 @@ namespace TerapiaReembolso
                     CryptoSerializer.Serialize<Dictionary<string, Paciente>>(arquivoPacientes, _listaPacientes);
                 }
 
+                // Salva paciente acre em arquivo binário criptografado se tiver dados
+                if (!string.IsNullOrEmpty(_pacienteAcre.CarteirinhaUnimed))
+                {
+                    string arquivoPacienteAcre = Path.Combine(caminhoConfiguracoes, "pacienteacre.bin");
+                    CryptoSerializer.Serialize<PacienteAcre>(arquivoPacienteAcre, _pacienteAcre);
+                }
+
                 // Mantem em memoria o pdf do recibo
                 TelaPrincipal.PegaClienteAtual().PDFRecibo = pdfRecibo;
             }
@@ -733,6 +761,16 @@ namespace TerapiaReembolso
             TelaPrincipal.PegaClienteAtual().LoginUnimed = txtLoginUnimed.Text;
 
             PegaPacienteAtual();
+
+            _pacienteAcre.CarteirinhaUnimed = txtLoginUnimedAcre.Text;
+            _pacienteAcre.NomeBanco = txtNomeBancoAcre.Text;
+            _pacienteAcre.PDFCarteirinhaRequisicao = dialogoPDFCarteirinha.FileName;
+            _pacienteAcre.PDFIdentidade = dialogoPDFIdentidade.FileName;
+            _pacienteAcre.Bairro = txtEnderecoBairroAcre.Text;
+            _pacienteAcre.Estado = txtEstadoAcre.Text;
+            _pacienteAcre.ComplementoEndereco = txtEnderecoComplementoAcre.Text;
+            _pacienteAcre.EnderecoSemNumero = txtEnderecoRuaAcre.Text;
+            _pacienteAcre.NumeroEndereco = txtEnderecoNumeroAcre.Text;
         }
 
         private void MainScreen_FormClosing(object sender, FormClosingEventArgs e)
@@ -893,9 +931,25 @@ namespace TerapiaReembolso
                 // (muitos campso do recibo são necessário para pedir o reembolso)
                 if (ValidaDadosParaRecibo() && ValidaDadosParaReembolso())
                 {
+                    // Caso seja reembolso Unimed Acre, valida mais dados
+                    if (ReembolsoAcre() && !ValidaDadosParaReembolsoAcre())
+                    {
+                        return;
+                    }
+
                     CarregaDadosTelaEmMemoria();
 
-                    Action action = (Action)SolicitacaoReembolsoUnimedSeguros.GerarSolicitacaoReembolso;
+                    Action action = null;
+
+                    if (!ReembolsoAcre())
+                    {
+                        action = (Action)SolicitacaoReembolsoUnimedSeguros.GerarSolicitacaoReembolso;
+                    }
+                    else
+                    {
+                        action = (Action)SolicitacaoReembolsoUnimedAcre.GerarSolicitacaoReembolso;
+                    }
+
                     RodaAutomacao(action);
 
                     // Mostra mensagem de sucesso
@@ -941,11 +995,23 @@ namespace TerapiaReembolso
         {
             try
             {
-                if (ValidaDadosParaReembolso())
+                if (!ReembolsoAcre())
                 {
-                    CarregaDadosTelaEmMemoria();
-                    SolicitacaoReembolsoUnimedSeguros.AbreSegurosUnimedCliente();
-                    SolicitacaoReembolsoUnimedSeguros.LoginUnimed();
+                    if (ValidaDadosParaReembolso())
+                    {
+                        CarregaDadosTelaEmMemoria();
+                        SolicitacaoReembolsoUnimedSeguros.AbreSegurosUnimedCliente();
+                        SolicitacaoReembolsoUnimedSeguros.LoginUnimed();
+                    }
+                }
+                else
+                {
+                    if (ValidaDadosParaReembolsoAcre())
+                    {
+                        CarregaDadosTelaEmMemoria();
+                        SolicitacaoReembolsoUnimedAcre.AbreUnimedAcre();
+                        SolicitacaoReembolsoUnimedAcre.LoginUnimedAcre();
+                    }
                 }
             }
             catch (Exception ex)
@@ -998,6 +1064,7 @@ namespace TerapiaReembolso
             pnlConsultas.Visible = false;
             pnlDadosReembolso.Visible = true;
             SalvaDadosPaciente();
+            SalvaDadosAtuais();
             btnGerarRecibo.Enabled = true;
         }
 
@@ -1166,6 +1233,7 @@ namespace TerapiaReembolso
             }
 
             SalvaDadosPaciente();
+            SalvaDadosAtuais();
         }
 
         private void SalvaDadosPaciente()
@@ -1207,8 +1275,13 @@ namespace TerapiaReembolso
         {
             try
             {
-                // Carrega dados do paciente selecionado
+                // Pega nome do paciente selecionado
                 string nomePaciente = cmbNomePaciente.Text;
+
+                // Mostra botão de dados da Unimed Acre somente para o Dimitri
+                btnMostraDadosUnimedAcre.Visible = ReembolsoAcre();
+
+                // Carrega dados do paciente selecionado
                 if (_listaPacientes.ContainsKey(nomePaciente))
                 {
                     Paciente paciente = _listaPacientes[nomePaciente];
@@ -1304,30 +1377,10 @@ namespace TerapiaReembolso
             }
         }
 
-        public static string RemoveAcentos(string text)
-        {
-            try
-            {
-                // Remove todos acentos do nome do paciente
-                StringBuilder sbReturn = new StringBuilder();
-                var arrayText = text.Normalize(NormalizationForm.FormD).ToCharArray();
-                foreach (char letter in arrayText)
-                {
-                    if (CharUnicodeInfo.GetUnicodeCategory(letter) != UnicodeCategory.NonSpacingMark)
-                        sbReturn.Append(letter);
-                }
-                return sbReturn.ToString();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Erro ao Remover Acenteos: " + ex.Message + ex.StackTrace, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return text;
-            }
-        }
 
         private void cmbNomePaciente_TextChanged(object sender, EventArgs e)
         {
-            cmbNomePaciente.Text = RemoveAcentos(cmbNomePaciente.Text);
+            cmbNomePaciente.Text = Utilitarios.RemoveAcentos(cmbNomePaciente.Text);
         }
 
         #endregion
@@ -1614,7 +1667,7 @@ namespace TerapiaReembolso
                     if (Path.GetExtension(dialogoRestaurarBackup.FileName).ToLower() != ".zip")
                     {
                         MessageBox.Show("Favor selecionar um arquivo ZIP.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        dialogoPDF.FileName = "";
+                        dialogoPDFRecibo.FileName = "";
                         return;
                     }
                     else
@@ -1673,7 +1726,7 @@ namespace TerapiaReembolso
                     if (Path.GetExtension(dialogoSalvarBackup.FileName).ToLower() != ".zip")
                     {
                         MessageBox.Show("Favor selecionar um arquivo ZIP.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        dialogoPDF.FileName = "";
+                        dialogoPDFRecibo.FileName = "";
                         return;
                     }
                     else
@@ -1728,5 +1781,215 @@ namespace TerapiaReembolso
                 MessageBox.Show("Erro ao Realizar Backup: " + ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        #region Reembolso Unimed Acre
+
+        private bool ReembolsoAcre()
+        {
+            // Pega nome do paciente selecionado
+            string nomePaciente = cmbNomePaciente.Text;
+
+            // Reembolso Unimed Acre somente para o Dimitri
+            return (nomePaciente == "Dimitri Melo Dourado");
+        }
+
+        public static PacienteAcre PegaPacienteAcre()
+        {
+            return _pacienteAcre;
+        }
+
+        private void btnSalvarDadosAcre_Click(object sender, EventArgs e)
+        {
+            if (!ValidaDadosParaReembolsoAcre())
+                return;
+
+            pnlUnimedAcre.Visible = false;
+
+
+            SalvaDadosAtuais();
+        }
+
+        private void btnMostraDadosUnimedAcre_Click(object sender, EventArgs e)
+        {
+            pnlUnimedAcre.Visible = true;
+            pnlUnimedAcre.BringToFront();
+        }
+
+        private bool ValidaDadosParaReembolsoAcre()
+        {
+            // Valida Número Carteirinha
+            if (string.IsNullOrEmpty(txtLoginUnimedAcre.Text))
+            {
+                MessageBox.Show("Favor Número Carteirinha.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtLoginUnimedAcre.Focus();
+                txtLoginUnimedAcre.SelectAll();
+                btnMostraDadosUnimedAcre_Click(null, EventArgs.Empty);
+                return false;
+            }
+
+            // Valida Número Carteirinha só números
+            if (!Regex.IsMatch(txtLoginUnimedAcre.Text, @"^\d+$"))
+            {
+                MessageBox.Show("Favor entrar Número Carteirinha somente números.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtAgenciaSemDigito.Focus();
+                txtAgenciaSemDigito.SelectAll();
+                btnMostraDadosUnimedAcre_Click(null, EventArgs.Empty);
+                return false;
+            }
+
+            // Valida nome do banco
+            if (string.IsNullOrEmpty(txtNomeBancoAcre.Text))
+            {
+                MessageBox.Show("Favor nome do banco.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtNomeBancoAcre.Focus();
+                txtNomeBancoAcre.SelectAll();
+                btnMostraDadosUnimedAcre_Click(null, EventArgs.Empty);
+                return false;
+            }
+
+            // Valida Endereço (Rua)
+            if (string.IsNullOrEmpty(txtEnderecoRuaAcre.Text))
+            {
+                MessageBox.Show("Favor entrar Endereço (Rua).", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtEnderecoRuaAcre.Focus();
+                txtEnderecoRuaAcre.SelectAll();
+                btnMostraDadosUnimedAcre_Click(null, EventArgs.Empty);
+                return false;
+            }
+
+            // Valida Dígito da Conta só números
+            if (!Regex.IsMatch(txtDigitoDaConta.Text, @"^\d+$"))
+            {
+                MessageBox.Show("Favor entrar Dígito da Conta somente números.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtDigitoDaConta.Focus();
+                txtDigitoDaConta.SelectAll();
+                btnMostraDadosUnimedAcre_Click(null, EventArgs.Empty);
+                return false;
+            }
+
+            // Valida Número
+            if (string.IsNullOrEmpty(txtEnderecoNumeroAcre.Text))
+            {
+                MessageBox.Show("Favor entrar Número.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtEnderecoNumeroAcre.Focus();
+                txtEnderecoNumeroAcre.SelectAll();
+                btnMostraDadosUnimedAcre_Click(null, EventArgs.Empty);
+                return false;
+            }
+
+            // Valida campo Número só números
+            if (!Regex.IsMatch(txtEnderecoNumeroAcre.Text, @"^\d+$"))
+            {
+                MessageBox.Show("Favor entrar no campo Número somente números.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtEnderecoNumeroAcre.Focus();
+                txtEnderecoNumeroAcre.SelectAll();
+                btnMostraDadosUnimedAcre_Click(null, EventArgs.Empty);
+                return false;
+            }
+
+            // Valida Complemento
+            if (string.IsNullOrEmpty(txtEnderecoComplementoAcre.Text))
+            {
+                MessageBox.Show("Favor entrar Complemento.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtEnderecoComplementoAcre.Focus();
+                txtEnderecoComplementoAcre.SelectAll();
+                btnMostraDadosUnimedAcre_Click(null, EventArgs.Empty);
+                return false;
+            }
+
+            // Valida Bairro
+            if (string.IsNullOrEmpty(txtEnderecoBairroAcre.Text))
+            {
+                MessageBox.Show("Favor entrar Bairro.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtEnderecoBairroAcre.Focus();
+                txtEnderecoBairroAcre.SelectAll();
+                btnMostraDadosUnimedAcre_Click(null, EventArgs.Empty);
+                return false;
+            }
+
+            // Valida PDF da carteirinha
+            if (string.IsNullOrEmpty(dialogoPDFCarteirinha.FileName))
+            {
+                MessageBox.Show("Favor selecionar PDF da cateirinha/requisição médica.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                btnSelecionarPDFCarteirinha.Focus();
+                btnMostraDadosUnimedAcre_Click(null, EventArgs.Empty);
+                return false;
+            }
+
+            // Valida PDF da identidade
+            if (string.IsNullOrEmpty(dialogoPDFIdentidade.FileName))
+            {
+                MessageBox.Show("Favor selecionar PDF da identidade.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                btnSelecionarPDFIdentidade.Focus();
+                btnMostraDadosUnimedAcre_Click(null, EventArgs.Empty);
+                return false;
+            }
+
+            return true;
+        }
+
+        private void btnSelecionarPDFCarteirinha_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                // Pede arquivo PDF da carteirinha pro usuário
+                DialogResult dialogResult = dialogoPDFCarteirinha.ShowDialog();
+
+                // Se arquivo foi selecionado
+                if (dialogResult == DialogResult.OK)
+                {
+                    // Verifica extensão do arquivo
+                    if (Path.GetExtension(dialogoPDFCarteirinha.FileName).ToLower() != ".pdf")
+                    {
+                        MessageBox.Show("Favor selecionar um arquivo PDF.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        dialogoPDFCarteirinha.FileName = "";
+                    }
+                    else
+                    {
+                        TelaPrincipal.PegaPacienteAcre().PDFCarteirinhaRequisicao = dialogoPDFCarteirinha.FileName;
+                    }
+
+                    // Mostra nome do PDF na tela
+                    lblNomeArquivoCarteirinha.Text = Path.GetFileName(dialogoPDFCarteirinha.FileName);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Erro selecionando PDF: " + ex.Message + ex.StackTrace, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void btnSelecionarPDFIdentidade_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                // Pede arquivo PDF da identidade pro usuário
+                DialogResult dialogResult = dialogoPDFIdentidade.ShowDialog();
+
+                // Se arquivo foi selecionado
+                if (dialogResult == DialogResult.OK)
+                {
+                    // Verifica extensão do arquivo
+                    if (Path.GetExtension(dialogoPDFIdentidade.FileName).ToLower() != ".pdf")
+                    {
+                        MessageBox.Show("Favor selecionar um arquivo PDF.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        dialogoPDFRecibo.FileName = "";
+                    }
+                    else
+                    {
+                        TelaPrincipal.PegaPacienteAcre().PDFIdentidade = dialogoPDFIdentidade.FileName;
+                    }
+
+                    // Mostra nome do PDF na tela
+                    lblNomeArquivoIdentidade.Text = Path.GetFileName(dialogoPDFIdentidade.FileName);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Erro selecionando PDF: " + ex.Message + ex.StackTrace, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        #endregion
     }
 }

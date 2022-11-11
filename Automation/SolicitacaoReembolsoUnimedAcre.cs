@@ -12,14 +12,10 @@
 
 using System;
 using System.Threading;
-using System.Xml;
-using System.Xml.Linq;
-using AngleSharp.Dom;
 
 // Selenium/Protractor para automação web
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.Support.Extensions;
 using Protractor;
 
 // Pacote para baixar automaticamente último ChormeDriver da Internet
@@ -35,12 +31,12 @@ namespace TerapiaReembolso
 
         public static void GerarSolicitacaoReembolso()
         {
-            AbreSegurosUnimedCliente();
-            LoginUnimed();
+            AbreUnimedAcre();
+            LoginUnimedAcre();
             SubmeteSolicitaoReembolso();
         }
 
-        public static void AbreSegurosUnimedCliente()
+        public static void AbreUnimedAcre()
         {
             // Inicia o Chrome maximizado
             ChromeOptions options = new ChromeOptions();
@@ -93,7 +89,7 @@ namespace TerapiaReembolso
             System.Threading.Thread.Sleep(1000);
         }
 
-        public static void LoginUnimed()
+        public static void LoginUnimedAcre()
         {
             // Caso se tenha um login e senha para entrar
             if (!string.IsNullOrEmpty(TelaPrincipal.PegaClienteAtual().LoginUnimed) && !string.IsNullOrEmpty(TelaPrincipal.PegaClienteAtual().SenhaUnimed))
@@ -113,12 +109,12 @@ namespace TerapiaReembolso
                     // Seta número da carteirinha para logar
                     var emailText = _chromeDriver.FindElement(By.Id("carteira1"));
                     emailText.Clear();
-                    emailText.SendKeys(TelaPrincipal.PegaClienteAtual().LoginUnimed);
+                    emailText.SendKeys(TelaPrincipal.PegaPacienteAcre().CarteirinhaUnimed);
 
                     // Seta senha para logar
                     var passwordText = _chromeDriver.FindElement(By.Id("password"));
                     passwordText.Clear();
-                    passwordText.SendKeys(TelaPrincipal.PegaClienteAtual().SenhaUnimed);
+                    passwordText.SendKeys(TelaPrincipal.PegaPacienteAcre().CarteirinhaUnimed);
 
                     // Submete o formulário
                     emailText.Submit();
@@ -177,23 +173,20 @@ namespace TerapiaReembolso
             _element.Click();
 
             // Seleciona banco
-            //TODO: buscar dinamico valor
             arrows[2].Click();
-            WaitExtension.WaitUntilElement(_chromeDriver, By.XPath("//div[contains(text(),'260-BANCO NUBANK ( NUCONTA )')]"), 15);
-            _element = _chromeDriver.FindElement(By.XPath("//div[contains(text(),'260-BANCO NUBANK ( NUCONTA )')]"));
+            WaitExtension.WaitUntilElement(_chromeDriver, By.XPath($"//div[contains(text(),'{TelaPrincipal.PegaPacienteAcre().NomeBanco}')]"), 15);
+            _element = _chromeDriver.FindElement(By.XPath($"//div[contains(text(),'{TelaPrincipal.PegaPacienteAcre().NomeBanco}')]"));
             _element.Click();
 
             // Seta agencia
-            //TODO: buscar dinamico valor
             WaitExtension.WaitUntilElement(_chromeDriver, By.Name("nr_agencia"), 15);
             _element = _chromeDriver.FindElement(By.Name("nr_agencia"));
-            _element.SendKeys("0001");
+            _element.SendKeys(TelaPrincipal.PegaClienteAtual().Agencia);
 
-            // Seta conta
-            //TODO: buscar dinamico valor
+            // Seta conta e dígito
             WaitExtension.WaitUntilElement(_chromeDriver, By.Name("nr_conta"), 15);
             _element = _chromeDriver.FindElement(By.Name("nr_conta"));
-            _element.SendKeys("5325235");
+            _element.SendKeys(TelaPrincipal.PegaClienteAtual().Conta + TelaPrincipal.PegaClienteAtual().Digito);
 
             // Submete e vai para próxima etapa
             _element.Submit();
@@ -213,57 +206,63 @@ namespace TerapiaReembolso
             _element = _chromeDriver.FindElement(By.XPath("//option[contains(text(),'Física')]"));
             _element.Click();
 
-            // Seta nome do psicologo
-            //TODO: buscar dinamico valor
+            // Seta nome do psicologo sem acentos
             WaitExtension.WaitUntilElement(_chromeDriver, By.Name("nmprestador"), 15);
             _element = _chromeDriver.FindElement(By.Name("nmprestador"));
-            _element.SendKeys("psicologo nome");
+            _element.SendKeys(Utilitarios.RemoveAcentos(TelaPrincipal.PegaClienteAtual().NomeTerapeuta));
 
             // Seta cpf nome do psicologo
-            //TODO: buscar dinamico valor
             WaitExtension.WaitUntilElement(_chromeDriver, By.Name("nrcpfcnpj"), 15);
             _element = _chromeDriver.FindElement(By.Name("nrcpfcnpj"));
-            _element.SendKeys("82002851034");
+            _element.SendKeys(TelaPrincipal.PegaClienteAtual().CPFTerapeuta);
 
             // Seta data do atendimento
-            //TODO: buscar dinamico valor
             WaitExtension.WaitUntilElement(_chromeDriver, By.Name("dtatendimento"), 15);
             _element = _chromeDriver.FindElement(By.Name("dtatendimento"));
-            _element.SendKeys("07/11/2022");
+            _element.SendKeys(TelaPrincipal.PacienteAtual.DataConsultaLista[0].ToString("dd/MM/yyyy"));
 
             // Seta cep
-            //TODO: buscar dinamico valor
             WaitExtension.WaitUntilElement(_chromeDriver, By.Name("nrcep"), 15);
             _element = _chromeDriver.FindElement(By.Name("nrcep"));
-            _element.SendKeys("91330291");
+            _element.SendKeys(TelaPrincipal.PegaClienteAtual().CEP);
             Thread.Sleep(2000);
 
             // Seta endereço
-            //TODO: buscar dinamico valor
             WaitExtension.WaitUntilElement(_chromeDriver, By.Name("endereco"), 15);
             _element = _chromeDriver.FindElement(By.Name("endereco"));
             _element.Clear();
-            _element.SendKeys("Matias Jose Bins");
+            _element.SendKeys(TelaPrincipal.PegaPacienteAcre().EnderecoSemNumero);
 
             // Seta número do endereço
-            //TODO: buscar dinamico valor
             WaitExtension.WaitUntilElement(_chromeDriver, By.Name("nrendereco"), 15);
             _element = _chromeDriver.FindElement(By.Name("nrendereco"));
-            _element.SendKeys("1578");
+            _element.SendKeys(TelaPrincipal.PegaPacienteAcre().NumeroEndereco);
 
             // Seta complemento do endereço
-            //TODO: buscar dinamico valor
             WaitExtension.WaitUntilElement(_chromeDriver, By.Name("dscomplemento"), 15);
             _element = _chromeDriver.FindElement(By.Name("dscomplemento"));
-            _element.SendKeys("sala 8");
+            _element.SendKeys(TelaPrincipal.PegaPacienteAcre().ComplementoEndereco);
 
             // Seta bairro
-            //TODO: buscar dinamico valor
             WaitExtension.WaitUntilElement(_chromeDriver, By.Name("dsbairro"), 15);
             _element = _chromeDriver.FindElement(By.Name("dsbairro"));
             _element.Clear();
-            _element.SendKeys("Chacara das pedras");
+            _element.SendKeys(TelaPrincipal.PegaPacienteAcre().Bairro);
                         
+            // Seta a cidade
+            _element = _chromeDriver.FindElement(By.Name("nmcidade"));
+            _element.Clear();
+            _element.SendKeys(TelaPrincipal.PegaClienteAtual().Cidade);
+
+            // Busca todas flechinas dos dropdowns
+            var arrows = _chromeDriver.FindElements(By.XPath("//span[@class='select2-arrow']"));
+
+            // Seleciona estado
+            arrows[2].Click();
+            WaitExtension.WaitUntilElement(_chromeDriver, By.XPath($"//div[contains(text(),'{TelaPrincipal.PegaPacienteAcre().Estado}')]"), 15);
+            _element = _chromeDriver.FindElement(By.XPath($"//div[contains(text(),'{TelaPrincipal.PegaPacienteAcre().Estado}')]"));
+            _element.Click();
+
             // Submete o form
             _element = _chromeDriver.FindElement(By.Name("nmcidade"));
             _element.Submit();
@@ -310,22 +309,19 @@ namespace TerapiaReembolso
             Utilitarios.AguardaSpinner(_chromeDriver);
 
             // Seta data do atendimento
-            //TODO: buscar dinamico valor
             WaitExtension.WaitUntilElement(_chromeDriver, By.Name("dtrealizacao"), 15);
             _element = _chromeDriver.FindElement(By.Name("dtrealizacao"));
-            _element.SendKeys("07/11/2022");
+            _element.SendKeys(TelaPrincipal.PacienteAtual.DataConsultaLista[0].ToString("dd/MM/yyyy"));
 
             // Seta quantidade
-            //TODO: buscar dinamico valor
             WaitExtension.WaitUntilElement(_chromeDriver, By.Name("quantidade"), 15);
             _element = _chromeDriver.FindElement(By.Name("quantidade"));
             _element.SendKeys("1");
 
             // Seta valor da consulta
-            //TODO: buscar dinamico valor
             WaitExtension.WaitUntilElement(_chromeDriver, By.Name("vlcobrado"), 15);
             _element = _chromeDriver.FindElement(By.Name("vlcobrado"));
-            _element.SendKeys("120,00");
+            _element.SendKeys(TelaPrincipal.PacienteAtual.Valor);
 
             // Clica no botão adicionar
             WaitExtension.WaitUntilElement(_chromeDriver, By.XPath("//button[contains(text(),'Adicionar')]"), 15);
@@ -352,18 +348,15 @@ namespace TerapiaReembolso
             var inputFiles = _chromeDriver.FindElements(By.XPath("//input[@type='file']"));
 
             // Seta carteirinha e pedido médico
-            //TODO: buscar dinamico valor
-            inputFiles[0].SendKeys(@"C:\temp\Dimitri\Carteirinha Unimed Dimitri e Pedido Medico Terapia Dimitri.pdf");
+            inputFiles[0].SendKeys(TelaPrincipal.PegaPacienteAcre().PDFCarteirinhaRequisicao);
             Thread.Sleep(8000);
 
             // Seta identidade
-            //TODO: buscar dinamico valor
-            inputFiles[0].SendKeys(@"C:\temp\Dimitri\Identidade Dimitri.pdf");
+            inputFiles[0].SendKeys(TelaPrincipal.PegaPacienteAcre().PDFIdentidade);
             Thread.Sleep(8000);
 
             // Seta recibo
-            //TODO: buscar dinamico valor
-            inputFiles[0].SendKeys(@"C:\temp\Dimitri\Recibo Consulta Dimitri 07 de Novembro Novo.pdf");
+            inputFiles[0].SendKeys(TelaPrincipal.PegaClienteAtual().PDFRecibo);
             Thread.Sleep(8000);
         }
     }
