@@ -11,6 +11,7 @@
  * *******************************************************************************************************************/
 
 using System;
+using System.Text;
 using System.Threading;
 
 // Selenium/Protractor para automação web
@@ -21,7 +22,6 @@ using OpenQA.Selenium.Chrome;
 // Pacote para baixar automaticamente último ChormeDriver da Internet
 using WebDriverManager;
 using WebDriverManager.DriverConfigs.Impl;
-using System.Text;
 
 namespace TerapiaReembolso
 {
