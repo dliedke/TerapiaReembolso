@@ -39,7 +39,7 @@ namespace TerapiaReembolso
 
         // Path onde serão serializados as configurações de clientes e pacientes
         private string _caminhoConfiguracoes = Environment.ExpandEnvironmentVariables(@"%APPDATA%\..\Local\TerapiaReembolso");
-        
+
         public TelaPrincipal()
         {
             InitializeComponent();
@@ -560,7 +560,7 @@ namespace TerapiaReembolso
             return true;
         }
 
-        
+
         #endregion
 
         #region Carrega/Salva Dados
@@ -1952,6 +1952,15 @@ namespace TerapiaReembolso
                 MostraDadosUnimedAcre();
                 MessageBox.Show("Favor selecionar data do recibo.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 dtDataRecibo.Focus();
+                return false;
+            }
+
+            // Valida se todos arquivos PDF são diferentes
+            if ((Path.GetFileName(dialogoPDFIdentidade.FileName) == Path.GetFileName(dialogoPDFCarteirinha.FileName)) ||
+                (Path.GetFileName(dialogoPDFIdentidade.FileName) == Path.GetFileName(dialogoPDFRecibo.FileName)) ||
+                (Path.GetFileName(dialogoPDFCarteirinha.FileName) == Path.GetFileName(dialogoPDFRecibo.FileName)))
+            {
+                MessageBox.Show("Favor selecionar diferentes arquivos para identidade, carteirinha e recibo.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return false;
             }
 
