@@ -16,7 +16,6 @@ using System.Globalization;
 // Selenium para automação web
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.Support.Extensions;
 
 // Pacote para baixar automaticamente último ChormeDriver da Internet
 using WebDriverManager;

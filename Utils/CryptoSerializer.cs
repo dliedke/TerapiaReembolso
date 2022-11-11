@@ -1,4 +1,16 @@
-﻿using System.IO;
+﻿/* *******************************************************************************************************************
+ * Aplicação: TerapiaReembolso
+ * 
+ * Autor:  Daniel Liedke
+ * 
+ * Copyright © Daniel Liedke 2022
+ * Usage and reproduction in any manner whatsoever without the written permission of Daniel Liedke is strictly forbidden.
+ *  
+ * Propósito: Salvar e carregar classes em arquivo criptografado
+ *           
+ * *******************************************************************************************************************/
+
+using System.IO;
 using System.Security.Cryptography;
 using System.Runtime.Serialization.Formatters.Binary;
 

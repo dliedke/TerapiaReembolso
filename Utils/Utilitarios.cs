@@ -1,14 +1,26 @@
-﻿using System.Net;
+﻿/* *******************************************************************************************************************
+ * Aplicação: TerapiaReembolso
+ * 
+ * Autor:  Daniel Liedke
+ * 
+ * Copyright © Daniel Liedke 2022
+ * Usage and reproduction in any manner whatsoever without the written permission of Daniel Liedke is strictly forbidden.
+ *  
+ * Propósito: Metodos genéricos para automação e outras operações
+ *           
+ * *******************************************************************************************************************/
+
+using System;
+using System.Net;
+using System.Text;
 using System.Threading;
 using System.Diagnostics;
+using System.Globalization;
+using System.Windows.Forms;
 
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.Extensions;
-using System.Globalization;
-using System.Text;
-using System.Windows.Forms;
-using System;
 
 namespace TerapiaReembolso
 {

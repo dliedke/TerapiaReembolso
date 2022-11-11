@@ -6,14 +6,13 @@
  * Copyright © Daniel Liedke 2022
  * Usage and reproduction in any manner whatsoever without the written permission of Daniel Liedke is strictly forbidden.
  *  
- * Propósito: Automatizar geração de recibos e solicitações de reembolso para terapia no Unimed Seguros
+ * Propósito: Automatizar geração de recibos e solicitações de reembolso para terapia no Unimed Seguros e Unimed Acre
  *           
  * *******************************************************************************************************************/
 
 using System;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Drawing;
 using System.Diagnostics;
 using System.Globalization;
@@ -30,17 +29,17 @@ namespace TerapiaReembolso
     {
         #region Variáveis de Classe e Inicialização da Aplicação
 
-        private static List<Configuracao> _listaConfiguracoesClientes = new List<Configuracao>();
         private static int _indiceClienteAtual = 0;
+        private static List<Configuracao> _listaConfiguracoesClientes = new List<Configuracao>();
         private DateTimePickerWithBackColor[] _datasConsultasControles;
         private Dictionary<string, Paciente> _listaPacientes = new Dictionary<string, Paciente>();
         private static PacienteAcre _pacienteAcre = new PacienteAcre();
 
-        // Path onde serão serializados as configurações de clientes e pacientes
-        private string _caminhoConfiguracoes = Environment.ExpandEnvironmentVariables(@"%APPDATA%\..\Local\TerapiaReembolso");
-
         public static Paciente PacienteAtual;
 
+        // Path onde serão serializados as configurações de clientes e pacientes
+        private string _caminhoConfiguracoes = Environment.ExpandEnvironmentVariables(@"%APPDATA%\..\Local\TerapiaReembolso");
+        
         public TelaPrincipal()
         {
             InitializeComponent();
@@ -688,9 +687,9 @@ namespace TerapiaReembolso
             lblNomeArquivoIdentidade.Text = Path.GetFileName(_pacienteAcre.PDFIdentidade);
             txtEnderecoBairroAcre.Text = _pacienteAcre.Bairro;
             txtEstadoAcre.Text = _pacienteAcre.Estado;
-            txtEnderecoComplementoAcre.Text = _pacienteAcre.ComplementoEndereco;
-            txtEnderecoRuaAcre.Text = _pacienteAcre.EnderecoSemNumero;
-            txtEnderecoNumeroAcre.Text = _pacienteAcre.NumeroEndereco;
+            txtEnderecoComplementoAcre.Text = _pacienteAcre.EnderecoComplemento;
+            txtEnderecoRuaAcre.Text = _pacienteAcre.EnderecoRua;
+            txtEnderecoNumeroAcre.Text = _pacienteAcre.EnderecoNumero;
         }
 
         private void SalvaDadosAtuais()
@@ -768,9 +767,9 @@ namespace TerapiaReembolso
             _pacienteAcre.PDFIdentidade = dialogoPDFIdentidade.FileName;
             _pacienteAcre.Bairro = txtEnderecoBairroAcre.Text;
             _pacienteAcre.Estado = txtEstadoAcre.Text;
-            _pacienteAcre.ComplementoEndereco = txtEnderecoComplementoAcre.Text;
-            _pacienteAcre.EnderecoSemNumero = txtEnderecoRuaAcre.Text;
-            _pacienteAcre.NumeroEndereco = txtEnderecoNumeroAcre.Text;
+            _pacienteAcre.EnderecoComplemento = txtEnderecoComplementoAcre.Text;
+            _pacienteAcre.EnderecoRua = txtEnderecoRuaAcre.Text;
+            _pacienteAcre.EnderecoNumero = txtEnderecoNumeroAcre.Text;
         }
 
         private void MainScreen_FormClosing(object sender, FormClosingEventArgs e)
@@ -921,7 +920,7 @@ namespace TerapiaReembolso
 
         #endregion
 
-        #region Gerar Solicitação Reembolso
+        #region Gerar Solicitação Reembolso Unimed
 
         private void btnGerarSolicitacaoReembolso_Click(object sender, EventArgs e)
         {
@@ -932,7 +931,7 @@ namespace TerapiaReembolso
                 if (ValidaDadosParaRecibo() && ValidaDadosParaReembolso())
                 {
                     // Caso seja reembolso Unimed Acre, valida mais dados
-                    if (ReembolsoAcre() && !ValidaDadosParaReembolsoAcre())
+                    if (VerificaReembolsoAcre() && !ValidaDadosParaReembolsoAcre())
                     {
                         return;
                     }
@@ -941,7 +940,7 @@ namespace TerapiaReembolso
 
                     Action action = null;
 
-                    if (!ReembolsoAcre())
+                    if (!VerificaReembolsoAcre())
                     {
                         action = (Action)SolicitacaoReembolsoUnimedSeguros.GerarSolicitacaoReembolso;
                     }
@@ -995,7 +994,7 @@ namespace TerapiaReembolso
         {
             try
             {
-                if (!ReembolsoAcre())
+                if (!VerificaReembolsoAcre())
                 {
                     if (ValidaDadosParaReembolso())
                     {
@@ -1279,7 +1278,7 @@ namespace TerapiaReembolso
                 string nomePaciente = cmbNomePaciente.Text;
 
                 // Mostra botão de dados da Unimed Acre somente para o Dimitri
-                btnMostraDadosUnimedAcre.Visible = ReembolsoAcre();
+                btnMostraDadosUnimedAcre.Visible = VerificaReembolsoAcre();
 
                 // Carrega dados do paciente selecionado
                 if (_listaPacientes.ContainsKey(nomePaciente))
@@ -1395,7 +1394,7 @@ namespace TerapiaReembolso
                 lbNomeEmpresa.Visible = false;
                 lblCPFTerapeuta.Visible = true;
                 lblCNPJTerapeuta.Visible = false;
-                lblReciboAssinado.Text = "Recibo Assinado:";
+                lblReciboConsulta.Text = "Recibo Assinado:";
                 btnSelecionarPDFRecibo.Text = "Selecionar PDF Recibo";
             }
         }
@@ -1408,7 +1407,7 @@ namespace TerapiaReembolso
                 lbNomeEmpresa.Visible = true;
                 lblCPFTerapeuta.Visible = false;
                 lblCNPJTerapeuta.Visible = true;
-                lblReciboAssinado.Text = "Nota Fiscal PDF:";
+                lblReciboConsulta.Text = "Nota Fiscal PDF:";
                 btnSelecionarPDFRecibo.Text = "Selecionar Nota Fiscal";
             }
         }
@@ -1621,37 +1620,7 @@ namespace TerapiaReembolso
 
         #endregion
 
-        #region Tela de Sobre...
-
-        private void sairToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            // Fecha aplicação toda e salva os dados
-            Close();
-        }
-
-        private void sobreToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            // Mostra panel de Sobre... com ajuda e ano atual atualizado
-            pnlSobre.Visible = true;
-            pnlConsultas.Visible = false;
-            pnlReembolso.Visible = false;
-            pnlRecibo.Visible = false;
-            pnlCadastroCliente.Visible = false;
-            lblCopyright.Text = $"Copyright © Daniel Liedke {DateTime.Now.Year}";
-            lblNomeAplicao.Text = this.Text;
-        }
-
-        private void btnFecharSobre_Click(object sender, EventArgs e)
-        {
-            // Fecha panel de Sobre...
-            pnlSobre.Visible = false;
-            pnlConsultas.Visible = false;
-            pnlReembolso.Visible = true;
-            pnlReembolso.BringToFront();
-            pnlRecibo.Visible = true;
-        }
-
-        #endregion
+        #region Backup/Restaurar
 
         private void restaurarBackupToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -1782,14 +1751,16 @@ namespace TerapiaReembolso
             }
         }
 
+        #endregion
+
         #region Reembolso Unimed Acre
 
-        private bool ReembolsoAcre()
+        private bool VerificaReembolsoAcre()
         {
             // Pega nome do paciente selecionado
             string nomePaciente = cmbNomePaciente.Text;
 
-            // Reembolso Unimed Acre somente para o Dimitri
+            // Reembolso Unimed Acre somente para o Dimitri Melo Dourado
             return (nomePaciente == "Dimitri Melo Dourado");
         }
 
@@ -1988,6 +1959,38 @@ namespace TerapiaReembolso
             {
                 MessageBox.Show("Erro selecionando PDF: " + ex.Message + ex.StackTrace, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        #endregion
+
+        #region Tela de Sobre...
+
+        private void sairToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // Fecha aplicação toda e salva os dados
+            Close();
+        }
+
+        private void sobreToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // Mostra panel de Sobre... com ajuda e ano atual atualizado
+            pnlSobre.Visible = true;
+            pnlConsultas.Visible = false;
+            pnlReembolso.Visible = false;
+            pnlRecibo.Visible = false;
+            pnlCadastroCliente.Visible = false;
+            lblCopyright.Text = $"Copyright © Daniel Liedke {DateTime.Now.Year}";
+            lblNomeAplicao.Text = this.Text;
+        }
+
+        private void btnFecharSobre_Click(object sender, EventArgs e)
+        {
+            // Fecha panel de Sobre...
+            pnlSobre.Visible = false;
+            pnlConsultas.Visible = false;
+            pnlReembolso.Visible = true;
+            pnlReembolso.BringToFront();
+            pnlRecibo.Visible = true;
         }
 
         #endregion

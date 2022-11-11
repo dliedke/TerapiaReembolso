@@ -14,9 +14,9 @@ using System;
 using System.Threading;
 
 // Selenium/Protractor para automação web
+using Protractor;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
-using Protractor;
 
 // Pacote para baixar automaticamente último ChormeDriver da Internet
 using WebDriverManager;
@@ -231,17 +231,17 @@ namespace TerapiaReembolso
             WaitExtension.WaitUntilElement(_chromeDriver, By.Name("endereco"), 15);
             _element = _chromeDriver.FindElement(By.Name("endereco"));
             _element.Clear();
-            _element.SendKeys(TelaPrincipal.PegaPacienteAcre().EnderecoSemNumero);
+            _element.SendKeys(TelaPrincipal.PegaPacienteAcre().EnderecoRua);
 
             // Seta número do endereço
             WaitExtension.WaitUntilElement(_chromeDriver, By.Name("nrendereco"), 15);
             _element = _chromeDriver.FindElement(By.Name("nrendereco"));
-            _element.SendKeys(TelaPrincipal.PegaPacienteAcre().NumeroEndereco);
+            _element.SendKeys(TelaPrincipal.PegaPacienteAcre().EnderecoNumero);
 
             // Seta complemento do endereço
             WaitExtension.WaitUntilElement(_chromeDriver, By.Name("dscomplemento"), 15);
             _element = _chromeDriver.FindElement(By.Name("dscomplemento"));
-            _element.SendKeys(TelaPrincipal.PegaPacienteAcre().ComplementoEndereco);
+            _element.SendKeys(TelaPrincipal.PegaPacienteAcre().EnderecoComplemento);
 
             // Seta bairro
             WaitExtension.WaitUntilElement(_chromeDriver, By.Name("dsbairro"), 15);
@@ -292,7 +292,7 @@ namespace TerapiaReembolso
             Thread.Sleep(2000);
             Utilitarios.AguardaSpinner(_chromeDriver);
 
-            // Double click no TD com o primeiro resultado (Angular)
+            // Double click no TD com o primeiro resultado (Angular usando NgWebDriver)
             var ngDriver = new NgWebDriver(_chromeDriver);
             ngDriver.WaitForAngular();
             var elements = ngDriver.FindElements(NgBy.Repeater("data in options.data"));
@@ -344,18 +344,18 @@ namespace TerapiaReembolso
 
         private static void SetaDocumentos()
         {
-            // Busca todos input type=file
+            // Busca todos elementos input type=file
             var inputFiles = _chromeDriver.FindElements(By.XPath("//input[@type='file']"));
 
-            // Seta carteirinha e pedido médico
+            // Carrega arquivo da carteirinha e pedido médico
             inputFiles[0].SendKeys(TelaPrincipal.PegaPacienteAcre().PDFCarteirinhaRequisicao);
             Thread.Sleep(8000);
 
-            // Seta identidade
+            // Carrega arquivo da identidade
             inputFiles[0].SendKeys(TelaPrincipal.PegaPacienteAcre().PDFIdentidade);
             Thread.Sleep(8000);
 
-            // Seta recibo
+            // Carrega arquivo do recibo
             inputFiles[0].SendKeys(TelaPrincipal.PegaClienteAtual().PDFRecibo);
             Thread.Sleep(8000);
         }

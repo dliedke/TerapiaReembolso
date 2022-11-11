@@ -6,7 +6,7 @@
  * Copyright © Daniel Liedke 2022
  * Usage and reproduction in any manner whatsoever without the written permission of Daniel Liedke is strictly forbidden.
  *  
- * Purpose: Start up class
+ * Purpose: Classe de inicialização
  *           
  * *******************************************************************************************************************/
 

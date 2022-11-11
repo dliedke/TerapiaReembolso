@@ -34,7 +34,7 @@
             this.lblNomeDoPaciente = new System.Windows.Forms.Label();
             this.lblValorTotal = new System.Windows.Forms.Label();
             this.lblReferenteA = new System.Windows.Forms.Label();
-            this.lblReciboAssinado = new System.Windows.Forms.Label();
+            this.lblReciboConsulta = new System.Windows.Forms.Label();
             this.btnSelecionarPDFRecibo = new System.Windows.Forms.Button();
             this.dialogoPDFRecibo = new System.Windows.Forms.OpenFileDialog();
             this.lblCPFPaciente = new System.Windows.Forms.Label();
@@ -242,16 +242,16 @@
             this.lblReferenteA.Text = "Referente à:";
             this.lblReferenteA.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
-            // lblReciboAssinado
+            // lblReciboConsulta
             // 
-            this.lblReciboAssinado.AutoSize = true;
-            this.lblReciboAssinado.ForeColor = System.Drawing.Color.White;
-            this.lblReciboAssinado.Location = new System.Drawing.Point(29, 154);
-            this.lblReciboAssinado.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblReciboAssinado.Name = "lblReciboAssinado";
-            this.lblReciboAssinado.Size = new System.Drawing.Size(114, 16);
-            this.lblReciboAssinado.TabIndex = 7;
-            this.lblReciboAssinado.Text = "Recibo Assinado:";
+            this.lblReciboConsulta.AutoSize = true;
+            this.lblReciboConsulta.ForeColor = System.Drawing.Color.White;
+            this.lblReciboConsulta.Location = new System.Drawing.Point(29, 154);
+            this.lblReciboConsulta.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblReciboConsulta.Name = "lblReciboConsulta";
+            this.lblReciboConsulta.Size = new System.Drawing.Size(109, 16);
+            this.lblReciboConsulta.TabIndex = 7;
+            this.lblReciboConsulta.Text = "Recibo Consulta:";
             // 
             // btnSelecionarPDFRecibo
             // 
@@ -311,7 +311,7 @@
             this.statusStrip.Location = new System.Drawing.Point(0, 769);
             this.statusStrip.Name = "statusStrip";
             this.statusStrip.Padding = new System.Windows.Forms.Padding(3, 0, 19, 0);
-            this.statusStrip.Size = new System.Drawing.Size(1393, 26);
+            this.statusStrip.Size = new System.Drawing.Size(1076, 26);
             this.statusStrip.SizingGrip = false;
             this.statusStrip.TabIndex = 12;
             this.statusStrip.Text = "statusStrip1";
@@ -956,9 +956,9 @@
             this.pnlReembolso.Controls.Add(this.lnkUnimedLogin);
             this.pnlReembolso.Controls.Add(this.lblTituloSolicitacaoReembolso);
             this.pnlReembolso.Controls.Add(this.btnGerarSolicitacaoReembolso);
-            this.pnlReembolso.Controls.Add(this.pnlUnimedAcre);
             this.pnlReembolso.Controls.Add(this.pnlDadosReembolso);
             this.pnlReembolso.Controls.Add(this.pnlDadosBancarios);
+            this.pnlReembolso.Controls.Add(this.pnlUnimedAcre);
             this.pnlReembolso.Location = new System.Drawing.Point(552, 36);
             this.pnlReembolso.Margin = new System.Windows.Forms.Padding(3, 1, 3, 1);
             this.pnlReembolso.Name = "pnlReembolso";
@@ -1286,7 +1286,7 @@
             this.pnlDadosReembolso.Controls.Add(this.lbDadosReembolso);
             this.pnlDadosReembolso.Controls.Add(this.lblLoginUnimed);
             this.pnlDadosReembolso.Controls.Add(this.btnSelecionarPDFRecibo);
-            this.pnlDadosReembolso.Controls.Add(this.lblReciboAssinado);
+            this.pnlDadosReembolso.Controls.Add(this.lblReciboConsulta);
             this.pnlDadosReembolso.Controls.Add(this.txtLoginUnimed);
             this.pnlDadosReembolso.Controls.Add(this.grbTipoAtendimento);
             this.pnlDadosReembolso.Controls.Add(this.lblNomeArquivoPDF);
@@ -1538,7 +1538,7 @@
             this.menuAplicacao.Location = new System.Drawing.Point(0, 0);
             this.menuAplicacao.Name = "menuAplicacao";
             this.menuAplicacao.Padding = new System.Windows.Forms.Padding(3, 1, 0, 1);
-            this.menuAplicacao.Size = new System.Drawing.Size(1393, 26);
+            this.menuAplicacao.Size = new System.Drawing.Size(1076, 26);
             this.menuAplicacao.TabIndex = 46;
             this.menuAplicacao.Text = "menuStrip1";
             // 
@@ -1799,7 +1799,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(36)))), ((int)(((byte)(36)))), ((int)(((byte)(36)))));
-            this.ClientSize = new System.Drawing.Size(1393, 795);
+            this.ClientSize = new System.Drawing.Size(1076, 795);
             this.Controls.Add(this.pnlCadastroCliente);
             this.Controls.Add(this.pnlSobre);
             this.Controls.Add(this.menuAplicacao);
@@ -1860,7 +1860,7 @@
         private System.Windows.Forms.Label lblNomeDoPaciente;
         private System.Windows.Forms.Label lblValorTotal;
         private System.Windows.Forms.Label lblReferenteA;
-        private System.Windows.Forms.Label lblReciboAssinado;
+        private System.Windows.Forms.Label lblReciboConsulta;
         private System.Windows.Forms.Button btnSelecionarPDFRecibo;
         private System.Windows.Forms.OpenFileDialog dialogoPDFRecibo;
         private System.Windows.Forms.Label lblCPFPaciente;
