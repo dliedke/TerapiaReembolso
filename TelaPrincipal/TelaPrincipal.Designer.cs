@@ -58,20 +58,10 @@
             this.lbMes = new System.Windows.Forms.Label();
             this.cmbDiaSemana = new System.Windows.Forms.ComboBox();
             this.cmbMes = new System.Windows.Forms.ComboBox();
-            this.dtDataConsulta10 = new TerapiaReembolso.DateTimePickerWithBackColor();
-            this.dtDataConsulta9 = new TerapiaReembolso.DateTimePickerWithBackColor();
-            this.dtDataConsulta8 = new TerapiaReembolso.DateTimePickerWithBackColor();
-            this.dtDataConsulta7 = new TerapiaReembolso.DateTimePickerWithBackColor();
-            this.dtDataConsulta6 = new TerapiaReembolso.DateTimePickerWithBackColor();
             this.btnSalvarConsultas = new System.Windows.Forms.Button();
             this.lblNumeroDeConsultas = new System.Windows.Forms.Label();
             this.numNumeroConsultas = new System.Windows.Forms.NumericUpDown();
             this.lblSelecioneDataConsultas = new System.Windows.Forms.Label();
-            this.dtDataConsulta4 = new TerapiaReembolso.DateTimePickerWithBackColor();
-            this.dtDataConsulta3 = new TerapiaReembolso.DateTimePickerWithBackColor();
-            this.dtDataConsulta5 = new TerapiaReembolso.DateTimePickerWithBackColor();
-            this.dtDataConsulta2 = new TerapiaReembolso.DateTimePickerWithBackColor();
-            this.dtDataConsulta1 = new TerapiaReembolso.DateTimePickerWithBackColor();
             this.pnlRecibo = new System.Windows.Forms.Panel();
             this.pnlDadosTerapeuta = new System.Windows.Forms.Panel();
             this.lblCNPJTerapeuta = new System.Windows.Forms.Label();
@@ -119,7 +109,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.txtObservacoes = new System.Windows.Forms.TextBox();
             this.lbDataRecibo = new System.Windows.Forms.Label();
-            this.dtDataRecibo = new TerapiaReembolso.DateTimePickerWithBackColor();
             this.lblEstado = new System.Windows.Forms.Label();
             this.txtEstadoAcre = new System.Windows.Forms.TextBox();
             this.lblNomeArquivoIdentidade = new System.Windows.Forms.Label();
@@ -151,11 +140,11 @@
             this.clientesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.adicionarExcluirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItemLinha1 = new System.Windows.Forms.ToolStripSeparator();
-            this.sobreToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ajudaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pnlSobre = new System.Windows.Forms.Panel();
             this.lblAjuda = new System.Windows.Forms.Label();
             this.picIconeSobre = new System.Windows.Forms.PictureBox();
-            this.btnFecharSobre = new System.Windows.Forms.Button();
+            this.btnFecharAjuda = new System.Windows.Forms.Button();
             this.lblCopyright = new System.Windows.Forms.Label();
             this.lblNomeAplicao = new System.Windows.Forms.Label();
             this.pnlCadastroCliente = new System.Windows.Forms.Panel();
@@ -170,6 +159,17 @@
             this.dialogoRestaurarBackup = new System.Windows.Forms.OpenFileDialog();
             this.dialogoPDFCarteirinha = new System.Windows.Forms.OpenFileDialog();
             this.dialogoPDFIdentidade = new System.Windows.Forms.OpenFileDialog();
+            this.dtDataConsulta10 = new TerapiaReembolso.DateTimePickerWithBackColor();
+            this.dtDataConsulta9 = new TerapiaReembolso.DateTimePickerWithBackColor();
+            this.dtDataConsulta8 = new TerapiaReembolso.DateTimePickerWithBackColor();
+            this.dtDataConsulta7 = new TerapiaReembolso.DateTimePickerWithBackColor();
+            this.dtDataConsulta6 = new TerapiaReembolso.DateTimePickerWithBackColor();
+            this.dtDataConsulta4 = new TerapiaReembolso.DateTimePickerWithBackColor();
+            this.dtDataConsulta3 = new TerapiaReembolso.DateTimePickerWithBackColor();
+            this.dtDataConsulta5 = new TerapiaReembolso.DateTimePickerWithBackColor();
+            this.dtDataConsulta2 = new TerapiaReembolso.DateTimePickerWithBackColor();
+            this.dtDataConsulta1 = new TerapiaReembolso.DateTimePickerWithBackColor();
+            this.dtDataRecibo = new TerapiaReembolso.DateTimePickerWithBackColor();
             this.statusStrip.SuspendLayout();
             this.pnlConsultas.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numNumeroConsultas)).BeginInit();
@@ -192,10 +192,10 @@
             // 
             this.btnGerarRecibo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnGerarRecibo.ForeColor = System.Drawing.Color.White;
-            this.btnGerarRecibo.Location = new System.Drawing.Point(173, 663);
-            this.btnGerarRecibo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnGerarRecibo.Location = new System.Drawing.Point(195, 829);
+            this.btnGerarRecibo.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnGerarRecibo.Name = "btnGerarRecibo";
-            this.btnGerarRecibo.Size = new System.Drawing.Size(179, 50);
+            this.btnGerarRecibo.Size = new System.Drawing.Size(201, 62);
             this.btnGerarRecibo.TabIndex = 3;
             this.btnGerarRecibo.Text = "Gerar Recibo";
             this.btnGerarRecibo.UseVisualStyleBackColor = true;
@@ -205,10 +205,10 @@
             // 
             this.txtValorConsulta.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(74)))), ((int)(((byte)(74)))), ((int)(((byte)(74)))));
             this.txtValorConsulta.ForeColor = System.Drawing.Color.White;
-            this.txtValorConsulta.Location = new System.Drawing.Point(176, 81);
-            this.txtValorConsulta.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtValorConsulta.Location = new System.Drawing.Point(198, 101);
+            this.txtValorConsulta.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtValorConsulta.Name = "txtValorConsulta";
-            this.txtValorConsulta.Size = new System.Drawing.Size(63, 22);
+            this.txtValorConsulta.Size = new System.Drawing.Size(70, 26);
             this.txtValorConsulta.TabIndex = 1;
             this.txtValorConsulta.ValidatingType = typeof(int);
             this.txtValorConsulta.TextChanged += new System.EventHandler(this.txtValorConsulta_TextChanged);
@@ -216,10 +216,10 @@
             // lblNomeDoPaciente
             // 
             this.lblNomeDoPaciente.ForeColor = System.Drawing.Color.White;
-            this.lblNomeDoPaciente.Location = new System.Drawing.Point(116, 43);
+            this.lblNomeDoPaciente.Location = new System.Drawing.Point(130, 54);
             this.lblNomeDoPaciente.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblNomeDoPaciente.Name = "lblNomeDoPaciente";
-            this.lblNomeDoPaciente.Size = new System.Drawing.Size(57, 30);
+            this.lblNomeDoPaciente.Size = new System.Drawing.Size(64, 38);
             this.lblNomeDoPaciente.TabIndex = 4;
             this.lblNomeDoPaciente.Text = "Nome:";
             // 
@@ -227,10 +227,10 @@
             // 
             this.lblValorTotal.AutoSize = true;
             this.lblValorTotal.ForeColor = System.Drawing.Color.White;
-            this.lblValorTotal.Location = new System.Drawing.Point(64, 84);
+            this.lblValorTotal.Location = new System.Drawing.Point(72, 105);
             this.lblValorTotal.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblValorTotal.Name = "lblValorTotal";
-            this.lblValorTotal.Size = new System.Drawing.Size(97, 16);
+            this.lblValorTotal.Size = new System.Drawing.Size(117, 20);
             this.lblValorTotal.TabIndex = 5;
             this.lblValorTotal.Text = "Valor Consulta:";
             // 
@@ -238,10 +238,10 @@
             // 
             this.lblReferenteA.AutoSize = true;
             this.lblReferenteA.ForeColor = System.Drawing.Color.White;
-            this.lblReferenteA.Location = new System.Drawing.Point(76, 156);
+            this.lblReferenteA.Location = new System.Drawing.Point(86, 195);
             this.lblReferenteA.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblReferenteA.Name = "lblReferenteA";
-            this.lblReferenteA.Size = new System.Drawing.Size(80, 16);
+            this.lblReferenteA.Size = new System.Drawing.Size(98, 20);
             this.lblReferenteA.TabIndex = 6;
             this.lblReferenteA.Text = "Referente à:";
             this.lblReferenteA.TextAlign = System.Drawing.ContentAlignment.TopRight;
@@ -250,10 +250,10 @@
             // 
             this.lblReciboConsulta.AutoSize = true;
             this.lblReciboConsulta.ForeColor = System.Drawing.Color.White;
-            this.lblReciboConsulta.Location = new System.Drawing.Point(29, 154);
+            this.lblReciboConsulta.Location = new System.Drawing.Point(33, 192);
             this.lblReciboConsulta.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblReciboConsulta.Name = "lblReciboConsulta";
-            this.lblReciboConsulta.Size = new System.Drawing.Size(109, 16);
+            this.lblReciboConsulta.Size = new System.Drawing.Size(130, 20);
             this.lblReciboConsulta.TabIndex = 7;
             this.lblReciboConsulta.Text = "Recibo Consulta:";
             // 
@@ -261,10 +261,10 @@
             // 
             this.btnSelecionarPDFRecibo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSelecionarPDFRecibo.ForeColor = System.Drawing.Color.White;
-            this.btnSelecionarPDFRecibo.Location = new System.Drawing.Point(159, 148);
-            this.btnSelecionarPDFRecibo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnSelecionarPDFRecibo.Location = new System.Drawing.Point(179, 185);
+            this.btnSelecionarPDFRecibo.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnSelecionarPDFRecibo.Name = "btnSelecionarPDFRecibo";
-            this.btnSelecionarPDFRecibo.Size = new System.Drawing.Size(199, 28);
+            this.btnSelecionarPDFRecibo.Size = new System.Drawing.Size(224, 35);
             this.btnSelecionarPDFRecibo.TabIndex = 2;
             this.btnSelecionarPDFRecibo.Text = "Selecionar PDF Recibo";
             this.btnSelecionarPDFRecibo.UseVisualStyleBackColor = true;
@@ -278,10 +278,10 @@
             // 
             this.lblCPFPaciente.AutoSize = true;
             this.lblCPFPaciente.ForeColor = System.Drawing.Color.White;
-            this.lblCPFPaciente.Location = new System.Drawing.Point(123, 119);
+            this.lblCPFPaciente.Location = new System.Drawing.Point(138, 149);
             this.lblCPFPaciente.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblCPFPaciente.Name = "lblCPFPaciente";
-            this.lblCPFPaciente.Size = new System.Drawing.Size(36, 16);
+            this.lblCPFPaciente.Size = new System.Drawing.Size(44, 20);
             this.lblCPFPaciente.TabIndex = 10;
             this.lblCPFPaciente.Text = "CPF:";
             // 
@@ -289,11 +289,11 @@
             // 
             this.txtCPFPaciente.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(74)))), ((int)(((byte)(74)))), ((int)(((byte)(74)))));
             this.txtCPFPaciente.ForeColor = System.Drawing.Color.White;
-            this.txtCPFPaciente.Location = new System.Drawing.Point(176, 119);
-            this.txtCPFPaciente.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtCPFPaciente.Location = new System.Drawing.Point(198, 149);
+            this.txtCPFPaciente.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtCPFPaciente.MaxLength = 16;
             this.txtCPFPaciente.Name = "txtCPFPaciente";
-            this.txtCPFPaciente.Size = new System.Drawing.Size(293, 22);
+            this.txtCPFPaciente.Size = new System.Drawing.Size(329, 26);
             this.txtCPFPaciente.TabIndex = 5;
             this.txtCPFPaciente.TextChanged += new System.EventHandler(this.txtCPFPaciente_TextChanged);
             // 
@@ -301,10 +301,10 @@
             // 
             this.lblNomeArquivoRecibo.AutoEllipsis = true;
             this.lblNomeArquivoRecibo.ForeColor = System.Drawing.Color.White;
-            this.lblNomeArquivoRecibo.Location = new System.Drawing.Point(156, 180);
+            this.lblNomeArquivoRecibo.Location = new System.Drawing.Point(176, 225);
             this.lblNomeArquivoRecibo.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblNomeArquivoRecibo.Name = "lblNomeArquivoRecibo";
-            this.lblNomeArquivoRecibo.Size = new System.Drawing.Size(292, 21);
+            this.lblNomeArquivoRecibo.Size = new System.Drawing.Size(328, 26);
             this.lblNomeArquivoRecibo.TabIndex = 11;
             // 
             // statusStrip
@@ -312,10 +312,10 @@
             this.statusStrip.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatus});
-            this.statusStrip.Location = new System.Drawing.Point(0, 769);
+            this.statusStrip.Location = new System.Drawing.Point(0, 962);
             this.statusStrip.Name = "statusStrip";
-            this.statusStrip.Padding = new System.Windows.Forms.Padding(3, 0, 19, 0);
-            this.statusStrip.Size = new System.Drawing.Size(1076, 26);
+            this.statusStrip.Padding = new System.Windows.Forms.Padding(3, 0, 21, 0);
+            this.statusStrip.Size = new System.Drawing.Size(1204, 32);
             this.statusStrip.SizingGrip = false;
             this.statusStrip.TabIndex = 12;
             this.statusStrip.Text = "statusStrip1";
@@ -324,17 +324,17 @@
             // 
             this.toolStripStatus.ForeColor = System.Drawing.Color.White;
             this.toolStripStatus.Name = "toolStripStatus";
-            this.toolStripStatus.Size = new System.Drawing.Size(37, 20);
+            this.toolStripStatus.Size = new System.Drawing.Size(45, 25);
             this.toolStripStatus.Text = "Idle.";
             // 
             // lnkAssinarPDF
             // 
             this.lnkAssinarPDF.AutoSize = true;
             this.lnkAssinarPDF.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.lnkAssinarPDF.Location = new System.Drawing.Point(435, 9);
+            this.lnkAssinarPDF.Location = new System.Drawing.Point(489, 11);
             this.lnkAssinarPDF.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lnkAssinarPDF.Name = "lnkAssinarPDF";
-            this.lnkAssinarPDF.Size = new System.Drawing.Size(82, 16);
+            this.lnkAssinarPDF.Size = new System.Drawing.Size(98, 20);
             this.lnkAssinarPDF.TabIndex = 24;
             this.lnkAssinarPDF.TabStop = true;
             this.lnkAssinarPDF.Text = "Assinar PDF";
@@ -344,21 +344,21 @@
             // 
             this.txtReferenteA.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(74)))), ((int)(((byte)(74)))), ((int)(((byte)(74)))));
             this.txtReferenteA.ForeColor = System.Drawing.Color.White;
-            this.txtReferenteA.Location = new System.Drawing.Point(173, 156);
-            this.txtReferenteA.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtReferenteA.Location = new System.Drawing.Point(195, 195);
+            this.txtReferenteA.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtReferenteA.MaxLength = 32;
             this.txtReferenteA.Name = "txtReferenteA";
-            this.txtReferenteA.Size = new System.Drawing.Size(296, 22);
+            this.txtReferenteA.Size = new System.Drawing.Size(332, 26);
             this.txtReferenteA.TabIndex = 6;
             // 
             // lblNomeDoTerapeuta
             // 
             this.lblNomeDoTerapeuta.AutoSize = true;
             this.lblNomeDoTerapeuta.ForeColor = System.Drawing.Color.White;
-            this.lblNomeDoTerapeuta.Location = new System.Drawing.Point(107, 73);
+            this.lblNomeDoTerapeuta.Location = new System.Drawing.Point(120, 91);
             this.lblNomeDoTerapeuta.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblNomeDoTerapeuta.Name = "lblNomeDoTerapeuta";
-            this.lblNomeDoTerapeuta.Size = new System.Drawing.Size(47, 16);
+            this.lblNomeDoTerapeuta.Size = new System.Drawing.Size(55, 20);
             this.lblNomeDoTerapeuta.TabIndex = 27;
             this.lblNomeDoTerapeuta.Text = "Nome:";
             // 
@@ -366,21 +366,21 @@
             // 
             this.txtNomeDoTerapeuta.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(74)))), ((int)(((byte)(74)))), ((int)(((byte)(74)))));
             this.txtNomeDoTerapeuta.ForeColor = System.Drawing.Color.White;
-            this.txtNomeDoTerapeuta.Location = new System.Drawing.Point(169, 74);
-            this.txtNomeDoTerapeuta.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtNomeDoTerapeuta.Location = new System.Drawing.Point(190, 92);
+            this.txtNomeDoTerapeuta.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtNomeDoTerapeuta.MaxLength = 32;
             this.txtNomeDoTerapeuta.Name = "txtNomeDoTerapeuta";
-            this.txtNomeDoTerapeuta.Size = new System.Drawing.Size(303, 22);
+            this.txtNomeDoTerapeuta.Size = new System.Drawing.Size(340, 26);
             this.txtNomeDoTerapeuta.TabIndex = 1;
             // 
             // lblCPFTerapeuta
             // 
             this.lblCPFTerapeuta.AutoSize = true;
             this.lblCPFTerapeuta.ForeColor = System.Drawing.Color.White;
-            this.lblCPFTerapeuta.Location = new System.Drawing.Point(116, 108);
+            this.lblCPFTerapeuta.Location = new System.Drawing.Point(130, 135);
             this.lblCPFTerapeuta.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblCPFTerapeuta.Name = "lblCPFTerapeuta";
-            this.lblCPFTerapeuta.Size = new System.Drawing.Size(36, 16);
+            this.lblCPFTerapeuta.Size = new System.Drawing.Size(44, 20);
             this.lblCPFTerapeuta.TabIndex = 29;
             this.lblCPFTerapeuta.Text = "CPF:";
             // 
@@ -388,11 +388,11 @@
             // 
             this.txtCPFTerapeuta.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(74)))), ((int)(((byte)(74)))), ((int)(((byte)(74)))));
             this.txtCPFTerapeuta.ForeColor = System.Drawing.Color.White;
-            this.txtCPFTerapeuta.Location = new System.Drawing.Point(169, 108);
-            this.txtCPFTerapeuta.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtCPFTerapeuta.Location = new System.Drawing.Point(190, 135);
+            this.txtCPFTerapeuta.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtCPFTerapeuta.MaxLength = 20;
             this.txtCPFTerapeuta.Name = "txtCPFTerapeuta";
-            this.txtCPFTerapeuta.Size = new System.Drawing.Size(303, 22);
+            this.txtCPFTerapeuta.Size = new System.Drawing.Size(340, 26);
             this.txtCPFTerapeuta.TabIndex = 2;
             this.txtCPFTerapeuta.TextChanged += new System.EventHandler(this.txtCPFTerapeuta_TextChanged);
             // 
@@ -400,10 +400,10 @@
             // 
             this.lblEnderecoTerapeuta.AutoSize = true;
             this.lblEnderecoTerapeuta.ForeColor = System.Drawing.Color.White;
-            this.lblEnderecoTerapeuta.Location = new System.Drawing.Point(84, 254);
+            this.lblEnderecoTerapeuta.Location = new System.Drawing.Point(94, 318);
             this.lblEnderecoTerapeuta.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblEnderecoTerapeuta.Name = "lblEnderecoTerapeuta";
-            this.lblEnderecoTerapeuta.Size = new System.Drawing.Size(69, 16);
+            this.lblEnderecoTerapeuta.Size = new System.Drawing.Size(82, 20);
             this.lblEnderecoTerapeuta.TabIndex = 31;
             this.lblEnderecoTerapeuta.Text = "Endereço:";
             // 
@@ -411,21 +411,21 @@
             // 
             this.txtEnderecoTerapeuta.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(74)))), ((int)(((byte)(74)))), ((int)(((byte)(74)))));
             this.txtEnderecoTerapeuta.ForeColor = System.Drawing.Color.White;
-            this.txtEnderecoTerapeuta.Location = new System.Drawing.Point(169, 252);
-            this.txtEnderecoTerapeuta.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtEnderecoTerapeuta.Location = new System.Drawing.Point(190, 315);
+            this.txtEnderecoTerapeuta.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtEnderecoTerapeuta.Multiline = true;
             this.txtEnderecoTerapeuta.Name = "txtEnderecoTerapeuta";
-            this.txtEnderecoTerapeuta.Size = new System.Drawing.Size(303, 63);
+            this.txtEnderecoTerapeuta.Size = new System.Drawing.Size(340, 78);
             this.txtEnderecoTerapeuta.TabIndex = 6;
             // 
             // lblCRP
             // 
             this.lblCRP.AutoSize = true;
             this.lblCRP.ForeColor = System.Drawing.Color.White;
-            this.lblCRP.Location = new System.Drawing.Point(115, 144);
+            this.lblCRP.Location = new System.Drawing.Point(129, 180);
             this.lblCRP.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblCRP.Name = "lblCRP";
-            this.lblCRP.Size = new System.Drawing.Size(38, 16);
+            this.lblCRP.Size = new System.Drawing.Size(46, 20);
             this.lblCRP.TabIndex = 33;
             this.lblCRP.Text = "CRP:";
             // 
@@ -433,11 +433,11 @@
             // 
             this.txtCRP.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(74)))), ((int)(((byte)(74)))), ((int)(((byte)(74)))));
             this.txtCRP.ForeColor = System.Drawing.Color.White;
-            this.txtCRP.Location = new System.Drawing.Point(169, 143);
-            this.txtCRP.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtCRP.Location = new System.Drawing.Point(190, 179);
+            this.txtCRP.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtCRP.MaxLength = 20;
             this.txtCRP.Name = "txtCRP";
-            this.txtCRP.Size = new System.Drawing.Size(301, 22);
+            this.txtCRP.Size = new System.Drawing.Size(338, 26);
             this.txtCRP.TabIndex = 3;
             this.txtCRP.TextChanged += new System.EventHandler(this.txtCRP_TextChanged);
             // 
@@ -445,10 +445,10 @@
             // 
             this.btnSelecionarConsultas.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSelecionarConsultas.ForeColor = System.Drawing.Color.White;
-            this.btnSelecionarConsultas.Location = new System.Drawing.Point(176, 194);
-            this.btnSelecionarConsultas.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnSelecionarConsultas.Location = new System.Drawing.Point(198, 242);
+            this.btnSelecionarConsultas.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnSelecionarConsultas.Name = "btnSelecionarConsultas";
-            this.btnSelecionarConsultas.Size = new System.Drawing.Size(179, 36);
+            this.btnSelecionarConsultas.Size = new System.Drawing.Size(201, 45);
             this.btnSelecionarConsultas.TabIndex = 7;
             this.btnSelecionarConsultas.Text = "Selecionar Consultas";
             this.btnSelecionarConsultas.UseVisualStyleBackColor = true;
@@ -475,10 +475,10 @@
             this.pnlConsultas.Controls.Add(this.dtDataConsulta5);
             this.pnlConsultas.Controls.Add(this.dtDataConsulta2);
             this.pnlConsultas.Controls.Add(this.dtDataConsulta1);
-            this.pnlConsultas.Location = new System.Drawing.Point(552, 36);
+            this.pnlConsultas.Location = new System.Drawing.Point(621, 45);
             this.pnlConsultas.Margin = new System.Windows.Forms.Padding(3, 1, 3, 1);
             this.pnlConsultas.Name = "pnlConsultas";
-            this.pnlConsultas.Size = new System.Drawing.Size(509, 722);
+            this.pnlConsultas.Size = new System.Drawing.Size(572, 902);
             this.pnlConsultas.TabIndex = 35;
             this.pnlConsultas.Visible = false;
             // 
@@ -486,10 +486,10 @@
             // 
             this.lbDiaSemana.AutoSize = true;
             this.lbDiaSemana.ForeColor = System.Drawing.Color.White;
-            this.lbDiaSemana.Location = new System.Drawing.Point(219, 15);
+            this.lbDiaSemana.Location = new System.Drawing.Point(246, 19);
             this.lbDiaSemana.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbDiaSemana.Name = "lbDiaSemana";
-            this.lbDiaSemana.Size = new System.Drawing.Size(104, 16);
+            this.lbDiaSemana.Size = new System.Drawing.Size(123, 20);
             this.lbDiaSemana.TabIndex = 48;
             this.lbDiaSemana.Text = "Dia da Semana:";
             // 
@@ -497,10 +497,10 @@
             // 
             this.lbMes.AutoSize = true;
             this.lbMes.ForeColor = System.Drawing.Color.White;
-            this.lbMes.Location = new System.Drawing.Point(13, 15);
+            this.lbMes.Location = new System.Drawing.Point(15, 19);
             this.lbMes.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbMes.Name = "lbMes";
-            this.lbMes.Size = new System.Drawing.Size(36, 16);
+            this.lbMes.Size = new System.Drawing.Size(43, 20);
             this.lbMes.TabIndex = 47;
             this.lbMes.Text = "Mes:";
             // 
@@ -511,10 +511,10 @@
             this.cmbDiaSemana.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbDiaSemana.ForeColor = System.Drawing.Color.White;
             this.cmbDiaSemana.FormattingEnabled = true;
-            this.cmbDiaSemana.Location = new System.Drawing.Point(335, 12);
+            this.cmbDiaSemana.Location = new System.Drawing.Point(377, 15);
             this.cmbDiaSemana.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.cmbDiaSemana.Name = "cmbDiaSemana";
-            this.cmbDiaSemana.Size = new System.Drawing.Size(160, 24);
+            this.cmbDiaSemana.Size = new System.Drawing.Size(180, 28);
             this.cmbDiaSemana.TabIndex = 1;
             this.cmbDiaSemana.ValueMember = "Value";
             this.cmbDiaSemana.SelectedIndexChanged += new System.EventHandler(this.cmbDiaSemana_SelectedIndexChanged);
@@ -526,72 +526,22 @@
             this.cmbMes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbMes.ForeColor = System.Drawing.Color.White;
             this.cmbMes.FormattingEnabled = true;
-            this.cmbMes.Location = new System.Drawing.Point(59, 12);
+            this.cmbMes.Location = new System.Drawing.Point(66, 15);
             this.cmbMes.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.cmbMes.Name = "cmbMes";
-            this.cmbMes.Size = new System.Drawing.Size(151, 24);
+            this.cmbMes.Size = new System.Drawing.Size(169, 28);
             this.cmbMes.TabIndex = 0;
             this.cmbMes.ValueMember = "Value";
             this.cmbMes.SelectedIndexChanged += new System.EventHandler(this.cmbMes_SelectedIndexChanged);
-            // 
-            // dtDataConsulta10
-            // 
-            this.dtDataConsulta10.BackDisabledColor = System.Drawing.SystemColors.Control;
-            this.dtDataConsulta10.ForeDisabledColor = System.Drawing.Color.Empty;
-            this.dtDataConsulta10.Location = new System.Drawing.Point(119, 544);
-            this.dtDataConsulta10.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.dtDataConsulta10.Name = "dtDataConsulta10";
-            this.dtDataConsulta10.Size = new System.Drawing.Size(305, 22);
-            this.dtDataConsulta10.TabIndex = 12;
-            // 
-            // dtDataConsulta9
-            // 
-            this.dtDataConsulta9.BackDisabledColor = System.Drawing.SystemColors.Control;
-            this.dtDataConsulta9.ForeDisabledColor = System.Drawing.Color.Empty;
-            this.dtDataConsulta9.Location = new System.Drawing.Point(119, 506);
-            this.dtDataConsulta9.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.dtDataConsulta9.Name = "dtDataConsulta9";
-            this.dtDataConsulta9.Size = new System.Drawing.Size(305, 22);
-            this.dtDataConsulta9.TabIndex = 11;
-            // 
-            // dtDataConsulta8
-            // 
-            this.dtDataConsulta8.BackDisabledColor = System.Drawing.SystemColors.Control;
-            this.dtDataConsulta8.ForeDisabledColor = System.Drawing.Color.Empty;
-            this.dtDataConsulta8.Location = new System.Drawing.Point(119, 464);
-            this.dtDataConsulta8.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.dtDataConsulta8.Name = "dtDataConsulta8";
-            this.dtDataConsulta8.Size = new System.Drawing.Size(305, 22);
-            this.dtDataConsulta8.TabIndex = 10;
-            // 
-            // dtDataConsulta7
-            // 
-            this.dtDataConsulta7.BackDisabledColor = System.Drawing.SystemColors.Control;
-            this.dtDataConsulta7.ForeDisabledColor = System.Drawing.Color.Empty;
-            this.dtDataConsulta7.Location = new System.Drawing.Point(119, 422);
-            this.dtDataConsulta7.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.dtDataConsulta7.Name = "dtDataConsulta7";
-            this.dtDataConsulta7.Size = new System.Drawing.Size(305, 22);
-            this.dtDataConsulta7.TabIndex = 9;
-            // 
-            // dtDataConsulta6
-            // 
-            this.dtDataConsulta6.BackDisabledColor = System.Drawing.SystemColors.Control;
-            this.dtDataConsulta6.ForeDisabledColor = System.Drawing.Color.Empty;
-            this.dtDataConsulta6.Location = new System.Drawing.Point(119, 378);
-            this.dtDataConsulta6.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.dtDataConsulta6.Name = "dtDataConsulta6";
-            this.dtDataConsulta6.Size = new System.Drawing.Size(305, 22);
-            this.dtDataConsulta6.TabIndex = 8;
             // 
             // btnSalvarConsultas
             // 
             this.btnSalvarConsultas.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSalvarConsultas.ForeColor = System.Drawing.Color.White;
-            this.btnSalvarConsultas.Location = new System.Drawing.Point(155, 591);
-            this.btnSalvarConsultas.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnSalvarConsultas.Location = new System.Drawing.Point(174, 739);
+            this.btnSalvarConsultas.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnSalvarConsultas.Name = "btnSalvarConsultas";
-            this.btnSalvarConsultas.Size = new System.Drawing.Size(179, 36);
+            this.btnSalvarConsultas.Size = new System.Drawing.Size(201, 45);
             this.btnSalvarConsultas.TabIndex = 13;
             this.btnSalvarConsultas.Text = "Salvar";
             this.btnSalvarConsultas.UseVisualStyleBackColor = true;
@@ -601,16 +551,16 @@
             // 
             this.lblNumeroDeConsultas.AutoSize = true;
             this.lblNumeroDeConsultas.ForeColor = System.Drawing.Color.White;
-            this.lblNumeroDeConsultas.Location = new System.Drawing.Point(171, 65);
+            this.lblNumeroDeConsultas.Location = new System.Drawing.Point(192, 81);
             this.lblNumeroDeConsultas.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblNumeroDeConsultas.Name = "lblNumeroDeConsultas";
-            this.lblNumeroDeConsultas.Size = new System.Drawing.Size(139, 16);
+            this.lblNumeroDeConsultas.Size = new System.Drawing.Size(166, 20);
             this.lblNumeroDeConsultas.TabIndex = 39;
             this.lblNumeroDeConsultas.Text = "Número de Consultas:";
             // 
             // numNumeroConsultas
             // 
-            this.numNumeroConsultas.Location = new System.Drawing.Point(323, 65);
+            this.numNumeroConsultas.Location = new System.Drawing.Point(363, 81);
             this.numNumeroConsultas.Margin = new System.Windows.Forms.Padding(3, 1, 3, 1);
             this.numNumeroConsultas.Maximum = new decimal(new int[] {
             10,
@@ -623,7 +573,7 @@
             0,
             0});
             this.numNumeroConsultas.Name = "numNumeroConsultas";
-            this.numNumeroConsultas.Size = new System.Drawing.Size(60, 22);
+            this.numNumeroConsultas.Size = new System.Drawing.Size(68, 26);
             this.numNumeroConsultas.TabIndex = 2;
             this.numNumeroConsultas.Value = new decimal(new int[] {
             10,
@@ -636,64 +586,12 @@
             // 
             this.lblSelecioneDataConsultas.AutoSize = true;
             this.lblSelecioneDataConsultas.ForeColor = System.Drawing.Color.White;
-            this.lblSelecioneDataConsultas.Location = new System.Drawing.Point(173, 113);
+            this.lblSelecioneDataConsultas.Location = new System.Drawing.Point(195, 141);
             this.lblSelecioneDataConsultas.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblSelecioneDataConsultas.Name = "lblSelecioneDataConsultas";
-            this.lblSelecioneDataConsultas.Size = new System.Drawing.Size(194, 16);
+            this.lblSelecioneDataConsultas.Size = new System.Drawing.Size(229, 20);
             this.lblSelecioneDataConsultas.TabIndex = 37;
             this.lblSelecioneDataConsultas.Text = "Selecione datas das consultas:";
-            // 
-            // dtDataConsulta4
-            // 
-            this.dtDataConsulta4.BackDisabledColor = System.Drawing.SystemColors.Control;
-            this.dtDataConsulta4.ForeDisabledColor = System.Drawing.Color.Empty;
-            this.dtDataConsulta4.Location = new System.Drawing.Point(119, 286);
-            this.dtDataConsulta4.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.dtDataConsulta4.Name = "dtDataConsulta4";
-            this.dtDataConsulta4.Size = new System.Drawing.Size(305, 22);
-            this.dtDataConsulta4.TabIndex = 6;
-            // 
-            // dtDataConsulta3
-            // 
-            this.dtDataConsulta3.BackDisabledColor = System.Drawing.SystemColors.Control;
-            this.dtDataConsulta3.ForeDisabledColor = System.Drawing.Color.Empty;
-            this.dtDataConsulta3.Location = new System.Drawing.Point(119, 239);
-            this.dtDataConsulta3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.dtDataConsulta3.Name = "dtDataConsulta3";
-            this.dtDataConsulta3.Size = new System.Drawing.Size(305, 22);
-            this.dtDataConsulta3.TabIndex = 5;
-            // 
-            // dtDataConsulta5
-            // 
-            this.dtDataConsulta5.BackDisabledColor = System.Drawing.SystemColors.Control;
-            this.dtDataConsulta5.ForeDisabledColor = System.Drawing.Color.Empty;
-            this.dtDataConsulta5.Location = new System.Drawing.Point(119, 331);
-            this.dtDataConsulta5.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.dtDataConsulta5.Name = "dtDataConsulta5";
-            this.dtDataConsulta5.Size = new System.Drawing.Size(305, 22);
-            this.dtDataConsulta5.TabIndex = 7;
-            // 
-            // dtDataConsulta2
-            // 
-            this.dtDataConsulta2.BackDisabledColor = System.Drawing.SystemColors.Control;
-            this.dtDataConsulta2.ForeDisabledColor = System.Drawing.Color.Empty;
-            this.dtDataConsulta2.Location = new System.Drawing.Point(119, 194);
-            this.dtDataConsulta2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.dtDataConsulta2.Name = "dtDataConsulta2";
-            this.dtDataConsulta2.Size = new System.Drawing.Size(305, 22);
-            this.dtDataConsulta2.TabIndex = 4;
-            // 
-            // dtDataConsulta1
-            // 
-            this.dtDataConsulta1.BackDisabledColor = System.Drawing.SystemColors.Control;
-            this.dtDataConsulta1.CalendarForeColor = System.Drawing.Color.White;
-            this.dtDataConsulta1.CalendarMonthBackground = System.Drawing.Color.FromArgb(((int)(((byte)(74)))), ((int)(((byte)(74)))), ((int)(((byte)(74)))));
-            this.dtDataConsulta1.ForeDisabledColor = System.Drawing.Color.Empty;
-            this.dtDataConsulta1.Location = new System.Drawing.Point(119, 149);
-            this.dtDataConsulta1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.dtDataConsulta1.Name = "dtDataConsulta1";
-            this.dtDataConsulta1.Size = new System.Drawing.Size(305, 22);
-            this.dtDataConsulta1.TabIndex = 3;
             // 
             // pnlRecibo
             // 
@@ -703,10 +601,10 @@
             this.pnlRecibo.Controls.Add(this.lnkAssinarPDF);
             this.pnlRecibo.Controls.Add(this.btnGerarRecibo);
             this.pnlRecibo.Controls.Add(this.pnlDadosPaciente);
-            this.pnlRecibo.Location = new System.Drawing.Point(5, 36);
+            this.pnlRecibo.Location = new System.Drawing.Point(6, 45);
             this.pnlRecibo.Margin = new System.Windows.Forms.Padding(3, 1, 3, 1);
             this.pnlRecibo.Name = "pnlRecibo";
-            this.pnlRecibo.Size = new System.Drawing.Size(535, 720);
+            this.pnlRecibo.Size = new System.Drawing.Size(602, 900);
             this.pnlRecibo.TabIndex = 36;
             // 
             // pnlDadosTerapeuta
@@ -728,20 +626,20 @@
             this.pnlDadosTerapeuta.Controls.Add(this.lblEnderecoTerapeuta);
             this.pnlDadosTerapeuta.Controls.Add(this.lblCRP);
             this.pnlDadosTerapeuta.Controls.Add(this.txtCRP);
-            this.pnlDadosTerapeuta.Location = new System.Drawing.Point(17, 305);
+            this.pnlDadosTerapeuta.Location = new System.Drawing.Point(19, 381);
             this.pnlDadosTerapeuta.Margin = new System.Windows.Forms.Padding(1);
             this.pnlDadosTerapeuta.Name = "pnlDadosTerapeuta";
-            this.pnlDadosTerapeuta.Size = new System.Drawing.Size(506, 340);
+            this.pnlDadosTerapeuta.Size = new System.Drawing.Size(569, 424);
             this.pnlDadosTerapeuta.TabIndex = 2;
             // 
             // lblCNPJTerapeuta
             // 
             this.lblCNPJTerapeuta.AutoSize = true;
             this.lblCNPJTerapeuta.ForeColor = System.Drawing.Color.White;
-            this.lblCNPJTerapeuta.Location = new System.Drawing.Point(107, 111);
+            this.lblCNPJTerapeuta.Location = new System.Drawing.Point(120, 139);
             this.lblCNPJTerapeuta.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblCNPJTerapeuta.Name = "lblCNPJTerapeuta";
-            this.lblCNPJTerapeuta.Size = new System.Drawing.Size(45, 16);
+            this.lblCNPJTerapeuta.Size = new System.Drawing.Size(53, 20);
             this.lblCNPJTerapeuta.TabIndex = 46;
             this.lblCNPJTerapeuta.Text = "CNPJ:";
             this.lblCNPJTerapeuta.Visible = false;
@@ -750,10 +648,10 @@
             // 
             this.lbNomeEmpresa.AutoSize = true;
             this.lbNomeEmpresa.ForeColor = System.Drawing.Color.White;
-            this.lbNomeEmpresa.Location = new System.Drawing.Point(47, 74);
+            this.lbNomeEmpresa.Location = new System.Drawing.Point(53, 92);
             this.lbNomeEmpresa.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbNomeEmpresa.Name = "lbNomeEmpresa";
-            this.lbNomeEmpresa.Size = new System.Drawing.Size(105, 16);
+            this.lbNomeEmpresa.Size = new System.Drawing.Size(123, 20);
             this.lbNomeEmpresa.TabIndex = 45;
             this.lbNomeEmpresa.Text = "Nome Empresa:";
             this.lbNomeEmpresa.Visible = false;
@@ -763,11 +661,11 @@
             this.gbTipoPessoa.Controls.Add(this.rbFisica);
             this.gbTipoPessoa.Controls.Add(this.rbJuridica);
             this.gbTipoPessoa.ForeColor = System.Drawing.Color.White;
-            this.gbTipoPessoa.Location = new System.Drawing.Point(169, 7);
+            this.gbTipoPessoa.Location = new System.Drawing.Point(190, 9);
             this.gbTipoPessoa.Margin = new System.Windows.Forms.Padding(3, 1, 3, 1);
             this.gbTipoPessoa.Name = "gbTipoPessoa";
             this.gbTipoPessoa.Padding = new System.Windows.Forms.Padding(3, 1, 3, 1);
-            this.gbTipoPessoa.Size = new System.Drawing.Size(213, 55);
+            this.gbTipoPessoa.Size = new System.Drawing.Size(240, 69);
             this.gbTipoPessoa.TabIndex = 0;
             this.gbTipoPessoa.TabStop = false;
             this.gbTipoPessoa.Text = "Tipo de Pessoa:";
@@ -777,10 +675,10 @@
             this.rbFisica.AutoSize = true;
             this.rbFisica.Checked = true;
             this.rbFisica.ForeColor = System.Drawing.Color.White;
-            this.rbFisica.Location = new System.Drawing.Point(21, 26);
+            this.rbFisica.Location = new System.Drawing.Point(24, 32);
             this.rbFisica.Margin = new System.Windows.Forms.Padding(3, 1, 3, 1);
             this.rbFisica.Name = "rbFisica";
-            this.rbFisica.Size = new System.Drawing.Size(64, 20);
+            this.rbFisica.Size = new System.Drawing.Size(75, 24);
             this.rbFisica.TabIndex = 0;
             this.rbFisica.TabStop = true;
             this.rbFisica.Text = "Física";
@@ -791,10 +689,10 @@
             // 
             this.rbJuridica.AutoSize = true;
             this.rbJuridica.ForeColor = System.Drawing.Color.White;
-            this.rbJuridica.Location = new System.Drawing.Point(93, 26);
+            this.rbJuridica.Location = new System.Drawing.Point(105, 32);
             this.rbJuridica.Margin = new System.Windows.Forms.Padding(3, 1, 3, 1);
             this.rbJuridica.Name = "rbJuridica";
-            this.rbJuridica.Size = new System.Drawing.Size(75, 20);
+            this.rbJuridica.Size = new System.Drawing.Size(88, 24);
             this.rbJuridica.TabIndex = 1;
             this.rbJuridica.Text = "Juridica";
             this.rbJuridica.UseVisualStyleBackColor = true;
@@ -804,10 +702,10 @@
             // 
             this.lbDadosTerapeuta.AutoSize = true;
             this.lbDadosTerapeuta.ForeColor = System.Drawing.Color.White;
-            this.lbDadosTerapeuta.Location = new System.Drawing.Point(8, 7);
+            this.lbDadosTerapeuta.Location = new System.Drawing.Point(9, 9);
             this.lbDadosTerapeuta.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbDadosTerapeuta.Name = "lbDadosTerapeuta";
-            this.lbDadosTerapeuta.Size = new System.Drawing.Size(117, 16);
+            this.lbDadosTerapeuta.Size = new System.Drawing.Size(137, 20);
             this.lbDadosTerapeuta.TabIndex = 43;
             this.lbDadosTerapeuta.Text = "Dados Terapeuta:";
             // 
@@ -815,10 +713,10 @@
             // 
             this.lblCidade.AutoSize = true;
             this.lblCidade.ForeColor = System.Drawing.Color.White;
-            this.lblCidade.Location = new System.Drawing.Point(99, 214);
+            this.lblCidade.Location = new System.Drawing.Point(111, 268);
             this.lblCidade.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblCidade.Name = "lblCidade";
-            this.lblCidade.Size = new System.Drawing.Size(54, 16);
+            this.lblCidade.Size = new System.Drawing.Size(63, 20);
             this.lblCidade.TabIndex = 14;
             this.lblCidade.Text = "Cidade:";
             // 
@@ -826,21 +724,21 @@
             // 
             this.txtCidade.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(74)))), ((int)(((byte)(74)))), ((int)(((byte)(74)))));
             this.txtCidade.ForeColor = System.Drawing.Color.White;
-            this.txtCidade.Location = new System.Drawing.Point(168, 214);
-            this.txtCidade.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtCidade.Location = new System.Drawing.Point(189, 268);
+            this.txtCidade.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtCidade.MaxLength = 32;
             this.txtCidade.Name = "txtCidade";
-            this.txtCidade.Size = new System.Drawing.Size(304, 22);
+            this.txtCidade.Size = new System.Drawing.Size(342, 26);
             this.txtCidade.TabIndex = 5;
             // 
             // lblCEP
             // 
             this.lblCEP.AutoSize = true;
             this.lblCEP.ForeColor = System.Drawing.Color.White;
-            this.lblCEP.Location = new System.Drawing.Point(115, 180);
+            this.lblCEP.Location = new System.Drawing.Point(129, 225);
             this.lblCEP.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblCEP.Name = "lblCEP";
-            this.lblCEP.Size = new System.Drawing.Size(37, 16);
+            this.lblCEP.Size = new System.Drawing.Size(45, 20);
             this.lblCEP.TabIndex = 36;
             this.lblCEP.Text = "CEP:";
             // 
@@ -848,11 +746,11 @@
             // 
             this.txtCEP.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(74)))), ((int)(((byte)(74)))), ((int)(((byte)(74)))));
             this.txtCEP.ForeColor = System.Drawing.Color.White;
-            this.txtCEP.Location = new System.Drawing.Point(169, 180);
-            this.txtCEP.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtCEP.Location = new System.Drawing.Point(190, 225);
+            this.txtCEP.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtCEP.MaxLength = 12;
             this.txtCEP.Name = "txtCEP";
-            this.txtCEP.Size = new System.Drawing.Size(301, 22);
+            this.txtCEP.Size = new System.Drawing.Size(338, 26);
             this.txtCEP.TabIndex = 4;
             this.txtCEP.TextChanged += new System.EventHandler(this.txtCEP_TextChanged);
             // 
@@ -861,10 +759,10 @@
             this.lblTituloGeracaoRecibo.AutoSize = true;
             this.lblTituloGeracaoRecibo.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.1F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTituloGeracaoRecibo.ForeColor = System.Drawing.Color.White;
-            this.lblTituloGeracaoRecibo.Location = new System.Drawing.Point(171, 9);
+            this.lblTituloGeracaoRecibo.Location = new System.Drawing.Point(192, 11);
             this.lblTituloGeracaoRecibo.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblTituloGeracaoRecibo.Name = "lblTituloGeracaoRecibo";
-            this.lblTituloGeracaoRecibo.Size = new System.Drawing.Size(209, 17);
+            this.lblTituloGeracaoRecibo.Size = new System.Drawing.Size(239, 20);
             this.lblTituloGeracaoRecibo.TabIndex = 44;
             this.lblTituloGeracaoRecibo.Text = "Geração de Recibo Terapia";
             // 
@@ -884,20 +782,20 @@
             this.pnlDadosPaciente.Controls.Add(this.lblReferenteA);
             this.pnlDadosPaciente.Controls.Add(this.lblValorTotal);
             this.pnlDadosPaciente.Controls.Add(this.txtValorConsulta);
-            this.pnlDadosPaciente.Location = new System.Drawing.Point(17, 37);
+            this.pnlDadosPaciente.Location = new System.Drawing.Point(19, 46);
             this.pnlDadosPaciente.Margin = new System.Windows.Forms.Padding(1);
             this.pnlDadosPaciente.Name = "pnlDadosPaciente";
-            this.pnlDadosPaciente.Size = new System.Drawing.Size(502, 249);
+            this.pnlDadosPaciente.Size = new System.Drawing.Size(564, 311);
             this.pnlDadosPaciente.TabIndex = 1;
             // 
             // btnNovoPaciente
             // 
             this.btnNovoPaciente.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnNovoPaciente.ForeColor = System.Drawing.Color.White;
-            this.btnNovoPaciente.Location = new System.Drawing.Point(261, 71);
+            this.btnNovoPaciente.Location = new System.Drawing.Point(294, 89);
             this.btnNovoPaciente.Margin = new System.Windows.Forms.Padding(1);
             this.btnNovoPaciente.Name = "btnNovoPaciente";
-            this.btnNovoPaciente.Size = new System.Drawing.Size(63, 34);
+            this.btnNovoPaciente.Size = new System.Drawing.Size(71, 42);
             this.btnNovoPaciente.TabIndex = 2;
             this.btnNovoPaciente.Text = "Novo";
             this.btnNovoPaciente.UseVisualStyleBackColor = true;
@@ -907,10 +805,10 @@
             // 
             this.btnExcluirPaciente.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnExcluirPaciente.ForeColor = System.Drawing.Color.White;
-            this.btnExcluirPaciente.Location = new System.Drawing.Point(395, 71);
+            this.btnExcluirPaciente.Location = new System.Drawing.Point(444, 89);
             this.btnExcluirPaciente.Margin = new System.Windows.Forms.Padding(1);
             this.btnExcluirPaciente.Name = "btnExcluirPaciente";
-            this.btnExcluirPaciente.Size = new System.Drawing.Size(72, 34);
+            this.btnExcluirPaciente.Size = new System.Drawing.Size(81, 42);
             this.btnExcluirPaciente.TabIndex = 4;
             this.btnExcluirPaciente.Text = "Excluir";
             this.btnExcluirPaciente.UseVisualStyleBackColor = true;
@@ -920,10 +818,10 @@
             // 
             this.btnSalvarPaciente.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSalvarPaciente.ForeColor = System.Drawing.Color.White;
-            this.btnSalvarPaciente.Location = new System.Drawing.Point(328, 71);
+            this.btnSalvarPaciente.Location = new System.Drawing.Point(369, 89);
             this.btnSalvarPaciente.Margin = new System.Windows.Forms.Padding(1);
             this.btnSalvarPaciente.Name = "btnSalvarPaciente";
-            this.btnSalvarPaciente.Size = new System.Drawing.Size(64, 34);
+            this.btnSalvarPaciente.Size = new System.Drawing.Size(72, 42);
             this.btnSalvarPaciente.TabIndex = 3;
             this.btnSalvarPaciente.Text = "Salvar";
             this.btnSalvarPaciente.UseVisualStyleBackColor = true;
@@ -934,10 +832,10 @@
             this.cmbNomePaciente.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(74)))), ((int)(((byte)(74)))), ((int)(((byte)(74)))));
             this.cmbNomePaciente.ForeColor = System.Drawing.Color.White;
             this.cmbNomePaciente.FormattingEnabled = true;
-            this.cmbNomePaciente.Location = new System.Drawing.Point(173, 43);
+            this.cmbNomePaciente.Location = new System.Drawing.Point(195, 54);
             this.cmbNomePaciente.Margin = new System.Windows.Forms.Padding(1);
             this.cmbNomePaciente.Name = "cmbNomePaciente";
-            this.cmbNomePaciente.Size = new System.Drawing.Size(292, 24);
+            this.cmbNomePaciente.Size = new System.Drawing.Size(328, 28);
             this.cmbNomePaciente.TabIndex = 0;
             this.cmbNomePaciente.SelectedIndexChanged += new System.EventHandler(this.cmbNomePaciente_SelectedIndexChanged);
             this.cmbNomePaciente.TextChanged += new System.EventHandler(this.cmbNomePaciente_TextChanged);
@@ -947,10 +845,10 @@
             // 
             this.lbDadosPaciente.AutoSize = true;
             this.lbDadosPaciente.ForeColor = System.Drawing.Color.White;
-            this.lbDadosPaciente.Location = new System.Drawing.Point(8, 9);
+            this.lbDadosPaciente.Location = new System.Drawing.Point(9, 11);
             this.lbDadosPaciente.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbDadosPaciente.Name = "lbDadosPaciente";
-            this.lbDadosPaciente.Size = new System.Drawing.Size(104, 16);
+            this.lbDadosPaciente.Size = new System.Drawing.Size(122, 20);
             this.lbDadosPaciente.TabIndex = 44;
             this.lbDadosPaciente.Text = "Dados Paciente";
             // 
@@ -962,19 +860,19 @@
             this.pnlReembolso.Controls.Add(this.btnGerarSolicitacaoReembolso);
             this.pnlReembolso.Controls.Add(this.pnlDadosReembolso);
             this.pnlReembolso.Controls.Add(this.pnlDadosBancarios);
-            this.pnlReembolso.Location = new System.Drawing.Point(552, 36);
+            this.pnlReembolso.Location = new System.Drawing.Point(621, 45);
             this.pnlReembolso.Margin = new System.Windows.Forms.Padding(3, 1, 3, 1);
             this.pnlReembolso.Name = "pnlReembolso";
-            this.pnlReembolso.Size = new System.Drawing.Size(508, 720);
+            this.pnlReembolso.Size = new System.Drawing.Size(572, 900);
             this.pnlReembolso.TabIndex = 37;
             // 
             // lnkUnimedLogin
             // 
             this.lnkUnimedLogin.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.lnkUnimedLogin.Location = new System.Drawing.Point(449, 9);
+            this.lnkUnimedLogin.Location = new System.Drawing.Point(505, 11);
             this.lnkUnimedLogin.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lnkUnimedLogin.Name = "lnkUnimedLogin";
-            this.lnkUnimedLogin.Size = new System.Drawing.Size(49, 23);
+            this.lnkUnimedLogin.Size = new System.Drawing.Size(55, 29);
             this.lnkUnimedLogin.TabIndex = 50;
             this.lnkUnimedLogin.TabStop = true;
             this.lnkUnimedLogin.Text = "Login";
@@ -985,10 +883,10 @@
             this.lblTituloSolicitacaoReembolso.AutoSize = true;
             this.lblTituloSolicitacaoReembolso.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.1F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTituloSolicitacaoReembolso.ForeColor = System.Drawing.Color.White;
-            this.lblTituloSolicitacaoReembolso.Location = new System.Drawing.Point(128, 9);
+            this.lblTituloSolicitacaoReembolso.Location = new System.Drawing.Point(144, 11);
             this.lblTituloSolicitacaoReembolso.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblTituloSolicitacaoReembolso.Name = "lblTituloSolicitacaoReembolso";
-            this.lblTituloSolicitacaoReembolso.Size = new System.Drawing.Size(254, 17);
+            this.lblTituloSolicitacaoReembolso.Size = new System.Drawing.Size(296, 20);
             this.lblTituloSolicitacaoReembolso.TabIndex = 43;
             this.lblTituloSolicitacaoReembolso.Text = "Solicitação de Reembolso Unimed";
             // 
@@ -996,10 +894,10 @@
             // 
             this.btnGerarSolicitacaoReembolso.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnGerarSolicitacaoReembolso.ForeColor = System.Drawing.Color.White;
-            this.btnGerarSolicitacaoReembolso.Location = new System.Drawing.Point(157, 663);
-            this.btnGerarSolicitacaoReembolso.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnGerarSolicitacaoReembolso.Location = new System.Drawing.Point(177, 829);
+            this.btnGerarSolicitacaoReembolso.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnGerarSolicitacaoReembolso.Name = "btnGerarSolicitacaoReembolso";
-            this.btnGerarSolicitacaoReembolso.Size = new System.Drawing.Size(179, 50);
+            this.btnGerarSolicitacaoReembolso.Size = new System.Drawing.Size(201, 62);
             this.btnGerarSolicitacaoReembolso.TabIndex = 3;
             this.btnGerarSolicitacaoReembolso.Text = "Gerar solicitação de reembolso";
             this.btnGerarSolicitacaoReembolso.UseVisualStyleBackColor = true;
@@ -1019,20 +917,20 @@
             this.pnlDadosReembolso.Controls.Add(this.lblNomeArquivoRecibo);
             this.pnlDadosReembolso.Controls.Add(this.txtSenhaUnimed);
             this.pnlDadosReembolso.Controls.Add(this.lblSenhaUnimed);
-            this.pnlDadosReembolso.Location = new System.Drawing.Point(20, 37);
+            this.pnlDadosReembolso.Location = new System.Drawing.Point(22, 46);
             this.pnlDadosReembolso.Margin = new System.Windows.Forms.Padding(1);
             this.pnlDadosReembolso.Name = "pnlDadosReembolso";
-            this.pnlDadosReembolso.Size = new System.Drawing.Size(470, 338);
+            this.pnlDadosReembolso.Size = new System.Drawing.Size(528, 422);
             this.pnlDadosReembolso.TabIndex = 1;
             // 
             // btnMostraDadosUnimedAcre
             // 
             this.btnMostraDadosUnimedAcre.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnMostraDadosUnimedAcre.ForeColor = System.Drawing.Color.White;
-            this.btnMostraDadosUnimedAcre.Location = new System.Drawing.Point(241, 248);
-            this.btnMostraDadosUnimedAcre.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnMostraDadosUnimedAcre.Location = new System.Drawing.Point(271, 310);
+            this.btnMostraDadosUnimedAcre.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnMostraDadosUnimedAcre.Name = "btnMostraDadosUnimedAcre";
-            this.btnMostraDadosUnimedAcre.Size = new System.Drawing.Size(179, 36);
+            this.btnMostraDadosUnimedAcre.Size = new System.Drawing.Size(201, 45);
             this.btnMostraDadosUnimedAcre.TabIndex = 49;
             this.btnMostraDadosUnimedAcre.Text = "Dados Unimed Acre";
             this.btnMostraDadosUnimedAcre.UseVisualStyleBackColor = true;
@@ -1042,10 +940,10 @@
             // 
             this.lbDadosReembolso.AutoSize = true;
             this.lbDadosReembolso.ForeColor = System.Drawing.Color.White;
-            this.lbDadosReembolso.Location = new System.Drawing.Point(11, 9);
+            this.lbDadosReembolso.Location = new System.Drawing.Point(12, 11);
             this.lbDadosReembolso.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbDadosReembolso.Name = "lbDadosReembolso";
-            this.lbDadosReembolso.Size = new System.Drawing.Size(125, 16);
+            this.lbDadosReembolso.Size = new System.Drawing.Size(145, 20);
             this.lbDadosReembolso.TabIndex = 48;
             this.lbDadosReembolso.Text = "Dados Reembolso:";
             // 
@@ -1053,10 +951,10 @@
             // 
             this.lblLoginUnimed.AutoSize = true;
             this.lblLoginUnimed.ForeColor = System.Drawing.Color.White;
-            this.lblLoginUnimed.Location = new System.Drawing.Point(13, 59);
+            this.lblLoginUnimed.Location = new System.Drawing.Point(15, 74);
             this.lblLoginUnimed.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblLoginUnimed.Name = "lblLoginUnimed";
-            this.lblLoginUnimed.Size = new System.Drawing.Size(130, 16);
+            this.lblLoginUnimed.Size = new System.Drawing.Size(156, 20);
             this.lblLoginUnimed.TabIndex = 47;
             this.lblLoginUnimed.Text = "Login Unimed (CPF):";
             // 
@@ -1064,11 +962,11 @@
             // 
             this.txtLoginUnimed.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(74)))), ((int)(((byte)(74)))), ((int)(((byte)(74)))));
             this.txtLoginUnimed.ForeColor = System.Drawing.Color.White;
-            this.txtLoginUnimed.Location = new System.Drawing.Point(159, 59);
-            this.txtLoginUnimed.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtLoginUnimed.Location = new System.Drawing.Point(179, 74);
+            this.txtLoginUnimed.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtLoginUnimed.MaxLength = 16;
             this.txtLoginUnimed.Name = "txtLoginUnimed";
-            this.txtLoginUnimed.Size = new System.Drawing.Size(281, 22);
+            this.txtLoginUnimed.Size = new System.Drawing.Size(316, 26);
             this.txtLoginUnimed.TabIndex = 0;
             this.txtLoginUnimed.TextChanged += new System.EventHandler(this.txtLoginUnimed_TextChanged);
             // 
@@ -1077,11 +975,11 @@
             this.grbTipoAtendimento.Controls.Add(this.rbPresencial);
             this.grbTipoAtendimento.Controls.Add(this.rbTelemedicina);
             this.grbTipoAtendimento.ForeColor = System.Drawing.Color.White;
-            this.grbTipoAtendimento.Location = new System.Drawing.Point(24, 213);
+            this.grbTipoAtendimento.Location = new System.Drawing.Point(27, 266);
             this.grbTipoAtendimento.Margin = new System.Windows.Forms.Padding(3, 1, 3, 1);
             this.grbTipoAtendimento.Name = "grbTipoAtendimento";
             this.grbTipoAtendimento.Padding = new System.Windows.Forms.Padding(3, 1, 3, 1);
-            this.grbTipoAtendimento.Size = new System.Drawing.Size(184, 101);
+            this.grbTipoAtendimento.Size = new System.Drawing.Size(207, 126);
             this.grbTipoAtendimento.TabIndex = 42;
             this.grbTipoAtendimento.TabStop = false;
             this.grbTipoAtendimento.Text = "Tipo de Atendimento:";
@@ -1090,10 +988,10 @@
             // 
             this.rbPresencial.AutoSize = true;
             this.rbPresencial.ForeColor = System.Drawing.Color.White;
-            this.rbPresencial.Location = new System.Drawing.Point(21, 30);
+            this.rbPresencial.Location = new System.Drawing.Point(24, 38);
             this.rbPresencial.Margin = new System.Windows.Forms.Padding(3, 1, 3, 1);
             this.rbPresencial.Name = "rbPresencial";
-            this.rbPresencial.Size = new System.Drawing.Size(92, 20);
+            this.rbPresencial.Size = new System.Drawing.Size(107, 24);
             this.rbPresencial.TabIndex = 0;
             this.rbPresencial.Text = "Presencial";
             this.rbPresencial.UseVisualStyleBackColor = true;
@@ -1103,10 +1001,10 @@
             this.rbTelemedicina.AutoSize = true;
             this.rbTelemedicina.Checked = true;
             this.rbTelemedicina.ForeColor = System.Drawing.Color.White;
-            this.rbTelemedicina.Location = new System.Drawing.Point(21, 62);
+            this.rbTelemedicina.Location = new System.Drawing.Point(24, 78);
             this.rbTelemedicina.Margin = new System.Windows.Forms.Padding(3, 1, 3, 1);
             this.rbTelemedicina.Name = "rbTelemedicina";
-            this.rbTelemedicina.Size = new System.Drawing.Size(111, 20);
+            this.rbTelemedicina.Size = new System.Drawing.Size(127, 24);
             this.rbTelemedicina.TabIndex = 1;
             this.rbTelemedicina.TabStop = true;
             this.rbTelemedicina.Text = "Telemedicina";
@@ -1116,22 +1014,22 @@
             // 
             this.txtSenhaUnimed.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(74)))), ((int)(((byte)(74)))), ((int)(((byte)(74)))));
             this.txtSenhaUnimed.ForeColor = System.Drawing.Color.White;
-            this.txtSenhaUnimed.Location = new System.Drawing.Point(159, 101);
-            this.txtSenhaUnimed.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtSenhaUnimed.Location = new System.Drawing.Point(179, 126);
+            this.txtSenhaUnimed.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtSenhaUnimed.MaxLength = 32;
             this.txtSenhaUnimed.Name = "txtSenhaUnimed";
             this.txtSenhaUnimed.PasswordChar = '*';
-            this.txtSenhaUnimed.Size = new System.Drawing.Size(281, 22);
+            this.txtSenhaUnimed.Size = new System.Drawing.Size(316, 26);
             this.txtSenhaUnimed.TabIndex = 1;
             // 
             // lblSenhaUnimed
             // 
             this.lblSenhaUnimed.AutoSize = true;
             this.lblSenhaUnimed.ForeColor = System.Drawing.Color.White;
-            this.lblSenhaUnimed.Location = new System.Drawing.Point(40, 102);
+            this.lblSenhaUnimed.Location = new System.Drawing.Point(45, 128);
             this.lblSenhaUnimed.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblSenhaUnimed.Name = "lblSenhaUnimed";
-            this.lblSenhaUnimed.Size = new System.Drawing.Size(99, 16);
+            this.lblSenhaUnimed.Size = new System.Drawing.Size(119, 20);
             this.lblSenhaUnimed.TabIndex = 45;
             this.lblSenhaUnimed.Text = "Senha Unimed:";
             // 
@@ -1147,20 +1045,20 @@
             this.pnlDadosBancarios.Controls.Add(this.lblContaSemDigito);
             this.pnlDadosBancarios.Controls.Add(this.txtContaSemDigito);
             this.pnlDadosBancarios.Controls.Add(this.lblAgenciaSemDigito);
-            this.pnlDadosBancarios.Location = new System.Drawing.Point(20, 395);
+            this.pnlDadosBancarios.Location = new System.Drawing.Point(22, 494);
             this.pnlDadosBancarios.Margin = new System.Windows.Forms.Padding(1);
             this.pnlDadosBancarios.Name = "pnlDadosBancarios";
-            this.pnlDadosBancarios.Size = new System.Drawing.Size(470, 251);
+            this.pnlDadosBancarios.Size = new System.Drawing.Size(528, 313);
             this.pnlDadosBancarios.TabIndex = 2;
             // 
             // lbDadosBancarios
             // 
             this.lbDadosBancarios.AutoSize = true;
             this.lbDadosBancarios.ForeColor = System.Drawing.Color.White;
-            this.lbDadosBancarios.Location = new System.Drawing.Point(8, 12);
+            this.lbDadosBancarios.Location = new System.Drawing.Point(9, 15);
             this.lbDadosBancarios.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbDadosBancarios.Name = "lbDadosBancarios";
-            this.lbDadosBancarios.Size = new System.Drawing.Size(115, 16);
+            this.lbDadosBancarios.Size = new System.Drawing.Size(135, 20);
             this.lbDadosBancarios.TabIndex = 42;
             this.lbDadosBancarios.Text = "Dados Bancários:";
             // 
@@ -1168,10 +1066,10 @@
             // 
             this.lblNomeDoBanco.AutoSize = true;
             this.lblNomeDoBanco.ForeColor = System.Drawing.Color.White;
-            this.lblNomeDoBanco.Location = new System.Drawing.Point(32, 68);
+            this.lblNomeDoBanco.Location = new System.Drawing.Point(36, 85);
             this.lblNomeDoBanco.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblNomeDoBanco.Name = "lblNomeDoBanco";
-            this.lblNomeDoBanco.Size = new System.Drawing.Size(108, 16);
+            this.lblNomeDoBanco.Size = new System.Drawing.Size(127, 20);
             this.lblNomeDoBanco.TabIndex = 35;
             this.lblNomeDoBanco.Text = "Nome do Banco:";
             // 
@@ -1179,10 +1077,10 @@
             // 
             this.lblDigitoDaConta.AutoSize = true;
             this.lblDigitoDaConta.ForeColor = System.Drawing.Color.White;
-            this.lblDigitoDaConta.Location = new System.Drawing.Point(40, 193);
+            this.lblDigitoDaConta.Location = new System.Drawing.Point(45, 241);
             this.lblDigitoDaConta.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblDigitoDaConta.Name = "lblDigitoDaConta";
-            this.lblDigitoDaConta.Size = new System.Drawing.Size(100, 16);
+            this.lblDigitoDaConta.Size = new System.Drawing.Size(120, 20);
             this.lblDigitoDaConta.TabIndex = 41;
             this.lblDigitoDaConta.Text = "Dígito da conta:";
             // 
@@ -1190,22 +1088,22 @@
             // 
             this.txtNomeDoBanco.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(74)))), ((int)(((byte)(74)))), ((int)(((byte)(74)))));
             this.txtNomeDoBanco.ForeColor = System.Drawing.Color.White;
-            this.txtNomeDoBanco.Location = new System.Drawing.Point(152, 65);
-            this.txtNomeDoBanco.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtNomeDoBanco.Location = new System.Drawing.Point(171, 81);
+            this.txtNomeDoBanco.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtNomeDoBanco.MaxLength = 32;
             this.txtNomeDoBanco.Name = "txtNomeDoBanco";
-            this.txtNomeDoBanco.Size = new System.Drawing.Size(281, 22);
+            this.txtNomeDoBanco.Size = new System.Drawing.Size(316, 26);
             this.txtNomeDoBanco.TabIndex = 0;
             // 
             // txtDigitoDaConta
             // 
             this.txtDigitoDaConta.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(74)))), ((int)(((byte)(74)))), ((int)(((byte)(74)))));
             this.txtDigitoDaConta.ForeColor = System.Drawing.Color.White;
-            this.txtDigitoDaConta.Location = new System.Drawing.Point(153, 193);
-            this.txtDigitoDaConta.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtDigitoDaConta.Location = new System.Drawing.Point(172, 241);
+            this.txtDigitoDaConta.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtDigitoDaConta.MaxLength = 32;
             this.txtDigitoDaConta.Name = "txtDigitoDaConta";
-            this.txtDigitoDaConta.Size = new System.Drawing.Size(281, 22);
+            this.txtDigitoDaConta.Size = new System.Drawing.Size(316, 26);
             this.txtDigitoDaConta.TabIndex = 3;
             this.txtDigitoDaConta.TextChanged += new System.EventHandler(this.txtDigitoDaConta_TextChanged);
             // 
@@ -1213,11 +1111,11 @@
             // 
             this.txtAgenciaSemDigito.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(74)))), ((int)(((byte)(74)))), ((int)(((byte)(74)))));
             this.txtAgenciaSemDigito.ForeColor = System.Drawing.Color.White;
-            this.txtAgenciaSemDigito.Location = new System.Drawing.Point(153, 108);
-            this.txtAgenciaSemDigito.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtAgenciaSemDigito.Location = new System.Drawing.Point(172, 135);
+            this.txtAgenciaSemDigito.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtAgenciaSemDigito.MaxLength = 32;
             this.txtAgenciaSemDigito.Name = "txtAgenciaSemDigito";
-            this.txtAgenciaSemDigito.Size = new System.Drawing.Size(281, 22);
+            this.txtAgenciaSemDigito.Size = new System.Drawing.Size(316, 26);
             this.txtAgenciaSemDigito.TabIndex = 1;
             this.txtAgenciaSemDigito.TextChanged += new System.EventHandler(this.txtAgenciaSemDigito_TextChanged);
             // 
@@ -1225,10 +1123,10 @@
             // 
             this.lblContaSemDigito.AutoSize = true;
             this.lblContaSemDigito.ForeColor = System.Drawing.Color.White;
-            this.lblContaSemDigito.Location = new System.Drawing.Point(30, 154);
+            this.lblContaSemDigito.Location = new System.Drawing.Point(34, 192);
             this.lblContaSemDigito.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblContaSemDigito.Name = "lblContaSemDigito";
-            this.lblContaSemDigito.Size = new System.Drawing.Size(110, 16);
+            this.lblContaSemDigito.Size = new System.Drawing.Size(132, 20);
             this.lblContaSemDigito.TabIndex = 39;
             this.lblContaSemDigito.Text = "Conta sem dígito:";
             // 
@@ -1236,11 +1134,11 @@
             // 
             this.txtContaSemDigito.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(74)))), ((int)(((byte)(74)))), ((int)(((byte)(74)))));
             this.txtContaSemDigito.ForeColor = System.Drawing.Color.White;
-            this.txtContaSemDigito.Location = new System.Drawing.Point(152, 150);
-            this.txtContaSemDigito.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtContaSemDigito.Location = new System.Drawing.Point(171, 188);
+            this.txtContaSemDigito.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtContaSemDigito.MaxLength = 32;
             this.txtContaSemDigito.Name = "txtContaSemDigito";
-            this.txtContaSemDigito.Size = new System.Drawing.Size(281, 22);
+            this.txtContaSemDigito.Size = new System.Drawing.Size(316, 26);
             this.txtContaSemDigito.TabIndex = 2;
             this.txtContaSemDigito.TextChanged += new System.EventHandler(this.txtContaSemDigito_TextChanged);
             // 
@@ -1248,10 +1146,10 @@
             // 
             this.lblAgenciaSemDigito.AutoSize = true;
             this.lblAgenciaSemDigito.ForeColor = System.Drawing.Color.White;
-            this.lblAgenciaSemDigito.Location = new System.Drawing.Point(15, 108);
+            this.lblAgenciaSemDigito.Location = new System.Drawing.Point(17, 135);
             this.lblAgenciaSemDigito.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblAgenciaSemDigito.Name = "lblAgenciaSemDigito";
-            this.lblAgenciaSemDigito.Size = new System.Drawing.Size(125, 16);
+            this.lblAgenciaSemDigito.Size = new System.Drawing.Size(147, 20);
             this.lblAgenciaSemDigito.TabIndex = 37;
             this.lblAgenciaSemDigito.Text = "Agência sem dígito:";
             // 
@@ -1284,20 +1182,20 @@
             this.pnlUnimedAcre.Controls.Add(this.lblRua);
             this.pnlUnimedAcre.Controls.Add(this.txtEnderecoRuaAcre);
             this.pnlUnimedAcre.Controls.Add(this.lblNomeBancoAcre);
-            this.pnlUnimedAcre.Location = new System.Drawing.Point(22, 36);
+            this.pnlUnimedAcre.Location = new System.Drawing.Point(25, 45);
             this.pnlUnimedAcre.Margin = new System.Windows.Forms.Padding(1);
             this.pnlUnimedAcre.Name = "pnlUnimedAcre";
-            this.pnlUnimedAcre.Size = new System.Drawing.Size(1038, 720);
+            this.pnlUnimedAcre.Size = new System.Drawing.Size(1168, 900);
             this.pnlUnimedAcre.TabIndex = 43;
             this.pnlUnimedAcre.Visible = false;
             // 
             // label1
             // 
             this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(187, 446);
+            this.label1.Location = new System.Drawing.Point(210, 558);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(185, 45);
+            this.label1.Size = new System.Drawing.Size(208, 56);
             this.label1.TabIndex = 61;
             this.label1.Text = "Observações / Justificativa:";
             // 
@@ -1305,45 +1203,33 @@
             // 
             this.txtObservacoes.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(74)))), ((int)(((byte)(74)))), ((int)(((byte)(74)))));
             this.txtObservacoes.ForeColor = System.Drawing.Color.White;
-            this.txtObservacoes.Location = new System.Drawing.Point(372, 446);
-            this.txtObservacoes.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtObservacoes.Location = new System.Drawing.Point(418, 558);
+            this.txtObservacoes.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtObservacoes.MaxLength = 2000;
             this.txtObservacoes.Multiline = true;
             this.txtObservacoes.Name = "txtObservacoes";
-            this.txtObservacoes.Size = new System.Drawing.Size(570, 114);
+            this.txtObservacoes.Size = new System.Drawing.Size(641, 142);
             this.txtObservacoes.TabIndex = 60;
             // 
             // lbDataRecibo
             // 
             this.lbDataRecibo.AutoSize = true;
             this.lbDataRecibo.ForeColor = System.Drawing.Color.White;
-            this.lbDataRecibo.Location = new System.Drawing.Point(55, 158);
+            this.lbDataRecibo.Location = new System.Drawing.Point(62, 198);
             this.lbDataRecibo.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbDataRecibo.Name = "lbDataRecibo";
-            this.lbDataRecibo.Size = new System.Drawing.Size(86, 16);
+            this.lbDataRecibo.Size = new System.Drawing.Size(102, 20);
             this.lbDataRecibo.TabIndex = 59;
             this.lbDataRecibo.Text = "Data Recibo:";
-            // 
-            // dtDataRecibo
-            // 
-            this.dtDataRecibo.BackDisabledColor = System.Drawing.SystemColors.Control;
-            this.dtDataRecibo.CalendarForeColor = System.Drawing.Color.White;
-            this.dtDataRecibo.CalendarMonthBackground = System.Drawing.Color.FromArgb(((int)(((byte)(74)))), ((int)(((byte)(74)))), ((int)(((byte)(74)))));
-            this.dtDataRecibo.ForeDisabledColor = System.Drawing.Color.Empty;
-            this.dtDataRecibo.Location = new System.Drawing.Point(153, 161);
-            this.dtDataRecibo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.dtDataRecibo.Name = "dtDataRecibo";
-            this.dtDataRecibo.Size = new System.Drawing.Size(281, 22);
-            this.dtDataRecibo.TabIndex = 58;
             // 
             // lblEstado
             // 
             this.lblEstado.AutoSize = true;
             this.lblEstado.ForeColor = System.Drawing.Color.White;
-            this.lblEstado.Location = new System.Drawing.Point(591, 250);
+            this.lblEstado.Location = new System.Drawing.Point(665, 312);
             this.lblEstado.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblEstado.Name = "lblEstado";
-            this.lblEstado.Size = new System.Drawing.Size(53, 16);
+            this.lblEstado.Size = new System.Drawing.Size(64, 20);
             this.lblEstado.TabIndex = 57;
             this.lblEstado.Text = "Estado:";
             // 
@@ -1351,41 +1237,41 @@
             // 
             this.txtEstadoAcre.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(74)))), ((int)(((byte)(74)))), ((int)(((byte)(74)))));
             this.txtEstadoAcre.ForeColor = System.Drawing.Color.White;
-            this.txtEstadoAcre.Location = new System.Drawing.Point(660, 252);
-            this.txtEstadoAcre.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtEstadoAcre.Location = new System.Drawing.Point(742, 315);
+            this.txtEstadoAcre.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtEstadoAcre.MaxLength = 32;
             this.txtEstadoAcre.Name = "txtEstadoAcre";
-            this.txtEstadoAcre.Size = new System.Drawing.Size(281, 22);
+            this.txtEstadoAcre.Size = new System.Drawing.Size(316, 26);
             this.txtEstadoAcre.TabIndex = 56;
             // 
             // lblNomeArquivoIdentidade
             // 
             this.lblNomeArquivoIdentidade.AutoEllipsis = true;
             this.lblNomeArquivoIdentidade.ForeColor = System.Drawing.Color.White;
-            this.lblNomeArquivoIdentidade.Location = new System.Drawing.Point(235, 389);
+            this.lblNomeArquivoIdentidade.Location = new System.Drawing.Point(264, 486);
             this.lblNomeArquivoIdentidade.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblNomeArquivoIdentidade.Name = "lblNomeArquivoIdentidade";
-            this.lblNomeArquivoIdentidade.Size = new System.Drawing.Size(719, 19);
+            this.lblNomeArquivoIdentidade.Size = new System.Drawing.Size(809, 24);
             this.lblNomeArquivoIdentidade.TabIndex = 53;
             // 
             // lblNomeArquivoCarteirinha
             // 
             this.lblNomeArquivoCarteirinha.AutoEllipsis = true;
             this.lblNomeArquivoCarteirinha.ForeColor = System.Drawing.Color.White;
-            this.lblNomeArquivoCarteirinha.Location = new System.Drawing.Point(235, 306);
+            this.lblNomeArquivoCarteirinha.Location = new System.Drawing.Point(264, 382);
             this.lblNomeArquivoCarteirinha.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblNomeArquivoCarteirinha.Name = "lblNomeArquivoCarteirinha";
-            this.lblNomeArquivoCarteirinha.Size = new System.Drawing.Size(707, 19);
+            this.lblNomeArquivoCarteirinha.Size = new System.Drawing.Size(795, 24);
             this.lblNomeArquivoCarteirinha.TabIndex = 52;
             // 
             // lblBairro
             // 
             this.lblBairro.AutoSize = true;
             this.lblBairro.ForeColor = System.Drawing.Color.White;
-            this.lblBairro.Location = new System.Drawing.Point(604, 199);
+            this.lblBairro.Location = new System.Drawing.Point(680, 249);
             this.lblBairro.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblBairro.Name = "lblBairro";
-            this.lblBairro.Size = new System.Drawing.Size(46, 16);
+            this.lblBairro.Size = new System.Drawing.Size(55, 20);
             this.lblBairro.TabIndex = 51;
             this.lblBairro.Text = "Bairro:";
             // 
@@ -1393,21 +1279,21 @@
             // 
             this.txtEnderecoBairroAcre.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(74)))), ((int)(((byte)(74)))), ((int)(((byte)(74)))));
             this.txtEnderecoBairroAcre.ForeColor = System.Drawing.Color.White;
-            this.txtEnderecoBairroAcre.Location = new System.Drawing.Point(660, 202);
-            this.txtEnderecoBairroAcre.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtEnderecoBairroAcre.Location = new System.Drawing.Point(742, 252);
+            this.txtEnderecoBairroAcre.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtEnderecoBairroAcre.MaxLength = 32;
             this.txtEnderecoBairroAcre.Name = "txtEnderecoBairroAcre";
-            this.txtEnderecoBairroAcre.Size = new System.Drawing.Size(281, 22);
+            this.txtEnderecoBairroAcre.Size = new System.Drawing.Size(316, 26);
             this.txtEnderecoBairroAcre.TabIndex = 5;
             // 
             // lblComplemento
             // 
             this.lblComplemento.AutoSize = true;
             this.lblComplemento.ForeColor = System.Drawing.Color.White;
-            this.lblComplemento.Location = new System.Drawing.Point(554, 153);
+            this.lblComplemento.Location = new System.Drawing.Point(623, 191);
             this.lblComplemento.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblComplemento.Name = "lblComplemento";
-            this.lblComplemento.Size = new System.Drawing.Size(94, 16);
+            this.lblComplemento.Size = new System.Drawing.Size(112, 20);
             this.lblComplemento.TabIndex = 49;
             this.lblComplemento.Text = "Complemento:";
             // 
@@ -1415,21 +1301,21 @@
             // 
             this.txtEnderecoComplementoAcre.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(74)))), ((int)(((byte)(74)))), ((int)(((byte)(74)))));
             this.txtEnderecoComplementoAcre.ForeColor = System.Drawing.Color.White;
-            this.txtEnderecoComplementoAcre.Location = new System.Drawing.Point(660, 154);
-            this.txtEnderecoComplementoAcre.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtEnderecoComplementoAcre.Location = new System.Drawing.Point(742, 192);
+            this.txtEnderecoComplementoAcre.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtEnderecoComplementoAcre.MaxLength = 32;
             this.txtEnderecoComplementoAcre.Name = "txtEnderecoComplementoAcre";
-            this.txtEnderecoComplementoAcre.Size = new System.Drawing.Size(281, 22);
+            this.txtEnderecoComplementoAcre.Size = new System.Drawing.Size(316, 26);
             this.txtEnderecoComplementoAcre.TabIndex = 4;
             // 
             // btnSalvarDadosAcre
             // 
             this.btnSalvarDadosAcre.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSalvarDadosAcre.ForeColor = System.Drawing.Color.White;
-            this.btnSalvarDadosAcre.Location = new System.Drawing.Point(410, 629);
-            this.btnSalvarDadosAcre.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnSalvarDadosAcre.Location = new System.Drawing.Point(461, 786);
+            this.btnSalvarDadosAcre.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnSalvarDadosAcre.Name = "btnSalvarDadosAcre";
-            this.btnSalvarDadosAcre.Size = new System.Drawing.Size(179, 36);
+            this.btnSalvarDadosAcre.Size = new System.Drawing.Size(201, 45);
             this.btnSalvarDadosAcre.TabIndex = 8;
             this.btnSalvarDadosAcre.Text = "Salvar";
             this.btnSalvarDadosAcre.UseVisualStyleBackColor = true;
@@ -1439,10 +1325,10 @@
             // 
             this.btnSelecionarPDFIdentidade.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSelecionarPDFIdentidade.ForeColor = System.Drawing.Color.White;
-            this.btnSelecionarPDFIdentidade.Location = new System.Drawing.Point(235, 350);
-            this.btnSelecionarPDFIdentidade.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnSelecionarPDFIdentidade.Location = new System.Drawing.Point(264, 438);
+            this.btnSelecionarPDFIdentidade.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnSelecionarPDFIdentidade.Name = "btnSelecionarPDFIdentidade";
-            this.btnSelecionarPDFIdentidade.Size = new System.Drawing.Size(199, 28);
+            this.btnSelecionarPDFIdentidade.Size = new System.Drawing.Size(224, 35);
             this.btnSelecionarPDFIdentidade.TabIndex = 7;
             this.btnSelecionarPDFIdentidade.Text = "Selecionar PDF Identidade";
             this.btnSelecionarPDFIdentidade.UseVisualStyleBackColor = true;
@@ -1452,10 +1338,10 @@
             // 
             this.lblIdentidade.AutoSize = true;
             this.lblIdentidade.ForeColor = System.Drawing.Color.White;
-            this.lblIdentidade.Location = new System.Drawing.Point(135, 355);
+            this.lblIdentidade.Location = new System.Drawing.Point(152, 444);
             this.lblIdentidade.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblIdentidade.Name = "lblIdentidade";
-            this.lblIdentidade.Size = new System.Drawing.Size(74, 16);
+            this.lblIdentidade.Size = new System.Drawing.Size(89, 20);
             this.lblIdentidade.TabIndex = 46;
             this.lblIdentidade.Text = "Identidade:";
             // 
@@ -1463,10 +1349,10 @@
             // 
             this.btnSelecionarPDFCarteirinha.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSelecionarPDFCarteirinha.ForeColor = System.Drawing.Color.White;
-            this.btnSelecionarPDFCarteirinha.Location = new System.Drawing.Point(235, 265);
-            this.btnSelecionarPDFCarteirinha.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnSelecionarPDFCarteirinha.Location = new System.Drawing.Point(264, 331);
+            this.btnSelecionarPDFCarteirinha.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnSelecionarPDFCarteirinha.Name = "btnSelecionarPDFCarteirinha";
-            this.btnSelecionarPDFCarteirinha.Size = new System.Drawing.Size(199, 28);
+            this.btnSelecionarPDFCarteirinha.Size = new System.Drawing.Size(224, 35);
             this.btnSelecionarPDFCarteirinha.TabIndex = 6;
             this.btnSelecionarPDFCarteirinha.Text = "Selecionar PDF Carteirinha";
             this.btnSelecionarPDFCarteirinha.UseVisualStyleBackColor = true;
@@ -1475,10 +1361,10 @@
             // lblCarteirinha
             // 
             this.lblCarteirinha.ForeColor = System.Drawing.Color.White;
-            this.lblCarteirinha.Location = new System.Drawing.Point(78, 265);
+            this.lblCarteirinha.Location = new System.Drawing.Point(88, 331);
             this.lblCarteirinha.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblCarteirinha.Name = "lblCarteirinha";
-            this.lblCarteirinha.Size = new System.Drawing.Size(149, 37);
+            this.lblCarteirinha.Size = new System.Drawing.Size(168, 46);
             this.lblCarteirinha.TabIndex = 44;
             this.lblCarteirinha.Text = "Carteirinha e Requisição Médica:";
             // 
@@ -1486,20 +1372,20 @@
             // 
             this.lblDadosUnimedAcre.AutoSize = true;
             this.lblDadosUnimedAcre.ForeColor = System.Drawing.Color.White;
-            this.lblDadosUnimedAcre.Location = new System.Drawing.Point(8, 12);
+            this.lblDadosUnimedAcre.Location = new System.Drawing.Point(9, 15);
             this.lblDadosUnimedAcre.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblDadosUnimedAcre.Name = "lblDadosUnimedAcre";
-            this.lblDadosUnimedAcre.Size = new System.Drawing.Size(132, 16);
+            this.lblDadosUnimedAcre.Size = new System.Drawing.Size(156, 20);
             this.lblDadosUnimedAcre.TabIndex = 42;
             this.lblDadosUnimedAcre.Text = "Dados Unimed Acre:";
             // 
             // lblNumeroCarteirinha
             // 
             this.lblNumeroCarteirinha.ForeColor = System.Drawing.Color.White;
-            this.lblNumeroCarteirinha.Location = new System.Drawing.Point(12, 58);
+            this.lblNumeroCarteirinha.Location = new System.Drawing.Point(14, 72);
             this.lblNumeroCarteirinha.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblNumeroCarteirinha.Name = "lblNumeroCarteirinha";
-            this.lblNumeroCarteirinha.Size = new System.Drawing.Size(134, 24);
+            this.lblNumeroCarteirinha.Size = new System.Drawing.Size(151, 30);
             this.lblNumeroCarteirinha.TabIndex = 35;
             this.lblNumeroCarteirinha.Text = "Número Carteirinha:";
             // 
@@ -1507,10 +1393,10 @@
             // 
             this.lblNumero.AutoSize = true;
             this.lblNumero.ForeColor = System.Drawing.Color.White;
-            this.lblNumero.Location = new System.Drawing.Point(591, 107);
+            this.lblNumero.Location = new System.Drawing.Point(665, 134);
             this.lblNumero.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblNumero.Name = "lblNumero";
-            this.lblNumero.Size = new System.Drawing.Size(58, 16);
+            this.lblNumero.Size = new System.Drawing.Size(69, 20);
             this.lblNumero.TabIndex = 41;
             this.lblNumero.Text = "Número:";
             // 
@@ -1518,43 +1404,43 @@
             // 
             this.txtLoginUnimedAcre.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(74)))), ((int)(((byte)(74)))), ((int)(((byte)(74)))));
             this.txtLoginUnimedAcre.ForeColor = System.Drawing.Color.White;
-            this.txtLoginUnimedAcre.Location = new System.Drawing.Point(153, 62);
-            this.txtLoginUnimedAcre.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtLoginUnimedAcre.Location = new System.Drawing.Point(172, 78);
+            this.txtLoginUnimedAcre.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtLoginUnimedAcre.MaxLength = 32;
             this.txtLoginUnimedAcre.Name = "txtLoginUnimedAcre";
-            this.txtLoginUnimedAcre.Size = new System.Drawing.Size(281, 22);
+            this.txtLoginUnimedAcre.Size = new System.Drawing.Size(316, 26);
             this.txtLoginUnimedAcre.TabIndex = 0;
             // 
             // txtEnderecoNumeroAcre
             // 
             this.txtEnderecoNumeroAcre.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(74)))), ((int)(((byte)(74)))), ((int)(((byte)(74)))));
             this.txtEnderecoNumeroAcre.ForeColor = System.Drawing.Color.White;
-            this.txtEnderecoNumeroAcre.Location = new System.Drawing.Point(660, 107);
-            this.txtEnderecoNumeroAcre.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtEnderecoNumeroAcre.Location = new System.Drawing.Point(742, 134);
+            this.txtEnderecoNumeroAcre.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtEnderecoNumeroAcre.MaxLength = 32;
             this.txtEnderecoNumeroAcre.Name = "txtEnderecoNumeroAcre";
-            this.txtEnderecoNumeroAcre.Size = new System.Drawing.Size(281, 22);
+            this.txtEnderecoNumeroAcre.Size = new System.Drawing.Size(316, 26);
             this.txtEnderecoNumeroAcre.TabIndex = 3;
             // 
             // txtNomeBancoAcre
             // 
             this.txtNomeBancoAcre.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(74)))), ((int)(((byte)(74)))), ((int)(((byte)(74)))));
             this.txtNomeBancoAcre.ForeColor = System.Drawing.Color.White;
-            this.txtNomeBancoAcre.Location = new System.Drawing.Point(153, 109);
-            this.txtNomeBancoAcre.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtNomeBancoAcre.Location = new System.Drawing.Point(172, 136);
+            this.txtNomeBancoAcre.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtNomeBancoAcre.MaxLength = 32;
             this.txtNomeBancoAcre.Name = "txtNomeBancoAcre";
-            this.txtNomeBancoAcre.Size = new System.Drawing.Size(281, 22);
+            this.txtNomeBancoAcre.Size = new System.Drawing.Size(316, 26);
             this.txtNomeBancoAcre.TabIndex = 1;
             // 
             // lblRua
             // 
             this.lblRua.AutoSize = true;
             this.lblRua.ForeColor = System.Drawing.Color.White;
-            this.lblRua.Location = new System.Drawing.Point(543, 61);
+            this.lblRua.Location = new System.Drawing.Point(611, 76);
             this.lblRua.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblRua.Name = "lblRua";
-            this.lblRua.Size = new System.Drawing.Size(105, 16);
+            this.lblRua.Size = new System.Drawing.Size(126, 20);
             this.lblRua.TabIndex = 39;
             this.lblRua.Text = "Endereço (Rua):";
             // 
@@ -1562,35 +1448,36 @@
             // 
             this.txtEnderecoRuaAcre.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(74)))), ((int)(((byte)(74)))), ((int)(((byte)(74)))));
             this.txtEnderecoRuaAcre.ForeColor = System.Drawing.Color.White;
-            this.txtEnderecoRuaAcre.Location = new System.Drawing.Point(660, 61);
-            this.txtEnderecoRuaAcre.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtEnderecoRuaAcre.Location = new System.Drawing.Point(742, 76);
+            this.txtEnderecoRuaAcre.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtEnderecoRuaAcre.MaxLength = 32;
             this.txtEnderecoRuaAcre.Name = "txtEnderecoRuaAcre";
-            this.txtEnderecoRuaAcre.Size = new System.Drawing.Size(281, 22);
+            this.txtEnderecoRuaAcre.Size = new System.Drawing.Size(316, 26);
             this.txtEnderecoRuaAcre.TabIndex = 2;
             // 
             // lblNomeBancoAcre
             // 
             this.lblNomeBancoAcre.AutoSize = true;
             this.lblNomeBancoAcre.ForeColor = System.Drawing.Color.White;
-            this.lblNomeBancoAcre.Location = new System.Drawing.Point(34, 108);
+            this.lblNomeBancoAcre.Location = new System.Drawing.Point(38, 135);
             this.lblNomeBancoAcre.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblNomeBancoAcre.Name = "lblNomeBancoAcre";
-            this.lblNomeBancoAcre.Size = new System.Drawing.Size(108, 16);
+            this.lblNomeBancoAcre.Size = new System.Drawing.Size(127, 20);
             this.lblNomeBancoAcre.TabIndex = 37;
             this.lblNomeBancoAcre.Text = "Nome do Banco:";
             // 
             // menuAplicacao
             // 
+            this.menuAplicacao.GripMargin = new System.Windows.Forms.Padding(2, 2, 0, 2);
             this.menuAplicacao.ImageScalingSize = new System.Drawing.Size(40, 40);
             this.menuAplicacao.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.arquivoToolStripMenuItem,
             this.clientesToolStripMenuItem,
-            this.sobreToolStripMenuItem});
+            this.ajudaToolStripMenuItem});
             this.menuAplicacao.Location = new System.Drawing.Point(0, 0);
             this.menuAplicacao.Name = "menuAplicacao";
             this.menuAplicacao.Padding = new System.Windows.Forms.Padding(3, 1, 0, 1);
-            this.menuAplicacao.Size = new System.Drawing.Size(1076, 30);
+            this.menuAplicacao.Size = new System.Drawing.Size(1204, 31);
             this.menuAplicacao.TabIndex = 46;
             this.menuAplicacao.Text = "menuStrip1";
             // 
@@ -1602,32 +1489,32 @@
             this.toolStripMenuItem1,
             this.sairToolStripMenuItem1});
             this.arquivoToolStripMenuItem.Name = "arquivoToolStripMenuItem";
-            this.arquivoToolStripMenuItem.Size = new System.Drawing.Size(75, 28);
+            this.arquivoToolStripMenuItem.Size = new System.Drawing.Size(91, 29);
             this.arquivoToolStripMenuItem.Text = "&Arquivo";
             // 
             // restaurarBackupToolStripMenuItem
             // 
             this.restaurarBackupToolStripMenuItem.Name = "restaurarBackupToolStripMenuItem";
-            this.restaurarBackupToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.restaurarBackupToolStripMenuItem.Size = new System.Drawing.Size(235, 34);
             this.restaurarBackupToolStripMenuItem.Text = "&Abrir Backup...";
             this.restaurarBackupToolStripMenuItem.Click += new System.EventHandler(this.restaurarBackupToolStripMenuItem_Click);
             // 
             // fazerBackupToolStripMenuItem
             // 
             this.fazerBackupToolStripMenuItem.Name = "fazerBackupToolStripMenuItem";
-            this.fazerBackupToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.fazerBackupToolStripMenuItem.Size = new System.Drawing.Size(235, 34);
             this.fazerBackupToolStripMenuItem.Text = "&Salvar Backup...";
             this.fazerBackupToolStripMenuItem.Click += new System.EventHandler(this.fazerBackupToolStripMenuItem_Click);
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(221, 6);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(232, 6);
             // 
             // sairToolStripMenuItem1
             // 
             this.sairToolStripMenuItem1.Name = "sairToolStripMenuItem1";
-            this.sairToolStripMenuItem1.Size = new System.Drawing.Size(224, 26);
+            this.sairToolStripMenuItem1.Size = new System.Drawing.Size(235, 34);
             this.sairToolStripMenuItem1.Text = "&Sair";
             this.sairToolStripMenuItem1.Click += new System.EventHandler(this.sairToolStripMenuItem_Click);
             // 
@@ -1637,27 +1524,27 @@
             this.adicionarExcluirToolStripMenuItem,
             this.toolStripMenuItemLinha1});
             this.clientesToolStripMenuItem.Name = "clientesToolStripMenuItem";
-            this.clientesToolStripMenuItem.Size = new System.Drawing.Size(75, 28);
+            this.clientesToolStripMenuItem.Size = new System.Drawing.Size(89, 29);
             this.clientesToolStripMenuItem.Text = "Clientes";
             // 
             // adicionarExcluirToolStripMenuItem
             // 
             this.adicionarExcluirToolStripMenuItem.Name = "adicionarExcluirToolStripMenuItem";
-            this.adicionarExcluirToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.adicionarExcluirToolStripMenuItem.Size = new System.Drawing.Size(255, 34);
             this.adicionarExcluirToolStripMenuItem.Text = "&Adicionar / Excluir";
             this.adicionarExcluirToolStripMenuItem.Click += new System.EventHandler(this.adicionarExcluirToolStripMenuItem_Click);
             // 
             // toolStripMenuItemLinha1
             // 
             this.toolStripMenuItemLinha1.Name = "toolStripMenuItemLinha1";
-            this.toolStripMenuItemLinha1.Size = new System.Drawing.Size(221, 6);
+            this.toolStripMenuItemLinha1.Size = new System.Drawing.Size(252, 6);
             // 
-            // sobreToolStripMenuItem
+            // ajudaToolStripMenuItem
             // 
-            this.sobreToolStripMenuItem.Name = "sobreToolStripMenuItem";
-            this.sobreToolStripMenuItem.Size = new System.Drawing.Size(71, 28);
-            this.sobreToolStripMenuItem.Text = "&Sobre...";
-            this.sobreToolStripMenuItem.Click += new System.EventHandler(this.sobreToolStripMenuItem_Click);
+            this.ajudaToolStripMenuItem.Name = "ajudaToolStripMenuItem";
+            this.ajudaToolStripMenuItem.Size = new System.Drawing.Size(74, 29);
+            this.ajudaToolStripMenuItem.Text = "&Ajuda";
+            this.ajudaToolStripMenuItem.Click += new System.EventHandler(this.ajudaToolStripMenuItem_Click);
             // 
             // pnlSobre
             // 
@@ -1665,23 +1552,24 @@
             this.pnlSobre.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlSobre.Controls.Add(this.lblAjuda);
             this.pnlSobre.Controls.Add(this.picIconeSobre);
-            this.pnlSobre.Controls.Add(this.btnFecharSobre);
+            this.pnlSobre.Controls.Add(this.btnFecharAjuda);
             this.pnlSobre.Controls.Add(this.lblCopyright);
             this.pnlSobre.Controls.Add(this.lblNomeAplicao);
             this.pnlSobre.ForeColor = System.Drawing.Color.White;
-            this.pnlSobre.Location = new System.Drawing.Point(291, 126);
+            this.pnlSobre.Location = new System.Drawing.Point(6, 41);
             this.pnlSobre.Margin = new System.Windows.Forms.Padding(1);
             this.pnlSobre.Name = "pnlSobre";
-            this.pnlSobre.Size = new System.Drawing.Size(590, 535);
+            this.pnlSobre.Size = new System.Drawing.Size(1188, 906);
             this.pnlSobre.TabIndex = 45;
             this.pnlSobre.Visible = false;
             // 
             // lblAjuda
             // 
-            this.lblAjuda.Location = new System.Drawing.Point(47, 117);
+            this.lblAjuda.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblAjuda.Location = new System.Drawing.Point(84, 158);
             this.lblAjuda.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.lblAjuda.Name = "lblAjuda";
-            this.lblAjuda.Size = new System.Drawing.Size(491, 318);
+            this.lblAjuda.Size = new System.Drawing.Size(1025, 615);
             this.lblAjuda.TabIndex = 4;
             this.lblAjuda.Text = resources.GetString("lblAjuda.Text");
             // 
@@ -1689,46 +1577,46 @@
             // 
             this.picIconeSobre.BackgroundImage = global::TerapiaReembolso.Properties.Resources.App;
             this.picIconeSobre.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.picIconeSobre.Location = new System.Drawing.Point(417, 37);
+            this.picIconeSobre.Location = new System.Drawing.Point(878, 52);
             this.picIconeSobre.Margin = new System.Windows.Forms.Padding(1);
             this.picIconeSobre.Name = "picIconeSobre";
-            this.picIconeSobre.Size = new System.Drawing.Size(32, 33);
+            this.picIconeSobre.Size = new System.Drawing.Size(36, 41);
             this.picIconeSobre.TabIndex = 3;
             this.picIconeSobre.TabStop = false;
             // 
-            // btnFecharSobre
+            // btnFecharAjuda
             // 
-            this.btnFecharSobre.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnFecharSobre.Location = new System.Drawing.Point(249, 465);
-            this.btnFecharSobre.Margin = new System.Windows.Forms.Padding(1);
-            this.btnFecharSobre.Name = "btnFecharSobre";
-            this.btnFecharSobre.Size = new System.Drawing.Size(81, 41);
-            this.btnFecharSobre.TabIndex = 2;
-            this.btnFecharSobre.Text = "Fechar";
-            this.btnFecharSobre.UseVisualStyleBackColor = true;
-            this.btnFecharSobre.Click += new System.EventHandler(this.btnFecharSobre_Click);
+            this.btnFecharAjuda.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnFecharAjuda.Location = new System.Drawing.Point(469, 814);
+            this.btnFecharAjuda.Margin = new System.Windows.Forms.Padding(1);
+            this.btnFecharAjuda.Name = "btnFecharAjuda";
+            this.btnFecharAjuda.Size = new System.Drawing.Size(201, 62);
+            this.btnFecharAjuda.TabIndex = 2;
+            this.btnFecharAjuda.Text = "Fechar";
+            this.btnFecharAjuda.UseVisualStyleBackColor = true;
+            this.btnFecharAjuda.Click += new System.EventHandler(this.btnFecharAjuda_Click);
             // 
             // lblCopyright
             // 
             this.lblCopyright.AutoSize = true;
-            this.lblCopyright.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCopyright.Location = new System.Drawing.Point(165, 65);
+            this.lblCopyright.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCopyright.Location = new System.Drawing.Point(493, 103);
             this.lblCopyright.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.lblCopyright.Name = "lblCopyright";
-            this.lblCopyright.Size = new System.Drawing.Size(180, 15);
+            this.lblCopyright.Size = new System.Drawing.Size(288, 25);
             this.lblCopyright.TabIndex = 1;
             this.lblCopyright.Text = "Copyright © Daniel Liedke 2022";
             // 
             // lblNomeAplicao
             // 
             this.lblNomeAplicao.AutoSize = true;
-            this.lblNomeAplicao.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNomeAplicao.Location = new System.Drawing.Point(137, 37);
+            this.lblNomeAplicao.Font = new System.Drawing.Font("Microsoft Sans Serif", 22F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblNomeAplicao.Location = new System.Drawing.Point(346, 45);
             this.lblNomeAplicao.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.lblNomeAplicao.Name = "lblNomeAplicao";
-            this.lblNomeAplicao.Size = new System.Drawing.Size(246, 25);
+            this.lblNomeAplicao.Size = new System.Drawing.Size(519, 52);
             this.lblNomeAplicao.TabIndex = 0;
-            this.lblNomeAplicao.Text = "Terapia Reembolso v8.0";
+            this.lblNomeAplicao.Text = "Terapia Reembolso v9.2";
             // 
             // pnlCadastroCliente
             // 
@@ -1740,10 +1628,10 @@
             this.pnlCadastroCliente.Controls.Add(this.lbCliente);
             this.pnlCadastroCliente.Controls.Add(this.lbNomeCliente);
             this.pnlCadastroCliente.Controls.Add(this.btnFecharDadosCliente);
-            this.pnlCadastroCliente.Location = new System.Drawing.Point(335, 251);
+            this.pnlCadastroCliente.Location = new System.Drawing.Point(377, 314);
             this.pnlCadastroCliente.Margin = new System.Windows.Forms.Padding(1);
             this.pnlCadastroCliente.Name = "pnlCadastroCliente";
-            this.pnlCadastroCliente.Size = new System.Drawing.Size(498, 249);
+            this.pnlCadastroCliente.Size = new System.Drawing.Size(560, 311);
             this.pnlCadastroCliente.TabIndex = 45;
             this.pnlCadastroCliente.Visible = false;
             // 
@@ -1751,10 +1639,10 @@
             // 
             this.lbInstrucoesClientes.AutoSize = true;
             this.lbInstrucoesClientes.ForeColor = System.Drawing.Color.White;
-            this.lbInstrucoesClientes.Location = new System.Drawing.Point(52, 43);
+            this.lbInstrucoesClientes.Location = new System.Drawing.Point(58, 54);
             this.lbInstrucoesClientes.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbInstrucoesClientes.Name = "lbInstrucoesClientes";
-            this.lbInstrucoesClientes.Size = new System.Drawing.Size(310, 32);
+            this.lbInstrucoesClientes.Size = new System.Drawing.Size(364, 40);
             this.lbInstrucoesClientes.TabIndex = 45;
             this.lbInstrucoesClientes.Text = "Cada cliente pode ter diferente terapeuta e\r\nconta para reembolso (ex: plano de s" +
     "aúde familiar)";
@@ -1763,10 +1651,10 @@
             // 
             this.btnNovoCliente.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnNovoCliente.ForeColor = System.Drawing.Color.White;
-            this.btnNovoCliente.Location = new System.Drawing.Point(307, 132);
+            this.btnNovoCliente.Location = new System.Drawing.Point(345, 165);
             this.btnNovoCliente.Margin = new System.Windows.Forms.Padding(1);
             this.btnNovoCliente.Name = "btnNovoCliente";
-            this.btnNovoCliente.Size = new System.Drawing.Size(63, 34);
+            this.btnNovoCliente.Size = new System.Drawing.Size(71, 42);
             this.btnNovoCliente.TabIndex = 1;
             this.btnNovoCliente.Text = "Novo";
             this.btnNovoCliente.UseVisualStyleBackColor = true;
@@ -1776,10 +1664,10 @@
             // 
             this.btnExcluirCliente.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnExcluirCliente.ForeColor = System.Drawing.Color.White;
-            this.btnExcluirCliente.Location = new System.Drawing.Point(380, 132);
+            this.btnExcluirCliente.Location = new System.Drawing.Point(428, 165);
             this.btnExcluirCliente.Margin = new System.Windows.Forms.Padding(1);
             this.btnExcluirCliente.Name = "btnExcluirCliente";
-            this.btnExcluirCliente.Size = new System.Drawing.Size(72, 34);
+            this.btnExcluirCliente.Size = new System.Drawing.Size(81, 42);
             this.btnExcluirCliente.TabIndex = 3;
             this.btnExcluirCliente.Text = "Excluir";
             this.btnExcluirCliente.UseVisualStyleBackColor = true;
@@ -1790,30 +1678,30 @@
             this.cmbNomeCliente.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(74)))), ((int)(((byte)(74)))), ((int)(((byte)(74)))));
             this.cmbNomeCliente.ForeColor = System.Drawing.Color.White;
             this.cmbNomeCliente.FormattingEnabled = true;
-            this.cmbNomeCliente.Location = new System.Drawing.Point(159, 97);
+            this.cmbNomeCliente.Location = new System.Drawing.Point(179, 121);
             this.cmbNomeCliente.Margin = new System.Windows.Forms.Padding(1);
             this.cmbNomeCliente.Name = "cmbNomeCliente";
-            this.cmbNomeCliente.Size = new System.Drawing.Size(292, 24);
+            this.cmbNomeCliente.Size = new System.Drawing.Size(328, 28);
             this.cmbNomeCliente.TabIndex = 0;
             // 
             // lbCliente
             // 
             this.lbCliente.AutoSize = true;
             this.lbCliente.ForeColor = System.Drawing.Color.White;
-            this.lbCliente.Location = new System.Drawing.Point(8, 9);
+            this.lbCliente.Location = new System.Drawing.Point(9, 11);
             this.lbCliente.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbCliente.Name = "lbCliente";
-            this.lbCliente.Size = new System.Drawing.Size(209, 16);
+            this.lbCliente.Size = new System.Drawing.Size(245, 20);
             this.lbCliente.TabIndex = 44;
             this.lbCliente.Text = "Dados Cliente (Para Reembolso):";
             // 
             // lbNomeCliente
             // 
             this.lbNomeCliente.ForeColor = System.Drawing.Color.White;
-            this.lbNomeCliente.Location = new System.Drawing.Point(52, 97);
+            this.lbNomeCliente.Location = new System.Drawing.Point(58, 121);
             this.lbNomeCliente.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbNomeCliente.Name = "lbNomeCliente";
-            this.lbNomeCliente.Size = new System.Drawing.Size(107, 30);
+            this.lbNomeCliente.Size = new System.Drawing.Size(120, 38);
             this.lbNomeCliente.TabIndex = 4;
             this.lbNomeCliente.Text = "Nome Cliente:";
             // 
@@ -1821,10 +1709,10 @@
             // 
             this.btnFecharDadosCliente.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnFecharDadosCliente.ForeColor = System.Drawing.Color.White;
-            this.btnFecharDadosCliente.Location = new System.Drawing.Point(165, 194);
-            this.btnFecharDadosCliente.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnFecharDadosCliente.Location = new System.Drawing.Point(186, 242);
+            this.btnFecharDadosCliente.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnFecharDadosCliente.Name = "btnFecharDadosCliente";
-            this.btnFecharDadosCliente.Size = new System.Drawing.Size(179, 36);
+            this.btnFecharDadosCliente.Size = new System.Drawing.Size(201, 45);
             this.btnFecharDadosCliente.TabIndex = 7;
             this.btnFecharDadosCliente.Text = "Fechar";
             this.btnFecharDadosCliente.UseVisualStyleBackColor = true;
@@ -1846,18 +1734,132 @@
             // 
             this.dialogoPDFIdentidade.Filter = "PDF files|*.pdf";
             // 
+            // dtDataConsulta10
+            // 
+            this.dtDataConsulta10.BackDisabledColor = System.Drawing.SystemColors.Control;
+            this.dtDataConsulta10.ForeDisabledColor = System.Drawing.Color.Empty;
+            this.dtDataConsulta10.Location = new System.Drawing.Point(134, 680);
+            this.dtDataConsulta10.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.dtDataConsulta10.Name = "dtDataConsulta10";
+            this.dtDataConsulta10.Size = new System.Drawing.Size(343, 26);
+            this.dtDataConsulta10.TabIndex = 12;
+            // 
+            // dtDataConsulta9
+            // 
+            this.dtDataConsulta9.BackDisabledColor = System.Drawing.SystemColors.Control;
+            this.dtDataConsulta9.ForeDisabledColor = System.Drawing.Color.Empty;
+            this.dtDataConsulta9.Location = new System.Drawing.Point(134, 632);
+            this.dtDataConsulta9.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.dtDataConsulta9.Name = "dtDataConsulta9";
+            this.dtDataConsulta9.Size = new System.Drawing.Size(343, 26);
+            this.dtDataConsulta9.TabIndex = 11;
+            // 
+            // dtDataConsulta8
+            // 
+            this.dtDataConsulta8.BackDisabledColor = System.Drawing.SystemColors.Control;
+            this.dtDataConsulta8.ForeDisabledColor = System.Drawing.Color.Empty;
+            this.dtDataConsulta8.Location = new System.Drawing.Point(134, 580);
+            this.dtDataConsulta8.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.dtDataConsulta8.Name = "dtDataConsulta8";
+            this.dtDataConsulta8.Size = new System.Drawing.Size(343, 26);
+            this.dtDataConsulta8.TabIndex = 10;
+            // 
+            // dtDataConsulta7
+            // 
+            this.dtDataConsulta7.BackDisabledColor = System.Drawing.SystemColors.Control;
+            this.dtDataConsulta7.ForeDisabledColor = System.Drawing.Color.Empty;
+            this.dtDataConsulta7.Location = new System.Drawing.Point(134, 528);
+            this.dtDataConsulta7.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.dtDataConsulta7.Name = "dtDataConsulta7";
+            this.dtDataConsulta7.Size = new System.Drawing.Size(343, 26);
+            this.dtDataConsulta7.TabIndex = 9;
+            // 
+            // dtDataConsulta6
+            // 
+            this.dtDataConsulta6.BackDisabledColor = System.Drawing.SystemColors.Control;
+            this.dtDataConsulta6.ForeDisabledColor = System.Drawing.Color.Empty;
+            this.dtDataConsulta6.Location = new System.Drawing.Point(134, 472);
+            this.dtDataConsulta6.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.dtDataConsulta6.Name = "dtDataConsulta6";
+            this.dtDataConsulta6.Size = new System.Drawing.Size(343, 26);
+            this.dtDataConsulta6.TabIndex = 8;
+            // 
+            // dtDataConsulta4
+            // 
+            this.dtDataConsulta4.BackDisabledColor = System.Drawing.SystemColors.Control;
+            this.dtDataConsulta4.ForeDisabledColor = System.Drawing.Color.Empty;
+            this.dtDataConsulta4.Location = new System.Drawing.Point(134, 358);
+            this.dtDataConsulta4.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.dtDataConsulta4.Name = "dtDataConsulta4";
+            this.dtDataConsulta4.Size = new System.Drawing.Size(343, 26);
+            this.dtDataConsulta4.TabIndex = 6;
+            // 
+            // dtDataConsulta3
+            // 
+            this.dtDataConsulta3.BackDisabledColor = System.Drawing.SystemColors.Control;
+            this.dtDataConsulta3.ForeDisabledColor = System.Drawing.Color.Empty;
+            this.dtDataConsulta3.Location = new System.Drawing.Point(134, 299);
+            this.dtDataConsulta3.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.dtDataConsulta3.Name = "dtDataConsulta3";
+            this.dtDataConsulta3.Size = new System.Drawing.Size(343, 26);
+            this.dtDataConsulta3.TabIndex = 5;
+            // 
+            // dtDataConsulta5
+            // 
+            this.dtDataConsulta5.BackDisabledColor = System.Drawing.SystemColors.Control;
+            this.dtDataConsulta5.ForeDisabledColor = System.Drawing.Color.Empty;
+            this.dtDataConsulta5.Location = new System.Drawing.Point(134, 414);
+            this.dtDataConsulta5.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.dtDataConsulta5.Name = "dtDataConsulta5";
+            this.dtDataConsulta5.Size = new System.Drawing.Size(343, 26);
+            this.dtDataConsulta5.TabIndex = 7;
+            // 
+            // dtDataConsulta2
+            // 
+            this.dtDataConsulta2.BackDisabledColor = System.Drawing.SystemColors.Control;
+            this.dtDataConsulta2.ForeDisabledColor = System.Drawing.Color.Empty;
+            this.dtDataConsulta2.Location = new System.Drawing.Point(134, 242);
+            this.dtDataConsulta2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.dtDataConsulta2.Name = "dtDataConsulta2";
+            this.dtDataConsulta2.Size = new System.Drawing.Size(343, 26);
+            this.dtDataConsulta2.TabIndex = 4;
+            // 
+            // dtDataConsulta1
+            // 
+            this.dtDataConsulta1.BackDisabledColor = System.Drawing.SystemColors.Control;
+            this.dtDataConsulta1.CalendarForeColor = System.Drawing.Color.White;
+            this.dtDataConsulta1.CalendarMonthBackground = System.Drawing.Color.FromArgb(((int)(((byte)(74)))), ((int)(((byte)(74)))), ((int)(((byte)(74)))));
+            this.dtDataConsulta1.ForeDisabledColor = System.Drawing.Color.Empty;
+            this.dtDataConsulta1.Location = new System.Drawing.Point(134, 186);
+            this.dtDataConsulta1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.dtDataConsulta1.Name = "dtDataConsulta1";
+            this.dtDataConsulta1.Size = new System.Drawing.Size(343, 26);
+            this.dtDataConsulta1.TabIndex = 3;
+            // 
+            // dtDataRecibo
+            // 
+            this.dtDataRecibo.BackDisabledColor = System.Drawing.SystemColors.Control;
+            this.dtDataRecibo.CalendarForeColor = System.Drawing.Color.White;
+            this.dtDataRecibo.CalendarMonthBackground = System.Drawing.Color.FromArgb(((int)(((byte)(74)))), ((int)(((byte)(74)))), ((int)(((byte)(74)))));
+            this.dtDataRecibo.ForeDisabledColor = System.Drawing.Color.Empty;
+            this.dtDataRecibo.Location = new System.Drawing.Point(172, 201);
+            this.dtDataRecibo.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.dtDataRecibo.Name = "dtDataRecibo";
+            this.dtDataRecibo.Size = new System.Drawing.Size(316, 26);
+            this.dtDataRecibo.TabIndex = 58;
+            // 
             // TelaPrincipal
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(36)))), ((int)(((byte)(36)))), ((int)(((byte)(36)))));
-            this.ClientSize = new System.Drawing.Size(1076, 795);
+            this.ClientSize = new System.Drawing.Size(1204, 994);
+            this.Controls.Add(this.pnlSobre);
             this.Controls.Add(this.menuAplicacao);
             this.Controls.Add(this.statusStrip);
             this.Controls.Add(this.pnlRecibo);
             this.Controls.Add(this.pnlReembolso);
             this.Controls.Add(this.pnlConsultas);
-            this.Controls.Add(this.pnlSobre);
             this.Controls.Add(this.pnlCadastroCliente);
             this.Controls.Add(this.pnlUnimedAcre);
             this.ForeColor = System.Drawing.Color.Black;
@@ -1988,9 +1990,9 @@
         private System.Windows.Forms.Button btnSalvarPaciente;
         private System.Windows.Forms.Button btnNovoPaciente;
         private System.Windows.Forms.MenuStrip menuAplicacao;
-        private System.Windows.Forms.ToolStripMenuItem sobreToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem ajudaToolStripMenuItem;
         private System.Windows.Forms.Panel pnlSobre;
-        private System.Windows.Forms.Button btnFecharSobre;
+        private System.Windows.Forms.Button btnFecharAjuda;
         private System.Windows.Forms.Label lblCopyright;
         private System.Windows.Forms.Label lblNomeAplicao;
         private System.Windows.Forms.PictureBox picIconeSobre;

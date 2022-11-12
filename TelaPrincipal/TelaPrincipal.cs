@@ -356,7 +356,7 @@ namespace TerapiaReembolso
             btnExcluirCliente.Enabled = habilitado;
             btnExcluirPaciente.Enabled = habilitado;
             btnFecharDadosCliente.Enabled = habilitado;
-            btnFecharSobre.Enabled = habilitado;
+            btnFecharAjuda.Enabled = habilitado;
             btnGerarRecibo.Enabled = habilitado;
             btnGerarSolicitacaoReembolso.Enabled = habilitado;
             btnNovoCliente.Enabled = habilitado;
@@ -468,7 +468,7 @@ namespace TerapiaReembolso
 
         #endregion
 
-        #region Gerenciamento da Tela Sobre...
+        #region Gerenciamento da Tela Ajuda
 
         private void sairToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -476,9 +476,9 @@ namespace TerapiaReembolso
             Close();
         }
 
-        private void sobreToolStripMenuItem_Click(object sender, EventArgs e)
+        private void ajudaToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            // Mostra panel de Sobre... com ajuda e ano atual atualizado
+            // Mostra panel de ajuda e ano atual atualizado
             pnlSobre.Visible = true;
             pnlConsultas.Visible = false;
             pnlReembolso.Visible = false;
@@ -488,7 +488,7 @@ namespace TerapiaReembolso
             lblNomeAplicao.Text = this.Text;
         }
 
-        private void btnFecharSobre_Click(object sender, EventArgs e)
+        private void btnFecharAjuda_Click(object sender, EventArgs e)
         {
             // Fecha panel de Sobre...
             pnlSobre.Visible = false;

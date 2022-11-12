@@ -133,12 +133,13 @@ Multiplos pacientes podem ser cadastrados para geração de diferentes recibos p
 
 Multiplos clientes podem ser cadastrados para solicitação de reembolso por todos familiares cobertos pelo plano de saúde.
 
-Caso automação der errado para geração de recibo ou solicitação de reembolso, tenha paciência e tente outra vez :) 
-Sempre mantenha o Chrome atualizado na última versão.
+Caso automação der errado para geração de recibo ou solicitação de reembolso, tenha paciência e tente mais uma vez.
+
+Sempre mantenha o Chrome atualizado na última versão. Abre o Chrome, clique em ... Menu "Ajuda" Menu "Sobre o Google Chrome" e atualize manualmente caso necessário.
 
 Os dados de login no site da Unimed Seguros e informações do paciente devem estar corretos e não são validados por esta aplicação.
 
-Lembre sempre de realizar backup dos seus dados usando o menu Arquivo e subir para a Internet o arquivo zip para não perder nada.</value>
+Lembre sempre de realizar backup dos seus dados usando o menu Arquivo e salvar na Internet o arquivo zip para não perder nada.</value>
   </data>
   <metadata name="dialogoSalvarBackup.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>488, 17</value>
