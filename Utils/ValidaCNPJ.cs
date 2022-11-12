@@ -1,4 +1,16 @@
-﻿using System;
+﻿/* *******************************************************************************************************************
+ * Aplicação: TerapiaReembolso
+ * 
+ * Autor:  Antonio Azevedo
+ * 
+ * Copyright © Daniel Liedke 2022
+ * Usage and reproduction in any manner whatsoever without the written permission of Daniel Liedke is strictly forbidden.
+ *  
+ * Propósito: Valida e Calcula digito verificador de um CNPJ
+ *           
+ * *******************************************************************************************************************/
+
+using System;
 using System.Text.RegularExpressions;
 /* 
  * Valida e Calcula digito verificador de um CNPJ.

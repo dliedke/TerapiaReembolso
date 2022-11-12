@@ -33,7 +33,7 @@
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
     <ApplicationRevision>0</ApplicationRevision>
-    <ApplicationVersion>9.0.0.0</ApplicationVersion>
+    <ApplicationVersion>9.1.0.0</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -157,6 +157,27 @@
     <Compile Include="DateTimePickerWithBackColor.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="TelaPrincipal\TelaPrincipal.ReembolsoAcre.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TelaPrincipal\TelaPrincipal.CadastroPacientes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TelaPrincipal\TelaPrincipal.CarregaSalvaDados.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TelaPrincipal\TelaPrincipal.Consultas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TelaPrincipal\TelaPrincipal.BackupRestore.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TelaPrincipal\TelaPrincipal.CadastroCliente.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TelaPrincipal\TelaPrincipal.Validacoes.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Utils\CryptoSerializer.cs" />
     <Compile Include="Data\Item.cs" />
     <Compile Include="Data\Paciente.cs" />
@@ -164,15 +185,15 @@
     <Compile Include="Utils\ValidaCPF.cs" />
     <Compile Include="Utils\Utilitarios.cs" />
     <Compile Include="Utils\WaitExtension.cs" />
-    <Compile Include="TelaPrincipal.cs">
+    <Compile Include="TelaPrincipal\TelaPrincipal.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="TelaPrincipal.Designer.cs">
+    <Compile Include="TelaPrincipal\TelaPrincipal.Designer.cs">
       <DependentUpon>TelaPrincipal.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="TelaPrincipal.resx">
+    <EmbeddedResource Include="TelaPrincipal\TelaPrincipal.resx">
       <DependentUpon>TelaPrincipal.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>

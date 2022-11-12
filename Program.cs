@@ -1,12 +1,12 @@
 ﻿/* *******************************************************************************************************************
- * Application: TerapiaReembolso
+ * Aplicações: TerapiaReembolso
  * 
- * Authors:  Daniel Liedke
+ * Autor:  Daniel Liedke
  * 
  * Copyright © Daniel Liedke 2022
  * Usage and reproduction in any manner whatsoever without the written permission of Daniel Liedke is strictly forbidden.
  *  
- * Purpose: Classe de inicialização
+ * Propósito: Classe de inicialização
  *           
  * *******************************************************************************************************************/
 

@@ -1,3 +1,15 @@
+/* *******************************************************************************************************************
+ * Aplicação: TerapiaReembolso
+ * 
+ * Autor:  Vincenzo Rossi
+ * 
+ * Copyright © Daniel Liedke 2022
+ * Usage and reproduction in any manner whatsoever without the written permission of Daniel Liedke is strictly forbidden.
+ *  
+ * Propósito: Calendário com mais estilos para o tema dark
+ *           
+ * *******************************************************************************************************************/
+
 // *****************************************
 // ** Author: Vincenzo Rossi              **
 // ** Year  : 2008                        **

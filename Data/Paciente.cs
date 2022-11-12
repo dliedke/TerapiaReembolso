@@ -1,4 +1,16 @@
-﻿using System;
+﻿/* *******************************************************************************************************************
+ * Aplicação: TerapiaReembolso
+ * 
+ * Autor:  Daniel Liedke
+ * 
+ * Copyright © Daniel Liedke 2022
+ * Usage and reproduction in any manner whatsoever without the written permission of Daniel Liedke is strictly forbidden.
+ *  
+ * Propósito: Paciente mais genérico usado para gerar recibo e solicitar reembolso
+ *           
+ * *******************************************************************************************************************/
+
+using System;
 using System.Linq;
 using System.Collections.Generic;
 

@@ -1,12 +1,12 @@
 ﻿/* *******************************************************************************************************************
- * Application: TerapiaReembolso
+ * Aplicação: TerapiaReembolso
  * 
- * Authors:  Daniel Liedke
+ * Autor:  Daniel Liedke
  * 
  * Copyright © Daniel Liedke 2022
  * Usage and reproduction in any manner whatsoever without the written permission of Daniel Liedke is strictly forbidden.
  *  
- * Purpose: Extension to wait for elements to stabilize the automation
+ * Propósito: Aguarda por elementos na página para estabilizar a automações e reduzir sleeps
  *           
  * *******************************************************************************************************************/
 
