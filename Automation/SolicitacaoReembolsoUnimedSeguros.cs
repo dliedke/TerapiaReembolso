@@ -317,10 +317,6 @@ namespace TerapiaReembolso
             _element = _chromeDriver.FindElement(By.XPath($"//option[.='Transferência em conta corrente']"));
             _element.Click();
 
-            // Seta CPF favorecido bancário
-            _element = _chromeDriver.FindElement(By.Id("cpfBeneficiaryInput"));
-            _element.SendKeys(TelaPrincipal.PacienteAtual.CPF);
-            
             // Seta nome do banco
             _element = _chromeDriver.FindElement(By.XPath($"//option[.=' {TelaPrincipal.PegaClienteAtual().NomeBanco} ']"));
             _element.Click();
