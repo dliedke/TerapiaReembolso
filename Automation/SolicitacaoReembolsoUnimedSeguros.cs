@@ -309,7 +309,7 @@ namespace TerapiaReembolso
         public static void SetaInformacoesBancarias()
         {
             // Seleciona paciente para conta bancária
-            var elements = _chromeDriver.FindElements(By.XPath($"//option[.='{TelaPrincipal.PacienteAtual.Nome}']"));
+            var elements = _chromeDriver.FindElements(By.XPath($"//option[.=' {TelaPrincipal.PacienteAtual.Nome} ']"));
             Utilitarios.ScrollAteElemento(_chromeDriver, elements[1]);
             elements[1].Click();
 
@@ -317,8 +317,12 @@ namespace TerapiaReembolso
             _element = _chromeDriver.FindElement(By.XPath($"//option[.='Transferência em conta corrente']"));
             _element.Click();
 
+            // Seta CPF favorecido bancário
+            _element = _chromeDriver.FindElement(By.Id("cpfBeneficiaryInput"));
+            _element.SendKeys(TelaPrincipal.PacienteAtual.CPF);
+            
             // Seta nome do banco
-            _element = _chromeDriver.FindElement(By.XPath($"//option[.='{TelaPrincipal.PegaClienteAtual().NomeBanco}']"));
+            _element = _chromeDriver.FindElement(By.XPath($"//option[.=' {TelaPrincipal.PegaClienteAtual().NomeBanco} ']"));
             _element.Click();
 
             // Seta número da agência
