@@ -199,7 +199,7 @@ namespace TerapiaReembolso
             // Seleciona paciente
             try
             {
-                _element = _chromeDriver.FindElement(By.XPath($"//option[.='{TelaPrincipal.PacienteAtual.Nome}']"));
+                _element = _chromeDriver.FindElement(By.XPath($"//option[.=' {TelaPrincipal.PacienteAtual.Nome} ']"));
                 _element.Click();
             }
             catch { }
