@@ -161,7 +161,7 @@ namespace TerapiaReembolso
             Utilitarios.AguardaSpinner(_chromeDriver);
 
             // Espera botão "Nova solicitação de reembolso" e clica
-            By novaSolicitacaoBy = By.XPath("//a[.='Nova solicitação de reembolso']");
+            By novaSolicitacaoBy = By.XPath("//a[.=' Nova solicitação de reembolso ']");
             WaitExtension.WaitUntilElement(_chromeDriver, novaSolicitacaoBy);
             var botaoNovaSolicitacao = _chromeDriver.FindElement(novaSolicitacaoBy);
             botaoNovaSolicitacao.Click();
